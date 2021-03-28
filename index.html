@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hybrid MDE</title>
+    <style>
+      .cm-scroller {
+        font-family: 'Courier New', Courier, monospace !important;
+      }
+
+      #app {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/dist/es/index.js"></script>
+    <script type="module">
+      import HybridMDE from './dist/es/index.js'
+
+      HybridMDE(document.getElementById('app'))
+    </script>
+  </body>
+</html>
