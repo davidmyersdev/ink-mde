@@ -5,10 +5,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap">
     <style>
-      body {
-        background-color: #171717;
-      }
-
       #app {
         border: 1px solid #000;
       }
@@ -22,9 +18,13 @@
     <div id="app"></div>
     <script type="module" src="/dist/es/index.js"></script>
     <script type="module">
-      import HybridMDE from './dist/es/index.js'
+      import HybridMDE from '/dist/es/index.js'
 
-      HybridMDE(document.getElementById('app'))
+      HybridMDE(document.getElementById('app'), {
+        onChange(value) {
+          console.log(value)
+        },
+      })
     </script>
   </body>
 </html>
