@@ -8,12 +8,17 @@ import { languages } from '@codemirror/language-data'
 
 import SyntaxHighlighting from './highlight'
 
-const HybridMDE = (element) => {
-  const language = new Compartment()
+const HybridMDE = (parentElement, options) => {
+  const {
+    value = '',
+    onChange = () => {},
+  } = options
 
-  return new EditorView({
+  const language = new Compartment()
+  const view = new EditorView({
+    parent: parentElement,
     state: EditorState.create({
-      doc: '',
+      doc: value,
       extensions: [
         SyntaxHighlighting,
         history(),
@@ -31,8 +36,16 @@ const HybridMDE = (element) => {
         ]),
       ],
     }),
-    parent: element,
+    dispatch(transaction) {
+      if (transaction.docChanged) {
+        onChange(transaction.newDoc.toString())
+      }
+
+      view.update([transaction])
+    },
   })
+
+  return view
 }
 
 export default HybridMDE
