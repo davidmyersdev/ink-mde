@@ -1,6 +1,6 @@
 {
-  "name": "@voraciousdev/hybrid-mde",
-  "version": "v0.1.0",
+  "name": "hybrid-mde",
+  "version": "v0.1.1",
   "description": "A plain-text javascript markdown editor that renders formatting live and in-place without the need for a preview pane.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",

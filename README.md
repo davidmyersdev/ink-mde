@@ -5,7 +5,7 @@ A plain-text javascript markdown editor that renders text formatting live and in
 ## Install
 
 ```shell
-npm install --save @voraciousdev/hybrid-mde
+npm install --save hybrid-mde
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install --save @voraciousdev/hybrid-mde
 Create a basic editor without worrying about state.
 
 ```js
-import HybridMDE from '@voraciousdev/hybrid-mde'
+import HybridMDE from 'hybrid-mde'
 
 HybridMDE(document.getElementById('editor'))
 ```
@@ -25,7 +25,7 @@ HybridMDE(document.getElementById('editor'))
 Supply some initial data and set a callback to track data changes.
 
 ```js
-import HybridMDE from '@voraciousdev/hybrid-mde'
+import HybridMDE from 'hybrid-mde'
 
 HybridMDE(document.getElementById('editor'), {
   value: '# Start with some text',
