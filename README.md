@@ -1,3 +1,7 @@
+[![latest tag](https://img.shields.io/github/v/tag/writewithocto/hybrid-mde?color=blue&label=latest%20tag&sort=semver)](https://github.com/writewithocto/hybrid-mde/releases)
+[![license](https://img.shields.io/github/license/writewithocto/hybrid-mde)](https://github.com/writewithocto/hybrid-mde/blob/master/LICENSE)
+[![open issues](https://img.shields.io/github/issues-raw/writewithocto/hybrid-mde)](https://github.com/writewithocto/hybrid-mde/issues)
+
 # hybrid-mde
 
 A plain-text javascript markdown editor that renders text formatting live and in-place without the need for a preview pane. Built on CodeMirror 6.
@@ -33,6 +37,19 @@ Hybrid(document.getElementById('editor'), {
     console.log('Doc edited:', value)
   },
 })
+```
+
+### Hot-swap Docs
+
+Swap the active doc without rebuilding the whole DOM or re-supplying configuration.
+
+```js
+import Hybrid from 'hybrid-mde'
+
+const editor = Hybrid(document.getElementById('editor'))
+
+// user performs some action to change the active doc...
+editor.setDoc('# New Doc')
 ```
 
 ## Customize with CSS variables
