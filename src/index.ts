@@ -1,19 +1,15 @@
 import { defaultKeymap, defaultTabBinding } from '@codemirror/commands'
 import { commentKeymap } from '@codemirror/comment'
 import { history, historyKeymap } from '@codemirror/history'
-import { EditorState, Compartment } from '@codemirror/state'
+import { EditorState, Compartment, Transaction } from '@codemirror/state'
 import { keymap, EditorView } from '@codemirror/view'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 
 import SyntaxHighlighting from './highlight'
+import { Hybrid, HybridOptions } from './types/hybrid'
 
-const HybridMDE = (parentElement, options) => {
-  const {
-    value = '',
-    onChange = () => {},
-  } = options
-
+const Hybrid = (parentElement: HTMLElement, { value = '', onChange = () => {} }: HybridOptions): Hybrid => {
   const language = new Compartment()
   const view = new EditorView({
     parent: parentElement,
@@ -36,7 +32,7 @@ const HybridMDE = (parentElement, options) => {
         ]),
       ],
     }),
-    dispatch(transaction) {
+    dispatch(transaction: Transaction) {
       if (transaction.docChanged) {
         onChange(transaction.newDoc.toString())
       }
@@ -45,7 +41,9 @@ const HybridMDE = (parentElement, options) => {
     },
   })
 
-  return view
+  return {
+    view,
+  }
 }
 
-export default HybridMDE
+export default Hybrid

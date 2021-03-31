@@ -15,9 +15,9 @@ npm install --save hybrid-mde
 Create a basic editor without worrying about state.
 
 ```js
-import HybridMDE from 'hybrid-mde'
+import Hybrid from 'hybrid-mde'
 
-HybridMDE(document.getElementById('editor'))
+Hybrid(document.getElementById('editor'))
 ```
 
 ### State Tracking
@@ -25,9 +25,9 @@ HybridMDE(document.getElementById('editor'))
 Supply some initial data and set a callback to track data changes.
 
 ```js
-import HybridMDE from 'hybrid-mde'
+import Hybrid from 'hybrid-mde'
 
-HybridMDE(document.getElementById('editor'), {
+Hybrid(document.getElementById('editor'), {
   value: '# Start with some text',
   onChange: (value) => {
     console.log('Doc edited:', value)
