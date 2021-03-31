@@ -20,7 +20,8 @@
     <script type="module">
       import Hybrid from '/dist/es/index.js'
 
-      Hybrid(document.getElementById('app'), {
+      window.hybrid = Hybrid(document.getElementById('app'), {
+        value: '# Hello',
         onChange(value) {
           console.log(value)
         },

@@ -1,7 +1,7 @@
-import { EditorView } from '@codemirror/view'
-
 export interface Hybrid {
-  view: EditorView
+  destroy: () => void
+  focus: () => void
+  setDoc: (doc: string) => void
 }
 
 export interface HybridOptions {
