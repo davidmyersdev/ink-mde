@@ -121,13 +121,13 @@
     lezer-json "^0.13.0"
 
 "@codemirror/lang-markdown@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/lang-markdown/-/lang-markdown-0.18.0.tgz#564b2dd549a184f47b7f919a32db6814438f77c9"
-  integrity sha512-a5DrJQwnW7kFbsAVWBayjKv+/X1gt5mkzdK2FcvewVNcvd6grpy8ufkqvXDNkYGfgLghXO5QH38lFCj04w9+Rg==
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/lang-markdown/-/lang-markdown-0.18.1.tgz#1f9ebc1310790b1634eae7a0ad376269203c2bd3"
+  integrity sha512-HthOPpA0zZivpScNno33KmFZbZ73JEwGeSNj5lKutyAyqSEpE4ALlVv0LdfI6YjzgtUH3MsctQyUhvZrJngKRQ==
   dependencies:
     "@codemirror/highlight" "^0.18.0"
     "@codemirror/lang-html" "^0.18.0"
-    "@codemirror/language" "^0.18.0"
+    "@codemirror/language" "^0.18.1"
     "@codemirror/state" "^0.18.0"
     "@codemirror/view" "^0.18.0"
     lezer-markdown "^0.14.3"
@@ -194,7 +194,7 @@
     "@codemirror/legacy-modes" "^0.18.0"
     "@codemirror/stream-parser" "^0.18.0"
 
-"@codemirror/language@^0.18.0":
+"@codemirror/language@^0.18.0", "@codemirror/language@^0.18.1":
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-0.18.1.tgz#23682324228606c4ae5b6a9f7cd0a4b9fdff83dd"
   integrity sha512-j/TWV8sNmzU79kk/hPLb9NqSPoH59850kQSpgY11LxOEBlKVRKgaWabgNtUCSeVCAnfisGekupk3aq2ftILqug==
