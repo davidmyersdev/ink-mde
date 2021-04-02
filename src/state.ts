@@ -7,6 +7,7 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 
 import SyntaxHighlighting from './highlight'
+import { taggedCodeBlocks } from './extensions/tagged_code_blocks'
 
 export const createState = (doc: string): EditorState => {
   const language = new Compartment()
@@ -22,6 +23,7 @@ export const createState = (doc: string): EditorState => {
           codeLanguages: languages,
         }),
       ]),
+      taggedCodeBlocks(),
       keymap.of([
         defaultTabBinding,
         ...defaultKeymap,
