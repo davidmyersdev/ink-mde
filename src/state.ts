@@ -6,24 +6,25 @@ import { keymap, } from '@codemirror/view'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 
+import { images } from './extensions/images'
+import { codeBlocks } from './extensions/code_blocks'
 import SyntaxHighlighting from './highlight'
-import { taggedCodeBlocks } from './extensions/tagged_code_blocks'
+import { HybridOptions } from './types/hybrid'
 
-export const createState = (doc: string): EditorState => {
-  const language = new Compartment()
+export const createState = (options: HybridOptions): EditorState => {
+  const renderImages = new Compartment()
 
   return EditorState.create({
-    doc,
+    doc: options.value,
     extensions: [
       SyntaxHighlighting,
       history(),
-      language.of([
-        markdown({
-          base: markdownLanguage,
-          codeLanguages: languages,
-        }),
-      ]),
-      taggedCodeBlocks(),
+      markdown({
+        base: markdownLanguage,
+        codeLanguages: languages,
+      }),
+      codeBlocks(),
+      renderImages.of(options.renderImages ? images() : []),
       keymap.of([
         defaultTabBinding,
         ...defaultKeymap,

@@ -1,3 +1,4 @@
+import { syntaxTree } from '@codemirror/language'
 import { RangeSetBuilder } from '@codemirror/rangeset'
 import { Extension } from '@codemirror/state'
 import { Decoration, DecorationSet, EditorView, ViewPlugin, ViewUpdate } from '@codemirror/view'
@@ -8,7 +9,10 @@ const codeBlockBaseTheme = EditorView.baseTheme({
 })
 
 const codeBlockSyntaxNodes = [
+  'CodeBlock',
   'FencedCode',
+  'HTMLBlock',
+  'CommentBlock',
 ]
 
 const codeBlockDecoration = Decoration.line({
@@ -36,16 +40,19 @@ const decorate = (view: EditorView) => {
     for (let position = from; position < to;) {
       const line = view.state.doc.lineAt(position)
 
-      // @ts-ignore: state.tree not recognized
-      view.state.tree.iterate({ enter: (type, _from, _to) => {
-        if (type.name !== 'Document') {
-          if (codeBlockSyntaxNodes.includes(type.name)) {
-            builder.add(line.from, line.from, codeBlockDecoration)
-          }
+      syntaxTree(view.state).iterate({
+        enter: (type, _from, _to) => {
+          if (type.name !== 'Document') {
+            if (codeBlockSyntaxNodes.includes(type.name)) {
+              builder.add(line.from, line.from, codeBlockDecoration)
+            }
 
-          return false
-        }
-      }, from: line.from, to: line.to })
+            return false
+          }
+        },
+        from: line.from,
+        to: line.to,
+      })
 
       position = line.to + 1
     }
@@ -54,7 +61,7 @@ const decorate = (view: EditorView) => {
   return builder.finish()
 }
 
-export const taggedCodeBlocks = (): Extension => {
+export const codeBlocks = (): Extension => {
   return [
     codeBlockBaseTheme,
     codeBlockPlugin,
