@@ -2,10 +2,10 @@ import { Transaction } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 
 import { createState } from './state'
-import { Hybrid, HybridOptions, HybridUnsafeOptions } from './types/hybrid'
+import * as Types from './types/hybrid'
 
-const Hybrid = (parentElement: HTMLElement, unsafeOptions: HybridUnsafeOptions): Hybrid => {
-  const options: HybridOptions = {
+const Hybrid = (parentElement: HTMLElement, unsafeOptions: Types.HybridUnsafeOptions): Types.Hybrid => {
+  const options: Types.HybridOptions = {
     renderImages: false,
     value: '',
     onChange: () => {},
