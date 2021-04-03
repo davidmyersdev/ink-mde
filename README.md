@@ -52,7 +52,18 @@ const editor = Hybrid(document.getElementById('editor'))
 editor.setDoc('# New Doc')
 ```
 
-## Customize with CSS variables
+## Customization
+
+### Fonts
+
+The fonts for `hybrid-mde` can be customized with CSS variables.
+
+| CSS Variable                    | Description                            | Default Value |
+| ----                            | ----                                   | ----          |
+| `--hybrid-mde-font-family`      | Proportional font used for normal text | `sans-serif`  |
+| `--hybrid-mde-font-family-mono` | Monospace font used for code           | `monospace`   |
+
+### Syntax Highlighting
 
 The syntax highlighting theme is fully configurable through CSS variables. This means we can do things like...
 
@@ -62,9 +73,9 @@ The syntax highlighting theme is fully configurable through CSS variables. This 
 
 Check out the examples below.
 
-### Examples
+#### Examples
 
-#### Light and Dark modes
+##### Light and Dark modes
 
 Make headings dark for light mode and light for dark mode.
 
@@ -78,7 +89,7 @@ Make headings dark for light mode and light for dark mode.
 }
 ```
 
-### Tags / CSS Variable Reference
+#### Tags / CSS Variable Reference
 
 Tags are applied to the code by the CodeMirror language parsers. This means things could possibly be a bit off depending on the language being highlighted. If you think something is being incorrectly highlighted, feel free to [open an issue](https://github.com/writewithocto/hybrid-mde/issues). The CSS variables listed under a given Tag are in order of highest-to-lowest precedence. For more information about Tags, check out the [CodeMirror Tag reference](https://codemirror.net/6/docs/ref/#highlight.tags).
 
