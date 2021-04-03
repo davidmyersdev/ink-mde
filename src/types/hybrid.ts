@@ -5,6 +5,13 @@ export interface Hybrid {
 }
 
 export interface HybridOptions {
+  renderImages: boolean
   value: string
   onChange: (value: string) => void
+}
+
+export interface HybridUnsafeOptions {
+  renderImages?: boolean
+  value?: string
+  onChange?: (value: string) => void
 }
