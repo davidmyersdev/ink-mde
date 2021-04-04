@@ -6,7 +6,7 @@ import { languages } from '@codemirror/language-data'
 import { codeBlocks } from './extensions/code_blocks'
 import { images } from './extensions/images'
 import { keymaps } from './extensions/keymaps'
-import SyntaxHighlighting from './highlight'
+import { syntaxHighlighting } from './extensions/syntax_highlighting'
 import { HybridOptions } from './types/hybrid'
 
 export const createState = (options: HybridOptions): EditorState => {
@@ -15,15 +15,15 @@ export const createState = (options: HybridOptions): EditorState => {
   return EditorState.create({
     doc: options.value,
     extensions: [
-      SyntaxHighlighting,
+      syntaxHighlighting(),
       history(),
       markdown({
         base: markdownLanguage,
         codeLanguages: languages,
       }),
       codeBlocks(),
-      renderImages.of(options.renderImages ? images() : []),
       keymaps(),
+      renderImages.of(options.renderImages ? images() : []),
     ],
   })
 }
