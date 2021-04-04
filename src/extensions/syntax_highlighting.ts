@@ -1,6 +1,7 @@
 import { HighlightStyle, tags } from '@codemirror/highlight'
+import { Extension } from '@codemirror/state'
 
-const SyntaxHighlighting = HighlightStyle.define([
+export const syntaxHighlighting = (): Extension => HighlightStyle.define([
   // ordered by lowest to highest precedence
   {
     tag: tags.atom,
@@ -141,5 +142,3 @@ const SyntaxHighlighting = HighlightStyle.define([
     fontWeight: 'bold',
   },
 ])
-
-export default SyntaxHighlighting
