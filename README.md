@@ -63,6 +63,15 @@ The fonts for `hybrid-mde` can be customized with CSS variables.
 | `--hybrid-mde-font-family`      | Proportional font used for normal text | `sans-serif`  |
 | `--hybrid-mde-font-family-mono` | Monospace font used for code           | `monospace`   |
 
+### Images
+
+When the `renderImages: true` config is used, some image properties can be changed with CSS variables.
+
+| CSS Variable                        | Description                 | Default Value        |
+| ----                                | ----                        | ----                 |
+| `--hybrid-mde-image-backdrop-color` | Color of the image backdrop | `rgba(0, 0, 0, 0.3)` |
+| `--hybrid-mde-image-max-height`     | Max height of the image     | `20rem`              |
+
 ### Syntax Highlighting
 
 The syntax highlighting theme is fully configurable through CSS variables. This means we can do things like...
