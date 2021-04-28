@@ -19,7 +19,8 @@
       import Hybrid from '/dist/es/index.js'
 
       window.hybrid = Hybrid(document.getElementById('app'), {
-        value: '# Hello',
+        renderImages: true,
+        value: '# Hello\n\nThis is an _inline_ image. ![](https://i.giphy.com/media/vP4ci3sz5YZHi/giphy.webp)',
         onChange(value) {
           console.log(value)
         },

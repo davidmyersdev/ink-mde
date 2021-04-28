@@ -1,7 +1,7 @@
 import { syntaxTree } from '@codemirror/language'
-import { Range } from '@codemirror/rangeset'
-import { Extension } from '@codemirror/state'
-import { Decoration, DecorationSet, EditorView, ViewPlugin, ViewUpdate, WidgetType } from '@codemirror/view'
+import { Range, RangeSet } from '@codemirror/rangeset'
+import { EditorState, Extension, StateField } from '@codemirror/state'
+import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
 
 interface ImageWidgetParams {
   url: string
@@ -22,31 +22,32 @@ class ImageWidget extends WidgetType {
 
   toDOM() {
     const container = document.createElement('div')
-    const figure = container.appendChild(document.createElement('figure'))
-    const image = document.createElement('img')
+    const backdrop = container.appendChild(document.createElement('div'))
+    const figure = backdrop.appendChild(document.createElement('figure'))
+    const image = figure.appendChild(document.createElement('img'))
 
     container.setAttribute('aria-hidden', 'true')
     container.className = 'cm-image-container'
+    backdrop.className = 'cm-image-backdrop'
     figure.className = 'cm-image-figure'
     image.className = 'cm-image-img'
     image.src = this.url
 
-    container.style.backgroundColor = 'var(--hybrid-mde-images-bg-color, rgba(0, 0, 0, 0.3))'
-    container.style.display = 'flex'
-    container.style.alignItems = 'center'
-    container.style.justifyContent = 'center'
-    container.style.padding = '1rem'
-    container.style.marginBottom = '0.5rem'
-    container.style.marginTop = '0.5rem'
-    container.style.maxWidth = '100%'
+    container.style.paddingBottom = '0.5rem'
+    container.style.paddingTop = '0.5rem'
+
+    backdrop.style.backgroundColor = 'var(--hybrid-mde-image-backdrop-color, rgba(0, 0, 0, 0.3))'
+    backdrop.style.display = 'flex'
+    backdrop.style.alignItems = 'center'
+    backdrop.style.justifyContent = 'center'
+    backdrop.style.padding = '1rem'
+    backdrop.style.maxWidth = '100%'
 
     figure.style.margin = '0'
 
     image.style.display = 'block'
     image.style.maxHeight = 'var(--hybrid-mde-images-max-height, 20rem)'
     image.style.maxWidth = '100%'
-
-    figure.appendChild(image)
 
     return container
   }
@@ -60,51 +61,43 @@ const imageDecoration = (imageWidgetParams: ImageWidgetParams) => Decoration.wid
   block: true,
 })
 
-const imagePlugin = ViewPlugin.fromClass(class {
-  decorations: DecorationSet
-
-  constructor(view: EditorView) {
-    this.decorations = decorate(view)
-  }
-
-  update(viewUpdate: ViewUpdate) {
-    if (viewUpdate.docChanged || viewUpdate.viewportChanged) {
-      this.decorations = decorate(viewUpdate.view)
-    }
-  }
-}, { decorations: (plugin) => plugin.decorations })
-
-const decorate = (view: EditorView) => {
+const decorate = (state: EditorState) => {
   const widgets: Range<Decoration>[] = []
 
-  for (const { from, to } of view.visibleRanges) {
-    for (let position = from; position < to;) {
-      const line = view.state.doc.lineAt(position)
+  syntaxTree(state).iterate({
+    enter: (type, from, to) => {
+      if (type.name === 'Image') {
+        const result = imageRegex.exec(state.doc.sliceString(from, to))
+        const url = result?.groups?.url
 
-      syntaxTree(view.state).iterate({
-        enter: (type, from, to) => {
-          if (type.name === 'Image') {
-            const result = imageRegex.exec(view.state.doc.sliceString(from, to))
-            const url = result?.groups?.url
+        if (url) {
+          widgets.push(imageDecoration({ url }).range(state.doc.lineAt(from).from))
+        }
+      }
+    },
+  })
 
-            if (url) {
-              widgets.push(imageDecoration({ url }).range(line.from))
-            }
-          }
-        },
-        from: line.from,
-        to: line.to,
-      })
-
-      position = line.to + 1
-    }
-  }
-
-  return Decoration.set(widgets)
+  return widgets.length > 0 ? RangeSet.of(widgets) : Decoration.none
 }
+
+const imageField = StateField.define<DecorationSet>({
+  create(state) {
+    return decorate(state)
+  },
+  update(images, transaction) {
+    if (transaction.docChanged) {
+      return decorate(transaction.state)
+    }
+
+    return images.map(transaction.changes)
+  },
+  provide(field) {
+    return EditorView.decorations.from(field)
+  },
+})
 
 export const images = (): Extension => {
   return [
-    imagePlugin,
+    imageField,
   ]
 }
