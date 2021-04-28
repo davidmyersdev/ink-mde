@@ -6,6 +6,8 @@
 
 A plain-text javascript markdown editor that renders text formatting live and in-place without the need for a preview pane. Built on CodeMirror 6.
 
+![](https://i.imgur.com/sGSmw8w.png)
+
 ## Install
 
 ```shell
