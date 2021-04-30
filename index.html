@@ -5,10 +5,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
+      body {
+        background-color: #171717;
+        color: #fafafa;
+      }
+
       #app {
-        border: 1px solid #000;
+        margin: auto;
+        max-width: 75rem;
+        padding: 0.5em;
+
         --hybrid-mde-font-family: 'Inter', Helvetica, sans-serif;
         --hybrid-mde-font-family-mono: 'Fira Code', 'Courier New', Courier, monospace;
+      }
+
+      #app .cm-editor .cm-content {
+        min-height: 50rem;
+      }
+
+      #app .cm-editor.cm-focused {
+        outline: none;
       }
     </style>
   </head>
