@@ -6,6 +6,7 @@ import * as Types from './types/hybrid'
 
 const Hybrid = (parentElement: HTMLElement, unsafeOptions: Types.HybridUnsafeOptions): Types.Hybrid => {
   const options: Types.HybridOptions = {
+    appearance: 'dark',
     renderImages: false,
     value: '',
     onChange: () => {},
