@@ -3,12 +3,11 @@ import { Compartment, EditorState } from '@codemirror/state'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 
-import { baseTheme } from './extensions/base_theme'
 import { codeBlocks } from './extensions/code_blocks'
 import { images } from './extensions/images'
 import { keymaps } from './extensions/keymaps'
 import { lineWrapping } from './extensions/line_wrapping'
-import { syntaxHighlighting } from './extensions/syntax_highlighting'
+import { theme } from './extensions/theme'
 import { HybridOptions } from './types/hybrid'
 
 export const createState = (options: HybridOptions): EditorState => {
@@ -17,13 +16,12 @@ export const createState = (options: HybridOptions): EditorState => {
   return EditorState.create({
     doc: options.value,
     extensions: [
-      syntaxHighlighting(),
+      theme(options),
       history(),
       markdown({
         base: markdownLanguage,
         codeLanguages: languages,
       }),
-      baseTheme(),
       codeBlocks(),
       keymaps(),
       lineWrapping(),
