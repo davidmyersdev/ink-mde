@@ -68,10 +68,9 @@ const decorate = (state: EditorState) => {
     enter: (type, from, to) => {
       if (type.name === 'Image') {
         const result = imageRegex.exec(state.doc.sliceString(from, to))
-        const url = result?.groups?.url
 
-        if (url) {
-          widgets.push(imageDecoration({ url }).range(state.doc.lineAt(from).from))
+        if (result && result.groups && result.groups.url) {
+          widgets.push(imageDecoration({ url: result.groups.url }).range(state.doc.lineAt(from).from))
         }
       }
     },
