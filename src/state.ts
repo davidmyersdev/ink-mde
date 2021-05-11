@@ -14,7 +14,7 @@ export const createState = (options: InkOptions): EditorState => {
   const renderImages = new Compartment()
 
   return EditorState.create({
-    doc: options.value,
+    doc: options.doc,
     extensions: [
       theme(options),
       history(),

@@ -2,20 +2,22 @@ type Appearance = 'dark' | 'light'
 
 export interface Ink {
   destroy: () => void
+  doc: () => string
   focus: () => void
-  setDoc: (doc: string) => void
+  load: (doc: string) => void
+  update: (doc: string) => void
 }
 
 export interface InkOptions {
   appearance: Appearance
+  doc: string
+  onChange: (doc: string) => void
   renderImages: boolean
-  value: string
-  onChange: (value: string) => void
 }
 
 export interface InkUnsafeOptions {
   appearance?: Appearance
+  doc?: string
+  onChange?: (doc: string) => void
   renderImages?: boolean
-  value?: string
-  onChange?: (value: string) => void
 }
