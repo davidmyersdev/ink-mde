@@ -36,7 +36,7 @@ class ImageWidget extends WidgetType {
     container.style.paddingBottom = '0.5rem'
     container.style.paddingTop = '0.5rem'
 
-    backdrop.style.backgroundColor = 'var(--hybrid-mde-image-backdrop-color, rgba(0, 0, 0, 0.3))'
+    backdrop.style.backgroundColor = 'var(--ink-image-backdrop-color, rgba(0, 0, 0, 0.3))'
     backdrop.style.display = 'flex'
     backdrop.style.alignItems = 'center'
     backdrop.style.justifyContent = 'center'
@@ -46,7 +46,7 @@ class ImageWidget extends WidgetType {
     figure.style.margin = '0'
 
     image.style.display = 'block'
-    image.style.maxHeight = 'var(--hybrid-mde-images-max-height, 20rem)'
+    image.style.maxHeight = 'var(--ink-images-max-height, 20rem)'
     image.style.maxWidth = '100%'
 
     return container

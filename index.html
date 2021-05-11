@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="dark">
   <head>
-    <title>Hybrid MDE</title>
+    <title>Ink</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
@@ -20,8 +20,8 @@
         max-width: 75rem;
         padding: 0.5em;
 
-        --hybrid-mde-font-family: 'Inter', Helvetica, sans-serif;
-        --hybrid-mde-font-family-mono: 'Fira Code', 'Courier New', Courier, monospace;
+        --ink-font-family: 'Inter', Helvetica, sans-serif;
+        --ink-font-family-mono: 'Fira Code', 'Courier New', Courier, monospace;
       }
 
       #app .cm-editor .cm-content {
@@ -37,9 +37,9 @@
     <div id="app"></div>
     <script type="module" src="/dist/es/index.js"></script>
     <script type="module">
-      import Hybrid from '/dist/es/index.js'
+      import Ink from '/dist/es/index.js'
 
-      window.hybrid = Hybrid(document.getElementById('app'), {
+      window.ink = Ink(document.getElementById('app'), {
         appearance: 'dark',
         renderImages: true,
         value: '# Hello\n\nThis is an _inline_ image. ![](https://i.giphy.com/media/vP4ci3sz5YZHi/giphy.webp)',

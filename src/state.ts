@@ -8,9 +8,9 @@ import { images } from './extensions/images'
 import { keymaps } from './extensions/keymaps'
 import { lineWrapping } from './extensions/line_wrapping'
 import { theme } from './extensions/theme'
-import { HybridOptions } from './types/hybrid'
+import { InkOptions } from './types/ink'
 
-export const createState = (options: HybridOptions): EditorState => {
+export const createState = (options: InkOptions): EditorState => {
   const renderImages = new Compartment()
 
   return EditorState.create({

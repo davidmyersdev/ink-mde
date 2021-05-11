@@ -4,8 +4,8 @@ import { Extension } from '@codemirror/state'
 import { Decoration, DecorationSet, EditorView, ViewPlugin, ViewUpdate } from '@codemirror/view'
 
 const codeBlockBaseTheme = EditorView.baseTheme({
-  '.cm-line': { fontFamily: 'var(--hybrid-mde-font-family, sans-serif)' },
-  '.cm-line.cm-codeblock': { fontFamily: 'var(--hybrid-mde-font-family-mono, monospace)', },
+  '.cm-line': { fontFamily: 'var(--ink-font-family, sans-serif)' },
+  '.cm-line.cm-codeblock': { fontFamily: 'var(--ink-font-family-mono, monospace)', },
 })
 
 const codeBlockSyntaxNodes = [
