@@ -34,9 +34,9 @@ Supply some initial data and set a callback to track data changes.
 import ink from '@writewithocto/ink'
 
 ink(document.getElementById('editor'), {
-  value: '# Start with some text',
-  onChange: (value) => {
-    console.log('Doc edited:', value)
+  doc: '# Start with some text',
+  onChange: (doc) => {
+    console.log('Doc edited:', doc)
   },
 })
 ```
@@ -51,7 +51,7 @@ import ink from '@writewithocto/ink'
 const editor = ink(document.getElementById('editor'))
 
 // user performs some action to change the active doc...
-editor.setDoc('# New Doc')
+editor.load('# New Doc')
 ```
 
 ## Customization

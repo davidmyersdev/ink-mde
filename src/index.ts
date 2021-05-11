@@ -8,7 +8,7 @@ const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
   const options: Types.InkOptions = {
     appearance: 'dark',
     renderImages: false,
-    value: '',
+    doc: '',
     onChange: () => {},
     ...unsafeOptions,
   }
@@ -29,11 +29,25 @@ const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
     destroy() {
       view.destroy()
     },
+    doc() {
+      return view.state.sliceDoc()
+    },
     focus() {
       view.focus()
     },
-    setDoc(value: string) {
-      view.setState(createState({ ...options, value }))
+    load(doc: string) {
+      view.setState(createState({ ...options, doc }))
+    },
+    update(doc) {
+      view.dispatch(
+        view.state.update({
+          changes: {
+            from: 0,
+            to: view.state.doc.length,
+            insert: doc,
+          },
+        })
+      )
     },
   }
 }
