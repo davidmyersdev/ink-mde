@@ -1,19 +1,19 @@
 type Appearance = 'dark' | 'light'
 
-export interface Hybrid {
+export interface Ink {
   destroy: () => void
   focus: () => void
   setDoc: (doc: string) => void
 }
 
-export interface HybridOptions {
+export interface InkOptions {
   appearance: Appearance
   renderImages: boolean
   value: string
   onChange: (value: string) => void
 }
 
-export interface HybridUnsafeOptions {
+export interface InkUnsafeOptions {
   appearance?: Appearance
   renderImages?: boolean
   value?: string

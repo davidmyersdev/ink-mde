@@ -2,10 +2,10 @@ import { Transaction } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 
 import { createState } from './state'
-import * as Types from './types/hybrid'
+import * as Types from './types/ink'
 
-const Hybrid = (parentElement: HTMLElement, unsafeOptions: Types.HybridUnsafeOptions): Types.Hybrid => {
-  const options: Types.HybridOptions = {
+const Ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions): Types.Ink => {
+  const options: Types.InkOptions = {
     appearance: 'dark',
     renderImages: false,
     value: '',
@@ -38,4 +38,4 @@ const Hybrid = (parentElement: HTMLElement, unsafeOptions: Types.HybridUnsafeOpt
   }
 }
 
-export default Hybrid
+export default Ink

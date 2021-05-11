@@ -1,8 +1,8 @@
-[![latest tag](https://img.shields.io/github/v/tag/writewithocto/hybrid-mde?color=blue&label=latest%20tag&sort=semver)](https://github.com/writewithocto/hybrid-mde/releases)
-[![license](https://img.shields.io/github/license/writewithocto/hybrid-mde)](https://github.com/writewithocto/hybrid-mde/blob/master/LICENSE)
-[![open issues](https://img.shields.io/github/issues-raw/writewithocto/hybrid-mde)](https://github.com/writewithocto/hybrid-mde/issues)
+[![latest tag](https://img.shields.io/github/v/tag/writewithocto/ink?color=blue&label=latest%20tag&sort=semver)](https://github.com/writewithocto/ink/releases)
+[![license](https://img.shields.io/github/license/writewithocto/ink)](https://github.com/writewithocto/ink/blob/master/LICENSE)
+[![open issues](https://img.shields.io/github/issues-raw/writewithocto/ink)](https://github.com/writewithocto/ink/issues)
 
-# hybrid-mde
+# ink
 
 A plain-text javascript markdown editor that renders text formatting live and in-place without the need for a preview pane. Built on CodeMirror 6.
 
@@ -11,7 +11,7 @@ A plain-text javascript markdown editor that renders text formatting live and in
 ## Install
 
 ```shell
-npm install --save hybrid-mde
+npm install --save @voraciousdev/ink
 ```
 
 ## Usage
@@ -21,9 +21,9 @@ npm install --save hybrid-mde
 Create a basic editor without worrying about state.
 
 ```js
-import Hybrid from 'hybrid-mde'
+import Ink from 'ink'
 
-Hybrid(document.getElementById('editor'))
+Ink(document.getElementById('editor'))
 ```
 
 ### State Tracking
@@ -31,9 +31,9 @@ Hybrid(document.getElementById('editor'))
 Supply some initial data and set a callback to track data changes.
 
 ```js
-import Hybrid from 'hybrid-mde'
+import Ink from 'ink'
 
-Hybrid(document.getElementById('editor'), {
+Ink(document.getElementById('editor'), {
   value: '# Start with some text',
   onChange: (value) => {
     console.log('Doc edited:', value)
@@ -46,9 +46,9 @@ Hybrid(document.getElementById('editor'), {
 Swap the active doc without rebuilding the whole DOM or re-supplying configuration.
 
 ```js
-import Hybrid from 'hybrid-mde'
+import Ink from 'ink'
 
-const editor = Hybrid(document.getElementById('editor'))
+const editor = Ink(document.getElementById('editor'))
 
 // user performs some action to change the active doc...
 editor.setDoc('# New Doc')
@@ -58,12 +58,12 @@ editor.setDoc('# New Doc')
 
 ### Fonts
 
-The fonts for `hybrid-mde` can be customized with CSS variables.
+The fonts for `ink` can be customized with CSS variables.
 
 | CSS Variable                    | Description                            | Default Value |
 | ----                            | ----                                   | ----          |
-| `--hybrid-mde-font-family`      | Proportional font used for normal text | `sans-serif`  |
-| `--hybrid-mde-font-family-mono` | Monospace font used for code           | `monospace`   |
+| `--ink-font-family`      | Proportional font used for normal text | `sans-serif`  |
+| `--ink-font-family-mono` | Monospace font used for code           | `monospace`   |
 
 ### Images
 
@@ -71,8 +71,8 @@ When the `renderImages: true` config is used, some image properties can be chang
 
 | CSS Variable                        | Description                 | Default Value        |
 | ----                                | ----                        | ----                 |
-| `--hybrid-mde-image-backdrop-color` | Color of the image backdrop | `rgba(0, 0, 0, 0.3)` |
-| `--hybrid-mde-image-max-height`     | Max height of the image     | `20rem`              |
+| `--ink-image-backdrop-color` | Color of the image backdrop | `rgba(0, 0, 0, 0.3)` |
+| `--ink-image-max-height`     | Max height of the image     | `20rem`              |
 
 ### Syntax Highlighting
 
@@ -92,46 +92,46 @@ Make headings dark for light mode and light for dark mode.
 
 ```css
 .light {
-  --hybrid-mde-heading: #111;
+  --ink-heading: #111;
 }
 
 .dark {
-  --hybrid-mde-heading: #eee;
+  --ink-heading: #eee;
 }
 ```
 
 #### Tags / CSS Variable Reference
 
-Tags are applied to the code by the CodeMirror language parsers. This means things could possibly be a bit off depending on the language being highlighted. If you think something is being incorrectly highlighted, feel free to [open an issue](https://github.com/writewithocto/hybrid-mde/issues). The CSS variables listed under a given Tag are in order of highest-to-lowest precedence. For more information about Tags, check out the [CodeMirror Tag reference](https://codemirror.net/6/docs/ref/#highlight.tags).
+Tags are applied to the code by the CodeMirror language parsers. This means things could possibly be a bit off depending on the language being highlighted. If you think something is being incorrectly highlighted, feel free to [open an issue](https://github.com/writewithocto/ink/issues). The CSS variables listed under a given Tag are in order of highest-to-lowest precedence. For more information about Tags, check out the [CodeMirror Tag reference](https://codemirror.net/6/docs/ref/#highlight.tags).
 
 | Tag   | Override Variables | Default |
 | ----  | ----               | ----    |
-| atom  | --hybrid-mde-atom | #d19a66 |
-| meta  | --hybrid-mde-meta | #abb2bf |
-| processingInstruction | --hybrid-mde-processingInstruction | #abb2bf |
-| comment | --hybrid-mde-comment | #abb2bf |
-| name | --hybrid-mde-name | #d19a66 |
-| labelName | --hybrid-mde-labelName<br>--hybrid-mde-name | #abb2bf |
-| propertyName | --hybrid-mde-propertyName<br>--hybrid-mde-name | #96c0d8 |
-| propertyName (definition) | --hybrid-mde-propertyName-definition<br>--hybrid-mde-propertyName<br>--hybrid-mde-name | #e06c75 |
-| variableName | --hybrid-mde-variableName<br>--hybrid-mde-name | #e06c75 |
-| variableName (definition) | --hybrid-mde-variableName-definition<br>--hybrid-mde-variableName<br>--hybrid-mde-name | #e5c07b |
-| variableName (local) | --hybrid-mde-variableName-local<br>--hybrid-mde-variableName<br>--hybrid-mde-name | #d19a66 |
-| variableName (special) | --hybrid-mde-variableName-special<br>--hybrid-mde-variableName<br>--hybrid-mde-name | inherit |
-| heading | --hybrid-mde-heading | #e06c75 |
-| heading1 | --hybrid-mde-heading1<br>--hybrid-mde-heading | #e06c75 |
-| heading2 | --hybrid-mde-heading2<br>--hybrid-mde-heading | #e06c75 |
-| heading3 | --hybrid-mde-heading3<br>--hybrid-mde-heading | #e06c75 |
-| heading4 | --hybrid-mde-heading4<br>--hybrid-mde-heading | #e06c75 |
-| heading5 | --hybrid-mde-heading5<br>--hybrid-mde-heading | #e06c75 |
-| heading6 | --hybrid-mde-heading6<br>--hybrid-mde-heading | #e06c75 |
-| keyword | --hybrid-mde-keyword | #c678dd |
-| number | --hybrid-mde-number | #d19a66 |
-| operator | --hybrid-mde-operator | #96c0d8 |
-| punctuation | --hybrid-mde-punctuation | #36454f |
-| link | --hybrid-mde-link | #96c0d8 |
-| url | --hybrid-mde-url | #96c0d8 |
-| string | --hybrid-mde-string | #98c379 |
-| string (special) | --hybrid-mde-string-special<br>--hybrid-mde-string | inherit |
-| emphasis | --hybrid-mde-emphasis | inherit |
-| strong | --hybrid-mde-strong | inherit |
+| atom  | --ink-atom | #d19a66 |
+| meta  | --ink-meta | #abb2bf |
+| processingInstruction | --ink-processingInstruction | #abb2bf |
+| comment | --ink-comment | #abb2bf |
+| name | --ink-name | #d19a66 |
+| labelName | --ink-labelName<br>--ink-name | #abb2bf |
+| propertyName | --ink-propertyName<br>--ink-name | #96c0d8 |
+| propertyName (definition) | --ink-propertyName-definition<br>--ink-propertyName<br>--ink-name | #e06c75 |
+| variableName | --ink-variableName<br>--ink-name | #e06c75 |
+| variableName (definition) | --ink-variableName-definition<br>--ink-variableName<br>--ink-name | #e5c07b |
+| variableName (local) | --ink-variableName-local<br>--ink-variableName<br>--ink-name | #d19a66 |
+| variableName (special) | --ink-variableName-special<br>--ink-variableName<br>--ink-name | inherit |
+| heading | --ink-heading | #e06c75 |
+| heading1 | --ink-heading1<br>--ink-heading | #e06c75 |
+| heading2 | --ink-heading2<br>--ink-heading | #e06c75 |
+| heading3 | --ink-heading3<br>--ink-heading | #e06c75 |
+| heading4 | --ink-heading4<br>--ink-heading | #e06c75 |
+| heading5 | --ink-heading5<br>--ink-heading | #e06c75 |
+| heading6 | --ink-heading6<br>--ink-heading | #e06c75 |
+| keyword | --ink-keyword | #c678dd |
+| number | --ink-number | #d19a66 |
+| operator | --ink-operator | #96c0d8 |
+| punctuation | --ink-punctuation | #36454f |
+| link | --ink-link | #96c0d8 |
+| url | --ink-url | #96c0d8 |
+| string | --ink-string | #98c379 |
+| string (special) | --ink-string-special<br>--ink-string | inherit |
+| emphasis | --ink-emphasis | inherit |
+| strong | --ink-strong | inherit |

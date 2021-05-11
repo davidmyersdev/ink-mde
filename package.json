@@ -1,10 +1,10 @@
 {
-  "name": "hybrid-mde",
-  "version": "v0.1.7",
+  "name": "@voraciousdev/ink",
+  "version": "v0.2.0",
   "description": "A plain-text javascript markdown editor that renders formatting live and in-place without the need for a preview pane.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
-  "repository": "https://github.com/writewithocto/hybrid-mde.git",
+  "repository": "https://github.com/writewithocto/ink.git",
   "author": "David R. Myers <davidrmyersii@gmail.com>",
   "license": "MIT",
   "private": false,
