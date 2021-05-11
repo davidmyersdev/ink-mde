@@ -4,7 +4,7 @@ import { EditorView } from '@codemirror/view'
 import { createState } from './state'
 import * as Types from './types/ink'
 
-const Ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions): Types.Ink => {
+const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions): Types.Ink => {
   const options: Types.InkOptions = {
     appearance: 'dark',
     renderImages: false,
@@ -38,4 +38,4 @@ const Ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
   }
 }
 
-export default Ink
+export default ink

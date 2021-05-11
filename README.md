@@ -2,16 +2,16 @@
 [![license](https://img.shields.io/github/license/writewithocto/ink)](https://github.com/writewithocto/ink/blob/master/LICENSE)
 [![open issues](https://img.shields.io/github/issues-raw/writewithocto/ink)](https://github.com/writewithocto/ink/issues)
 
-# ink
+# Ink
 
-A plain-text javascript markdown editor that renders text formatting live and in-place without the need for a preview pane. Built on CodeMirror 6.
+A plain-text javascript markdown editor that renders text formatting live and in-place without the need for a preview pane. Built on CodeMirror 6. Powers [octo.app](https://octo.app).
 
-![](https://i.imgur.com/S0SQEGc.png)
+![](https://i.imgur.com/YefGzW8.png)
 
 ## Install
 
 ```shell
-npm install --save @voraciousdev/ink
+npm install --save @writewithocto/ink
 ```
 
 ## Usage
@@ -21,9 +21,9 @@ npm install --save @voraciousdev/ink
 Create a basic editor without worrying about state.
 
 ```js
-import Ink from 'ink'
+import ink from '@writewithocto/ink'
 
-Ink(document.getElementById('editor'))
+ink(document.getElementById('editor'))
 ```
 
 ### State Tracking
@@ -31,9 +31,9 @@ Ink(document.getElementById('editor'))
 Supply some initial data and set a callback to track data changes.
 
 ```js
-import Ink from 'ink'
+import ink from '@writewithocto/ink'
 
-Ink(document.getElementById('editor'), {
+ink(document.getElementById('editor'), {
   value: '# Start with some text',
   onChange: (value) => {
     console.log('Doc edited:', value)
@@ -46,9 +46,9 @@ Ink(document.getElementById('editor'), {
 Swap the active doc without rebuilding the whole DOM or re-supplying configuration.
 
 ```js
-import Ink from 'ink'
+import ink from '@writewithocto/ink'
 
-const editor = Ink(document.getElementById('editor'))
+const editor = ink(document.getElementById('editor'))
 
 // user performs some action to change the active doc...
 editor.setDoc('# New Doc')
@@ -58,7 +58,7 @@ editor.setDoc('# New Doc')
 
 ### Fonts
 
-The fonts for `ink` can be customized with CSS variables.
+The fonts for `@writewithocto/ink` can be customized with CSS variables.
 
 | CSS Variable                    | Description                            | Default Value |
 | ----                            | ----                                   | ----          |
