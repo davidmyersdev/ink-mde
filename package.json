@@ -1,5 +1,5 @@
 {
-  "name": "@voraciousdev/ink",
+  "name": "@writewithocto/ink",
   "version": "v0.2.0",
   "description": "A plain-text javascript markdown editor that renders formatting live and in-place without the need for a preview pane.",
   "main": "./dist/cjs/index.js",
