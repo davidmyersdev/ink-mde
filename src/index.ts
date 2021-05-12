@@ -1,4 +1,4 @@
-import { Transaction } from '@codemirror/state'
+import { EditorSelection, Transaction } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 
 import { createState } from './state'
@@ -7,9 +7,9 @@ import * as Types from './types/ink'
 const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions): Types.Ink => {
   const options: Types.InkOptions = {
     appearance: 'dark',
-    renderImages: false,
     doc: '',
     onChange: () => {},
+    renderImages: false,
     ...unsafeOptions,
   }
 
@@ -37,6 +37,16 @@ const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
     },
     load(doc: string) {
       view.setState(createState({ ...options, doc }))
+    },
+    select(selection) {
+      view.dispatch(
+        view.state.update({
+          selection,
+        })
+      )
+    },
+    selection() {
+      return view.state.selection
     },
     update(doc) {
       view.dispatch(

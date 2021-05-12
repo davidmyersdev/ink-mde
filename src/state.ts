@@ -15,6 +15,7 @@ export const createState = (options: InkOptions): EditorState => {
 
   return EditorState.create({
     doc: options.doc,
+    selection: options.selection,
     extensions: [
       theme(options),
       history(),
