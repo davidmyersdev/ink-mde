@@ -17,11 +17,11 @@ const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
     parent: parentElement,
     state: createState(options),
     dispatch(transaction: Transaction) {
+      view.update([transaction])
+
       if (transaction.docChanged) {
         options.onChange(transaction.newDoc.toString())
       }
-
-      view.update([transaction])
     },
   })
 
