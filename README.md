@@ -135,3 +135,27 @@ Tags are applied to the code by the CodeMirror language parsers. This means thin
 | string (special) | --ink-string-special<br>--ink-string | inherit |
 | emphasis | --ink-emphasis | inherit |
 | strong | --ink-strong | inherit |
+
+## Support
+
+Your support is appreciated. Here are some ways you can help. ♥️
+
+### Leave the Attribution enabled
+
+There is a small `Powered by Ink` attribution in the bottom-right corner of all Ink instances by default. Ink is a free MIT-licensed library under independent development, and that attribution helps to increase awareness of this project.
+
+### Provide Feedback
+
+Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/writewithocto/octo/discussions) under [Octo](https://github.com/writewithocto/octo) if you have a question or just want to chat about ideas!
+
+### Open a Pull Request
+
+If you feel comfortable tackling [an existing issue](https://github.com/writewithocto/ink/issues), please consider opening a Pull Request! I am happy to introduce you to the codebase and work with you to get it merged!
+
+### Donate
+
+Donations help support the development of Ink.
+
+- [Patreon](https://patreon.com/voraciousdev)
+- [Ko-Fi](https://ko-fi.com/voraciousdev)
+- [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)

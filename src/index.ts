@@ -7,6 +7,7 @@ import * as Types from './types/ink'
 const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions): Types.Ink => {
   const options: Types.InkOptions = {
     appearance: 'dark',
+    disableAttribution: false,
     doc: '',
     enableSpellcheck: true,
     onChange: () => {},

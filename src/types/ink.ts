@@ -14,6 +14,7 @@ export interface Ink {
 
 export interface InkOptions {
   appearance: Appearance
+  disableAttribution: boolean
   doc: string
   enableSpellcheck: boolean
   onChange: (doc: string) => void
@@ -23,6 +24,7 @@ export interface InkOptions {
 
 export interface InkUnsafeOptions {
   appearance?: Appearance
+  disableAttribution?: boolean
   doc?: string
   enableSpellcheck?: boolean
   onChange?: (doc: string) => void
