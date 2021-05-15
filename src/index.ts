@@ -8,6 +8,7 @@ const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
   const options: Types.InkOptions = {
     appearance: 'dark',
     doc: '',
+    enableSpellcheck: true,
     onChange: () => {},
     renderImages: false,
     ...unsafeOptions,
