@@ -33,7 +33,9 @@ const ink = (parentElement: HTMLElement, unsafeOptions: Types.InkUnsafeOptions):
       return view.state.sliceDoc()
     },
     focus() {
-      view.focus()
+      if (!view.hasFocus) {
+        view.focus()
+      }
     },
     load(doc: string) {
       view.setState(createState({ ...options, doc }))
