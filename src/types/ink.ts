@@ -15,6 +15,7 @@ export interface Ink {
 export interface InkOptions {
   appearance: Appearance
   doc: string
+  enableSpellcheck: boolean
   onChange: (doc: string) => void
   renderImages: boolean
   selection?: EditorSelection
@@ -23,6 +24,7 @@ export interface InkOptions {
 export interface InkUnsafeOptions {
   appearance?: Appearance
   doc?: string
+  enableSpellcheck?: boolean
   onChange?: (doc: string) => void
   renderImages?: boolean
   selection?: EditorSelection
