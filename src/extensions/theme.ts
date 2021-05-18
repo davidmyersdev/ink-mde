@@ -156,8 +156,9 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     },
     // emphasis types
     {
-      tag: tags.deleted,
-      textDecoration: 'var(--ink-deleted, line-through)',
+      tag: tags.strikethrough,
+      color: 'var(--ink-strikethrough, inherit)',
+      textDecoration: 'line-through',
     },
     {
       tag: tags.emphasis,
