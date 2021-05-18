@@ -153,6 +153,10 @@ export const theme = ({ appearance }: InkOptions): Extension => {
     },
     // emphasis types
     {
+      tag: tags.deleted,
+      textDecoration: 'var(--ink-deleted, line-through)',
+    },
+    {
       tag: tags.emphasis,
       color: 'var(--ink-emphasis, inherit)',
       fontStyle: 'italic',
