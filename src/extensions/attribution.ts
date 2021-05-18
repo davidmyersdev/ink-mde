@@ -21,8 +21,6 @@ class AttributionWidget extends WidgetType {
     container.style.fontFamily = 'var(--ink-font-family, sans-serif)'
     container.style.fontSize = '0.75em'
     container.style.opacity = '0.5'
-    container.style.paddingBottom = '0.5rem'
-    container.style.paddingTop = '0.5rem'
     container.style.position = 'absolute'
     container.style.right = '0'
 
@@ -30,6 +28,8 @@ class AttributionWidget extends WidgetType {
 
     link.href = 'https://github.com/writewithocto/ink'
     link.innerText = 'Ink'
+    link.rel = 'noopener noreferrer'
+    link.target = '_blank'
     link.style.color = 'var(--ink-heading, #e06c75)'
     link.style.fontWeight = 'bold'
     link.style.textDecoration = 'none'

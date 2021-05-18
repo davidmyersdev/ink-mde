@@ -7,7 +7,7 @@ const defaults = {
 
 }
 
-export const theme = ({ appearance }: InkOptions): Extension => {
+export const theme = ({ appearance, disableAttribution }: InkOptions): Extension => {
   const baseTheme = EditorView.baseTheme({
     '&': {
       color: 'inherit',
@@ -16,6 +16,9 @@ export const theme = ({ appearance }: InkOptions): Extension => {
     '.cm-scroller': {
       lineHeight: 'var(--ink-line-height, 2em)',
       fontSize: 'var(--ink-font-size, 1.1em)',
+    },
+    '.cm-content': disableAttribution ? {} : {
+      paddingBottom: '2em',
     },
     '.cm-line': {
       padding: '0',
