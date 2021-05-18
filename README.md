@@ -106,35 +106,36 @@ Tags are applied to the code by the CodeMirror language parsers. This means thin
 
 | Tag   | Override Variables | Default |
 | ----  | ----               | ----    |
-| atom  | --ink-atom | #d19a66 |
-| meta  | --ink-meta | #abb2bf |
-| processingInstruction | --ink-processingInstruction | #abb2bf |
-| comment | --ink-comment | #abb2bf |
-| name | --ink-name | #d19a66 |
-| labelName | --ink-labelName<br>--ink-name | #abb2bf |
-| propertyName | --ink-propertyName<br>--ink-name | #96c0d8 |
-| propertyName (definition) | --ink-propertyName-definition<br>--ink-propertyName<br>--ink-name | #e06c75 |
-| variableName | --ink-variableName<br>--ink-name | #e06c75 |
-| variableName (definition) | --ink-variableName-definition<br>--ink-variableName<br>--ink-name | #e5c07b |
-| variableName (local) | --ink-variableName-local<br>--ink-variableName<br>--ink-name | #d19a66 |
-| variableName (special) | --ink-variableName-special<br>--ink-variableName<br>--ink-name | inherit |
-| heading | --ink-heading | #e06c75 |
-| heading1 | --ink-heading1<br>--ink-heading | #e06c75 |
-| heading2 | --ink-heading2<br>--ink-heading | #e06c75 |
-| heading3 | --ink-heading3<br>--ink-heading | #e06c75 |
-| heading4 | --ink-heading4<br>--ink-heading | #e06c75 |
-| heading5 | --ink-heading5<br>--ink-heading | #e06c75 |
-| heading6 | --ink-heading6<br>--ink-heading | #e06c75 |
-| keyword | --ink-keyword | #c678dd |
-| number | --ink-number | #d19a66 |
-| operator | --ink-operator | #96c0d8 |
-| punctuation | --ink-punctuation | #36454f |
-| link | --ink-link | #96c0d8 |
-| url | --ink-url | #96c0d8 |
-| string | --ink-string | #98c379 |
-| string (special) | --ink-string-special<br>--ink-string | inherit |
-| emphasis | --ink-emphasis | inherit |
-| strong | --ink-strong | inherit |
+| `atom`  | `--ink-atom` | `#d19a66` |
+| `meta`  | `--ink-meta` | `#abb2bf` |
+| `processingInstruction` | `--ink-processingInstruction` | `#abb2bf` |
+| `comment` | `--ink-comment` | `#abb2bf` |
+| `name` | `--ink-name` | `#d19a66` |
+| `labelName` | `--ink-labelName`<br>`--ink-name` | `#abb2bf` |
+| `propertyName` | `--ink-propertyName`<br>`--ink-name` | `#96c0d8` |
+| `propertyName (definition)` | `--ink-propertyName-definition`<br>`--ink-propertyName`<br>`--ink-name` | `#e06c75` |
+| `variableName` | `--ink-variableName`<br>`--ink-name` | `#e06c75` |
+| `variableName (definition)` | `--ink-variableName-definition`<br>`--ink-variableName`<br>`--ink-name` | `#e5c07b` |
+| `variableName (local)` | `--ink-variableName-local`<br>`--ink-variableName`<br>`--ink-name` | `#d19a66` |
+| `variableName (special)` | `--ink-variableName-special`<br>`--ink-variableName`<br>`--ink-name` | `inherit` |
+| `heading` | `--ink-heading` | `#e06c75` |
+| `heading1` | `--ink-heading1`<br>`--ink-heading` | `#e06c75` |
+| `heading2` | `--ink-heading2`<br>`--ink-heading` | `#e06c75` |
+| `heading3` | `--ink-heading3`<br>`--ink-heading` | `#e06c75` |
+| `heading4` | `--ink-heading4`<br>`--ink-heading` | `#e06c75` |
+| `heading5` | `--ink-heading5`<br>`--ink-heading` | `#e06c75` |
+| `heading6` | `--ink-heading6`<br>`--ink-heading` | `#e06c75` |
+| `keyword` | `--ink-keyword` | `#c678dd` |
+| `number` | `--ink-number` | `#d19a66` |
+| `operator` | `--ink-operator` | `#96c0d8` |
+| `punctuation` | `--ink-punctuation` | `#36454f` |
+| `link` | `--ink-link` | `#96c0d8` |
+| `url` | `--ink-url` | `#96c0d8` |
+| `string` | `--ink-string` | `#98c379` |
+| `string (special)` | `--ink-string-special`<br>`--ink-string` | `inherit` |
+| `deleted` | `--ink-deleted` | `line-through` |
+| `emphasis` | `--ink-emphasis` | `inherit` |
+| `strong` | `--ink-strong` | `inherit` |
 
 ## Support
 
