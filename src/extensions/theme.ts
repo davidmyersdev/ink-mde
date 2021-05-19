@@ -35,6 +35,23 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
       tag: tags.meta,
       color: 'var(--ink-meta, #abb2bf)',
     },
+    // emphasis types
+    {
+      tag: tags.emphasis,
+      color: 'var(--ink-emphasis, inherit)',
+      fontStyle: 'italic',
+    },
+    {
+      tag: tags.strong,
+      color: 'var(--ink-strong, inherit)',
+      fontWeight: 'bold',
+    },
+    {
+      tag: tags.strikethrough,
+      color: 'var(--ink-strikethrough, inherit)',
+      textDecoration: 'line-through',
+    },
+    // processing instructions
     {
       tag: tags.processingInstruction,
       color: 'var(--ink-processingInstruction, #abb2bf)',
@@ -153,22 +170,6 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     {
       tag: tags.special(tags.string),
       color: 'var(--ink-string-special, var(--ink-string, inherit))',
-    },
-    // emphasis types
-    {
-      tag: tags.strikethrough,
-      color: 'var(--ink-strikethrough, inherit)',
-      textDecoration: 'line-through',
-    },
-    {
-      tag: tags.emphasis,
-      color: 'var(--ink-emphasis, inherit)',
-      fontStyle: 'italic',
-    },
-    {
-      tag: tags.strong,
-      color: 'var(--ink-strong, inherit)',
-      fontWeight: 'bold',
     },
   ])
 
