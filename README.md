@@ -157,6 +157,7 @@ If you feel comfortable tackling [an existing issue](https://github.com/writewit
 
 Donations help support the development of Ink.
 
+- [GitHub Sponsors](https://github.com/sponsors/voraciousdev)
 - [Patreon](https://patreon.com/voraciousdev)
 - [Ko-Fi](https://ko-fi.com/voraciousdev)
 - [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)
