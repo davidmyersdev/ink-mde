@@ -17,7 +17,7 @@
     "@codemirror/comment": "^0.18.0",
     "@codemirror/highlight": "^0.18.3",
     "@codemirror/history": "^0.18.1",
-    "@codemirror/lang-markdown": "https://github.com/codemirror/lang-markdown#be8ad661474bd6e307f336472ac735c44d9d5bc8",
+    "@codemirror/lang-markdown": "^0.18.3",
     "@codemirror/language-data": "^0.18.0",
     "@codemirror/rangeset": "^0.18.0",
     "@codemirror/state": "^0.18.3",
