@@ -120,22 +120,10 @@
     "@codemirror/language" "^0.18.0"
     lezer-json "^0.13.0"
 
-"@codemirror/lang-markdown@^0.18.0":
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/@codemirror/lang-markdown/-/lang-markdown-0.18.2.tgz#c8208344da34b37300670a6150048300ed0a657c"
-  integrity sha512-vxyVtDqUur9pVwessAhy8jC4MSRCgB6odkiSgGBFIsILzZlzBvmzO+fXsgnd8Vcdk9WZxFwfdYf7r6tQBB32GQ==
-  dependencies:
-    "@codemirror/highlight" "^0.18.0"
-    "@codemirror/lang-html" "^0.18.0"
-    "@codemirror/language" "^0.18.1"
-    "@codemirror/state" "^0.18.0"
-    "@codemirror/view" "^0.18.0"
-    lezer-markdown "^0.14.3"
-    lezer-tree "^0.13.0"
-
-"@codemirror/lang-markdown@https://github.com/codemirror/lang-markdown#be8ad661474bd6e307f336472ac735c44d9d5bc8":
-  version "0.18.2"
-  resolved "https://github.com/codemirror/lang-markdown#be8ad661474bd6e307f336472ac735c44d9d5bc8"
+"@codemirror/lang-markdown@^0.18.0", "@codemirror/lang-markdown@^0.18.3":
+  version "0.18.3"
+  resolved "https://registry.yarnpkg.com/@codemirror/lang-markdown/-/lang-markdown-0.18.3.tgz#68f1ccfb5cb2270724b1b435df4506525413308d"
+  integrity sha512-K33MvOfNQNPjhrKUkA1jr000urvjznh5I1NcevsThVpe4OcD9J81VRBL4epoM/DYaNsAdn8r8aA6QQU4FWyZ6Q==
   dependencies:
     "@codemirror/highlight" "^0.18.4"
     "@codemirror/lang-html" "^0.18.0"
