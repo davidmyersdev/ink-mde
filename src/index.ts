@@ -1,4 +1,4 @@
-import { EditorSelection, Transaction } from '@codemirror/state'
+import { Transaction } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 
 import { createState } from './state'
