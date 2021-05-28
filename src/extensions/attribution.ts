@@ -1,6 +1,6 @@
-import { RangeSetBuilder } from '@codemirror/rangeset'
-import { Extension } from '@codemirror/state'
-import { Decoration, DecorationSet, PluginValue, ViewPlugin, WidgetType } from '@codemirror/view'
+import { RangeSet } from '@codemirror/rangeset'
+import { Extension, StateField } from '@codemirror/state'
+import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
 
 class AttributionWidget extends WidgetType {
   constructor() {
@@ -38,32 +38,26 @@ class AttributionWidget extends WidgetType {
   }
 }
 
-class AttributionPlugin implements PluginValue {
-  decorations: DecorationSet
-
-  constructor() {
-    const rangeSet = new RangeSetBuilder<Decoration>()
-
-    rangeSet.add(0, 0, decoration())
-
-    this.decorations = rangeSet.finish()
-  }
-
-  update() {
-    // nothing to update
-  }
-}
+const attributionField = StateField.define<DecorationSet>({
+  create(state) {
+    return RangeSet.of(decoration().range(state.doc.length))
+  },
+  update(_attributions, transaction) {
+    return RangeSet.of(decoration().range(transaction.newDoc.length))
+  },
+  provide(field) {
+    return EditorView.decorations.from(field)
+  },
+})
 
 const decoration = () => Decoration.widget({
   widget: new AttributionWidget(),
-  side: -1,
+  side: 1,
   block: true,
 })
 
-const attributionPlugin = ViewPlugin.fromClass(AttributionPlugin, { decorations: plugin => plugin.decorations })
-
 export const attribution = (): Extension => {
   return [
-    attributionPlugin,
+    attributionField,
   ]
 }
