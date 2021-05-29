@@ -1,7 +1,7 @@
 import { syntaxTree } from '@codemirror/language'
 import { RangeSetBuilder } from '@codemirror/rangeset'
 import { Extension } from '@codemirror/state'
-import { Decoration, DecorationSet, EditorView, ViewPlugin, ViewUpdate } from '@codemirror/view'
+import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 
 const codeBlockBaseTheme = EditorView.baseTheme({
   '.cm-line': { fontFamily: 'var(--ink-font-family, sans-serif)' },
@@ -19,19 +19,13 @@ const codeBlockDecoration = Decoration.line({
   attributes: { class: 'cm-codeblock' }
 })
 
-const codeBlockPlugin = ViewPlugin.fromClass(class {
-  decorations: DecorationSet
-
-  constructor(view: EditorView) {
-    this.decorations = decorate(view)
-  }
-
-  update(viewUpdate: ViewUpdate) {
-    if (viewUpdate.docChanged || viewUpdate.viewportChanged) {
-      this.decorations = decorate(viewUpdate.view)
+const codeBlockPlugin = ViewPlugin.define((view: EditorView) => {
+  return {
+    update: () => {
+      return decorate(view)
     }
   }
-}, { decorations: (plugin) => plugin.decorations })
+}, { decorations: (plugin) => plugin.update() })
 
 const decorate = (view: EditorView) => {
   const builder = new RangeSetBuilder<Decoration>()
