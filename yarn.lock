@@ -195,9 +195,9 @@
     "@codemirror/stream-parser" "^0.18.0"
 
 "@codemirror/language@^0.18.0", "@codemirror/language@^0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-0.18.1.tgz#23682324228606c4ae5b6a9f7cd0a4b9fdff83dd"
-  integrity sha512-j/TWV8sNmzU79kk/hPLb9NqSPoH59850kQSpgY11LxOEBlKVRKgaWabgNtUCSeVCAnfisGekupk3aq2ftILqug==
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-0.18.2.tgz#92b0e2ba0debfa8473d805efdabda5c24376cb16"
+  integrity sha512-2Kz0Xyfvt1Ex2KfTUcYZ3IBxpnFCqHaJijwZknGBT7JXv9dwbOPs9SfPfL4oxVuDIHZx8JTPfoV3LTTJrm8M3Q==
   dependencies:
     "@codemirror/state" "^0.18.0"
     "@codemirror/text" "^0.18.0"
@@ -281,9 +281,9 @@
     "@codemirror/view" "^0.18.0"
 
 "@codemirror/view@^0.18.0", "@codemirror/view@^0.18.3":
-  version "0.18.14"
-  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-0.18.14.tgz#509f2a487e1fa62b6b147e3a9db5aab6ce228495"
-  integrity sha512-b83favt2XtbV343wzmY4e5lTwYBdpklFZ31jJ/SDGixx6Yj5xTgZd6NU6jkK/XOT40D1rcRoKcQfFbbpjLG1SA==
+  version "0.18.15"
+  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-0.18.15.tgz#07e68a7b1050aba8a1754aff9309abaeb7ec52b4"
+  integrity sha512-xb95w3fzyw+rNp7dJpEL+aqn10YqeFNcG2sUk4KdjdTu3RWC0+eAJ11uXaxLi1SqKisJ6klxHA+fRZbCjSiyvA==
   dependencies:
     "@codemirror/rangeset" "^0.18.2"
     "@codemirror/state" "^0.18.0"
@@ -618,9 +618,9 @@ rollup-plugin-serve@^1.1.0:
     opener "1"
 
 rollup@^2.43.0:
-  version "2.50.3"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.50.3.tgz#71021dedf2e3423bee28e795860783feea2be63e"
-  integrity sha512-58KiHnaCzZn6F5yRMjHe7WTZuFj6r4iJVJz5UwvKD6f/xfTy2IdtbR2AVHN6cyfK1tBy//hJ66ebXy6Y1h7HlQ==
+  version "2.50.5"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.50.5.tgz#bbee9d6411af3f5fa5c6e7e2c69f7a65b753e568"
+  integrity sha512-Ztz4NurU2LbS3Jn5rlhnYv35z6pkjBUmYKr94fOBIKINKRO6kug9NTFHArT7jqwMP2kqEZ39jJuEtkk91NBltQ==
   optionalDependencies:
     fsevents "~2.3.1"
 
