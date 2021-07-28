@@ -119,12 +119,19 @@ Tags are applied to the code by the CodeMirror language parsers. This means thin
 | variableName (local) | `--ink-variableName-local`<br>`--ink-variableName`<br>`--ink-name` | `color` | `#d19a66` |
 | variableName (special) | `--ink-variableName-special`<br>`--ink-variableName`<br>`--ink-name` | `color` | `inherit` |
 | heading | `--ink-heading` | `color` | `#e06c75` |
+| heading | `--ink-heading-weight` | `font-weight` | `600` |
 | heading1 | `--ink-heading1`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading1-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading2 | `--ink-heading2`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading2-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading3 | `--ink-heading3`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading3-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading4 | `--ink-heading4`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading4-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading5 | `--ink-heading5`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading5-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading6 | `--ink-heading6`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading6-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | keyword | `--ink-keyword` | `color` | `#c678dd` |
 | number | `--ink-number` | `color` | `#d19a66` |
 | operator | `--ink-operator` | `color` | `#96c0d8` |
@@ -136,6 +143,7 @@ Tags are applied to the code by the CodeMirror language parsers. This means thin
 | emphasis | `--ink-emphasis` | `color` | `inherit` |
 | strikethrough | `--ink-strikethrough` | `color` | `inherit` |
 | strong | `--ink-strong` | `color` | `inherit` |
+| strong | `--ink-strong-weight` | `font-weight` | `600` |
 
 ## Support
 
