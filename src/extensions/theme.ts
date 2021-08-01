@@ -3,10 +3,6 @@ import { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 import { InkOptions } from '../types/ink'
 
-const defaults = {
-
-}
-
 export const theme = ({ appearance, disableAttribution }: InkOptions): Extension => {
   const baseTheme = EditorView.baseTheme({
     '&': {
@@ -54,13 +50,18 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     // processing instructions
     {
       tag: tags.processingInstruction,
-      color: 'var(--ink-processingInstruction, #abb2bf)',
+      color: 'var(--ink-processingInstruction, #36454f)',
     },
     // comment group
     {
       tag: tags.comment,
       color: 'var(--ink-comment, #abb2bf)',
       fontStyle: 'italic',
+    },
+    // monospace
+    {
+      tag: tags.monospace,
+      fontFamily: 'var(--ink-font-family-mono, monospace)',
     },
     // name group
     {
@@ -152,7 +153,7 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     },
     {
       tag: tags.punctuation,
-      color: 'var(--ink-punctuation, #36454f)',
+      color: 'var(--ink-punctuation, #abb2bf)',
     },
     {
       tag: tags.link,

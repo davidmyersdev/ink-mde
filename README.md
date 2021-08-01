@@ -69,10 +69,22 @@ The fonts for `@writewithocto/ink` can be customized with CSS variables.
 
 When the `renderImages: true` config is used, some image properties can be changed with CSS variables.
 
-| CSS Variable                 | Description                 | Default Value        |
-| ----                         | ----                        | ----                 |
-| `--ink-image-backdrop-color` | Color of the image backdrop | `rgba(0, 0, 0, 0.3)` |
-| `--ink-image-max-height`     | Max height of the image     | `20rem`              |
+| CSS Variable                   | Description                           | Default Value (Dark) | Default Value (Light) |
+| ----                           | ----                                  | ----                 | ----                  |
+| `--ink-image-background-color` | Background color for image containers | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
+| `--ink-image-border-radius`    | Border radius for image containers    | `0.25rem`            | `0.25rem`             |
+| `--ink-image-max-height`       | Max height for images                 | `20rem`              | `20rem`               |
+
+### Code / Code Blocks
+
+| CSS Variable                       | Description                      | Default Value (Dark) | Default Value (Light) |
+| ----                               | ----                             | ----                 | ----                  |
+| `--ink-code-background-color`      | Background color for inline code | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
+| `--ink-code-border-radius`         | Border radius for inline code    | `0.25rem`            | `0.25rem`             |
+| `--ink-code-padding`               | Padding for inline code          | `0.125rem`           | `0.125rem`            |
+| `--ink-codeblock-background-color` | Background color for code blocks | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
+| `--ink-codeblock-border-radius`    | Border radius for code blocks    | `0.25rem`            | `0.25rem`             |
+| `--ink-codeblock-padding`          | Padding for code blocks          | `0.5rem`             | `0.5rem`              |
 
 ### Syntax Highlighting
 
