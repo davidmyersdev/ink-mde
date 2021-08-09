@@ -3,7 +3,7 @@ import { Compartment, EditorState } from '@codemirror/state'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 
-import { codeBlocks } from './extensions/code_blocks'
+import { code } from './extensions/code'
 import { images } from './extensions/images'
 import { keymaps } from './extensions/keymaps'
 import { lineWrapping } from './extensions/line_wrapping'
@@ -27,12 +27,12 @@ export const createState = (options: InkOptions): EditorState => {
         base: markdownLanguage,
         codeLanguages: languages,
       }),
-      codeBlocks(),
+      code(),
       keymaps(),
       lineWrapping(),
       enableAttribution.of(options.disableAttribution ? [] : attribution()),
       enableSpellcheck.of(options.enableSpellcheck ? spellcheck() : []),
-      renderImages.of(options.renderImages ? images() : []),
+      renderImages.of(options.renderImages ? images(options) : []),
     ],
   })
 }

@@ -69,10 +69,22 @@ The fonts for `@writewithocto/ink` can be customized with CSS variables.
 
 When the `renderImages: true` config is used, some image properties can be changed with CSS variables.
 
-| CSS Variable                 | Description                 | Default Value        |
-| ----                         | ----                        | ----                 |
-| `--ink-image-backdrop-color` | Color of the image backdrop | `rgba(0, 0, 0, 0.3)` |
-| `--ink-image-max-height`     | Max height of the image     | `20rem`              |
+| CSS Variable                   | Description                           | Default Value (Dark) | Default Value (Light) |
+| ----                           | ----                                  | ----                 | ----                  |
+| `--ink-image-background-color` | Background color for image containers | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
+| `--ink-image-border-radius`    | Border radius for image containers    | `0.25rem`            | `0.25rem`             |
+| `--ink-image-max-height`       | Max height for images                 | `20rem`              | `20rem`               |
+
+### Code / Code Blocks
+
+| CSS Variable                       | Description                      | Default Value (Dark) | Default Value (Light) |
+| ----                               | ----                             | ----                 | ----                  |
+| `--ink-code-background-color`      | Background color for inline code | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
+| `--ink-code-border-radius`         | Border radius for inline code    | `0.25rem`            | `0.25rem`             |
+| `--ink-code-padding`               | Padding for inline code          | `0.125rem`           | `0.125rem`            |
+| `--ink-codeblock-background-color` | Background color for code blocks | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
+| `--ink-codeblock-border-radius`    | Border radius for code blocks    | `0.25rem`            | `0.25rem`             |
+| `--ink-codeblock-padding`          | Padding for code blocks          | `0.5rem`             | `0.5rem`              |
 
 ### Syntax Highlighting
 
@@ -119,12 +131,19 @@ Tags are applied to the code by the CodeMirror language parsers. This means thin
 | variableName (local) | `--ink-variableName-local`<br>`--ink-variableName`<br>`--ink-name` | `color` | `#d19a66` |
 | variableName (special) | `--ink-variableName-special`<br>`--ink-variableName`<br>`--ink-name` | `color` | `inherit` |
 | heading | `--ink-heading` | `color` | `#e06c75` |
+| heading | `--ink-heading-weight` | `font-weight` | `600` |
 | heading1 | `--ink-heading1`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading1-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading2 | `--ink-heading2`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading2-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading3 | `--ink-heading3`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading3-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading4 | `--ink-heading4`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading4-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading5 | `--ink-heading5`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading5-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | heading6 | `--ink-heading6`<br>`--ink-heading` | `color` | `#e06c75` |
+| heading1 | `--ink-heading6-weight`<br>`--ink-heading-weight` | `font-weight` | `600` |
 | keyword | `--ink-keyword` | `color` | `#c678dd` |
 | number | `--ink-number` | `color` | `#d19a66` |
 | operator | `--ink-operator` | `color` | `#96c0d8` |
@@ -136,6 +155,7 @@ Tags are applied to the code by the CodeMirror language parsers. This means thin
 | emphasis | `--ink-emphasis` | `color` | `inherit` |
 | strikethrough | `--ink-strikethrough` | `color` | `inherit` |
 | strong | `--ink-strong` | `color` | `inherit` |
+| strong | `--ink-strong-weight` | `font-weight` | `600` |
 
 ## Support
 
