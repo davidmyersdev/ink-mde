@@ -1,7 +1,10 @@
 <!doctype html>
-<html class="dark">
+<html class="light">
   <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+
     <title>Ink</title>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
@@ -35,9 +38,11 @@
     <script type="module">
       import ink from '/dist/es/index.js'
 
+      const appearance = document.documentElement.classList.contains('light') ? 'light' : 'dark'
+
       window.ink = ink(document.getElementById('app'), {
-        appearance: 'dark',
-        doc: '# Hello\n\nThis is an example doc.',
+        appearance,
+        doc: '# Hello\n\nThis is an example doc. `hello`\n\n```js\nconst add = (a, b) => (a + b)\n```',
         enableSpellcheck: true,
         renderImages: true,
         onChange(value) {

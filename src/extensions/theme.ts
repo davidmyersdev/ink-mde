@@ -3,10 +3,6 @@ import { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 import { InkOptions } from '../types/ink'
 
-const defaults = {
-
-}
-
 export const theme = ({ appearance, disableAttribution }: InkOptions): Extension => {
   const baseTheme = EditorView.baseTheme({
     '&': {
@@ -44,7 +40,7 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     {
       tag: tags.strong,
       color: 'var(--ink-strong, inherit)',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-strong-weight, 600)',
     },
     {
       tag: tags.strikethrough,
@@ -54,13 +50,18 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     // processing instructions
     {
       tag: tags.processingInstruction,
-      color: 'var(--ink-processingInstruction, #abb2bf)',
+      color: 'var(--ink-processingInstruction, #36454f)',
     },
     // comment group
     {
       tag: tags.comment,
       color: 'var(--ink-comment, #abb2bf)',
       fontStyle: 'italic',
+    },
+    // monospace
+    {
+      tag: tags.monospace,
+      fontFamily: 'var(--ink-font-family-mono, monospace)',
     },
     // name group
     {
@@ -99,43 +100,43 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     {
       tag: tags.heading,
       color: 'var(--ink-heading, #e06c75)',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading-weight, 600)',
     },
     {
       tag: tags.heading1,
       color: 'var(--ink-heading1, var(--ink-heading, #e06c75))',
       fontSize: '1.6em',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading1-weight, var(--ink-heading-weight, 600))',
     },
     {
       tag: tags.heading2,
       color: 'var(--ink-heading2, var(--ink-heading, #e06c75))',
       fontSize: '1.5em',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading2-weight, var(--ink-heading-weight, 600))',
     },
     {
       tag: tags.heading3,
       color: 'var(--ink-heading3, var(--ink-heading, #e06c75))',
       fontSize: '1.4em',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading3-weight, var(--ink-heading-weight, 600))',
     },
     {
       tag: tags.heading4,
       color: 'var(--ink-heading4, var(--ink-heading, #e06c75))',
       fontSize: '1.3em',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading4-weight, var(--ink-heading-weight, 600))',
     },
     {
       tag: tags.heading5,
       color: 'var(--ink-heading5, var(--ink-heading, #e06c75))',
       fontSize: '1.2em',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading5-weight, var(--ink-heading-weight, 600))',
     },
     {
       tag: tags.heading6,
       color: 'var(--ink-heading6, var(--ink-heading, #e06c75))',
       fontSize: '1.1em',
-      fontWeight: 'bold',
+      fontWeight: 'var(--ink-heading6-weight, var(--ink-heading-weight, 600))',
     },
     // contextual tag types
     {
@@ -152,7 +153,7 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
     },
     {
       tag: tags.punctuation,
-      color: 'var(--ink-punctuation, #36454f)',
+      color: 'var(--ink-punctuation, #abb2bf)',
     },
     {
       tag: tags.link,

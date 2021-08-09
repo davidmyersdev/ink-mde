@@ -1,0 +1,130 @@
+import { syntaxTree } from '@codemirror/language'
+import { RangeSetBuilder } from '@codemirror/rangeset'
+import { Extension } from '@codemirror/state'
+import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
+
+const codeBlockBaseTheme = EditorView.baseTheme({
+  '.cm-line': {
+    fontFamily: 'var(--ink-font-family, sans-serif)',
+  },
+  '.cm-line.cm-codeblock': {
+    fontFamily: 'var(--ink-font-family-mono, monospace)',
+    padding: '0 var(--ink-codeblock-padding, 0.5rem)',
+  },
+  '.cm-line.cm-codeblock.cm-codeblock-open': {
+    borderRadius: 'var(--ink-codeblock-border-radius, 0.25rem) var(--ink-codeblock-border-radius, 0.25rem) 0 0',
+    paddingTop: 'var(--ink-codeblock-padding, 0.5rem)',
+  },
+  '.cm-line.cm-codeblock.cm-codeblock-close': {
+    borderRadius: '0 0 var(--ink-codeblock-border-radius, 0.25rem) var(--ink-codeblock-border-radius, 0.25rem)',
+    paddingBottom: 'var(--ink-codeblock-padding, 0.5rem)',
+  },
+  '.cm-line .cm-code': {
+    padding: 'var(--ink-code-padding, 0.125rem) 0',
+  },
+  '.cm-line .cm-code.cm-code-open': {
+    borderRadius: 'var(--ink-code-border-radius, 0.25rem) 0 0 var(--ink-code-border-radius, 0.25rem)',
+    paddingLeft: 'var(--ink-code-padding, 0.125rem)',
+  },
+  '.cm-line .cm-code.cm-code-close': {
+    borderRadius: '0 var(--ink-code-border-radius, 0.25rem) var(--ink-code-border-radius, 0.25rem) 0',
+    paddingRight: 'var(--ink-code-padding, 0.125rem)',
+  },
+  '&light .cm-line.cm-codeblock': {
+    backgroundColor: 'var(--ink-codeblock-background-color, rgba(0, 0, 0, 0.05))',
+  },
+  '&dark .cm-line.cm-codeblock': {
+    backgroundColor: 'var(--ink-codeblock-background-color, rgba(0, 0, 0, 0.2))',
+  },
+  '&light .cm-line .cm-code': {
+    backgroundColor: 'var(--ink-code-background-color, rgba(0, 0, 0, 0.05))',
+  },
+  '&dark .cm-line .cm-code': {
+    backgroundColor: 'var(--ink-code-background-color, rgba(0, 0, 0, 0.2))',
+  },
+})
+
+const codeBlockSyntaxNodes = [
+  'CodeBlock',
+  'FencedCode',
+  'HTMLBlock',
+  'CommentBlock',
+]
+
+const codeBlockDecoration = Decoration.line({ attributes: { class: 'cm-codeblock' } })
+const codeBlockOpenDecoration = Decoration.line({ attributes: { class: 'cm-codeblock-open' } })
+const codeBlockCloseDecoration = Decoration.line({ attributes: { class: 'cm-codeblock-close' } })
+const codeDecoration = Decoration.mark({ attributes: { class: 'cm-code' } })
+const codeOpenDecoration = Decoration.mark({ attributes: { class: 'cm-code cm-code-open' } })
+const codeCloseDecoration = Decoration.mark({ attributes: { class: 'cm-code cm-code-close' } })
+
+const codeBlockPlugin = ViewPlugin.define((view: EditorView) => {
+  return {
+    update: () => {
+      return decorate(view)
+    }
+  }
+}, { decorations: (plugin) => plugin.update() })
+
+const decorate = (view: EditorView) => {
+  const builder = new RangeSetBuilder<Decoration>()
+  const tree = syntaxTree(view.state)
+
+  for (const visibleRange of view.visibleRanges) {
+    for (let position = visibleRange.from; position < visibleRange.to;) {
+      const line = view.state.doc.lineAt(position)
+      let inlineCode: { from: number, to: number, innerFrom: number, innerTo: number }
+
+      tree.iterate({
+        enter(type, from, to) {
+          if (type.name !== 'Document') {
+            if (codeBlockSyntaxNodes.includes(type.name)) {
+              builder.add(line.from, line.from, codeBlockDecoration)
+
+              const openLine = view.state.doc.lineAt(from)
+              const closeLine = view.state.doc.lineAt(to)
+
+              if (openLine.number === line.number) {
+                builder.add(line.from, line.from, codeBlockOpenDecoration)
+              }
+
+              if (closeLine.number === line.number) {
+                builder.add(line.from, line.from, codeBlockCloseDecoration)
+              }
+
+              return false
+            } else if (type.name === 'InlineCode') {
+              // Store a reference for the last inline code node.
+              inlineCode = { from, to, innerFrom: from, innerTo: to }
+            } else if (type.name === 'CodeMark') {
+              // Make sure the code mark is a part of the previously stored inline code node.
+              if (from === inlineCode.from) {
+                inlineCode.innerFrom = to
+
+                builder.add(from, to, codeOpenDecoration)
+              } else if (to === inlineCode.to) {
+                inlineCode.innerTo = from
+
+                builder.add(inlineCode.innerFrom, inlineCode.innerTo, codeDecoration)
+                builder.add(from, to, codeCloseDecoration)
+              }
+            }
+          }
+        },
+        from: line.from,
+        to: line.to,
+      })
+
+      position = line.to + 1
+    }
+  }
+
+  return builder.finish()
+}
+
+export const code = (): Extension => {
+  return [
+    codeBlockBaseTheme,
+    codeBlockPlugin,
+  ]
+}
