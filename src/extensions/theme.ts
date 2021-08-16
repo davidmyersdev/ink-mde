@@ -3,7 +3,7 @@ import { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 import { InkOptions } from '../types/ink'
 
-export const theme = ({ appearance, disableAttribution }: InkOptions): Extension => {
+export const theme = (): Extension => {
   const baseTheme = EditorView.baseTheme({
     '&': {
       color: 'inherit',
@@ -13,14 +13,10 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
       lineHeight: 'var(--ink-line-height, 2em)',
       fontSize: 'var(--ink-font-size, 1.1em)',
     },
-    '.cm-content': disableAttribution ? {} : {
-      paddingBottom: '2em',
-    },
     '.cm-line': {
       padding: '0',
     },
   })
-  const appearanceTheme = EditorView.theme({}, { dark: appearance === 'dark' })
   const syntaxHighlighting = HighlightStyle.define([
     // ordered by lowest to highest precedence
     {
@@ -176,7 +172,6 @@ export const theme = ({ appearance, disableAttribution }: InkOptions): Extension
 
   return [
     baseTheme,
-    appearanceTheme,
     syntaxHighlighting,
   ]
 }
