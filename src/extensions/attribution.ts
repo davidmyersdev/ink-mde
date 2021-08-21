@@ -38,6 +38,12 @@ class AttributionWidget extends WidgetType {
   }
 }
 
+const attributionTheme = EditorView.baseTheme({
+  '.cm-content': {
+    paddingBottom: '2em',
+  },
+})
+
 const attributionField = StateField.define<DecorationSet>({
   create(state) {
     return RangeSet.of(decoration().range(state.doc.length))
@@ -58,6 +64,7 @@ const decoration = () => Decoration.widget({
 
 export const attribution = (): Extension => {
   return [
+    attributionTheme,
     attributionField,
   ]
 }
