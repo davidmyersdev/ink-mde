@@ -2,65 +2,60 @@ import { syntaxTree } from '@codemirror/language'
 import { Range, RangeSet } from '@codemirror/rangeset'
 import { EditorState, Extension, StateField } from '@codemirror/state'
 import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
-import { InkOptions } from '../types/ink'
 
 interface ImageWidgetParams {
   url: string
 }
 
-export const images = ({ appearance }: InkOptions): Extension => {
-  class ImageWidget extends WidgetType {
-    readonly url
+class ImageWidget extends WidgetType {
+  readonly url
 
-    constructor({ url }: ImageWidgetParams) {
-      super()
+  constructor({ url }: ImageWidgetParams) {
+    super()
 
-      this.url = url
-    }
-
-    eq(imageWidget: ImageWidget) {
-      return imageWidget.url === this.url
-    }
-
-    toDOM() {
-      const container = document.createElement('div')
-      const backdrop = container.appendChild(document.createElement('div'))
-      const figure = backdrop.appendChild(document.createElement('figure'))
-      const image = figure.appendChild(document.createElement('img'))
-
-      container.setAttribute('aria-hidden', 'true')
-      container.className = 'cm-image-container'
-      backdrop.className = 'cm-image-backdrop'
-      figure.className = 'cm-image-figure'
-      image.className = 'cm-image-img'
-      image.src = this.url
-
-      container.style.paddingBottom = '0.5rem'
-      container.style.paddingTop = '0.5rem'
-
-      if (appearance === 'dark') {
-        backdrop.style.backgroundColor = 'var(--ink-image-background-color, rgba(0, 0, 0, 0.2))'
-      } else {
-        backdrop.style.backgroundColor = 'var(--ink-image-background-color, rgba(0, 0, 0, 0.05))'
-      }
-
-      backdrop.style.borderRadius = 'var(--ink-image-border-radius, 0.25rem)'
-      backdrop.style.display = 'flex'
-      backdrop.style.alignItems = 'center'
-      backdrop.style.justifyContent = 'center'
-      backdrop.style.padding = '1rem'
-      backdrop.style.maxWidth = '100%'
-
-      figure.style.margin = '0'
-
-      image.style.display = 'block'
-      image.style.maxHeight = 'var(--ink-images-max-height, 20rem)'
-      image.style.maxWidth = '100%'
-
-      return container
-    }
+    this.url = url
   }
 
+  eq(imageWidget: ImageWidget) {
+    return imageWidget.url === this.url
+  }
+
+  toDOM() {
+    const container = document.createElement('div')
+    const backdrop = container.appendChild(document.createElement('div'))
+    const figure = backdrop.appendChild(document.createElement('figure'))
+    const image = figure.appendChild(document.createElement('img'))
+
+    container.setAttribute('aria-hidden', 'true')
+    container.className = 'cm-image-container'
+    backdrop.className = 'cm-image-backdrop'
+    figure.className = 'cm-image-figure'
+    image.className = 'cm-image-img'
+    image.src = this.url
+
+    container.style.paddingBottom = '0.5rem'
+    container.style.paddingTop = '0.5rem'
+
+    backdrop.classList.add('cm-image-backdrop')
+
+    backdrop.style.borderRadius = 'var(--ink-image-border-radius, 0.25rem)'
+    backdrop.style.display = 'flex'
+    backdrop.style.alignItems = 'center'
+    backdrop.style.justifyContent = 'center'
+    backdrop.style.padding = '1rem'
+    backdrop.style.maxWidth = '100%'
+
+    figure.style.margin = '0'
+
+    image.style.display = 'block'
+    image.style.maxHeight = 'var(--ink-images-max-height, 20rem)'
+    image.style.maxWidth = '100%'
+
+    return container
+  }
+}
+
+export const images = (): Extension => {
   const imageRegex = /!\[.*\]\((?<url>.*)\)/
 
   const imageDecoration = (imageWidgetParams: ImageWidgetParams) => Decoration.widget({
@@ -87,7 +82,16 @@ export const images = ({ appearance }: InkOptions): Extension => {
     return widgets.length > 0 ? RangeSet.of(widgets) : Decoration.none
   }
 
-  const imageField = StateField.define<DecorationSet>({
+  const imagesTheme = EditorView.baseTheme({
+    '&dark .cm-image-backdrop': {
+      backgroundColor: 'var(--ink-image-background-color, rgba(0, 0, 0, 0.2))',
+    },
+    '&light .cm-image-backdrop': {
+      backgroundColor: 'var(--ink-image-background-color, rgba(0, 0, 0, 0.05))',
+    },
+  })
+
+  const imagesField = StateField.define<DecorationSet>({
     create(state) {
       return decorate(state)
     },
@@ -104,6 +108,7 @@ export const images = ({ appearance }: InkOptions): Extension => {
   })
 
   return [
-    imageField,
+    imagesTheme,
+    imagesField,
   ]
 }

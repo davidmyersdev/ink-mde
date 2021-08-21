@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="light">
+<html class="dark">
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
 
@@ -8,6 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
+      :root {
+        --ink-font-family: 'Inter', Helvetica, sans-serif;
+        --ink-font-family-mono: 'Fira Code', 'Courier New', Courier, monospace;
+      }
+
+      body {
+        font-family: var(--ink-font-family);
+      }
+
       .dark body {
         background-color: #171717;
         color: #fafafa;
@@ -22,9 +31,6 @@
         margin: auto;
         max-width: 75rem;
         padding: 0.5em;
-
-        --ink-font-family: 'Inter', Helvetica, sans-serif;
-        --ink-font-family-mono: 'Fira Code', 'Courier New', Courier, monospace;
       }
 
       #app .cm-editor.cm-focused {
@@ -33,6 +39,16 @@
     </style>
   </head>
   <body>
+    <div>
+      <label>
+        <input onclick="window.lightsOff()" type="radio" value="dark" name="appearance" checked>
+        <span>dark</span>
+      </label>
+      <label>
+        <input onclick="window.lightsOn()" type="radio" value="light" name="appearance">
+        <span>light</span>
+      </label>
+    </div>
     <div id="app"></div>
     <script type="module" src="/dist/es/index.js"></script>
     <script type="module">
@@ -42,13 +58,28 @@
 
       window.ink = ink(document.getElementById('app'), {
         appearance,
+        attribution: true,
         doc: '# Hello\n\nThis is an example doc. `hello`\n\n```js\nconst add = (a, b) => (a + b)\n```',
-        enableSpellcheck: true,
-        renderImages: true,
+        images: true,
+        spellcheck: true,
         onChange(value) {
           console.log(value)
         },
       })
+
+      window.lightsOn = () => {
+        document.documentElement.classList.remove('dark')
+        document.documentElement.classList.add('light')
+
+        window.ink.reconfigure({ appearance: 'light' })
+      }
+
+      window.lightsOff = () => {
+        document.documentElement.classList.remove('light')
+        document.documentElement.classList.add('dark')
+
+        window.ink.reconfigure({ appearance: 'dark' })
+      }
     </script>
   </body>
 </html>
