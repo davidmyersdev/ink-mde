@@ -4,7 +4,7 @@
 
 # Ink
 
-A plain-text javascript markdown editor that renders text formatting live and in-place without the need for a preview pane. Built on CodeMirror 6. Powers [octo.app](https://octo.app).
+The configurable, embeddable, extensible JavaScript Markdown editor that powers https://octo.app.
 
 ![](https://i.imgur.com/1tOS335.png)
 
