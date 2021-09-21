@@ -59,7 +59,19 @@
       window.ink = ink(document.getElementById('app'), {
         appearance,
         attribution: true,
-        doc: '# Hello\n\nThis is an example doc. `hello`\n\n```js\nconst add = (a, b) => (a + b)\n```',
+        doc: [
+          '# Hello',
+          '',
+          '{% codesandbox reverent-nobel-xqzjc %}',
+          '',
+          'This is an example doc. `hello`',
+          '',
+          '![](https://placekitten.com/200/300)',
+          '',
+          '```js',
+          'const add = (a, b) => (a + b)',
+          '```',
+        ].join("\n"),
         images: true,
         spellcheck: true,
         onChange(value) {
