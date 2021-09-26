@@ -1,7 +1,6 @@
 import { HighlightStyle, tags } from '@codemirror/highlight'
 import { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
-import { InkOptions } from '../types/ink'
 
 export const theme = (): Extension => {
   const baseTheme = EditorView.baseTheme({

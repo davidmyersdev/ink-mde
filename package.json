@@ -2,15 +2,16 @@
   "name": "@writewithocto/ink",
   "version": "v0.4.0",
   "description": "The configurable, embeddable, extensible JavaScript Markdown editor that powers https://octo.app.",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/es/index.js",
+  "main": "./dist/Ink.umd.js",
+  "module": "./dist/Ink.es.js",
   "repository": "https://github.com/writewithocto/ink.git",
   "author": "David R. Myers <davidrmyersii@gmail.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "serve": "rollup -c -w -p serve -p livereload",
-    "build": "rollup -c"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@codemirror/commands": "^0.19.0",
@@ -24,13 +25,8 @@
     "@codemirror/view": "^0.19.0"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^11.2.1",
-    "@rollup/plugin-typescript": "^8.2.1",
-    "rollup": "^2.43.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-serve": "^1.1.0",
-    "tslib": "^2.1.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.4.3",
+    "vite": "^2.5.10"
   },
   "files": [
     "dist",
