@@ -4,9 +4,10 @@ import { dark, light } from './extensions/appearance'
 import { attribution } from './extensions/attribution'
 import { images } from './extensions/images'
 import { spellcheck } from './extensions/spellcheck'
-
 import { createState } from './state'
 import * as Types from './types/ink'
+
+export * from './extensions/extension'
 
 const ink = (parent: HTMLElement, unsafeOptions: Types.InkUnsafeOptions): Types.Ink => {
   const options: Types.InkOptions = {
