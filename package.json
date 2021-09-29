@@ -1,6 +1,6 @@
 {
   "name": "@writewithocto/ink",
-  "version": "v0.5.0",
+  "version": "v0.5.1",
   "description": "The configurable, embeddable, extensible JavaScript Markdown editor that powers https://octo.app.",
   "main": "./dist/ink.umd.js",
   "module": "./dist/ink.es.js",
