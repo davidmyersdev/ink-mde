@@ -4,7 +4,7 @@
 
 # Ink
 
-The configurable, embeddable, extensible JavaScript Markdown editor that powers https://octo.app.
+The flexible TypeScript Markdown editor that powers https://octo.app.
 
 ![](https://i.imgur.com/1tOS335.png)
 
