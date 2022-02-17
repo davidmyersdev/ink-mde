@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: path.resolve(__dirname, './src/index.ts'),
       name: 'Ink',
       fileName: (format) => `ink.${format}.js`
     },
@@ -23,5 +23,10 @@ export default defineConfig({
         exports: 'named',
       }]
     }
+  },
+  resolve: {
+    alias: {
+      '/types': path.resolve(__dirname, './types'),
+    },
   },
 })

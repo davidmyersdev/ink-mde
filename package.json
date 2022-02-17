@@ -1,16 +1,19 @@
 {
+  "author": "David R. Myers <davidrmyersii@gmail.com>",
   "name": "@writewithocto/ink",
-  "version": "v0.5.2",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
+  "license": "MIT",
+  "version": "v0.5.2",
+  "repository": "https://github.com/writewithocto/ink.git",
   "main": "./dist/ink.umd.js",
   "module": "./dist/ink.es.js",
-  "repository": "https://github.com/writewithocto/ink.git",
-  "author": "David R. Myers <davidrmyersii@gmail.com>",
-  "license": "MIT",
   "private": false,
+  "type": "module",
+  "types": "./dist/ink.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && yarn build:types",
+    "build:types": "tsc --project tsconfig.types.json",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -22,9 +25,11 @@
     "@codemirror/language-data": "^0.19.0",
     "@codemirror/rangeset": "^0.19.0",
     "@codemirror/state": "^0.19.0",
-    "@codemirror/view": "^0.19.0"
+    "@codemirror/view": "^0.19.0",
+    "deepmerge": "^4.2.2"
   },
   "devDependencies": {
+    "@types/node": "^17.0.18",
     "typescript": "^4.4.3",
     "vite": "^2.5.10"
   },
