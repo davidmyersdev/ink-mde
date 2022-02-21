@@ -21,7 +21,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "ESNext",
-    "types": ["node"],
+    "types": ["node", "svelte"],
     "useDefineForClassFields": true
   },
   "include": [

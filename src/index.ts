@@ -4,6 +4,7 @@ import { EditorView } from '@codemirror/view'
 import { toCodeMirror, toInk } from '/src/adapters/selections'
 import { buildVendorUpdates } from '/src/configuration/extensions'
 import { createConfiguration, updateOptions } from '/src/configuration/instance'
+import App, { props } from '/src/ui/App.svelte'
 import { createState } from '/src/state'
 
 import type Ink from '/types/ink'
@@ -12,10 +13,18 @@ export * from '/src/vendor/extensions/extension'
 
 const ink = (parent: HTMLElement, options: Partial<Ink.Options>): Ink.Instance => {
   const configuration = createConfiguration(options)
+  const app = new App({ target: parent })
+
+  app.$on('files', (event: CustomEvent) => {
+    const files: FileList = event.detail as FileList
+
+    configuration.options.files.handler(files)
+  })
+
   const state = createState(configuration)
   const view = new EditorView({
     state,
-    parent,
+    parent: props.dom,
     dispatch(transaction: Transaction) {
       configuration.options.hooks.beforeUpdate(transaction.newDoc.toString())
 
