@@ -40,6 +40,7 @@
   </head>
   <body>
     <div>
+      Appearance
       <label>
         <input onclick="window.lightsOff()" type="radio" value="dark" name="appearance" checked>
         <span>dark</span>
@@ -47,6 +48,17 @@
       <label>
         <input onclick="window.lightsOn()" type="radio" value="light" name="appearance">
         <span>light</span>
+      </label>
+    </div>
+    <div>
+      Images
+      <label>
+        <input onclick="window.imagesShow()" type="radio" value="show" name="images" checked>
+        <span>show</span>
+      </label>
+      <label>
+        <input onclick="window.imagesHide()" type="radio" value="hide" name="images">
+        <span>hide</span>
       </label>
     </div>
     <div id="app"></div>
@@ -57,8 +69,6 @@
       const appearance = document.documentElement.classList.contains('light') ? 'light' : 'dark'
 
       window.ink = ink(document.getElementById('app'), {
-        appearance,
-        attribution: true,
         doc: [
           '# Hello',
           '',
@@ -70,10 +80,10 @@
           'const add = (a, b) => (a + b)',
           '```',
         ].join("\n"),
-        images: true,
-        spellcheck: true,
-        onChange(value) {
-          console.log(value)
+        interface: {
+          appearance,
+          images: true,
+          spellcheck: true,
         },
       })
 
@@ -82,15 +92,19 @@
       window.lightsOn = () => {
         document.documentElement.classList.remove('dark')
         document.documentElement.classList.add('light')
-
-        window.ink.reconfigure({ appearance: 'light' })
       }
 
       window.lightsOff = () => {
         document.documentElement.classList.remove('light')
         document.documentElement.classList.add('dark')
+      }
 
-        window.ink.reconfigure({ appearance: 'dark' })
+      window.imagesShow = () => {
+        window.ink.reconfigure({ interface: { images: true } })
+      }
+
+      window.imagesHide = () => {
+        window.ink.reconfigure({ interface: { images: false } })
       }
     </script>
   </body>
