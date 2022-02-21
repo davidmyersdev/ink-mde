@@ -1,18 +1,28 @@
 import { history } from '@codemirror/history'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
-import { EditorState, Extension } from '@codemirror/state'
+import { EditorSelection, EditorState } from '@codemirror/state'
 
-import { code } from './extensions/code'
-import { keymaps } from './extensions/keymaps'
-import { lineWrapping } from './extensions/line_wrapping'
-import { theme } from './extensions/theme'
-import { InkOptions } from './types/ink'
+import { toCodeMirror } from '/src/adapters/selections'
+import { buildVendors } from '/src/configuration/extensions'
+import { code } from '/src/vendor/extensions/code'
+import { keymaps } from '/src/vendor/extensions/keymaps'
+import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
+import { theme } from '/src/vendor/extensions/theme'
 
-export const createState = (options: InkOptions, extensions: Extension[] = []): EditorState => {
+import type Ink from '/types/ink'
+import type InkInternal from '/types/internal'
+
+const selection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {
+  if (selections.length > 0) {
+    return toCodeMirror(selections)
+  }
+}
+
+export const createState = (configuration: InkInternal.Configuration): EditorState => {
   return EditorState.create({
-    doc: options.doc,
-    selection: options.selection,
+    doc: configuration.options.doc,
+    selection: selection(configuration.options.selections),
     extensions: [
       history(),
       markdown({
@@ -23,7 +33,8 @@ export const createState = (options: InkOptions, extensions: Extension[] = []): 
       keymaps(),
       lineWrapping(),
       theme(),
-      ...extensions,
+      ...buildVendors(configuration),
+      ...configuration.options.extensions,
     ],
   })
 }

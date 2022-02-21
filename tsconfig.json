@@ -1,17 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "strict": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
+    "alwaysStrict": true,
+    "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "noEmit": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "paths": {
+      "/src/*": ["./src/*"],
+      "/types/*": ["./types/*"]
+    },
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+    "types": ["node"],
+    "useDefineForClassFields": true
   },
-  "include": ["./src"]
+  "include": [
+    "./src/**/*",
+    "./types/**/*"
+  ]
 }
