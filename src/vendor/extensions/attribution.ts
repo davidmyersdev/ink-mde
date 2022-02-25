@@ -18,7 +18,6 @@ class AttributionWidget extends WidgetType {
 
     container.setAttribute('aria-hidden', 'true')
     container.style.bottom = '0'
-    container.style.fontFamily = 'var(--ink-font-family, sans-serif)'
     container.style.fontSize = '0.75em'
     container.style.opacity = '0.5'
     container.style.position = 'absolute'
@@ -30,8 +29,8 @@ class AttributionWidget extends WidgetType {
     link.innerText = 'Ink'
     link.rel = 'noopener noreferrer'
     link.target = '_blank'
-    link.style.color = 'var(--ink-heading, #e06c75)'
-    link.style.fontWeight = 'bold'
+    link.style.color = 'var(--ink-internal-all-accent-color)'
+    link.style.fontWeight = '600'
     link.style.textDecoration = 'none'
 
     return container

@@ -5,42 +5,33 @@ import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 
 const codeBlockBaseTheme = EditorView.baseTheme({
   '.cm-line': {
-    fontFamily: 'var(--ink-font-family, sans-serif)',
+    fontFamily: 'var(--ink-internal-all-font-family)',
   },
   '.cm-line.cm-codeblock': {
-    fontFamily: 'var(--ink-font-family-mono, monospace)',
-    padding: '0 var(--ink-codeblock-padding, 0.5rem)',
+    backgroundColor: 'var(--ink-internal-block-background-color)',
+    fontFamily: 'var(--ink-internal-monospace-font-family)',
+    padding: '0 var(--ink-internal-block-padding)',
   },
   '.cm-line.cm-codeblock.cm-codeblock-open': {
-    borderRadius: 'var(--ink-codeblock-border-radius, 0.25rem) var(--ink-codeblock-border-radius, 0.25rem) 0 0',
-    paddingTop: 'var(--ink-codeblock-padding, 0.5rem)',
+    borderRadius: 'var(--ink-internal-all-border-radius) var(--ink-internal-all-border-radius) 0 0',
+    paddingTop: 'var(--ink-internal-block-padding)',
   },
   '.cm-line.cm-codeblock.cm-codeblock-close': {
-    borderRadius: '0 0 var(--ink-codeblock-border-radius, 0.25rem) var(--ink-codeblock-border-radius, 0.25rem)',
-    paddingBottom: 'var(--ink-codeblock-padding, 0.5rem)',
+    borderRadius: '0 0 var(--ink-internal-all-border-radius) var(--ink-internal-all-border-radius)',
+    paddingBottom: 'var(--ink-internal-block-padding)',
   },
   '.cm-line .cm-code': {
-    padding: 'var(--ink-code-padding, 0.125rem) 0',
+    backgroundColor: 'var(--ink-internal-block-background-color)',
+    fontFamily: 'var(--ink-internal-monospace-font-family)',
+    padding: 'var(--ink-internal-inline-padding) 0',
   },
   '.cm-line .cm-code.cm-code-open': {
-    borderRadius: 'var(--ink-code-border-radius, 0.25rem) 0 0 var(--ink-code-border-radius, 0.25rem)',
-    paddingLeft: 'var(--ink-code-padding, 0.125rem)',
+    borderRadius: 'var(--ink-internal-all-border-radius) 0 0 var(--ink-internal-all-border-radius)',
+    paddingLeft: 'var(--ink-internal-inline-padding)',
   },
   '.cm-line .cm-code.cm-code-close': {
-    borderRadius: '0 var(--ink-code-border-radius, 0.25rem) var(--ink-code-border-radius, 0.25rem) 0',
-    paddingRight: 'var(--ink-code-padding, 0.125rem)',
-  },
-  '&light .cm-line.cm-codeblock': {
-    backgroundColor: 'var(--ink-codeblock-background-color, rgba(0, 0, 0, 0.05))',
-  },
-  '&dark .cm-line.cm-codeblock': {
-    backgroundColor: 'var(--ink-codeblock-background-color, rgba(0, 0, 0, 0.2))',
-  },
-  '&light .cm-line .cm-code': {
-    backgroundColor: 'var(--ink-code-background-color, rgba(0, 0, 0, 0.05))',
-  },
-  '&dark .cm-line .cm-code': {
-    backgroundColor: 'var(--ink-code-background-color, rgba(0, 0, 0, 0.2))',
+    borderRadius: '0 var(--ink-internal-all-border-radius) var(--ink-internal-all-border-radius) 0',
+    paddingRight: 'var(--ink-internal-inline-padding)',
   },
 })
 

@@ -5,167 +5,169 @@ import { EditorView } from '@codemirror/view'
 export const theme = (): Extension => {
   const baseTheme = EditorView.baseTheme({
     '&': {
-      color: 'inherit',
-      backgroundColor: 'transparent',
+      padding: 'var(--ink-internal-editor-padding)',
     },
     '.cm-scroller': {
-      lineHeight: 'var(--ink-line-height, 2em)',
-      fontSize: 'var(--ink-font-size, 1.1em)',
+      lineHeight: 'var(--ink-internal-editor-line-height)',
+      fontFamily: 'var(--ink-internal-all-font-family)',
+      fontSize: 'var(--ink-internal-editor-font-size)',
     },
     '.cm-line': {
       padding: '0',
     },
   })
+
   const syntaxHighlighting = HighlightStyle.define([
     // ordered by lowest to highest precedence
     {
       tag: tags.atom,
-      color: 'var(--ink-atom, #d19a66)',
+      color: 'var(--ink-internal-syntax-atom-color)',
     },
     {
       tag: tags.meta,
-      color: 'var(--ink-meta, #abb2bf)',
+      color: 'var(--ink-internal-syntax-meta-color)',
     },
     // emphasis types
     {
       tag: tags.emphasis,
-      color: 'var(--ink-emphasis, inherit)',
-      fontStyle: 'italic',
+      color: 'var(--ink-internal-syntax-emphasis-color)',
+      fontStyle: 'var(--ink-internal-syntax-emphasis-font-style)',
     },
     {
       tag: tags.strong,
-      color: 'var(--ink-strong, inherit)',
-      fontWeight: 'var(--ink-strong-weight, 600)',
+      color: 'var(--ink-internal-syntax-strong-color)',
+      fontWeight: 'var(--ink-internal-syntax-strong-font-weight)',
     },
     {
       tag: tags.strikethrough,
-      color: 'var(--ink-strikethrough, inherit)',
-      textDecoration: 'line-through',
+      color: 'var(--ink-internal-syntax-strikethrough-color)',
+      textDecoration: 'var(--ink-internal-syntax-strikethrough-text-decoration)',
     },
     // processing instructions
     {
       tag: tags.processingInstruction,
-      color: 'var(--ink-processingInstruction, #36454f)',
+      color: 'var(--ink-internal-syntax-processing-instruction-color)',
     },
     // comment group
     {
       tag: tags.comment,
-      color: 'var(--ink-comment, #abb2bf)',
-      fontStyle: 'italic',
+      color: 'var(--ink-internal-syntax-comment-color)',
+      fontStyle: 'var(--ink-internal-syntax-comment-font-style)',
     },
     // monospace
     {
       tag: tags.monospace,
-      fontFamily: 'var(--ink-font-family-mono, monospace)',
+      color: 'var(--ink-internal-syntax-monospace-color)',
+      fontFamily: 'var(--ink-internal-syntax-monospace-font-family)',
     },
     // name group
     {
       tag: tags.name,
-      color: 'var(--ink-name, #d19a66)',
+      color: 'var(--ink-internal-syntax-name-color)',
     },
     {
       tag: tags.labelName,
-      color: 'var(--ink-labelName, var(--ink-name, #abb2bf))',
+      color: 'var(--ink-internal-syntax-name-label-color)',
     },
     {
       tag: tags.propertyName,
-      color: 'var(--ink-propertyName, var(--ink-name, #96c0d8))',
+      color: 'var(--ink-internal-syntax-name-property-color)',
     },
     {
       tag: tags.definition(tags.propertyName),
-      color: 'var(--ink-propertyName-definition, var(--ink-propertyName, var(--ink-name, #e06c75)))',
+      color: 'var(--ink-internal-syntax-name-property-definition-color)',
     },
     {
       tag: tags.variableName,
-      color: 'var(--ink-variableName, var(--ink-name, #e06c75))',
+      color: 'var(--ink-internal-syntax-name-variable-color)',
     },
     {
       tag: tags.definition(tags.variableName),
-      color: 'var(--ink-variableName-definition, var(--ink-variableName, var(--ink-name, #e5c07b)))',
+      color: 'var(--ink-internal-syntax-name-variable-definition-color)',
     },
     {
       tag: tags.local(tags.variableName),
-      color: 'var(--ink-variableName-local, var(--ink-variableName, var(--ink-name, #d19a66)))',
+      color: 'var(--ink-internal-syntax-name-variable-local-color)',
     },
     {
       tag: tags.special(tags.variableName),
-      color: 'var(--ink-variableName-special, var(--ink-variableName, var(--ink-name, inherit)))',
+      color: 'var(--ink-internal-syntax-name-variable-special-color)',
     },
     // headings
     {
       tag: tags.heading,
-      color: 'var(--ink-heading, #e06c75)',
-      fontWeight: 'var(--ink-heading-weight, 600)',
+      color: 'var(--ink-internal-syntax-heading-color)',
+      fontWeight: 'var(--ink-internal-syntax-heading-font-weight)',
     },
     {
       tag: tags.heading1,
-      color: 'var(--ink-heading1, var(--ink-heading, #e06c75))',
-      fontSize: '1.6em',
-      fontWeight: 'var(--ink-heading1-weight, var(--ink-heading-weight, 600))',
+      color: 'var(--ink-internal-syntax-heading1-color)',
+      fontSize: 'var(--ink-internal-syntax-heading1-font-size)',
+      fontWeight: 'var(--ink-internal-syntax-heading1-font-weight)',
     },
     {
       tag: tags.heading2,
-      color: 'var(--ink-heading2, var(--ink-heading, #e06c75))',
-      fontSize: '1.5em',
-      fontWeight: 'var(--ink-heading2-weight, var(--ink-heading-weight, 600))',
+      color: 'var(--ink-internal-syntax-heading2-color)',
+      fontSize: 'var(--ink-internal-syntax-heading2-font-size)',
+      fontWeight: 'var(--ink-internal-syntax-heading2-font-weight)',
     },
     {
       tag: tags.heading3,
-      color: 'var(--ink-heading3, var(--ink-heading, #e06c75))',
-      fontSize: '1.4em',
-      fontWeight: 'var(--ink-heading3-weight, var(--ink-heading-weight, 600))',
+      color: 'var(--ink-internal-syntax-heading3-color)',
+      fontSize: 'var(--ink-internal-syntax-heading3-font-size)',
+      fontWeight: 'var(--ink-internal-syntax-heading3-font-weight)',
     },
     {
       tag: tags.heading4,
-      color: 'var(--ink-heading4, var(--ink-heading, #e06c75))',
-      fontSize: '1.3em',
-      fontWeight: 'var(--ink-heading4-weight, var(--ink-heading-weight, 600))',
+      color: 'var(--ink-internal-syntax-heading4-color)',
+      fontSize: 'var(--ink-internal-syntax-heading4-font-size)',
+      fontWeight: 'var(--ink-internal-syntax-heading4-font-weight)',
     },
     {
       tag: tags.heading5,
-      color: 'var(--ink-heading5, var(--ink-heading, #e06c75))',
-      fontSize: '1.2em',
-      fontWeight: 'var(--ink-heading5-weight, var(--ink-heading-weight, 600))',
+      color: 'var(--ink-internal-syntax-heading5-color)',
+      fontSize: 'var(--ink-internal-syntax-heading5-font-size)',
+      fontWeight: 'var(--ink-internal-syntax-heading5-font-weight)',
     },
     {
       tag: tags.heading6,
-      color: 'var(--ink-heading6, var(--ink-heading, #e06c75))',
-      fontSize: '1.1em',
-      fontWeight: 'var(--ink-heading6-weight, var(--ink-heading-weight, 600))',
+      color: 'var(--ink-internal-syntax-heading6-color)',
+      fontSize: 'var(--ink-internal-syntax-heading6-font-size)',
+      fontWeight: 'var(--ink-internal-syntax-heading6-font-weight)',
     },
     // contextual tag types
     {
       tag: tags.keyword,
-      color: 'var(--ink-keyword, #c678dd)',
+      color: 'var(--ink-internal-syntax-keyword-color)',
     },
     {
       tag: tags.number,
-      color: 'var(--ink-number, #d19a66)',
+      color: 'var(--ink-internal-syntax-number-color)',
     },
     {
       tag: tags.operator,
-      color: 'var(--ink-operator, #96c0d8)',
+      color: 'var(--ink-internal-syntax-operator-color)',
     },
     {
       tag: tags.punctuation,
-      color: 'var(--ink-punctuation, #abb2bf)',
+      color: 'var(--ink-internal-syntax-punctuation-color)',
     },
     {
       tag: tags.link,
-      color: 'var(--ink-link, #96c0d8)',
+      color: 'var(--ink-internal-syntax-link-color)',
     },
     {
       tag: tags.url,
-      color: 'var(--ink-url, #96c0d8)',
+      color: 'var(--ink-internal-syntax-url-color)',
     },
     // string group
     {
       tag: tags.string,
-      color: 'var(--ink-string, #98c379)',
+      color: 'var(--ink-internal-syntax-string-color)',
     },
     {
       tag: tags.special(tags.string),
-      color: 'var(--ink-string-special, var(--ink-string, inherit))',
+      color: 'var(--ink-internal-syntax-string-special-color)',
     },
   ])
 

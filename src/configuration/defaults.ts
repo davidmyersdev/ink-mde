@@ -6,17 +6,15 @@ export const defaultOptions: Ink.Options = {
   doc: '',
   extensions: [],
   files: {
-    clipboard: true,
-    dragAndDrop: true,
-    hook(files: FileList) {
-      console.log({ files })
-    },
+    clipboard: false,
+    dragAndDrop: false,
+    handler: () => {},
     injectMarkup: true,
     types: ['image/*'],
   },
   hooks: {
-    afterUpdate(_doc) {},
-    beforeUpdate(_doc) {},
+    afterUpdate: () => {},
+    beforeUpdate: () => {},
   },
   interface: {
     appearance: InkValues.Appearance.Dark,
