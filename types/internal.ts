@@ -1,12 +1,15 @@
 /// <reference path="ink.ts" />
 
 import type { Compartment as VendorCompartment, Extension as VendorExtension, StateEffect as VendorStateEffect } from '@codemirror/state'
+import type { SvelteComponent as VendorComponent } from 'svelte'
 import type Ink from '/types/ink'
+import type InkUi from '/types/ui'
 
 export namespace InkInternal {
   export interface Configuration {
-    options: Ink.Options
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
+    options: Ink.Options
+    root: InkUi.Root
   }
 
   export interface Extension {
@@ -26,6 +29,7 @@ export namespace InkInternal {
   export namespace Vendor {
     // All vendor types (and adapters) should be encapsulated here.
     export type Compartment = VendorCompartment
+    export type Component = VendorComponent
     export type Extension = VendorExtension
     export type ExtensionResolver = (options: Ink.Options) => InkInternal.Vendor.Extension
     export type ExtensionResolvers = {

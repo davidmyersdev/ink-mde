@@ -1,63 +1,165 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-  import Modal from '/src/ui/Modal.svelte'
+  import { onMount } from 'svelte'
 
+  import Ink from '/types/ink'
+
+  export let options: Ink.Options
+
+  $: dragAndDrop = options.files.dragAndDrop
+  $: handler = options.files.handler
+
+  let depth: number = 0
   let files: File[] = []
-  let form: HTMLElement
+  let isLoading = false
+  let isVisible = false
 
-  const dispatch = createEventDispatcher()
-  const drag = (event: DragEvent) => {
-    event.preventDefault()
+  const closeModal = () => {
+    isVisible = false
   }
-  const drop = (event: DragEvent) => {
-    event.preventDefault()
 
-    const transfer = event.dataTransfer as DataTransfer
+  const dropOnZone = (event: DragEvent) => {
+    if (dragAndDrop) {
+      event.preventDefault()
+      event.stopPropagation()
 
-    if (transfer.files) {
-      Array.from(transfer.files).forEach(file => (files = [...files, file]))
+      const transfer = event.dataTransfer
 
-      dispatch('files', transfer.files)
+      if (transfer?.files) {
+        Array.from(transfer.files).forEach(file => (files = [...files, file]))
+
+        const promise = handler(transfer.files)
+
+        if (promise) {
+          isLoading = true
+
+          promise.finally(() => {
+            depth = 0
+            isLoading = false
+            isVisible = false
+            files = []
+          })
+        } else {
+          depth = 0
+          isVisible = false
+          files = []
+        }
+      } else {
+        depth = 0
+        isVisible = false
+        files = []
+      }
     }
   }
-  const file = (event: Event) => {
-    const target = event.target as HTMLInputElement
 
-    if (target.files) {
-      Array.from(target.files).forEach(file => (files = [...files, file]))
+  onMount(() => {
+    document.addEventListener('dragenter', (event: DragEvent) => {
+      if (dragAndDrop) {
+        event.preventDefault()
 
-      dispatch('files', target.files)
-    }
-  }
-  const upload = (_event: Event) => {
-    form.click()
-  }
+        depth += 1
+        isVisible = true
+      }
+    })
 
-  export let isVisible = false
+    document.addEventListener('dragover', (event: DragEvent) => {
+      if (dragAndDrop) {
+        event.preventDefault()
+
+        isVisible = true
+      }
+    })
+
+    document.addEventListener('dragleave', (event: DragEvent) => {
+      if (dragAndDrop) {
+        event.preventDefault()
+
+        depth -= 1
+
+        if (depth === 0) {
+          isVisible = false
+        }
+      }
+    })
+
+    document.addEventListener('drop', (event: DragEvent) => {
+      if (dragAndDrop) {
+        event.preventDefault()
+
+        depth = 0
+        isVisible = false
+      }
+    })
+  })
 </script>
 
-{#if isVisible}
-  <Modal isVisible={isVisible}>
-    <div class="ink-drop-zone" on:click={upload} on:drop={drop} on:dragover={drag}>
-      <input class="ink-drop-zone-input" type="file" multiple bind:this={form} on:change={file}>
-      <div class="ink-drop-zone-previews">
+<div class="ink--drop-zone" class:visible={isVisible}>
+  <div class="ink--drop-zone--modal">
+    <div class="ink--drop-zone--droppable-area" on:drop={dropOnZone}>
+      <div class="ink--drop-zone--file-preview">
         {#each files.slice(0, 8) as file, _i}
-          <img class="ink-drop-zone-preview-image" alt={file.name} src={URL.createObjectURL(file)}>
+          <img class="ink--drop-zone--file-preview-image" alt={file.name} src={URL.createObjectURL(file)}>
         {/each}
       </div>
-      <span>drop files here or click to upload</span>
+      {#if isLoading}
+        <span>uploading files...</span>
+      {:else}
+        <span>drop files here</span>
+      {/if}
     </div>
-  </Modal>
-{/if}
+    <div class="ink--drop-zone--hide" on:click={closeModal}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+  </div>
+</div>
 
 <style>
-  .ink-drop-zone {
+  .ink--drop-zone {
     align-items: center;
-    border: 0.25rem dashed #aaa;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--ink-internal-all-color);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: var(--ink-internal-modal-position);
+    z-index: 10;
+  }
+
+  .ink--drop-zone:not(.visible) {
+    display: none;
+  }
+
+  .ink--drop-zone--modal {
+    background-color: var(--ink-internal-block-background-color);
+    border-radius: var(--ink-internal-all-border-radius);
+    box-sizing: border-box;
+    height: 100%;
+    max-height: 20rem;
+    max-width: 40rem;
+    padding: 1rem;
+    position: relative;
+    width: 100%;
+  }
+
+  .ink--drop-zone--hide {
+    cursor: pointer;
+    height: 1.75rem;
+    position: absolute;
+    right: 0.25rem;
+    top: 0.25rem;
+    width: 1.75rem;
+  }
+
+  .ink--drop-zone--hide svg {
+    background-color: var(--ink-internal-block-background-color);
+  }
+
+  .ink--drop-zone--droppable-area {
+    align-items: center;
+    border: 0.2rem dashed var(--ink-internal-all-color);
     border-radius: 0.125rem;
     box-sizing: border-box;
-    color: #fafafa;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     font-size: 1.25em;
@@ -68,11 +170,7 @@
     text-align: center;
   }
 
-  .ink-drop-zone-input {
-    display: none;
-  }
-
-  .ink-drop-zone-previews {
+  .ink--drop-zone--file-preview {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -80,7 +178,7 @@
     max-width: 25.5rem;
   }
 
-  .ink-drop-zone-preview-image {
+  .ink--drop-zone--file-preview-image {
     border: 0.125rem solid #222;
     border-radius: 0.125rem;
     box-sizing: border-box;

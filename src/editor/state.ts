@@ -13,16 +13,16 @@ import { theme } from '/src/vendor/extensions/theme'
 import type Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-const selection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {
+const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {
   if (selections.length > 0) {
     return toCodeMirror(selections)
   }
 }
 
-export const createState = (configuration: InkInternal.Configuration): EditorState => {
+export const create = (configuration: InkInternal.Configuration): EditorState => {
   return EditorState.create({
     doc: configuration.options.doc,
-    selection: selection(configuration.options.selections),
+    selection: toVendorSelection(configuration.options.selections),
     extensions: [
       history(),
       markdown({
