@@ -61,7 +61,7 @@ const instance: Ink.Instance = ink(document.getElementById('editor'), options)
 
 To replace the current doc without rebuilding the UI, we can use the `Ink.Instance.load()` method. This is useful for interfaces where we want to present multiple docs to a user and let them switch between docs without leaving the page.
 
-```js
+```ts
 import ink from '@writewithocto/ink'
 import type Ink from '@writewithocto/ink'
 
@@ -71,108 +71,83 @@ const instance: Ink.Instance = ink(document.getElementById('editor'))
 instance.load('# New Doc')
 ```
 
+## Full Configuration Options
+
+| Option                          | Description                                | Type                                        | Default    |
+| ----                            | ----                                       | ----                                        | ----       |
+| `options.doc`                   | Initialize the editor with an existing doc | `string`                                    | `''`       |
+| `options.files.dragAndDrop`     | Enable drag-and-drop file uploads          | `boolean`                                   | `false`    |
+| `options.files.handler`         | Handle file uploads (not handled by Ink)   | `(files: FileList) => Promise<any> \| void` | `() => {}` |
+| `options.hooks.afterUpdate`     | Run some code after the doc is updated     | `(doc: string) => void`                     | `() => {}` |
+| `options.hooks.beforeUpdate`    | Run some code before the doc is updated    | `(doc: string) => void`                     | `() => {}` |
+| `options.interface.appearance`  | Change the editor theme                    | `'dark' \| 'light'`                         | `'dark'`   |
+| `options.interface.attribution` | Show the "Powered by Ink" attribution      | `boolean`                                   | `true`     |
+| `options.interface.images`      | Render images in the editor                | `boolean`                                   | `false`    |
+| `options.interface.spellcheck`  | Enable spellcheck                          | `boolean`                                   | `true`     |
+| `options.selections`            | Initialize the editor with selections      | `Ink.Editor.Selection[]`                    | `[]`       |
+
 ## Customization
 
-### Fonts
+Many styles can be customized with CSS custom properties (aka variables).
 
-The fonts for `@writewithocto/ink` can be customized with CSS variables.
-
-| CSS Variable             | Description                            | Default Value |
-| ----                     | ----                                   | ----          |
-| `--ink-font-family`      | Proportional font used for normal text | `sans-serif`  |
-| `--ink-font-family-mono` | Monospace font used for code           | `monospace`   |
-
-### Images
-
-When the `renderImages: true` config is used, some image properties can be changed with CSS variables.
-
-| CSS Variable                   | Description                           | Default Value (Dark) | Default Value (Light) |
-| ----                           | ----                                  | ----                 | ----                  |
-| `--ink-image-background-color` | Background color for image containers | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
-| `--ink-image-border-radius`    | Border radius for image containers    | `0.25rem`            | `0.25rem`             |
-| `--ink-image-max-height`       | Max height for images                 | `20rem`              | `20rem`               |
-
-### Code / Code Blocks
-
-| CSS Variable                       | Description                      | Default Value (Dark) | Default Value (Light) |
-| ----                               | ----                             | ----                 | ----                  |
-| `--ink-code-background-color`      | Background color for inline code | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
-| `--ink-code-border-radius`         | Border radius for inline code    | `0.25rem`            | `0.25rem`             |
-| `--ink-code-padding`               | Padding for inline code          | `0.125rem`           | `0.125rem`            |
-| `--ink-codeblock-background-color` | Background color for code blocks | `rgba(0, 0, 0, 0.2)` | `rgba(0, 0, 0, 0.05)` |
-| `--ink-codeblock-border-radius`    | Border radius for code blocks    | `0.25rem`            | `0.25rem`             |
-| `--ink-codeblock-padding`          | Padding for code blocks          | `0.5rem`             | `0.5rem`              |
-
-### Syntax Highlighting
-
-The syntax highlighting theme is fully configurable through CSS variables. This means we can do things like...
-
-- Change the heading colors
-- Change all (or some) colors for individual light and dark modes
-- Make adjustments for accessibility
-
-Check out the examples below.
-
-#### Examples
-
-##### Light and Dark modes
-
-Make headings dark for light mode and light for dark mode.
-
-```css
-.light {
-  --ink-heading: #111;
-}
-
-.dark {
-  --ink-heading: #eee;
-}
-```
-
-#### Tags / CSS Variable Reference
-
-Tags are applied to the code by the CodeMirror language parsers. This means things could possibly be a bit off depending on the language being highlighted. If you think something is being incorrectly highlighted, feel free to [open an issue](https://github.com/writewithocto/ink/issues). The CSS variables listed under a given Tag are in order of highest-to-lowest precedence. For more information about Tags, check out the [CodeMirror Tag reference](https://codemirror.net/6/docs/ref/#highlight.tags).
-
-| Tag                       | CSS Variable                                                            | CSS Property  | Default Value |
-| ----                      | ----                                                                    | ----          | ----          |
-| atom                      | `--ink-atom`                                                            | `color`       | `#d19a66`     |
-| meta                      | `--ink-meta`                                                            | `color`       | `#abb2bf`     |
-| processingInstruction     | `--ink-processingInstruction`                                           | `color`       | `#abb2bf`     |
-| comment                   | `--ink-comment`                                                         | `color`       | `#abb2bf`     |
-| name                      | `--ink-name`                                                            | `color`       | `#d19a66`     |
-| labelName                 | `--ink-labelName`<br>`--ink-name`                                       | `color`       | `#abb2bf`     |
-| propertyName              | `--ink-propertyName`<br>`--ink-name`                                    | `color`       | `#96c0d8`     |
-| propertyName (definition) | `--ink-propertyName-definition`<br>`--ink-propertyName`<br>`--ink-name` | `color`       | `#e06c75`     |
-| variableName              | `--ink-variableName`<br>`--ink-name`                                    | `color`       | `#e06c75`     |
-| variableName (definition) | `--ink-variableName-definition`<br>`--ink-variableName`<br>`--ink-name` | `color`       | `#e5c07b`     |
-| variableName (local)      | `--ink-variableName-local`<br>`--ink-variableName`<br>`--ink-name`      | `color`       | `#d19a66`     |
-| variableName (special)    | `--ink-variableName-special`<br>`--ink-variableName`<br>`--ink-name`    | `color`       | `inherit`     |
-| heading                   | `--ink-heading`                                                         | `color`       | `#e06c75`     |
-| heading                   | `--ink-heading-weight`                                                  | `font-weight` | `600`         |
-| heading1                  | `--ink-heading1`<br>`--ink-heading`                                     | `color`       | `#e06c75`     |
-| heading1                  | `--ink-heading1-weight`<br>`--ink-heading-weight`                       | `font-weight` | `600`         |
-| heading2                  | `--ink-heading2`<br>`--ink-heading`                                     | `color`       | `#e06c75`     |
-| heading2                  | `--ink-heading2-weight`<br>`--ink-heading-weight`                       | `font-weight` | `600`         |
-| heading3                  | `--ink-heading3`<br>`--ink-heading`                                     | `color`       | `#e06c75`     |
-| heading3                  | `--ink-heading3-weight`<br>`--ink-heading-weight`                       | `font-weight` | `600`         |
-| heading4                  | `--ink-heading4`<br>`--ink-heading`                                     | `color`       | `#e06c75`     |
-| heading4                  | `--ink-heading4-weight`<br>`--ink-heading-weight`                       | `font-weight` | `600`         |
-| heading5                  | `--ink-heading5`<br>`--ink-heading`                                     | `color`       | `#e06c75`     |
-| heading5                  | `--ink-heading5-weight`<br>`--ink-heading-weight`                       | `font-weight` | `600`         |
-| heading6                  | `--ink-heading6`<br>`--ink-heading`                                     | `color`       | `#e06c75`     |
-| heading6                  | `--ink-heading6-weight`<br>`--ink-heading-weight`                       | `font-weight` | `600`         |
-| keyword                   | `--ink-keyword`                                                         | `color`       | `#c678dd`     |
-| number                    | `--ink-number`                                                          | `color`       | `#d19a66`     |
-| operator                  | `--ink-operator`                                                        | `color`       | `#96c0d8`     |
-| punctuation               | `--ink-punctuation`                                                     | `color`       | `#36454f`     |
-| link                      | `--ink-link`                                                            | `color`       | `#96c0d8`     |
-| url                       | `--ink-url`                                                             | `color`       | `#96c0d8`     |
-| string                    | `--ink-string`                                                          | `color`       | `#98c379`     |
-| string (special)          | `--ink-string-special`<br>`--ink-string`                                | `color`       | `inherit`     |
-| emphasis                  | `--ink-emphasis`                                                        | `color`       | `inherit`     |
-| strikethrough             | `--ink-strikethrough`                                                   | `color`       | `inherit`     |
-| strong                    | `--ink-strong`                                                          | `color`       | `inherit`     |
-| strong                    | `--ink-strong-weight`                                                   | `font-weight` | `600`         |
+| CSS Custom Property                           | CSS Property       | Default (Dark) | Override (Light) |
+| ----                                          | ----               | ----           | ----             |
+| `--ink-all-accent-color`                      | `color`            | `#e06c75`      |                  |
+| `--ink-all-border-radius`                     | `border-radius`    | `0.25rem`      |                  |
+| `--ink-all-color`                             | `color`            | `#fafafa`      | `#171717`        |
+| `--ink-all-font-family`                       | `font-family`      | `sans-serif`   |                  |
+| `--ink-block-background-color`                | `background-color` | `#121212`      | `#ededed`        |
+| `--ink-block-max-height`                      | `max-height`       | `20rem`        |                  |
+| `--ink-block-padding`                         | `padding`          | `0.5rem`       |                  |
+| `--ink-monospace-font-family`                 | `font-family`      | `monospace`    |                  |
+| **Syntax Highlighting**                       |                    |                |                  |
+| `--ink-syntax-atom-color`                     | `color`            | `#d19a66`      |                  |
+| `--ink-syntax-comment-color`                  | `color`            | `#abb2bf`      |                  |
+| `--ink-syntax-emphasis-color`                 | `color`            | `inherit`      |                  |
+| `--ink-syntax-emphasis-font-style`            | `font-style`       | `italic`       |                  |
+| `--ink-syntax-heading-color`                  | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading-font-size`              | `font-size`        | `1em`          |                  |
+| `--ink-syntax-heading-font-weight`            | `font-weight`      | `600`          |                  |
+| `--ink-syntax-heading1-color`                 | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading1-font-size`             | `font-size`        | `1.6em`        |                  |
+| `--ink-syntax-heading1-font-weight`           | `font-weight`      | `600`          |                  |
+| `--ink-syntax-heading2-color`                 | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading2-font-size`             | `font-size`        | `1.5em`        |                  |
+| `--ink-syntax-heading2-font-weight`           | `font-weight`      | `600`          |                  |
+| `--ink-syntax-heading3-color`                 | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading3-font-size`             | `font-size`        | `1.4em`        |                  |
+| `--ink-syntax-heading3-font-weight`           | `font-weight`      | `600`          |                  |
+| `--ink-syntax-heading4-color`                 | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading4-font-size`             | `font-size`        | `1.3em`        |                  |
+| `--ink-syntax-heading4-font-weight`           | `font-weight`      | `600`          |                  |
+| `--ink-syntax-heading5-color`                 | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading5-font-size`             | `font-size`        | `1.2em`        |                  |
+| `--ink-syntax-heading5-font-weight`           | `font-weight`      | `600`          |                  |
+| `--ink-syntax-heading6-color`                 | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-heading6-font-size`             | `font-size`        | `1.1em`        |                  |
+| `--ink-syntax-heading6-font-weight`           | `font-weight`      | `600`          |                  |
+| `--ink-syntax-keyword-color`                  | `color`            | `#c678dd`      |                  |
+| `--ink-syntax-link-color`                     | `color`            | `#96c0d8`      |                  |
+| `--ink-syntax-meta-color`                     | `color`            | `#abb2bf`      |                  |
+| `--ink-syntax-name-color`                     | `color`            | `#d19a66`      |                  |
+| `--ink-syntax-name-label-color`               | `color`            | `#abb2bf`      |                  |
+| `--ink-syntax-name-property-color`            | `color`            | `#96c0d8`      |                  |
+| `--ink-syntax-name-property-definition-color` | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-name-variable-color`            | `color`            | `#e06c75`      |                  |
+| `--ink-syntax-name-variable-definition-color` | `color`            | `#e5c07b`      |                  |
+| `--ink-syntax-name-variable-local-color`      | `color`            | `#d19a66`      |                  |
+| `--ink-syntax-name-variable-special-color`    | `color`            | `inherit`      |                  |
+| `--ink-syntax-number-color`                   | `color`            | `#d19a66`      |                  |
+| `--ink-syntax-operator-color`                 | `color`            | `#96c0d8`      |                  |
+| `--ink-syntax-processing-instruction-color`   | `color`            | `#36454f`      |                  |
+| `--ink-syntax-punctuation-color`              | `color`            | `#abb2bf`      |                  |
+| `--ink-syntax-strikethrough-color`            | `color`            | `inherit`      |                  |
+| `--ink-syntax-strikethrough-text-decoration`  | `text-decoration`  | `line-through` |                  |
+| `--ink-syntax-string-color`                   | `color`            | `#98c379`      |                  |
+| `--ink-syntax-string-special-color`           | `color`            | `inherit`      |                  |
+| `--ink-syntax-strong-color`                   | `color`            | `inherit`      |                  |
+| `--ink-syntax-strong-font-weight`             | `font-weight`      | `600`          |                  |
+| `--ink-syntax-url-color`                      | `color`            | `#96c0d8`      |                  |
 
 ## Support
 

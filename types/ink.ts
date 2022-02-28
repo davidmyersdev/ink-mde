@@ -39,7 +39,7 @@ export namespace Ink {
     export interface Files {
       clipboard: boolean
       dragAndDrop: boolean
-      hook: Ink.Options.Hooks.Files
+      handler: (files: FileList) => Promise<any> | void
       injectMarkup: boolean
       types: string[]
     }
@@ -52,7 +52,6 @@ export namespace Ink {
     export namespace Hooks {
       export type AfterUpdate = (doc: string) => void
       export type BeforeUpdate = (doc: string) => void
-      export type Files = (files: FileList) => void
     }
 
     export interface Interface {

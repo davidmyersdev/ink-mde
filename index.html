@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
       :root {
-        --ink-font-family: 'Inter', Helvetica, sans-serif;
-        --ink-font-family-mono: 'Fira Code', 'Courier New', Courier, monospace;
+        --ink-all-font-family: 'Inter', Helvetica, sans-serif;
+        --ink-monospace-font-family: 'Fira Code', 'Courier New', Courier, monospace;
       }
 
       body {
-        font-family: var(--ink-font-family);
+        font-family: var(--ink-all-font-family);
       }
 
       .dark body {
@@ -30,7 +30,6 @@
       #app {
         margin: auto;
         max-width: 75rem;
-        padding: 0.5em;
       }
 
       #app .cm-editor.cm-focused {
@@ -61,6 +60,17 @@
         <span>hide</span>
       </label>
     </div>
+    <div>
+      Drag and drop
+      <label>
+        <input onclick="window.dragAndDrop(true)" type="radio" value="enabled" name="dragAndDrop" checked>
+        <span>enable</span>
+      </label>
+      <label>
+        <input onclick="window.dragAndDrop(false)" type="radio" value="disabled" name="dragAndDrop">
+        <span>disable</span>
+      </label>
+    </div>
     <div id="app"></div>
     <script type="module" src="/src/index.ts"></script>
     <script type="module">
@@ -74,12 +84,18 @@
           '',
           'This is an example doc. `hello`',
           '',
-          '![](https://placekitten.com/200/300)',
+          '![](https://placekitten.com/2000/500)',
           '',
           '```js',
           'const add = (a, b) => (a + b)',
           '```',
         ].join("\n"),
+        files: {
+          dragAndDrop: true,
+          hook(files) {
+            console.log({ files })
+          },
+        },
         interface: {
           appearance,
           images: true,
@@ -92,11 +108,15 @@
       window.lightsOn = () => {
         document.documentElement.classList.remove('dark')
         document.documentElement.classList.add('light')
+
+        window.ink.reconfigure({ interface: { appearance: 'light' } })
       }
 
       window.lightsOff = () => {
         document.documentElement.classList.remove('light')
         document.documentElement.classList.add('dark')
+
+        window.ink.reconfigure({ interface: { appearance: 'dark' } })
       }
 
       window.imagesShow = () => {
@@ -105,6 +125,10 @@
 
       window.imagesHide = () => {
         window.ink.reconfigure({ interface: { images: false } })
+      }
+
+      window.dragAndDrop = (enabled) => {
+        window.ink.reconfigure({ files: { dragAndDrop: enabled } })
       }
     </script>
   </body>
