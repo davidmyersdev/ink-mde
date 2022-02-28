@@ -38,17 +38,17 @@ class ImageWidget extends WidgetType {
 
     backdrop.classList.add('cm-image-backdrop')
 
-    backdrop.style.borderRadius = 'var(--ink-image-border-radius, 0.25rem)'
+    backdrop.style.borderRadius = 'var(--ink-internal-all-border-radius)'
     backdrop.style.display = 'flex'
     backdrop.style.alignItems = 'center'
     backdrop.style.justifyContent = 'center'
-    backdrop.style.padding = '1rem'
+    backdrop.style.overflow = 'hidden'
     backdrop.style.maxWidth = '100%'
 
     figure.style.margin = '0'
 
     image.style.display = 'block'
-    image.style.maxHeight = 'var(--ink-images-max-height, 20rem)'
+    image.style.maxHeight = 'var(--ink-internal-block-max-height)'
     image.style.maxWidth = '100%'
 
     return container
@@ -83,11 +83,8 @@ export const images = (): Extension => {
   }
 
   const imagesTheme = EditorView.baseTheme({
-    '&dark .cm-image-backdrop': {
-      backgroundColor: 'var(--ink-image-background-color, rgba(0, 0, 0, 0.2))',
-    },
-    '&light .cm-image-backdrop': {
-      backgroundColor: 'var(--ink-image-background-color, rgba(0, 0, 0, 0.05))',
+    '.cm-image-backdrop': {
+      backgroundColor: 'var(--ink-internal-block-background-color)',
     },
   })
 
