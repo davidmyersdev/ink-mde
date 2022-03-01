@@ -4,7 +4,8 @@ import { languages } from '@codemirror/language-data'
 import { EditorSelection, EditorState } from '@codemirror/state'
 
 import { toCodeMirror } from '/src/adapters/selections'
-import { buildVendors } from '/src/configuration/extensions'
+import { buildVendors } from '/src/extensions'
+import { getState } from '/src/state'
 import { code } from '/src/vendor/extensions/code'
 import { keymaps } from '/src/vendor/extensions/keymaps'
 import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
@@ -19,10 +20,12 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
   }
 }
 
-export const create = (configuration: InkInternal.Configuration): EditorState => {
+export const createVendorState = (ref: InkInternal.Ref): InkInternal.Vendor.State => {
+  const state = getState(ref)
+
   return EditorState.create({
-    doc: configuration.options.doc,
-    selection: toVendorSelection(configuration.options.selections),
+    doc: state.options.doc,
+    selection: toVendorSelection(state.options.selections),
     extensions: [
       history(),
       markdown({
@@ -33,8 +36,8 @@ export const create = (configuration: InkInternal.Configuration): EditorState =>
       keymaps(),
       lineWrapping(),
       theme(),
-      ...buildVendors(configuration),
-      ...configuration.options.extensions,
+      ...buildVendors(ref),
+      ...state.options.extensions,
     ],
   })
 }

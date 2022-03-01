@@ -1,12 +1,17 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import Ink from '/types/ink'
+  import { getState } from '/src/state'
+  import { insert } from '/src/instance'
 
-  export let options: Ink.Options
+  import type InkInternal from '/types/internal'
 
-  $: dragAndDrop = options.files.dragAndDrop
-  $: handler = options.files.handler
+  export let ref: InkInternal.Ref
+
+  $: state = getState(ref)
+  $: dragAndDrop = state.options.files.dragAndDrop
+  $: handler = state.options.files.handler
+  $: injectMarkup = state.options.files.injectMarkup
 
   let depth: number = 0
   let files: File[] = []
@@ -27,22 +32,20 @@
       if (transfer?.files) {
         Array.from(transfer.files).forEach(file => (files = [...files, file]))
 
-        const promise = handler(transfer.files)
+        isLoading = true
 
-        if (promise) {
-          isLoading = true
+        Promise.resolve(handler(transfer.files)).then((url?: string) => {
+          if (injectMarkup && url) {
+            const markup = `![](${url})`
 
-          promise.finally(() => {
-            depth = 0
-            isLoading = false
-            isVisible = false
-            files = []
-          })
-        } else {
+            insert(ref, markup)
+          }
+        }).finally(() => {
           depth = 0
+          isLoading = false
           isVisible = false
           files = []
-        }
+        })
       } else {
         depth = 0
         isVisible = false

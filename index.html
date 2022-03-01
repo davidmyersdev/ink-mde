@@ -93,7 +93,7 @@
         files: {
           dragAndDrop: true,
           handler(files) {
-            console.log({ files })
+            return URL.createObjectURL(Array.from(files).pop())
           },
         },
         interface: {

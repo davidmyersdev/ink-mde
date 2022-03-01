@@ -10,6 +10,7 @@ export namespace Ink {
     destroy: () => void
     doc: () => string
     focus: () => void
+    insert: (text: string, selection: Ink.Editor.Selection) => void
     load: (doc: string) => void
     reconfigure: (updates: Partial<Ink.Options>) => void
     select: (selections: Ink.Editor.Selection[]) => void
