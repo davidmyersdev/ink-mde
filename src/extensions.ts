@@ -1,5 +1,6 @@
 import { Compartment } from '@codemirror/state'
 
+import { getState } from '/src/state'
 import { dark, light } from '/src/vendor/extensions/appearance'
 import { attribution as attributionExtension } from '/src/vendor/extensions/attribution'
 import { images as imagesExtension } from '/src/vendor/extensions/images'
@@ -15,9 +16,11 @@ export const buildVendor = (extension: InkInternal.OptionExtension<Ink.Values.Ex
   return extension.compartment.of(result)
 }
 
-export const buildVendors = (configuration: InkInternal.Configuration) => {
-  return configuration.extensions.map((extension) => {
-    return buildVendor(extension, configuration.options)
+export const buildVendors = (ref: InkInternal.Ref) => {
+  const state = getState(ref)
+
+  return state.extensions.map((extension) => {
+    return buildVendor(extension, state.options)
   })
 }
 
@@ -27,9 +30,11 @@ export const buildVendorUpdate = (extension: InkInternal.OptionExtension<Ink.Val
   return extension.compartment.reconfigure(result)
 }
 
-export const buildVendorUpdates = (configuration: InkInternal.Configuration) => {
-  return configuration.extensions.map((extension) => {
-    return buildVendorUpdate(extension, configuration.options)
+export const buildVendorUpdates = (ref: InkInternal.Ref) => {
+  const state = getState(ref)
+
+  return state.extensions.map((extension) => {
+    return buildVendorUpdate(extension, state.options)
   })
 }
 
@@ -44,7 +49,7 @@ export const create = <T extends Ink.Options.ExtensionNames>(name: T): InkIntern
   }
 }
 
-export const createDefaults = () => {
+export const createExtensions = () => {
   return [
     create(InkValues.Extensions.Appearance),
     create(InkValues.Extensions.Attribution),

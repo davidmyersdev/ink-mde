@@ -1,6 +1,13 @@
 /// <reference path="ink.ts" />
 
-import type { Compartment as VendorCompartment, Extension as VendorExtension, StateEffect as VendorStateEffect } from '@codemirror/state'
+import type {
+  Compartment as VendorCompartment,
+  EditorState as VendorState,
+  Extension as VendorExtension,
+  StateEffect as VendorStateEffect,
+  Transaction as VendorTransaction,
+} from '@codemirror/state'
+import type { EditorView as VendorView } from '@codemirror/view'
 import type { SvelteComponent as VendorComponent } from 'svelte'
 import type Ink from '/types/ink'
 import type InkUi from '/types/ui'
@@ -11,6 +18,15 @@ export namespace InkInternal {
     options: Ink.Options
     root: InkUi.Root
   }
+
+  export type DeepPartial<T> = {
+    [K in keyof T]?:
+      T[K] extends (infer U)[] ? DeepPartial<U>[] :
+      T[K] extends object ? DeepPartial<T[K]> :
+      T[K]
+  }
+
+  export type Editor = InkInternal.Vendor.View
 
   export interface Extension {
     compartment: InkInternal.Vendor.Compartment
@@ -26,6 +42,16 @@ export namespace InkInternal {
     name: OptionName
   }
 
+  export type Ref = {}
+  export interface State {
+    components: InkUi.MountedComponent<any>[]
+    extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
+    options: Ink.Options
+    target: HTMLElement
+    root: InkUi.Root
+    editor: InkInternal.Editor
+  }
+
   export namespace Vendor {
     // All vendor types (and adapters) should be encapsulated here.
     export type Compartment = VendorCompartment
@@ -35,7 +61,10 @@ export namespace InkInternal {
     export type ExtensionResolvers = {
       [ExtensionName in Ink.Options.ExtensionNames]: ExtensionResolver
     }
+    export type State = VendorState
     export type StateEffect<Type> = VendorStateEffect<Type>
+    export type Transaction = VendorTransaction
+    export type View = VendorView
   }
 }
 
