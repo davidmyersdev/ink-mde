@@ -3,7 +3,7 @@ import Ink from '/types/ink'
 
 export const toCodeMirror = (selections: Ink.Editor.Selection[]) => {
   const ranges = selections.map((selection): SelectionRange => {
-    const range = SelectionRange.fromJSON({ anchor: selection.end, head: selection.start })
+    const range = SelectionRange.fromJSON({ anchor: selection.start, head: selection.end })
 
     return range
   })
@@ -12,11 +12,10 @@ export const toCodeMirror = (selections: Ink.Editor.Selection[]) => {
 }
 
 export const toInk = (selection: EditorSelection) => {
-  const ranges = selection.toJSON()
-  const selections = ranges.map((range: SelectionRange): Ink.Editor.Selection => {
+  const selections = selection.ranges.map((range: SelectionRange): Ink.Editor.Selection => {
     return {
-      end: range.anchor,
-      start: range.head,
+      end: range.anchor < range.head ? range.head : range.anchor,
+      start: range.head < range.anchor ? range.head : range.anchor,
     }
   })
 
