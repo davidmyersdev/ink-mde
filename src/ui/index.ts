@@ -1,26 +1,29 @@
+import { getState } from '/src/state'
 import DropZone from '/src/ui/DropZone.svelte'
 import { InkValues } from '/types/ink'
 
-import type Ink from '/types/ink'
+import type InkInternal from '/types/internal'
 import type InkUi from '/types/ui'
 
-export const init = (options: Ink.Options): InkUi.Root => {
-  const root = mount<any>(DropZone, { options: options })
-
-  return root
+export const createElement = (): InkUi.Element => {
+  return document.createElement('div')
 }
 
-export const mount = <T>(Component: InkUi.MountableComponent<T>, props: T): InkUi.MountedComponent<T> => {
-  const target = document.createElement('div')
-  const component = new Component({ props, target })
-
-  return {
-    component,
-    target,
-  }
+export const mountComponent = <T>(Component: InkUi.MountableComponent<T>, { props, target }: { props: T, target: HTMLElement }): InkUi.MountedComponent<T> => {
+  return new Component({ props, target })
 }
 
-export const style = (options: Ink.Options, root: InkUi.Root) => {
+export const mountComponents = (ref: InkInternal.Ref): InkUi.MountedComponent<any>[] => {
+  const { root } = getState(ref)
+
+  return [
+    mountComponent<any>(DropZone, { props: { ref }, target: root }),
+  ]
+}
+
+export const styleRoot = (ref: InkInternal.Ref) => {
+  const { root, options } = getState(ref)
+
   const isLight = options.interface.appearance === InkValues.Appearance.Light
   const styles = [
     { suffix: 'all-accent-color', default: '#e06c75' },
@@ -90,6 +93,6 @@ export const style = (options: Ink.Options, root: InkUi.Root) => {
   styles.forEach((style) => {
     const value = isLight && style.light ? style.light : style.default
 
-    root.target.style.setProperty(`--ink-internal-${style.suffix}`, `var(--ink-${style.suffix}, ${value})`)
+    root.style.setProperty(`--ink-internal-${style.suffix}`, `var(--ink-${style.suffix}, ${value})`)
   })
 }

@@ -1,17 +1,17 @@
-import { create as createConfiguration } from '/src/configuration/instance'
-import { create } from '/src/editor/instance'
+import { createInstance } from '/src/instance'
+import { hydrateState } from '/src/state'
 
 import type Ink from '/types/ink'
 
 export * from '/src/vendor/extensions/extension'
 
 const ink = (target: HTMLElement, options: Partial<Ink.Options>): Ink.Instance => {
-  const configuration = createConfiguration(options)
-  const instance = create(configuration)
+  const ref = {}
+  const state = hydrateState(ref, { target, options })
 
-  target.append(configuration.root.target)
+  target.append(state.root)
 
-  return instance
+  return createInstance(ref)
 }
 
 export default ink
