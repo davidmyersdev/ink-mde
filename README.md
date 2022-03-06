@@ -26,7 +26,7 @@ Mount the component and grab some data when you need it (e.g. on a form submit).
 
 ```ts
 import ink from '@writewithocto/ink'
-import type Ink from '@writewithocto/ink'
+import type * as Ink from '@writewithocto/ink'
 
 const instance: Ink.Instance = ink(document.getElementById('editor'))
 
@@ -40,7 +40,7 @@ To listen for changes, we can specify hooks.
 
 ```ts
 import ink from '@writewithocto/ink'
-import type Ink from '@writewithocto/ink'
+import type * as Ink from '@writewithocto/ink'
 
 const options: Ink.Options = {
   doc: '# Start with some text',
@@ -63,7 +63,7 @@ To replace the current doc without rebuilding the UI, we can use the `Ink.Instan
 
 ```ts
 import ink from '@writewithocto/ink'
-import type Ink from '@writewithocto/ink'
+import type * as Ink from '@writewithocto/ink'
 
 const instance: Ink.Instance = ink(document.getElementById('editor'))
 
