@@ -9,7 +9,13 @@
   "module": "./dist/ink.es.js",
   "private": false,
   "type": "module",
-  "types": "./dist/ink.d.ts",
+  "types": "./types/ink.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ink.es.js",
+      "require": "./dist/ink.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && yarn build:types",

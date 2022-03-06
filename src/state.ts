@@ -6,8 +6,9 @@ import { createEditor } from '/src/editor'
 import { createExtensions } from '/src/extensions'
 import { createElement, mountComponents, styleRoot } from './ui'
 
-import { InkValues } from '/types/ink'
+import { InkValues } from '/types/values'
 
+import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
 const store = new WeakMap<InkInternal.Ref, InkInternal.State>()
@@ -60,14 +61,14 @@ export const setState = (ref: InkInternal.Ref, state: InkInternal.State) => {
   return state
 }
 
-export const updateState = (ref: InkInternal.Ref, partialState: InkInternal.DeepPartial<InkInternal.State>): InkInternal.State => {
+export const updateState = (ref: InkInternal.Ref, partialState: Ink.DeepPartial<InkInternal.State>): InkInternal.State => {
   const state = getState(ref)
   const newState = deepmerge(state, partialState, { isMergeableObject: isPlainObject })
 
   return setState(ref, newState)
 }
 
-export const hydrateState = (ref: InkInternal.Ref, partialState: InkInternal.DeepPartial<InkInternal.State>): InkInternal.State => {
+export const hydrateState = (ref: InkInternal.Ref, partialState: Ink.DeepPartial<InkInternal.State>): InkInternal.State => {
   updateState(ref, partialState)
   updateState(ref, { editor: createEditor(ref) })
   updateState(ref, { components: mountComponents(ref) })

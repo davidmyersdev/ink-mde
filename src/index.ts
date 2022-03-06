@@ -1,11 +1,11 @@
 import { createInstance } from '/src/instance'
 import { hydrateState } from '/src/state'
 
-import type Ink from '/types/ink'
+import type * as Ink from '/types/ink'
 
 export * from '/src/vendor/extensions/extension'
 
-const ink = (target: HTMLElement, options: Partial<Ink.Options>): Ink.Instance => {
+const ink = (target: HTMLElement, options: Ink.DeepPartial<Ink.Options>): Ink.Instance => {
   const ref = {}
   const state = hydrateState(ref, { target, options })
 

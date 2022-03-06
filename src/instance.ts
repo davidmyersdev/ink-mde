@@ -4,7 +4,7 @@ import { buildVendorUpdates } from '/src/extensions'
 import { styleRoot } from './ui'
 import { createVendorState } from '/src/vendor/state'
 
-import type Ink from '/types/ink'
+import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
 export const destroy = (ref: InkInternal.Ref) => {
