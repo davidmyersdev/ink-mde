@@ -1,5 +1,5 @@
 import { EditorSelection, SelectionRange } from '@codemirror/state'
-import Ink from '/types/ink'
+import type * as Ink from '/types/ink'
 
 export const toCodeMirror = (selections: Ink.Editor.Selection[]) => {
   const ranges = selections.map((selection): SelectionRange => {

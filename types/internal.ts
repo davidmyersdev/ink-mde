@@ -1,5 +1,3 @@
-/// <reference path="ink.ts" />
-
 import type {
   Compartment as VendorCompartment,
   EditorState as VendorState,
@@ -9,7 +7,7 @@ import type {
 } from '@codemirror/state'
 import type { EditorView as VendorView } from '@codemirror/view'
 import type { SvelteComponent as VendorComponent } from 'svelte'
-import type Ink from '/types/ink'
+import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
 
 export namespace InkInternal {
@@ -17,13 +15,6 @@ export namespace InkInternal {
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
     options: Ink.Options
     root: InkUi.Root
-  }
-
-  export type DeepPartial<T> = {
-    [K in keyof T]?:
-      T[K] extends (infer U)[] ? DeepPartial<U>[] :
-      T[K] extends object ? DeepPartial<T[K]> :
-      T[K]
   }
 
   export type Editor = InkInternal.Vendor.View

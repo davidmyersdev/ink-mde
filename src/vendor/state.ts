@@ -11,7 +11,7 @@ import { keymaps } from '/src/vendor/extensions/keymaps'
 import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
 import { theme } from '/src/vendor/extensions/theme'
 
-import type Ink from '/types/ink'
+import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
 const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {

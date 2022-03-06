@@ -4,6 +4,6 @@
     "noEmit": false
   },
   "extends": "./tsconfig.json",
-  "files": ["./types/ink.ts"],
+  "files": ["./types/ink.d.ts"],
   "include": []
 }
