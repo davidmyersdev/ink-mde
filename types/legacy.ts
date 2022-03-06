@@ -1,5 +1,5 @@
 import type { EditorSelection, Extension } from '@codemirror/state'
-import type Ink from '/types/ink'
+import type * as Ink from '/types/ink'
 
 export interface InkLegacyOptions {
   appearance: Ink.Values.Appearance
