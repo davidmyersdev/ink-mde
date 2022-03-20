@@ -3,7 +3,7 @@
   "name": "@writewithocto/ink",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "license": "MIT",
-  "version": "v0.6.1",
+  "version": "v0.6.2",
   "repository": "https://github.com/writewithocto/ink.git",
   "main": "./dist/ink.umd.js",
   "module": "./dist/ink.es.js",
