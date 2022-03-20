@@ -47,5 +47,19 @@
     "dist",
     "src",
     "types"
+  ],
+  "keywords": [
+    "codemirror",
+    "component",
+    "easymde",
+    "javascript",
+    "js",
+    "markdown",
+    "mde",
+    "octo",
+    "sfc",
+    "simplemde",
+    "ts",
+    "typescript"
   ]
 }
