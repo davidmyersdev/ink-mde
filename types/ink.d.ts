@@ -4,7 +4,8 @@ import { InkValues } from './values'
 
 export type DeepPartial<T> = {
   [K in keyof T]?: T[K] extends (infer U)[]
-    ? DeepPartial<U>[] : T[K] extends object
+    ? DeepPartial<U>[] : T[K] extends Function
+    ? T[K] : T[K] extends object
     ? DeepPartial<T[K]> : T[K]
 }
 
@@ -57,8 +58,8 @@ export namespace Options {
   }
 
   export interface Hooks {
-    afterUpdate: Options.Hooks.AfterUpdate
-    beforeUpdate: Options.Hooks.BeforeUpdate
+    afterUpdate: (doc: string) => void
+    beforeUpdate: (doc: string) => void
   }
 
   export namespace Hooks {
