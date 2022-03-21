@@ -1,4 +1,5 @@
 import { Compartment } from '@codemirror/state'
+import { vim } from '@replit/codemirror-vim'
 
 import { getState } from '/src/state'
 import { dark, light } from '/src/vendor/extensions/appearance'
@@ -55,6 +56,7 @@ export const createExtensions = () => {
     create(InkValues.Extensions.Attribution),
     create(InkValues.Extensions.Images),
     create(InkValues.Extensions.Spellcheck),
+    create(InkValues.Extensions.Vim),
   ]
 }
 
@@ -70,5 +72,8 @@ export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
   },
   spellcheck(options: Ink.Options) {
     return options.interface.spellcheck ? spellcheckExtension() : []
+  },
+  vim(options: Ink.Options) {
+    return options.vim ? vim() : []
   },
 }

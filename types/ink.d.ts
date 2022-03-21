@@ -1,6 +1,6 @@
 // Type definitions for @writewithocto/ink
 
-import { InkValues } from './values'
+import { InkValues } from '/types/values'
 
 export type DeepPartial<T> = {
   [K in keyof T]?: T[K] extends (infer U)[]
@@ -37,6 +37,7 @@ export interface Options {
   hooks: Options.Hooks
   interface: Options.Interface
   selections: Editor.Selection[]
+  vim: boolean
 }
 
 export namespace Options {
@@ -47,6 +48,7 @@ export namespace Options {
     [InkValues.Extensions.Attribution]: boolean
     [InkValues.Extensions.Images]: boolean
     [InkValues.Extensions.Spellcheck]: boolean
+    [InkValues.Extensions.Vim]: boolean
   }
 
   export interface Files {

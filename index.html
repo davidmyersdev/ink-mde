@@ -80,14 +80,16 @@
 
       window.ink = ink(document.getElementById('app'), {
         doc: [
-          '# Hello',
+          '# Ink',
           '',
-          'This is an example doc. `hello`',
+          'The flexible *TypeScript* Markdown editor that makes writing fun.',
           '',
-          '![](https://placekitten.com/2000/500)',
+          '![](https://placekitten.com/2000/510)',
           '',
-          '```js',
-          'const add = (a, b) => (a + b)',
+          '```ts',
+          'const add = (a: number, b: number): number => {',
+          '  return a + b',
+          '}',
           '```',
         ].join("\n"),
         files: {
