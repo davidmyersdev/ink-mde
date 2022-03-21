@@ -39,6 +39,7 @@ export const blankState = (): InkInternal.State => {
         spellcheck: true,
       },
       selections: [],
+      vim: false,
     },
     root: createElement(),
     target: createElement(),

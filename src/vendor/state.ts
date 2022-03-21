@@ -27,17 +27,17 @@ export const createVendorState = (ref: InkInternal.Ref): InkInternal.Vendor.Stat
     doc: state.options.doc,
     selection: toVendorSelection(state.options.selections),
     extensions: [
+      ...buildVendors(ref),
+      ...state.options.extensions,
+      code(),
       history(),
+      keymaps(),
+      lineWrapping(),
       markdown({
         base: markdownLanguage,
         codeLanguages: languages,
       }),
-      code(),
-      keymaps(),
-      lineWrapping(),
       theme(),
-      ...buildVendors(ref),
-      ...state.options.extensions,
     ],
   })
 }
