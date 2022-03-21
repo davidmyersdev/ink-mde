@@ -1,6 +1,6 @@
 // Type definitions for @writewithocto/ink
 
-import { InkValues } from '/types/values'
+import { InkValues } from './values'
 
 export type DeepPartial<T> = {
   [K in keyof T]?: T[K] extends (infer U)[]
