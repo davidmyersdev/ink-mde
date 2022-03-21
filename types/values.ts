@@ -9,5 +9,6 @@ export namespace InkValues {
     Attribution = 'attribution',
     Images = 'images',
     Spellcheck = 'spellcheck',
+    Vim = 'vim',
   }
 }
