@@ -50,13 +50,14 @@ class ImageWidget extends WidgetType {
     image.style.display = 'block'
     image.style.maxHeight = 'var(--ink-internal-block-max-height)'
     image.style.maxWidth = '100%'
+    image.style.width = '100%'
 
     return container
   }
 }
 
 export const images = (): Extension => {
-  const imageRegex = /!\[.*\]\((?<url>.*)\)/
+  const imageRegex = /!\[.*?\]\((?<url>.*?)\)/
 
   const imageDecoration = (imageWidgetParams: ImageWidgetParams) => Decoration.widget({
     widget: new ImageWidget(imageWidgetParams),
