@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
 
   import { getState } from '/src/state'
   import { insert } from '/src/instance'
@@ -9,6 +9,8 @@
   export let ref: InkInternal.Ref
 
   $: state = getState(ref)
+  $: root = state.root
+  $: clipboard = state.options.files.clipboard
   $: dragAndDrop = state.options.files.dragAndDrop
   $: handler = state.options.files.handler
   $: injectMarkup = state.options.files.injectMarkup
@@ -30,22 +32,7 @@
       const transfer = event.dataTransfer
 
       if (transfer?.files) {
-        Array.from(transfer.files).forEach(file => (files = [...files, file]))
-
-        isLoading = true
-
-        Promise.resolve(handler(transfer.files)).then((url?: string) => {
-          if (injectMarkup && url) {
-            const markup = `![](${url})`
-
-            insert(ref, markup)
-          }
-        }).finally(() => {
-          depth = 0
-          isLoading = false
-          isVisible = false
-          files = []
-        })
+        uploadFiles(transfer.files)
       } else {
         depth = 0
         isVisible = false
@@ -54,44 +41,89 @@
     }
   }
 
-  onMount(() => {
-    document.addEventListener('dragenter', (event: DragEvent) => {
-      if (dragAndDrop) {
-        event.preventDefault()
+  const onDragEnter = (event: DragEvent) => {
+    if (dragAndDrop) {
+      event.preventDefault()
 
-        depth += 1
-        isVisible = true
-      }
-    })
+      depth += 1
+      isVisible = true
+    }
+  }
 
-    document.addEventListener('dragover', (event: DragEvent) => {
-      if (dragAndDrop) {
-        event.preventDefault()
+  const onDragLeave = (event: DragEvent) => {
+    if (dragAndDrop) {
+      event.preventDefault()
 
-        isVisible = true
-      }
-    })
+      depth -= 1
 
-    document.addEventListener('dragleave', (event: DragEvent) => {
-      if (dragAndDrop) {
-        event.preventDefault()
-
-        depth -= 1
-
-        if (depth === 0) {
-          isVisible = false
-        }
-      }
-    })
-
-    document.addEventListener('drop', (event: DragEvent) => {
-      if (dragAndDrop) {
-        event.preventDefault()
-
-        depth = 0
+      if (depth === 0) {
         isVisible = false
       }
+    }
+  }
+
+  const onDragOver = (event: DragEvent) => {
+    if (dragAndDrop) {
+      event.preventDefault()
+
+      isVisible = true
+    }
+  }
+
+  const onDrop = (event: DragEvent) => {
+    if (dragAndDrop) {
+      event.preventDefault()
+
+      depth = 0
+      isVisible = false
+    }
+  }
+
+  const onPaste = (event: ClipboardEvent) => {
+    if (clipboard) {
+      event.preventDefault()
+
+      const transfer = event.clipboardData
+
+      if (transfer?.files) {
+        uploadFiles(transfer.files)
+      }
+    }
+  }
+
+  const uploadFiles = (userFiles: FileList) => {
+    Array.from(userFiles).forEach(file => (files = [...files, file]))
+
+    isLoading = true
+
+    Promise.resolve(handler(userFiles)).then((url?: string) => {
+      if (injectMarkup && url) {
+        const markup = `![](${url})`
+
+        insert(ref, markup)
+      }
+    }).finally(() => {
+      depth = 0
+      isLoading = false
+      isVisible = false
+      files = []
     })
+  }
+
+  onMount(() => {
+    document.addEventListener('dragenter', onDragEnter)
+    document.addEventListener('dragleave', onDragLeave)
+    document.addEventListener('dragover', onDragOver)
+    document.addEventListener('drop', onDrop)
+    root.addEventListener('paste', onPaste)
+  })
+
+  onDestroy(() => {
+    document.removeEventListener('dragenter', onDragEnter)
+    document.removeEventListener('dragleave', onDragLeave)
+    document.removeEventListener('dragover', onDragOver)
+    document.removeEventListener('drop', onDrop)
+    root.removeEventListener('paste', onPaste)
   })
 </script>
 

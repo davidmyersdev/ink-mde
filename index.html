@@ -93,10 +93,12 @@
           '```',
         ].join("\n"),
         files: {
+          clipboard: true,
           dragAndDrop: true,
           handler(files) {
             return URL.createObjectURL(Array.from(files).pop())
           },
+          injectMarkup: true,
         },
         interface: {
           appearance,
