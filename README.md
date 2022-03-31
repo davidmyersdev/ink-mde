@@ -8,6 +8,16 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 
 ![](https://i.imgur.com/WlTfAeW.png)
 
+## Features
+
+- [x] Dark and light themes
+- [x] Hybrid plain-text Markdown rendering
+- [x] Syntax highlighting for many common languages (in code blocks)
+- [x] Drag-and-drop or paste to upload files
+- [x] Inline Markdown image previews
+- [x] Configurable and stylable
+- [x] Vim Mode
+
 ## Installation
 
 ```bash
@@ -158,7 +168,7 @@ Your support is appreciated. Here are some ways you can help. ♥️
 
 There is a small `Powered by Ink` attribution in the bottom-right corner of all Ink instances by default. Ink is a free MIT-licensed library under independent development, and that attribution helps to increase awareness of this project.
 
-### Provide Feedback
+### Tell us what you think
 
 Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/writewithocto/octo/discussions) under [Octo](https://github.com/writewithocto/octo) if you have a question or just want to chat about ideas!
 
@@ -166,9 +176,7 @@ Your feedback is immensely important for building Ink into a library that we all
 
 If you feel comfortable tackling [an existing issue](https://github.com/writewithocto/ink/issues), please consider opening a Pull Request! I am happy to introduce you to the codebase and work with you to get it merged!
 
-### Donate
-
-Donations help support the development of Ink.
+### Become a financial backer
 
 - [GitHub Sponsors](https://github.com/sponsors/voraciousdev)
 - [Patreon](https://patreon.com/voraciousdev)
