@@ -37,7 +37,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'editor-line-height', default: '2em' },
     { suffix: 'editor-padding', default: '0.5rem' },
     { suffix: 'inline-padding', default: '0.125rem' },
-    { suffix: 'modal-position', default: 'absolute' },
+    { suffix: 'modal-position', default: 'fixed' },
     { suffix: 'monospace-font-family', default: 'monospace' },
     { suffix: 'syntax-atom-color', default: '#d19a66' },
     { suffix: 'syntax-comment-color', default: '#abb2bf' },
