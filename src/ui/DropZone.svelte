@@ -95,6 +95,7 @@
     Array.from(userFiles).forEach(file => (files = [...files, file]))
 
     isLoading = true
+    isVisible = true
 
     Promise.resolve(handler(userFiles)).then((url?: string) => {
       if (injectMarkup && url) {
