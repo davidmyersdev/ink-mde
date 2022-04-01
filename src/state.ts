@@ -36,6 +36,7 @@ export const blankState = (): InkInternal.State => {
         appearance: InkValues.Appearance.Dark,
         attribution: true,
         images: false,
+        readonly: false,
         spellcheck: true,
       },
       selections: [],

@@ -47,6 +47,7 @@ export namespace Options {
     [InkValues.Extensions.Appearance]: InkValues.Appearance
     [InkValues.Extensions.Attribution]: boolean
     [InkValues.Extensions.Images]: boolean
+    [InkValues.Extensions.ReadOnly]: boolean
     [InkValues.Extensions.Spellcheck]: boolean
     [InkValues.Extensions.Vim]: boolean
   }
@@ -73,6 +74,7 @@ export namespace Options {
     [InkValues.Extensions.Appearance]: Options.Extensions[InkValues.Extensions.Appearance]
     [InkValues.Extensions.Attribution]: Options.Extensions[InkValues.Extensions.Attribution]
     [InkValues.Extensions.Images]: Options.Extensions[InkValues.Extensions.Images]
+    [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly]
     [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
   }
 }
