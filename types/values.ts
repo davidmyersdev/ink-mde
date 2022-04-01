@@ -8,6 +8,7 @@ export namespace InkValues {
     Appearance = 'appearance',
     Attribution = 'attribution',
     Images = 'images',
+    ReadOnly = 'readonly',
     Spellcheck = 'spellcheck',
     Vim = 'vim',
   }
