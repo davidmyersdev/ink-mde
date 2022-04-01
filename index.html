@@ -50,7 +50,7 @@
       </label>
     </div>
     <div>
-      Images
+      Image previews
       <label>
         <input onclick="window.imagesShow()" type="radio" value="show" name="images" checked>
         <span>show</span>
@@ -68,6 +68,17 @@
       </label>
       <label>
         <input onclick="window.dragAndDrop(false)" type="radio" value="disabled" name="dragAndDrop">
+        <span>disable</span>
+      </label>
+    </div>
+    <div>
+      ReadOnly mode
+      <label>
+        <input onclick="window.readonly(true)" type="radio" value="enabled" name="readonly" checked>
+        <span>enable</span>
+      </label>
+      <label>
+        <input onclick="window.readonly(false)" type="radio" value="disabled" name="readonly">
         <span>disable</span>
       </label>
     </div>
@@ -103,6 +114,7 @@
         interface: {
           appearance,
           images: true,
+          readonly: true,
           spellcheck: true,
         },
       })
@@ -129,6 +141,10 @@
 
       window.imagesHide = () => {
         window.ink.reconfigure({ interface: { images: false } })
+      }
+
+      window.readonly = (enabled) => {
+        window.ink.reconfigure({ interface: { readonly: enabled } })
       }
 
       window.dragAndDrop = (enabled) => {
