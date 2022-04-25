@@ -4,9 +4,6 @@ import { EditorView } from '@codemirror/view'
 
 export const theme = (): Extension => {
   const baseTheme = EditorView.baseTheme({
-    '&': {
-      padding: 'var(--ink-internal-editor-padding)',
-    },
     '.cm-scroller': {
       lineHeight: 'var(--ink-internal-editor-line-height)',
       fontFamily: 'var(--ink-internal-all-font-family)',
@@ -42,11 +39,6 @@ export const theme = (): Extension => {
       tag: tags.strikethrough,
       color: 'var(--ink-internal-syntax-strikethrough-color)',
       textDecoration: 'var(--ink-internal-syntax-strikethrough-text-decoration)',
-    },
-    // processing instructions
-    {
-      tag: tags.processingInstruction,
-      color: 'var(--ink-internal-syntax-processing-instruction-color)',
     },
     // comment group
     {
@@ -168,6 +160,11 @@ export const theme = (): Extension => {
     {
       tag: tags.special(tags.string),
       color: 'var(--ink-internal-syntax-string-special-color)',
+    },
+    // processing instructions
+    {
+      tag: tags.processingInstruction,
+      color: 'var(--ink-internal-syntax-processing-instruction-color)',
     },
   ])
 

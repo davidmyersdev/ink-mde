@@ -1,5 +1,6 @@
 import { getState } from '/src/state'
 import DropZone from '/src/ui/DropZone.svelte'
+import { createToolbar } from '/src/ui/toolbar'
 import { InkValues } from '/types/values'
 
 import type InkInternal from '/types/internal'
@@ -14,7 +15,11 @@ export const mountComponent = <T>(Component: InkUi.MountableComponent<T>, { prop
 }
 
 export const mountComponents = (ref: InkInternal.Ref): InkUi.MountedComponent<any>[] => {
-  const { root } = getState(ref)
+  const { options, root } = getState(ref)
+
+  if (options.interface.toolbar) {
+    root.prepend(createToolbar(ref))
+  }
 
   return [
     mountComponent<any>(DropZone, { props: { ref }, target: root }),
@@ -31,6 +36,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'all-color', default: '#fafafa', light: '#171717' },
     { suffix: 'all-font-family', default: 'sans-serif' },
     { suffix: 'block-background-color', default: '#121212', light: '#ededed' },
+    { suffix: 'block-background-hover-color', default: '#0f0f0f', light: '#e0e0e0' },
     { suffix: 'block-max-height', default: '20rem' },
     { suffix: 'block-padding', default: '0.5rem' },
     { suffix: 'editor-font-size', default: '1em' },
@@ -65,7 +71,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'syntax-heading6-font-size', default: '1.1em' },
     { suffix: 'syntax-heading6-font-weight', default: '600' },
     { suffix: 'syntax-keyword-color', default: '#c678dd' },
-    { suffix: 'syntax-link-color', default: '#96c0d8' },
+    { suffix: 'syntax-link-color', default: 'inherit' },
     { suffix: 'syntax-meta-color', default: '#abb2bf' },
     { suffix: 'syntax-monospace-color', default: 'inherit' },
     { suffix: 'syntax-monospace-font-family', default: 'var(--ink-internal-monospace-font-family)' },
@@ -79,7 +85,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'syntax-name-variable-special-color', default: 'inherit' },
     { suffix: 'syntax-number-color', default: '#d19a66' },
     { suffix: 'syntax-operator-color', default: '#96c0d8' },
-    { suffix: 'syntax-processing-instruction-color', default: '#36454f' },
+    { suffix: 'syntax-processing-instruction-color', default: '#444444', light: '#bbbbbb' },
     { suffix: 'syntax-punctuation-color', default: '#abb2bf' },
     { suffix: 'syntax-strikethrough-color', default: 'inherit' },
     { suffix: 'syntax-strikethrough-text-decoration', default: 'line-through' },
@@ -89,6 +95,8 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'syntax-strong-font-weight', default: '600' },
     { suffix: 'syntax-url-color', default: '#96c0d8' },
   ]
+
+  root.classList.add('ink')
 
   styles.forEach((style) => {
     const value = isLight && style.light ? style.light : style.default
