@@ -6,7 +6,7 @@
 
 The flexible TypeScript Markdown editor that powers https://octo.app.
 
-![](https://i.imgur.com/WlTfAeW.png)
+![](screenshot.png)
 
 ## Features
 
@@ -16,6 +16,7 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 - [x] Drag-and-drop or paste to upload files
 - [x] Inline Markdown image previews
 - [x] Configurable and stylable
+- [x] An optional formatting toolbar (great for mobile)
 - [x] Vim Mode
 
 ## Installation
@@ -94,6 +95,7 @@ instance.load('# New Doc')
 | `options.interface.attribution` | Show the "Powered by Ink" attribution      | `boolean`                                   | `true`     |
 | `options.interface.images`      | Render images in the editor                | `boolean`                                   | `false`    |
 | `options.interface.spellcheck`  | Enable spellcheck                          | `boolean`                                   | `true`     |
+| `options.interface.toolbar`     | Enable the formatting toolbar              | `boolean`                                   | `false`    |
 | `options.selections`            | Initialize the editor with selections      | `Ink.Editor.Selection[]`                    | `[]`       |
 | `options.vim`                   | Use Vim keybindings to edit the doc        | `boolean`                                   | `false`    |
 

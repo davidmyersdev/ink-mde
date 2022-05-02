@@ -1,7 +1,8 @@
 import { getState, updateState } from '/src/state'
 import { toCodeMirror, toInk } from '/src/adapters/selections'
 import { buildVendorUpdates } from '/src/extensions'
-import { styleRoot } from './ui'
+import * as formatter from '/src/formatter'
+import { styleRoot } from '/src/ui'
 import { createVendorState } from '/src/vendor/state'
 
 import type * as Ink from '/types/ink'
@@ -27,26 +28,34 @@ export const focus = (ref: InkInternal.Ref) => {
   }
 }
 
-export const insert = (ref: InkInternal.Ref, text: string, selection?: Ink.Editor.Selection) => {
+export const format = (ref: InkInternal.Ref, type: Ink.Values.Markup, selection?: Ink.Editor.Selection) => {
+  return formatter.format(ref, type, selection)
+}
+
+export const insert = (ref: InkInternal.Ref, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
   const { editor } = getState(ref)
 
   let start = selection?.start
   let end = selection?.end || selection?.start
 
-  if (!start) {
+  if (typeof start === 'undefined') {
     const current = selections(ref).pop() as Ink.Editor.Selection
 
     start = current.start
     end = current.end
   }
 
-  const changes = { from: start, to: end, insert: text }
-  const anchor = start === end ? start + text.length : start
-  const head = start === end ? start + text.length : start + text.length
-  const newSelection = { anchor, head }
+  const updates = { changes: { from: start, to: end, insert: text } }
+
+  if (updateSelection) {
+    const anchor = start === end ? start + text.length : start
+    const head = start === end ? start + text.length : start + text.length
+
+    Object.assign(updates, { selection: { anchor, head } })
+  }
 
   editor.dispatch(
-    editor.state.update({ changes, selection: newSelection })
+    editor.state.update(updates)
   )
 }
 
@@ -105,6 +114,16 @@ export const update = (ref: InkInternal.Ref, doc: string) => {
   )
 }
 
+export const wrap = (ref: InkInternal.Ref, { after, before, selection: userSelection }: Ink.Instance.WrapOptions) => {
+  const { editor } = getState(ref)
+
+  const selection = userSelection || selections(ref).pop() || { start: 0, end: 0 }
+  const text = editor.state.sliceDoc(selection.start, selection.end)
+
+  insert(ref, `${before}${text}${after}`, selection)
+  select(ref, [{ start: selection.start + before.length, end: selection.end + before.length }])
+}
+
 export const createInstance = (ref: InkInternal.Ref): Ink.Instance => {
   return {
     destroy: (...args) => destroy(ref, ...args),
@@ -116,5 +135,6 @@ export const createInstance = (ref: InkInternal.Ref): Ink.Instance => {
     select: (...args) => select(ref, ...args),
     selections: (...args) => selections(ref, ...args),
     update: (...args) => update(ref, ...args),
+    wrap: (...args) => wrap(ref, ...args),
   }
 }

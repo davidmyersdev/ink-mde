@@ -28,6 +28,41 @@ export interface Instance {
   select: (selections: Editor.Selection[]) => void
   selections: () => Editor.Selection[]
   update: (doc: string) => void
+  wrap: (options: Instance.WrapOptions) => void
+}
+
+export namespace Instance {
+  export interface WrapOptions {
+    after: string
+    before: string
+    selection?: Editor.Selection
+  }
+}
+
+export interface Markup {
+  [InkValues.Markup.Bold]: Markup.Definition
+  [InkValues.Markup.Code]: Markup.Definition
+  [InkValues.Markup.CodeBlock]: Markup.Definition
+  [InkValues.Markup.Heading]: Markup.Definition
+  [InkValues.Markup.Image]: Markup.Definition
+  [InkValues.Markup.Italic]: Markup.Definition
+  [InkValues.Markup.Link]: Markup.Definition
+  [InkValues.Markup.List]: Markup.Definition
+  [InkValues.Markup.OrderedList]: Markup.Definition
+  [InkValues.Markup.Quote]: Markup.Definition
+  [InkValues.Markup.TaskList]: Markup.Definition
+}
+
+export namespace Markup {
+  export interface Definition {
+    block: boolean
+    line: boolean
+    multiline: boolean
+    nodes: string[]
+    prefix: string
+    prefixStates: string[]
+    suffix: string
+  }
 }
 
 export interface Options {
@@ -76,12 +111,14 @@ export namespace Options {
     [InkValues.Extensions.Images]: Options.Extensions[InkValues.Extensions.Images]
     [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly]
     [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
+    toolbar: boolean
   }
 }
 
 export namespace Values {
   export type Appearance = InkValues.Appearance
   export type Extensions = InkValues.Extensions
+  export type Markup = InkValues.Markup
 }
 
 declare function ink(target: HTMLElement, options: DeepPartial<Options>): Instance

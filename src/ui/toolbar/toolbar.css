@@ -1,0 +1,45 @@
+.ink {
+  padding: var(--ink-internal-editor-padding, 0);
+}
+
+.ink-toolbar {
+  background-color: var(--ink-internal-block-background-color);
+  border-radius: var(--ink-internal-all-border-radius);
+  color: var(--ink-internal-all-color);
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  overflow: auto;
+  padding: 0.25rem;
+}
+
+.ink-toolbar-group {
+  display: flex;
+}
+
+.ink-toolbar-md {
+  justify-self: flex-end;
+}
+
+.ink-toolbar-button {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: var(--ink-internal-all-border-radius);
+  color: var(--ink-internal-all-color);
+  cursor: pointer;
+  display: flex;
+  height: 2.25rem;
+  justify-content: center;
+  width: 2.25rem;
+}
+
+.ink-toolbar-button:hover {
+  background-color: var(--ink-internal-block-background-hover-color);
+}
+
+.ink-toolbar-button > * {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+}

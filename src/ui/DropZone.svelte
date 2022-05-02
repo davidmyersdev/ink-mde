@@ -85,7 +85,7 @@
 
       const transfer = event.clipboardData
 
-      if (transfer?.files) {
+      if (transfer?.files && transfer.files.length > 0) {
         uploadFiles(transfer.files)
       }
     }
