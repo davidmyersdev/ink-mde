@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="dark">
+<html class="light">
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
 
@@ -18,18 +18,35 @@
       }
 
       .dark body {
-        background-color: #171717;
+        background-color: #121212;
         color: #fafafa;
       }
 
       .light body {
-        background-color: #fafafa;
+        background-color: #ededed;
         color: #171717;
       }
 
-      #app {
+      .dark #app {
+        background-color: #171717;
+      }
+
+      .light #app {
+        background-color: #fafafa;
+      }
+
+      .config {
+        display: none;
+      }
+
+      .app-wrapper {
         margin: auto;
-        max-width: 70ch;
+        max-width: 90ch;
+        padding: 0.5rem;
+      }
+
+      #app {
+        border-radius: 0.25rem;
       }
 
       #app .cm-editor.cm-focused {
@@ -38,51 +55,55 @@
     </style>
   </head>
   <body>
-    <div>
-      Appearance
-      <label>
-        <input onclick="window.lightsOff()" type="radio" value="dark" name="appearance" checked>
-        <span>dark</span>
-      </label>
-      <label>
-        <input onclick="window.lightsOn()" type="radio" value="light" name="appearance">
-        <span>light</span>
-      </label>
+    <section class="config">
+      <div>
+        Appearance
+        <label>
+          <input onclick="window.lightsOff()" type="radio" value="dark" name="appearance" checked>
+          <span>dark</span>
+        </label>
+        <label>
+          <input onclick="window.lightsOn()" type="radio" value="light" name="appearance">
+          <span>light</span>
+        </label>
+      </div>
+      <div>
+        Image previews
+        <label>
+          <input onclick="window.imagesShow()" type="radio" value="show" name="images" checked>
+          <span>show</span>
+        </label>
+        <label>
+          <input onclick="window.imagesHide()" type="radio" value="hide" name="images">
+          <span>hide</span>
+        </label>
+      </div>
+      <div>
+        Drag and drop
+        <label>
+          <input onclick="window.dragAndDrop(true)" type="radio" value="enabled" name="dragAndDrop" checked>
+          <span>enable</span>
+        </label>
+        <label>
+          <input onclick="window.dragAndDrop(false)" type="radio" value="disabled" name="dragAndDrop">
+          <span>disable</span>
+        </label>
+      </div>
+      <div>
+        ReadOnly mode
+        <label>
+          <input onclick="window.readonly(true)" type="radio" value="enabled" name="readonly" checked>
+          <span>enable</span>
+        </label>
+        <label>
+          <input onclick="window.readonly(false)" type="radio" value="disabled" name="readonly">
+          <span>disable</span>
+        </label>
+      </div>
+    </section>
+    <div class="app-wrapper">
+      <div id="app"></div>
     </div>
-    <div>
-      Image previews
-      <label>
-        <input onclick="window.imagesShow()" type="radio" value="show" name="images" checked>
-        <span>show</span>
-      </label>
-      <label>
-        <input onclick="window.imagesHide()" type="radio" value="hide" name="images">
-        <span>hide</span>
-      </label>
-    </div>
-    <div>
-      Drag and drop
-      <label>
-        <input onclick="window.dragAndDrop(true)" type="radio" value="enabled" name="dragAndDrop" checked>
-        <span>enable</span>
-      </label>
-      <label>
-        <input onclick="window.dragAndDrop(false)" type="radio" value="disabled" name="dragAndDrop">
-        <span>disable</span>
-      </label>
-    </div>
-    <div>
-      ReadOnly mode
-      <label>
-        <input onclick="window.readonly(true)" type="radio" value="enabled" name="readonly" checked>
-        <span>enable</span>
-      </label>
-      <label>
-        <input onclick="window.readonly(false)" type="radio" value="disabled" name="readonly">
-        <span>disable</span>
-      </label>
-    </div>
-    <div id="app"></div>
     <script type="module" src="/src/index.ts"></script>
     <script type="module">
       import ink from '/src/index.ts'
@@ -93,11 +114,12 @@
         doc: [
           '# Ink',
           '',
-          'The flexible *TypeScript* Markdown editor that makes writing fun.',
+          'The flexible TypeScript Markdown editor that works the way *you* want it to.',
           '',
-          '![](https://placekitten.com/2000/510)',
+          'Preview those beautiful images. ![kitten](https://placekitten.com/2000/200)',
           '',
           '```ts',
+          '// Write code with syntax highlighting.',
           'const add = (a: number, b: number): number => {',
           '  return a + b',
           '}',
