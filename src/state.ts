@@ -38,6 +38,7 @@ export const blankState = (): InkInternal.State => {
         images: false,
         readonly: false,
         spellcheck: true,
+        toolbar: false,
       },
       selections: [],
       vim: false,

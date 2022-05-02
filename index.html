@@ -29,7 +29,7 @@
 
       #app {
         margin: auto;
-        max-width: 75rem;
+        max-width: 70ch;
       }
 
       #app .cm-editor.cm-focused {
@@ -107,6 +107,8 @@
           clipboard: true,
           dragAndDrop: true,
           handler(files) {
+            console.log({ files })
+
             return URL.createObjectURL(Array.from(files).pop())
           },
           injectMarkup: true,
@@ -114,8 +116,9 @@
         interface: {
           appearance,
           images: true,
-          readonly: true,
+          readonly: false,
           spellcheck: true,
+          toolbar: true,
         },
       })
 
