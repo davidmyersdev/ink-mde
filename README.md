@@ -12,6 +12,7 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 
 - [x] Dark and light themes
 - [x] Hybrid plain-text Markdown rendering
+- [x] Supports GitHub Flavored Markdown ([an extension of CommonMark](https://github.github.com/gfm/#what-is-github-flavored-markdown-))
 - [x] Syntax highlighting for many common languages (in code blocks)
 - [x] Drag-and-drop or paste to upload files
 - [x] Inline Markdown image previews
@@ -21,6 +22,8 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 
 ## Installation
 
+Ink is written in TypeScript and provides both ES and UMD packages.
+
 ```bash
 # yarn
 yarn add @writewithocto/ink
@@ -29,9 +32,11 @@ yarn add @writewithocto/ink
 npm install --save @writewithocto/ink
 ```
 
-## Usage
+## How do I get started?
 
-### No configuration needed
+There are many ways to customize Ink to fit your needs. Here are a few examples to get you started.
+
+### Minimal setup
 
 Mount the component and grab some data when you need it (e.g. on a form submit).
 
@@ -110,6 +115,7 @@ Many styles can be customized with CSS custom properties (aka variables).
 | `--ink-all-color`                             | `color`            | `#fafafa`      | `#171717`        |
 | `--ink-all-font-family`                       | `font-family`      | `sans-serif`   |                  |
 | `--ink-block-background-color`                | `background-color` | `#121212`      | `#ededed`        |
+| `--ink-block-background-hover-color`          | `background-color` | `#0f0f0f`      | `#e0e0e0`        |
 | `--ink-block-max-height`                      | `max-height`       | `20rem`        |                  |
 | `--ink-block-padding`                         | `padding`          | `0.5rem`       |                  |
 | `--ink-monospace-font-family`                 | `font-family`      | `monospace`    |                  |
@@ -152,7 +158,7 @@ Many styles can be customized with CSS custom properties (aka variables).
 | `--ink-syntax-name-variable-special-color`    | `color`            | `inherit`      |                  |
 | `--ink-syntax-number-color`                   | `color`            | `#d19a66`      |                  |
 | `--ink-syntax-operator-color`                 | `color`            | `#96c0d8`      |                  |
-| `--ink-syntax-processing-instruction-color`   | `color`            | `#36454f`      |                  |
+| `--ink-syntax-processing-instruction-color`   | `color`            | `#444444`      | `#bbbbbb`        |
 | `--ink-syntax-punctuation-color`              | `color`            | `#abb2bf`      |                  |
 | `--ink-syntax-strikethrough-color`            | `color`            | `inherit`      |                  |
 | `--ink-syntax-strikethrough-text-decoration`  | `text-decoration`  | `line-through` |                  |
@@ -176,7 +182,7 @@ Your feedback is immensely important for building Ink into a library that we all
 
 ### Open a Pull Request
 
-If you feel comfortable tackling [an existing issue](https://github.com/writewithocto/ink/issues), please consider opening a Pull Request! I am happy to introduce you to the codebase and work with you to get it merged!
+If you feel comfortable with [an existing issue](https://github.com/writewithocto/ink/issues), please consider opening a Pull Request. I would love to work with you to get it merged!
 
 ### Become a financial backer
 
