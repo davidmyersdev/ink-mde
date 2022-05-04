@@ -24,20 +24,15 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@codemirror/commands": "^0.19.0",
-    "@codemirror/comment": "^0.19.0",
-    "@codemirror/fold": "^0.19.3",
-    "@codemirror/highlight": "^0.19.0",
-    "@codemirror/history": "^0.19.0",
-    "@codemirror/lang-markdown": "^0.19.0",
-    "@codemirror/language-data": "^0.19.0",
-    "@codemirror/rangeset": "^0.19.0",
-    "@codemirror/search": "^0.19.9",
-    "@codemirror/state": "^0.19.0",
-    "@codemirror/stream-parser": "^0.19.7",
-    "@codemirror/text": "^0.19.6",
-    "@codemirror/view": "^0.19.0",
-    "@replit/codemirror-vim": "^0.19.0",
+    "@codemirror/commands": "^0.20.0",
+    "@codemirror/lang-markdown": "^0.20.0",
+    "@codemirror/language": "^0.20.0",
+    "@codemirror/language-data": "^0.20.0",
+    "@codemirror/search": "^0.20.1",
+    "@codemirror/state": "^0.20.0",
+    "@codemirror/view": "^0.20.4",
+    "@lezer/highlight": "^0.16.0",
+    "@replit/codemirror-vim": "^0.20.0",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
     "sinuous": "^0.28.1"
@@ -48,7 +43,7 @@
     "svelte": "^3.46.4",
     "svelte-preprocess": "^4.10.3",
     "typescript": "^4.4.3",
-    "vite": "^2.5.10"
+    "vite": "^2.9.7"
   },
   "files": [
     "dist",

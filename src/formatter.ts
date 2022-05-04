@@ -163,7 +163,7 @@ const getNodes = (ref: InkInternal.Ref, selection: Ink.Editor.Selection) => {
   syntaxTree(state).iterate({
     from: selection.start,
     to: selection.end,
-    enter: (type, from, to) => {
+    enter: ({ type, from, to }) => {
       types.push({ type, from, to })
     },
   })
