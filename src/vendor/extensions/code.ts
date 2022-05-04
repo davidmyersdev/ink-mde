@@ -1,6 +1,5 @@
 import { syntaxTree } from '@codemirror/language'
-import { RangeSetBuilder } from '@codemirror/rangeset'
-import { Extension } from '@codemirror/state'
+import { Extension, RangeSetBuilder } from '@codemirror/state'
 import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 
 const codeBlockBaseTheme = EditorView.baseTheme({
@@ -67,7 +66,7 @@ const decorate = (view: EditorView) => {
       let inlineCode: { from: number, to: number, innerFrom: number, innerTo: number }
 
       tree.iterate({
-        enter(type, from, to) {
+        enter({ type, from, to }) {
           if (type.name !== 'Document') {
             if (codeBlockSyntaxNodes.includes(type.name)) {
               builder.add(line.from, line.from, codeBlockDecoration)

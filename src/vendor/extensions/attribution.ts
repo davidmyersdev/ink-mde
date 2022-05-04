@@ -1,5 +1,4 @@
-import { RangeSet } from '@codemirror/rangeset'
-import { Extension, StateField } from '@codemirror/state'
+import { Extension, RangeSet, StateField } from '@codemirror/state'
 import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
 
 class AttributionWidget extends WidgetType {

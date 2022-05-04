@@ -1,6 +1,4 @@
-import { defaultKeymap, indentLess, indentMore } from '@codemirror/commands'
-import { commentKeymap } from '@codemirror/comment'
-import { historyKeymap } from '@codemirror/history'
+import { defaultKeymap, historyKeymap, indentLess, indentMore } from '@codemirror/commands'
 import { Extension, Transaction } from '@codemirror/state'
 import { KeyBinding, keymap } from '@codemirror/view'
 
@@ -30,6 +28,5 @@ export const keymaps = (): Extension => {
     ...keyMaps,
     ...defaultKeymap,
     ...historyKeymap,
-    ...commentKeymap,
   ])
 }

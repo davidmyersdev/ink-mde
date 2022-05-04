@@ -1,5 +1,4 @@
-import { RangeSet } from '@codemirror/rangeset'
-import { EditorState, Extension, StateField } from '@codemirror/state'
+import { EditorState, Extension, RangeSet, StateField } from '@codemirror/state'
 import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
 import { StyleSpec } from 'style-mod'
 
