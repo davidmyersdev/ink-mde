@@ -1,6 +1,5 @@
 import { syntaxTree } from '@codemirror/language'
-import { Range, RangeSet } from '@codemirror/rangeset'
-import { EditorState, Extension, StateField } from '@codemirror/state'
+import { EditorState, Extension, Range, RangeSet, StateField } from '@codemirror/state'
 import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
 
 interface ImageWidgetParams {
@@ -69,7 +68,7 @@ export const images = (): Extension => {
     const widgets: Range<Decoration>[] = []
 
     syntaxTree(state).iterate({
-      enter: (type, from, to) => {
+      enter: ({ type, from, to }) => {
         if (type.name === 'Image') {
           const result = imageRegex.exec(state.doc.sliceString(from, to))
 
