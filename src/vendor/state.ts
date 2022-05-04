@@ -1,4 +1,4 @@
-import { history } from '@codemirror/history'
+import { history } from '@codemirror/commands'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { EditorSelection, EditorState } from '@codemirror/state'
