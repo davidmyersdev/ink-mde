@@ -1,17 +1,18 @@
-import { createInstance } from '/src/instance'
-import { hydrateState } from '/src/state'
+import { makeInstance } from '/src/instance'
+import { makeState } from '/src/state'
 
 import type * as Ink from '/types/ink'
 
 export * from '/src/vendor/extensions/extension'
 
-const ink = (target: HTMLElement, options: Ink.DeepPartial<Ink.Options>): Ink.Instance => {
-  const ref = {}
-  const state = hydrateState(ref, { target, options })
+export const defineOptions = (config: Ink.DeepPartial<Ink.Options>): Ink.DeepPartial<Ink.Options> => {
+  return config
+}
 
-  target.append(state.root)
+export const ink = (target: HTMLElement, options: Ink.DeepPartial<Ink.Options> = {}): Ink.Instance => {
+  const ref = makeState({ target, options })
 
-  return createInstance(ref)
+  return makeInstance(ref)
 }
 
 export default ink

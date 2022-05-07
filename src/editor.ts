@@ -5,11 +5,15 @@ import { createVendorState } from '/src/vendor/state'
 
 import type InkInternal from '/types/internal'
 
-export const createEditor = (ref: InkInternal.Ref): InkInternal.Editor => {
-  const { root } = getState(ref)
+export const makeEditor = (ref: InkInternal.Ref): InkInternal.Editor => {
+  const { root, target } = getState(ref)
 
+  // Mount the top-level component.
+  target.append(root)
+
+  // Mount the CodeMirror editor.
   return new EditorView({
-    dispatch(transaction: InkInternal.Vendor.Transaction) {
+    dispatch: (transaction: InkInternal.Vendor.Transaction) => {
       const { editor, options } = getState(ref)
 
       options.hooks.beforeUpdate(transaction.newDoc.toString())
@@ -20,6 +24,6 @@ export const createEditor = (ref: InkInternal.Ref): InkInternal.Editor => {
       }
     },
     parent: root,
-    state: createVendorState(ref)
+    state: createVendorState(ref),
   })
 }

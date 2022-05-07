@@ -28,7 +28,7 @@ class AttributionWidget extends WidgetType {
     link.innerText = 'Ink'
     link.rel = 'noopener noreferrer'
     link.target = '_blank'
-    link.style.color = 'var(--ink-internal-all-accent-color)'
+    link.style.color = 'var(--ink-internal-color)'
     link.style.fontWeight = '600'
     link.style.textDecoration = 'none'
 

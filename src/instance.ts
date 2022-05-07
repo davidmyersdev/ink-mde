@@ -67,7 +67,22 @@ export const load = (ref: InkInternal.Ref, doc: string) => {
   editor.setState(createVendorState(ref))
 }
 
-export const reconfigure = (ref: InkInternal.Ref, partialOptions: Partial<Ink.Options>) => {
+export const makeInstance = (ref: InkInternal.Ref): Ink.Instance => {
+  return {
+    destroy: (...args) => destroy(ref, ...args),
+    doc: (...args) => doc(ref, ...args),
+    focus: (...args) => focus(ref, ...args),
+    insert: (...args) => insert(ref, ...args),
+    load: (...args) => load(ref, ...args),
+    reconfigure: (...args) => reconfigure(ref, ...args),
+    select: (...args) => select(ref, ...args),
+    selections: (...args) => selections(ref, ...args),
+    update: (...args) => update(ref, ...args),
+    wrap: (...args) => wrap(ref, ...args),
+  }
+}
+
+export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.DeepPartial<Ink.Options>) => {
   const { components, editor } = getState(ref)
 
   updateState(ref, { options: partialOptions })
@@ -122,19 +137,4 @@ export const wrap = (ref: InkInternal.Ref, { after, before, selection: userSelec
 
   insert(ref, `${before}${text}${after}`, selection)
   select(ref, [{ start: selection.start + before.length, end: selection.end + before.length }])
-}
-
-export const createInstance = (ref: InkInternal.Ref): Ink.Instance => {
-  return {
-    destroy: (...args) => destroy(ref, ...args),
-    doc: (...args) => doc(ref, ...args),
-    focus: (...args) => focus(ref, ...args),
-    insert: (...args) => insert(ref, ...args),
-    load: (...args) => load(ref, ...args),
-    reconfigure: (...args) => reconfigure(ref, ...args),
-    select: (...args) => select(ref, ...args),
-    selections: (...args) => selections(ref, ...args),
-    update: (...args) => update(ref, ...args),
-    wrap: (...args) => wrap(ref, ...args),
-  }
 }

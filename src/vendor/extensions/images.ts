@@ -37,7 +37,7 @@ class ImageWidget extends WidgetType {
 
     backdrop.classList.add('cm-image-backdrop')
 
-    backdrop.style.borderRadius = 'var(--ink-internal-all-border-radius)'
+    backdrop.style.borderRadius = 'var(--ink-internal-border-radius)'
     backdrop.style.display = 'flex'
     backdrop.style.alignItems = 'center'
     backdrop.style.justifyContent = 'center'
