@@ -4,32 +4,32 @@ import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 
 const codeBlockBaseTheme = EditorView.baseTheme({
   '.cm-line': {
-    fontFamily: 'var(--ink-internal-all-font-family)',
+    fontFamily: 'var(--ink-internal-font-family)',
   },
   '.cm-line.cm-codeblock': {
     backgroundColor: 'var(--ink-internal-block-background-color)',
-    fontFamily: 'var(--ink-internal-monospace-font-family)',
+    fontFamily: 'var(--ink-internal-code-font-family)',
     padding: '0 var(--ink-internal-block-padding)',
   },
   '.cm-line.cm-codeblock.cm-codeblock-open': {
-    borderRadius: 'var(--ink-internal-all-border-radius) var(--ink-internal-all-border-radius) 0 0',
+    borderRadius: 'var(--ink-internal-border-radius) var(--ink-internal-border-radius) 0 0',
     paddingTop: 'var(--ink-internal-block-padding)',
   },
   '.cm-line.cm-codeblock.cm-codeblock-close': {
-    borderRadius: '0 0 var(--ink-internal-all-border-radius) var(--ink-internal-all-border-radius)',
+    borderRadius: '0 0 var(--ink-internal-border-radius) var(--ink-internal-border-radius)',
     paddingBottom: 'var(--ink-internal-block-padding)',
   },
   '.cm-line .cm-code': {
     backgroundColor: 'var(--ink-internal-block-background-color)',
-    fontFamily: 'var(--ink-internal-monospace-font-family)',
+    fontFamily: 'var(--ink-internal-code-font-family)',
     padding: 'var(--ink-internal-inline-padding) 0',
   },
   '.cm-line .cm-code.cm-code-open': {
-    borderRadius: 'var(--ink-internal-all-border-radius) 0 0 var(--ink-internal-all-border-radius)',
+    borderRadius: 'var(--ink-internal-border-radius) 0 0 var(--ink-internal-border-radius)',
     paddingLeft: 'var(--ink-internal-inline-padding)',
   },
   '.cm-line .cm-code.cm-code-close': {
-    borderRadius: '0 var(--ink-internal-all-border-radius) var(--ink-internal-all-border-radius) 0',
+    borderRadius: '0 var(--ink-internal-border-radius) var(--ink-internal-border-radius) 0',
     paddingRight: 'var(--ink-internal-inline-padding)',
   },
 })

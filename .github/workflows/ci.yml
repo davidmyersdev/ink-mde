@@ -11,3 +11,17 @@ jobs:
       - uses: actions/setup-node@v2
       - run: yarn install --frozen-lockfile
       - run: yarn build
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install --frozen-lockfile
+      - run: yarn docs:check
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install --frozen-lockfile
+      - run: yarn test:once

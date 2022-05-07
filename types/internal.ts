@@ -39,6 +39,7 @@ export namespace InkInternal {
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
     options: Ink.Options
     target: HTMLElement
+    ref: InkInternal.Ref
     root: InkUi.Root
     editor: InkInternal.Editor
   }

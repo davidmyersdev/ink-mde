@@ -72,6 +72,7 @@ export interface Options {
   hooks: Options.Hooks
   interface: Options.Interface
   selections: Editor.Selection[]
+  toolbar: Options.Toolbar
   vim: boolean
 }
 
@@ -113,6 +114,21 @@ export namespace Options {
     [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
     toolbar: boolean
   }
+
+  export interface Toolbar {
+    bold: boolean
+    code: boolean
+    codeBlock: boolean
+    heading: boolean
+    image: boolean
+    italic: boolean
+    link: boolean
+    list: boolean
+    orderedList: boolean
+    quote: boolean
+    taskList: boolean
+    upload: boolean
+  }
 }
 
 export namespace Values {
@@ -121,6 +137,6 @@ export namespace Values {
   export type Markup = InkValues.Markup
 }
 
-declare function ink(target: HTMLElement, options: DeepPartial<Options>): Instance
+export declare function ink(target: HTMLElement, options?: DeepPartial<Options>): Instance
 
 export default ink
