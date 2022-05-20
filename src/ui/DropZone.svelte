@@ -154,7 +154,7 @@
   .ink--drop-zone {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    color: var(--ink-internal-all-color);
+    color: var(--ink-internal-color);
     display: flex;
     inset: 0;
     justify-content: center;
@@ -168,7 +168,7 @@
 
   .ink--drop-zone--modal {
     background-color: var(--ink-internal-block-background-color);
-    border-radius: var(--ink-internal-all-border-radius);
+    border-radius: var(--ink-internal-border-radius);
     box-sizing: border-box;
     height: 100%;
     max-height: 20rem;
@@ -193,7 +193,7 @@
 
   .ink--drop-zone--droppable-area {
     align-items: center;
-    border: 0.2rem dashed var(--ink-internal-all-color);
+    border: 0.2rem dashed var(--ink-internal-color);
     border-radius: 0.125rem;
     box-sizing: border-box;
     display: flex;

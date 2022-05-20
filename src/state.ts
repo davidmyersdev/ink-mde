@@ -2,7 +2,7 @@ import { EditorView } from '@codemirror/view'
 import deepmerge from 'deepmerge'
 import { isPlainObject } from 'is-plain-object'
 
-import { createEditor } from '/src/editor'
+import { makeEditor } from '/src/editor'
 import { createExtensions } from '/src/extensions'
 import { createElement, mountComponents, styleRoot } from './ui'
 
@@ -41,8 +41,23 @@ export const blankState = (): InkInternal.State => {
         toolbar: false,
       },
       selections: [],
+      toolbar: {
+        bold: true,
+        code: true,
+        codeBlock: true,
+        heading: true,
+        image: true,
+        italic: true,
+        link: true,
+        list: true,
+        orderedList: true,
+        quote: true,
+        taskList: true,
+        upload: false,
+      },
       vim: false,
     },
+    ref: {},
     root: createElement(),
     target: createElement(),
   }
@@ -58,6 +73,18 @@ export const getState = (ref: InkInternal.Ref): InkInternal.State => {
   return state
 }
 
+export const makeState = (partialState: Ink.DeepPartial<InkInternal.State>): InkInternal.Ref => {
+  const ref = {}
+
+  // Todo: Generate a blank state object, and then perform a single update (reorganize dependency chain if necessary).
+  updateState(ref, partialState)
+  updateState(ref, { editor: makeEditor(ref) })
+  updateState(ref, { components: mountComponents(ref) })
+  styleRoot(ref)
+
+  return ref
+}
+
 export const setState = (ref: InkInternal.Ref, state: InkInternal.State) => {
   store.set(ref, state)
 
@@ -69,13 +96,4 @@ export const updateState = (ref: InkInternal.Ref, partialState: Ink.DeepPartial<
   const newState = deepmerge(state, partialState, { isMergeableObject: isPlainObject })
 
   return setState(ref, newState)
-}
-
-export const hydrateState = (ref: InkInternal.Ref, partialState: Ink.DeepPartial<InkInternal.State>): InkInternal.State => {
-  updateState(ref, partialState)
-  updateState(ref, { editor: createEditor(ref) })
-  updateState(ref, { components: mountComponents(ref) })
-  styleRoot(ref)
-
-  return getState(ref)
 }

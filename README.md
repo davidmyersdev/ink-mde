@@ -20,78 +20,73 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 - [x] An optional formatting toolbar (great for mobile)
 - [x] Vim Mode
 
-## Installation
+## How to install
 
 Ink is written in TypeScript and provides both ES and UMD packages.
 
-```bash
-# yarn
-yarn add @writewithocto/ink
+#### Yarn
 
-# npm
+```bash
+yarn add @writewithocto/ink
+```
+
+#### NPM
+
+```bash
 npm install --save @writewithocto/ink
 ```
 
-## How do I get started?
+## How to get started
 
 There are many ways to customize Ink to fit your needs. Here are a few examples to get you started.
 
 ### Minimal setup
 
-Mount the component and grab some data when you need it (e.g. on a form submit).
+Mount the component and start writing.
 
 ```ts
+// ./examples/minimal.ts
+
 import ink from '@writewithocto/ink'
-import type * as Ink from '@writewithocto/ink'
 
-const instance: Ink.Instance = ink(document.getElementById('editor'))
-
-// When a user submits a form, we can pull the markdown text from Ink.
-const markdown: string = instance.doc()
+// The only requirement is an HTML element.
+ink(document.getElementById('editor')!)
 ```
 
-### Listen for changes with hooks
+### Track state changes with hooks
 
-To listen for changes, we can specify hooks.
+To sync the editor with your app's state, you can use the `afterUpdate` hook.
 
 ```ts
-import ink from '@writewithocto/ink'
-import type * as Ink from '@writewithocto/ink'
+// ./examples/hooks.ts
 
-const options: Ink.Options = {
-  doc: '# Start with some text',
+import { defineOptions, ink } from '@writewithocto/ink'
+
+// With hooks, you can keep your state in sync with the editor.
+const state = { doc: '# Start with some text' }
+
+// Use defineOptions for automatic type hinting.
+const options = defineOptions({
+  doc: state.doc,
   hooks: {
-    beforeUpdate(doc: string) => {
-      console.log('About to update with:', doc)
-    },
-    afterUpdate(doc: string) => {
-      console.log('Updated with:', doc)
+    afterUpdate: (doc: string) => {
+      state.doc = doc
     },
   },
-}
+})
 
-const instance: Ink.Instance = ink(document.getElementById('editor'), options)
+const editor = ink(document.getElementById('editor')!, options)
+
+// You can also update the editor directly.
+editor.update(state.doc)
 ```
 
-### Replace the current doc with another
-
-To replace the current doc without rebuilding the UI, we can use the `Ink.Instance.load()` method. This is useful for interfaces where we want to present multiple docs to a user and let them switch between docs without leaving the page.
-
-```ts
-import ink from '@writewithocto/ink'
-import type * as Ink from '@writewithocto/ink'
-
-const instance: Ink.Instance = ink(document.getElementById('editor'))
-
-// Load a new doc without preserving the previous state, history, etc.
-instance.load('# New Doc')
-```
-
-## Full Configuration Options
+## Futher customization
 
 | Option                          | Description                                | Type                                        | Default    |
 | ----                            | ----                                       | ----                                        | ----       |
 | `options.doc`                   | Initialize the editor with an existing doc | `string`                                    | `''`       |
+| `options.files.clipboard`       | Enable file uploads on paste               | `boolean`                                   | `false`    |
 | `options.files.dragAndDrop`     | Enable drag-and-drop file uploads          | `boolean`                                   | `false`    |
 | `options.files.handler`         | Handle file uploads (not handled by Ink)   | `(files: FileList) => Promise<any> \| void` | `() => {}` |
 | `options.hooks.afterUpdate`     | Run some code after the doc is updated     | `(doc: string) => void`                     | `() => {}` |
@@ -102,24 +97,60 @@ instance.load('# New Doc')
 | `options.interface.spellcheck`  | Enable spellcheck                          | `boolean`                                   | `true`     |
 | `options.interface.toolbar`     | Enable the formatting toolbar              | `boolean`                                   | `false`    |
 | `options.selections`            | Initialize the editor with selections      | `Ink.Editor.Selection[]`                    | `[]`       |
+| `options.toolbar.bold`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.code`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.codeBlock`     | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.heading`       | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.image`         | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.italic`        | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.link`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.list`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.orderedList`   | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.quote`         | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.taskList`      | Include this button in the toolbar         | `boolean`                                   | `true`     |
+| `options.toolbar.upload`        | Include this button in the toolbar         | `boolean`                                   | `false`    |
 | `options.vim`                   | Use Vim keybindings to edit the doc        | `boolean`                                   | `false`    |
 
-## Customization
+### Appearance
 
-Many styles can be customized with CSS custom properties (aka variables).
+Many aspects of the editor's appearance can be customized with CSS custom properties (aka CSS variables).
+
+#### General-purpose styles
+
+| CSS Custom Property    | CSS Property       | Default (Dark) | Override (Light) |
+| ----                   | ----               | ----           | ----             |
+| `--ink-border-radius`  | `border-radius`    | `0.25rem`      |                  |
+| `--ink-color`          | `color`            | `#fafafa`      | `#171717`        |
+| `--ink-font-family`    | `font-family`      | `sans-serif`   |                  |
+| `--ink-flex-direction` | `flex-direction`   | `column`       |                  |
+
+#### Block styles
+
+Blocks are used to provide a dynamic user experience. Examples of blocks are images, multiline code blocks, and the toolbar.
+
+| CSS Custom Property                     | CSS Property       | Default (Dark) | Override (Light) |
+| ----                                    | ----               | ----           | ----             |
+| `--ink-block-background-color`          | `background-color` | `#121212`      | `#ededed`        |
+| `--ink-block-background-color-on-hover` | `background-color` | `#0f0f0f`      | `#e0e0e0`        |
+| `--ink-block-max-height`                | `max-height`       | `20rem`        |                  |
+| `--ink-block-padding`                   | `padding`          | `0.5rem`       |                  |
+
+#### Code styles
+
+These styles are for code blocks and inline code.
+
+| CSS Custom Property           | CSS Property       | Default (Dark)                      | Override (Light) |
+| ----                          | ----               | ----                                | ----             |
+| `--ink-code-background-color` | `background-color` | `var(--ink-block-background-color)` |                  |
+| `--ink-code-color`            | `color`            | `inherit`                           |                  |
+| `--ink-code-font-family`      | `font-family`      | `'Monaco', Courier, monospace`      |                  |
+
+#### Syntax highlighting
+
+You can customize the entire syntax theme too.
 
 | CSS Custom Property                           | CSS Property       | Default (Dark) | Override (Light) |
 | ----                                          | ----               | ----           | ----             |
-| `--ink-all-accent-color`                      | `color`            | `#e06c75`      |                  |
-| `--ink-all-border-radius`                     | `border-radius`    | `0.25rem`      |                  |
-| `--ink-all-color`                             | `color`            | `#fafafa`      | `#171717`        |
-| `--ink-all-font-family`                       | `font-family`      | `sans-serif`   |                  |
-| `--ink-block-background-color`                | `background-color` | `#121212`      | `#ededed`        |
-| `--ink-block-background-hover-color`          | `background-color` | `#0f0f0f`      | `#e0e0e0`        |
-| `--ink-block-max-height`                      | `max-height`       | `20rem`        |                  |
-| `--ink-block-padding`                         | `padding`          | `0.5rem`       |                  |
-| `--ink-monospace-font-family`                 | `font-family`      | `monospace`    |                  |
-| **Syntax Highlighting**                       |                    |                |                  |
 | `--ink-syntax-atom-color`                     | `color`            | `#d19a66`      |                  |
 | `--ink-syntax-comment-color`                  | `color`            | `#abb2bf`      |                  |
 | `--ink-syntax-emphasis-color`                 | `color`            | `inherit`      |                  |
