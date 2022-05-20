@@ -5,9 +5,12 @@ import { tags } from '@lezer/highlight'
 
 export const theme = (): Extension => {
   const baseTheme = EditorView.baseTheme({
+    '&': {
+      // .cm-editor
+    },
     '.cm-scroller': {
       lineHeight: 'var(--ink-internal-editor-line-height)',
-      fontFamily: 'var(--ink-internal-all-font-family)',
+      fontFamily: 'var(--ink-internal-font-family)',
       fontSize: 'var(--ink-internal-editor-font-size)',
     },
     '.cm-line': {
@@ -51,8 +54,8 @@ export const theme = (): Extension => {
       // monospace
       {
         tag: tags.monospace,
-        color: 'var(--ink-internal-syntax-monospace-color)',
-        fontFamily: 'var(--ink-internal-syntax-monospace-font-family)',
+        color: 'var(--ink-internal-syntax-code-color)',
+        fontFamily: 'var(--ink-internal-syntax-code-font-family)',
       },
       // name group
       {

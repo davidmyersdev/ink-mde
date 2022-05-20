@@ -9,12 +9,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
       :root {
-        --ink-all-font-family: 'Inter', Helvetica, sans-serif;
-        --ink-monospace-font-family: 'Fira Code', 'Courier New', Courier, monospace;
+        --ink-code-font-family: 'Fira Code';
       }
 
       body {
-        font-family: var(--ink-all-font-family);
+        font-family: 'Inter', Helvetica, sans-serif;
       }
 
       .dark body {
@@ -92,11 +91,11 @@
       <div>
         ReadOnly mode
         <label>
-          <input onclick="window.readonly(true)" type="radio" value="enabled" name="readonly" checked>
+          <input onclick="window.readonly(true)" type="radio" value="enabled" name="readonly">
           <span>enable</span>
         </label>
         <label>
-          <input onclick="window.readonly(false)" type="radio" value="disabled" name="readonly">
+          <input onclick="window.readonly(false)" type="radio" value="disabled" name="readonly" checked>
           <span>disable</span>
         </label>
       </div>

@@ -2,8 +2,7 @@ import { html, svg } from 'sinuous'
 import { focus, format, insert } from '/src/instance'
 import { getState } from '/src/state'
 import { InkValues } from '/types/values'
-
-import './toolbar.css'
+import { styles } from './styles'
 
 import type InkInternal from '/types/internal'
 
@@ -12,7 +11,8 @@ interface ButtonProps {
   handler: () => void
 }
 
-interface InsertProps {
+interface FormatProps {
+  enabled: boolean
   ref: InkInternal.Ref
 }
 
@@ -28,7 +28,9 @@ const Button = ({ content, handler }: ButtonProps) => {
   `
 }
 
-const InsertBold = ({ ref }: InsertProps) => {
+const InsertBold = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6.5 10H10.5C12.1569 10 13.5 11.3431 13.5 13C13.5 14.6569 12.1569 16 10.5 16H6.5V4H9.5C11.1569 4 12.5 5.34315 12.5 7C12.5 8.65686 11.1569 10 9.5 10"/>
@@ -44,7 +46,9 @@ const InsertBold = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertCode = ({ ref }: InsertProps) => {
+const InsertCode = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M7 4L8 6"/>
@@ -60,7 +64,9 @@ const InsertCode = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertCodeBlock = ({ ref }: InsertProps) => {
+const InsertCodeBlock = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M13 4L7 16"/>
@@ -78,7 +84,9 @@ const InsertCodeBlock = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertHeading = ({ ref }: InsertProps) => {
+const InsertHeading = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6 4V10M6 16V10M6 10H14M14 10V4M14 10V16"/>
@@ -94,7 +102,9 @@ const InsertHeading = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertImage = ({ ref }: InsertProps) => {
+const InsertImage = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <rect x="2" y="4" width="16" height="12" rx="1"/>
@@ -113,7 +123,9 @@ const InsertImage = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertItalic = ({ ref }: InsertProps) => {
+const InsertItalic = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M11 4L9 16M13 4H9M7 16H11"/>
@@ -129,7 +141,9 @@ const InsertItalic = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertLink = ({ ref }: InsertProps) => {
+const InsertLink = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M9.12127 10.881C10.02 11.78 11.5237 11.7349 12.4771 10.7813L15.2546 8.00302C16.2079 7.04937 16.253 5.54521 15.3542 4.6462C14.4555 3.74719 12.9512 3.79174 11.9979 4.74539L10.3437 6.40007M10.8787 9.11903C9.97997 8.22002 8.47626 8.26509 7.52288 9.21874L4.74545 11.997C3.79208 12.9506 3.74701 14.4548 4.64577 15.3538C5.54452 16.2528 7.04876 16.2083 8.00213 15.2546L9.65633 13.5999"/>
@@ -145,7 +159,9 @@ const InsertLink = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertList = ({ ref }: InsertProps) => {
+const InsertList = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M7 16H17.8294"/>
@@ -166,7 +182,9 @@ const InsertList = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertOrderedList = ({ ref }: InsertProps) => {
+const InsertOrderedList = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M7 16H18"/>
@@ -187,7 +205,9 @@ const InsertOrderedList = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertQuote = ({ ref }: InsertProps) => {
+const InsertQuote = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M2.00257 16H17.9955M2.00055 4H18M7 10H18.0659M2 8.5V11.4999C2.4 11.5 2.5 11.5 2.5 11.5V11V10.5M4 8.5V11.4999H4.5V11V10.5"/>
@@ -203,7 +223,9 @@ const InsertQuote = ({ ref }: InsertProps) => {
   `
 }
 
-const InsertTaskList = ({ ref }: InsertProps) => {
+const InsertTaskList = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const content = svg`
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M7 16H17.8294"/>
@@ -224,7 +246,9 @@ const InsertTaskList = ({ ref }: InsertProps) => {
   `
 }
 
-const UploadFile = ({ ref }: InsertProps) => {
+const UploadFile = ({ enabled, ref }: FormatProps) => {
+  if (!enabled) { return }
+
   const { options: { files } } = getState(ref)
 
   const icon = svg`
@@ -264,28 +288,63 @@ const UploadFile = ({ ref }: InsertProps) => {
 }
 
 const Toolbar = ({ ref }: ToolbarProps) => {
+  const { options: { toolbar } } = getState(ref)
+
   return html`
     <div class="ink-toolbar">
-      <div class="ink-toolbar-group">
-        <${InsertHeading} ref=${ref} />
-        <${InsertBold} ref=${ref} />
-        <${InsertItalic} ref=${ref} />
-      </div>
-      <div class="ink-toolbar-group">
-        <${InsertQuote} ref=${ref} />
-        <${InsertCodeBlock} ref=${ref} />
-        <${InsertCode} ref=${ref} />
-      </div>
-      <div class="ink-toolbar-group">
-        <${InsertList} ref=${ref} />
-        <${InsertOrderedList} ref=${ref} />
-        <${InsertTaskList} ref=${ref} />
-      </div>
-      <div class="ink-toolbar-group">
-        <${InsertLink} ref=${ref} />
-        <${InsertImage} ref=${ref} />
-        <${UploadFile} ref=${ref} />
-      </div>
+      <${styles} />
+      ${() => {
+        const { bold, heading, italic } = toolbar
+
+        if (!bold && !heading && !italic) { return }
+
+        return html`
+          <div class="ink-toolbar-group">
+            <${InsertHeading} enabled=${heading} ref=${ref} />
+            <${InsertBold} enabled=${bold} ref=${ref} />
+            <${InsertItalic} enabled=${italic} ref=${ref} />
+          </div>
+        `
+      }}
+      ${() => {
+        const { code, codeBlock, quote } = toolbar
+
+        if (!code && !codeBlock && !quote) { return }
+
+        return html`
+          <div class="ink-toolbar-group">
+            <${InsertQuote} enabled=${quote} ref=${ref} />
+            <${InsertCodeBlock} enabled=${codeBlock} ref=${ref} />
+            <${InsertCode} enabled=${code} ref=${ref} />
+          </div>
+        `
+      }}
+      ${() => {
+        const { list, orderedList, taskList } = toolbar
+
+        if (!list && !orderedList && !taskList) { return }
+
+        return html`
+          <div class="ink-toolbar-group">
+            <${InsertList} enabled=${list} ref=${ref} />
+            <${InsertOrderedList} enabled=${orderedList} ref=${ref} />
+            <${InsertTaskList} enabled=${taskList} ref=${ref} />
+          </div>
+        `
+      }}
+      ${() => {
+        const { image, link, upload} = toolbar
+
+        if (!image && !link && !upload) { return }
+
+        return html`
+          <div class="ink-toolbar-group">
+            <${InsertLink} enabled=${link} ref=${ref} />
+            <${InsertImage} enabled=${image} ref=${ref} />
+            <${UploadFile} enabled=${upload} ref=${ref} />
+          </div>
+        `
+      }}
     </div>
   `
 }

@@ -14,8 +14,10 @@
     "noUnusedParameters": true,
     "outDir": "./dist",
     "paths": {
+      "/examples/*": ["./examples/*"],
       "/src/*": ["./src/*"],
-      "/types/*": ["./types/*"]
+      "/types/*": ["./types/*"],
+      "@writewithocto/ink": ["./src/index"]
     },
     "resolveJsonModule": true,
     "sourceMap": true,
@@ -25,6 +27,7 @@
     "useDefineForClassFields": true
   },
   "include": [
+    "./examples/**/*",
     "./src/**/*",
     "./types/**/*"
   ]
