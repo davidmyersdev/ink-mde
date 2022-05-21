@@ -137,6 +137,7 @@ export namespace Values {
   export type Markup = InkValues.Markup
 }
 
+export declare function defineOptions(options: DeepPartial<Options>): DeepPartial<Options>
 export declare function ink(target: HTMLElement, options?: DeepPartial<Options>): Instance
 
 export default ink
