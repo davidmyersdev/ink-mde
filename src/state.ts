@@ -4,7 +4,7 @@ import { isPlainObject } from 'is-plain-object'
 
 import { makeEditor } from '/src/editor'
 import { createExtensions } from '/src/extensions'
-import { createElement, mountComponents, styleRoot } from './ui'
+import { createElement, mountComponents } from '/src/ui'
 
 import * as InkValues from '/types/values'
 
@@ -80,7 +80,6 @@ export const makeState = (partialState: Ink.DeepPartial<InkInternal.State>): Ink
   updateState(ref, partialState)
   updateState(ref, { editor: makeEditor(ref) })
   updateState(ref, { components: mountComponents(ref) })
-  styleRoot(ref)
 
   return ref
 }

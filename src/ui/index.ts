@@ -21,6 +21,8 @@ export const mountComponents = (ref: InkInternal.Ref): InkUi.MountedComponent<an
     root.prepend(createToolbar(ref))
   }
 
+  styleRoot(ref)
+
   return [
     mountComponent<any>(DropZone, { props: { ref }, target: root }),
   ]
