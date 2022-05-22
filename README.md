@@ -130,7 +130,7 @@ Blocks are used to provide a dynamic user experience. Examples of blocks are ima
 
 | CSS Custom Property                     | CSS Property       | Default (Dark) | Override (Light) |
 | ----                                    | ----               | ----           | ----             |
-| `--ink-block-background-color`          | `background-color` | `#121212`      | `#ededed`        |
+| `--ink-block-background-color`          | `background-color` | `#121212`      | `#f5f5f5`        |
 | `--ink-block-background-color-on-hover` | `background-color` | `#0f0f0f`      | `#e0e0e0`        |
 | `--ink-block-max-height`                | `max-height`       | `20rem`        |                  |
 | `--ink-block-padding`                   | `padding`          | `0.5rem`       |                  |

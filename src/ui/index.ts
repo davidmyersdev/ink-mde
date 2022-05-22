@@ -52,7 +52,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'flex-direction', default: 'column' },
     { suffix: 'font-family', default: 'var(--ink-all-font-family, inherit)' },
     // --ink-block-*
-    { suffix: 'block-background-color', default: '#121212', light: '#ededed' },
+    { suffix: 'block-background-color', default: '#121212', light: '#f5f5f5' },
     { suffix: 'block-background-color-on-hover', default: '#0f0f0f', light: '#e0e0e0' },
     { suffix: 'block-max-height', default: '20rem' },
     { suffix: 'block-padding', default: '0.5rem' },
