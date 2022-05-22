@@ -26,6 +26,18 @@ export const mountComponents = (ref: InkInternal.Ref): InkUi.MountedComponent<an
   ]
 }
 
+export const updateComponents = (ref: InkInternal.Ref) => {
+  const { components, root } = getState(ref)
+
+  styleRoot(ref)
+
+  components.forEach((component) => {
+    component.$set({ ref })
+  })
+
+  root.querySelector('.ink-toolbar')?.replaceWith(createToolbar(ref))
+}
+
 export const styleRoot = (ref: InkInternal.Ref) => {
   const { options, root } = getState(ref)
 

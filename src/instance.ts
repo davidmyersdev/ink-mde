@@ -2,7 +2,7 @@ import { getState, updateState } from '/src/state'
 import { toCodeMirror, toInk } from '/src/adapters/selections'
 import { buildVendorUpdates } from '/src/extensions'
 import * as formatter from '/src/formatter'
-import { styleRoot } from '/src/ui'
+import { updateComponents } from '/src/ui'
 import { createVendorState } from '/src/vendor/state'
 
 import type * as Ink from '/types/ink'
@@ -83,14 +83,10 @@ export const makeInstance = (ref: InkInternal.Ref): Ink.Instance => {
 }
 
 export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.DeepPartial<Ink.Options>) => {
-  const { components, editor } = getState(ref)
+  const { editor } = getState(ref)
 
   updateState(ref, { options: partialOptions })
-  styleRoot(ref)
-
-  components.forEach((component) => {
-    component.$set({ ref })
-  })
+  updateComponents(ref)
 
   const effects = buildVendorUpdates(ref)
 
