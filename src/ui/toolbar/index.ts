@@ -1,7 +1,7 @@
 import { html, svg } from 'sinuous'
 import { focus, format, insert } from '/src/instance'
 import { getState } from '/src/state'
-import { InkValues } from '/types/values'
+import * as InkValues from '/types/values'
 import { styles } from './styles'
 
 import type InkInternal from '/types/internal'

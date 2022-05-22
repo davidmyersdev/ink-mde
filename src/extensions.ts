@@ -6,7 +6,7 @@ import { dark, light } from '/src/vendor/extensions/appearance'
 import { attribution as attributionExtension } from '/src/vendor/extensions/attribution'
 import { images as imagesExtension } from '/src/vendor/extensions/images'
 import { spellcheck as spellcheckExtension } from '/src/vendor/extensions/spellcheck'
-import { InkValues } from '/types/values'
+import * as InkValues from '/types/values'
 
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'

@@ -3,6 +3,7 @@ import { makeState } from '/src/state'
 
 import type * as Ink from '/types/ink'
 
+export * from '/types/values'
 export * from '/src/vendor/extensions/extension'
 
 export const defineOptions = (options: Ink.DeepPartial<Ink.Options>): Ink.DeepPartial<Ink.Options> => {

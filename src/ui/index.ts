@@ -1,7 +1,7 @@
 import { getState } from '/src/state'
 import DropZone from '/src/ui/DropZone.svelte'
 import { createToolbar } from '/src/ui/toolbar'
-import { InkValues } from '/types/values'
+import * as InkValues from '/types/values'
 
 import type InkInternal from '/types/internal'
 import type InkUi from '/types/ui'
