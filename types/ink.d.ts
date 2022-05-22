@@ -1,12 +1,14 @@
 // Type definitions for @writewithocto/ink
 
-import { InkValues } from './values'
+import * as InkValues from './values'
+
+export * from './values'
 
 export type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends (infer U)[]
-    ? DeepPartial<U>[] : T[K] extends Function
-    ? T[K] : T[K] extends object
-    ? DeepPartial<T[K]> : T[K]
+  [K in keyof T]?: T[K] extends (infer U)[] ? DeepPartial<U>[]
+    : T[K] extends Function ? T[K]
+    : T[K] extends object ? DeepPartial<T[K]>
+    : T[K]
 }
 
 export namespace Editor {
@@ -80,7 +82,7 @@ export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
 
   export interface Extensions {
-    [InkValues.Extensions.Appearance]: InkValues.Appearance
+    [InkValues.Extensions.Appearance]: `${InkValues.Appearance}`
     [InkValues.Extensions.Attribution]: boolean
     [InkValues.Extensions.Images]: boolean
     [InkValues.Extensions.ReadOnly]: boolean

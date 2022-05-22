@@ -28,7 +28,7 @@ export const focus = (ref: InkInternal.Ref) => {
   }
 }
 
-export const format = (ref: InkInternal.Ref, type: Ink.Values.Markup, selection?: Ink.Editor.Selection) => {
+export const format = (ref: InkInternal.Ref, type: `${Ink.Values.Markup}`, selection?: Ink.Editor.Selection) => {
   return formatter.format(ref, type, selection)
 }
 

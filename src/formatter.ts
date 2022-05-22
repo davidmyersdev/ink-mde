@@ -1,7 +1,7 @@
 import { syntaxTree } from '@codemirror/language'
 import { insert, selections, wrap } from '/src/instance'
 import { getState } from '/src/state'
-import { InkValues } from '/types/values'
+import * as InkValues from '/types/values'
 
 import type { NodeType } from '@lezer/common'
 import type * as Ink from '/types/ink'
@@ -255,7 +255,7 @@ const formatInline = (ref: InkInternal.Ref, definition: FormatDefinition, select
   }
 }
 
-export const format = (ref: InkInternal.Ref, formatType: Ink.Values.Markup, userSelection?: Ink.Editor.Selection) => {
+export const format = (ref: InkInternal.Ref, formatType: `${Ink.Values.Markup}`, userSelection?: Ink.Editor.Selection) => {
   const definition = formatting[formatType]
   const selection = getSelection(ref, userSelection)
 

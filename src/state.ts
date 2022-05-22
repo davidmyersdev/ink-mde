@@ -6,7 +6,7 @@ import { makeEditor } from '/src/editor'
 import { createExtensions } from '/src/extensions'
 import { createElement, mountComponents, styleRoot } from './ui'
 
-import { InkValues } from '/types/values'
+import * as InkValues from '/types/values'
 
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
