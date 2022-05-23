@@ -33,7 +33,7 @@ export const blankState = (): InkInternal.State => {
         beforeUpdate: () => {},
       },
       interface: {
-        appearance: InkValues.Appearance.Dark,
+        appearance: InkValues.Appearance.Auto,
         attribution: true,
         images: false,
         readonly: false,

@@ -2,6 +2,7 @@ import { Compartment, EditorState } from '@codemirror/state'
 import { vim } from '@replit/codemirror-vim'
 
 import { getState } from '/src/state'
+import { isAutoDark } from '/src/ui'
 import { dark, light } from '/src/vendor/extensions/appearance'
 import { attribution as attributionExtension } from '/src/vendor/extensions/attribution'
 import { images as imagesExtension } from '/src/vendor/extensions/images'
@@ -62,8 +63,12 @@ export const createExtensions = () => {
 }
 
 export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
-  appearance(options: Ink.Options) {
-    return options.interface.appearance === InkValues.Appearance.Light ? light() : dark()
+  appearance({ interface: { appearance } }: Ink.Options) {
+    if (appearance === InkValues.Appearance.Dark) { return dark() }
+    if (appearance === InkValues.Appearance.Light) { return light() }
+
+    // Automatically determine the correct color scheme.
+    return isAutoDark() ? dark() : light()
   },
   attribution(options: Ink.Options) {
     return options.interface.attribution ? attributionExtension() : []

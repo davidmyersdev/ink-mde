@@ -1,6 +1,7 @@
 import { getState } from '/src/state'
 import DropZone from '/src/ui/DropZone.svelte'
 import { createToolbar } from '/src/ui/toolbar'
+import { buildVendorUpdates } from '/src/extensions'
 import * as InkValues from '/types/values'
 
 import type InkInternal from '/types/internal'
@@ -8,6 +9,17 @@ import type InkUi from '/types/ui'
 
 export const createElement = (): InkUi.Element => {
   return document.createElement('div')
+}
+
+export const isAutoDark = () => {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
+
+export const isDark = (appearance: string) => {
+  if (appearance === InkValues.Appearance.Dark) { return true }
+  if (appearance === InkValues.Appearance.Light) { return false }
+
+  return isAutoDark()
 }
 
 export const mountComponent = <T>(Component: InkUi.MountableComponent<T>, { props, target }: { props: T, target: HTMLElement }): InkUi.MountedComponent<T> => {
@@ -22,6 +34,7 @@ export const mountComponents = (ref: InkInternal.Ref): InkUi.MountedComponent<an
   }
 
   styleRoot(ref)
+  watchMedia(ref)
 
   return [
     mountComponent<any>(DropZone, { props: { ref }, target: root }),
@@ -43,10 +56,11 @@ export const updateComponents = (ref: InkInternal.Ref) => {
 export const styleRoot = (ref: InkInternal.Ref) => {
   const { options, root } = getState(ref)
 
+  root.classList.add('ink')
+
   // Todo: This should all be moved into a style element and injected into the container.
   // Todo: The syntax nodes should be merged with the tag nodes to ensure values are always set correctly. This might
   // require extracting this out into a separate "constants" file or something similar.
-  const isLight = options.interface.appearance === InkValues.Appearance.Light
   const styles = [
     // --ink-*
     { suffix: 'border-radius', default: 'var(--ink-all-border-radius, 0.25rem)' },
@@ -126,11 +140,31 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'monospace-font-family', default: "'Monaco', Courier, monospace" },
   ]
 
-  root.classList.add('ink')
+  const isLight = !isDark(options.interface.appearance)
 
   styles.forEach((style) => {
     const value = isLight && style.light ? style.light : style.default
 
     root.style.setProperty(`--ink-internal-${style.suffix}`, `var(--ink-${style.suffix}, ${value})`)
   })
+}
+
+export const watchMedia = (ref: InkInternal.Ref) => {
+  const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
+  const listener = (_event: MediaQueryListEvent) => {
+    const { editor, root } = getState(ref)
+
+    if (root.isConnected) {
+      const effects = buildVendorUpdates(ref)
+
+      styleRoot(ref)
+      editor.dispatch({
+        effects,
+      })
+    } else {
+      mediaQueryList.removeEventListener('change', listener)
+    }
+  }
+
+  mediaQueryList.addEventListener('change', listener)
 }

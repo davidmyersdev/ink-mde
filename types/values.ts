@@ -1,4 +1,5 @@
 export enum Appearance {
+  Auto = 'auto',
   Dark = 'dark',
   Light = 'light',
 }
