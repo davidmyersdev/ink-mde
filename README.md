@@ -10,7 +10,7 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 
 ## Features
 
-- [x] Dark and light themes
+- [x] Automatic, dark, or light themes (automatic by default)
 - [x] Hybrid plain-text Markdown rendering
 - [x] Supports GitHub Flavored Markdown ([an extension of CommonMark](https://github.github.com/gfm/#what-is-github-flavored-markdown-))
 - [x] Syntax highlighting for many common languages (in code blocks)
@@ -91,7 +91,7 @@ editor.update(state.doc)
 | `options.files.handler`         | Handle file uploads (not handled by Ink)   | `(files: FileList) => Promise<any> \| void` | `() => {}` |
 | `options.hooks.afterUpdate`     | Run some code after the doc is updated     | `(doc: string) => void`                     | `() => {}` |
 | `options.hooks.beforeUpdate`    | Run some code before the doc is updated    | `(doc: string) => void`                     | `() => {}` |
-| `options.interface.appearance`  | Change the editor theme                    | `'dark' \| 'light'`                         | `'dark'`   |
+| `options.interface.appearance`  | Change the editor theme                    | `'auto' \| 'dark' \| 'light'`               | `'auto'`   |
 | `options.interface.attribution` | Show the "Powered by Ink" attribution      | `boolean`                                   | `true`     |
 | `options.interface.images`      | Render images in the editor                | `boolean`                                   | `false`    |
 | `options.interface.spellcheck`  | Enable spellcheck                          | `boolean`                                   | `true`     |
