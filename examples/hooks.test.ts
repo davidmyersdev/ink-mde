@@ -1,9 +1,10 @@
 // @vitest-environment jsdom
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
+import { mockAll } from '/test/helpers/dom'
 
 describe('hooks', () => {
   it('runs without errors', async () => {
-    vi.spyOn(document, 'getElementById').mockImplementation(() => document.createElement('div'))
+    mockAll()
 
     await expect(import('./hooks')).resolves.not.toThrow()
   })
