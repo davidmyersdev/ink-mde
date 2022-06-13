@@ -16,6 +16,7 @@
     "paths": {
       "/examples/*": ["./examples/*"],
       "/src/*": ["./src/*"],
+      "/test/*": ["./test/*"],
       "/types/*": ["./types/*"],
       "@writewithocto/ink": ["./src/index"]
     },
@@ -29,6 +30,7 @@
   "include": [
     "./examples/**/*",
     "./src/**/*",
+    "./test/**/*",
     "./types/**/*"
   ]
 }
