@@ -7,6 +7,7 @@ export enum Appearance {
 export enum Extensions {
   Appearance = 'appearance',
   Attribution = 'attribution',
+  Autocomplete = 'autocomplete',
   Images = 'images',
   ReadOnly = 'readonly',
   Spellcheck = 'spellcheck',
@@ -25,4 +26,10 @@ export enum Markup {
   OrderedList = 'ordered_list',
   Quote = 'quote',
   TaskList = 'task_list',
+}
+
+export enum PluginType {
+  Completion = 'completion',
+  Default = 'default',
+  Grammar = 'grammar',
 }

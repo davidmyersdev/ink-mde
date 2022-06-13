@@ -1,26 +1,20 @@
 import { EditorView } from '@codemirror/view'
-import deepmerge from 'deepmerge'
-import { isPlainObject } from 'is-plain-object'
-
+import { deepmerge } from 'deepmerge-ts'
 import { makeEditor } from '/src/editor'
 import { createExtensions } from '/src/extensions'
 import { createElement, mountComponents } from '/src/ui'
-
 import * as InkValues from '/types/values'
-
-import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-const store = new WeakMap<InkInternal.Ref, InkInternal.State>()
+const store = new WeakMap<InkInternal.Ref, InkInternal.StateResolved>()
 
-export const blankState = (): InkInternal.State => {
+export const blankState = (): InkInternal.StateResolved => {
   return {
     components: [],
     editor: new EditorView(),
     extensions: createExtensions(),
     options: {
       doc: '',
-      extensions: [],
       files: {
         clipboard: false,
         dragAndDrop: false,
@@ -35,11 +29,13 @@ export const blankState = (): InkInternal.State => {
       interface: {
         appearance: InkValues.Appearance.Auto,
         attribution: true,
+        autocomplete: false,
         images: false,
         readonly: false,
         spellcheck: true,
         toolbar: false,
       },
+      plugins: [],
       selections: [],
       toolbar: {
         bold: true,
@@ -63,7 +59,7 @@ export const blankState = (): InkInternal.State => {
   }
 }
 
-export const getState = (ref: InkInternal.Ref): InkInternal.State => {
+export const getState = (ref: InkInternal.Ref): InkInternal.StateResolved => {
   const state = store.get(ref)
 
   if (!state) {
@@ -73,7 +69,7 @@ export const getState = (ref: InkInternal.Ref): InkInternal.State => {
   return state
 }
 
-export const makeState = (partialState: Ink.DeepPartial<InkInternal.State>): InkInternal.Ref => {
+export const makeState = (partialState: InkInternal.State): InkInternal.Ref => {
   const ref = {}
 
   // Todo: Generate a blank state object, and then perform a single update (reorganize dependency chain if necessary).
@@ -84,15 +80,15 @@ export const makeState = (partialState: Ink.DeepPartial<InkInternal.State>): Ink
   return ref
 }
 
-export const setState = (ref: InkInternal.Ref, state: InkInternal.State) => {
+export const setState = (ref: InkInternal.Ref, state: InkInternal.StateResolved) => {
   store.set(ref, state)
 
   return state
 }
 
-export const updateState = (ref: InkInternal.Ref, partialState: Ink.DeepPartial<InkInternal.State>): InkInternal.State => {
+export const updateState = (ref: InkInternal.Ref, partialState: InkInternal.State): InkInternal.StateResolved => {
   const state = getState(ref)
-  const newState = deepmerge(state, partialState, { isMergeableObject: isPlainObject })
+  const newState = deepmerge(state, partialState) as InkInternal.StateResolved
 
   return setState(ref, newState)
 }

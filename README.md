@@ -36,7 +36,7 @@ yarn add @writewithocto/ink
 npm install --save @writewithocto/ink
 ```
 
-## How to get started
+## Getting started
 
 There are many ways to customize Ink to fit your needs. Here are a few examples to get you started.
 
@@ -81,7 +81,9 @@ const editor = ink(document.getElementById('editor')!, options)
 editor.update(state.doc)
 ```
 
-## Futher customization
+## Further customization
+
+Other features of the editor can be customized through the following options.
 
 | Option                          | Description                                | Type                                        | Default    |
 | ----                            | ----                                       | ----                                        | ----       |
@@ -96,6 +98,7 @@ editor.update(state.doc)
 | `options.interface.images`      | Render images in the editor                | `boolean`                                   | `false`    |
 | `options.interface.spellcheck`  | Enable spellcheck                          | `boolean`                                   | `true`     |
 | `options.interface.toolbar`     | Enable the formatting toolbar              | `boolean`                                   | `false`    |
+| `options.plugins`               | Extend the editor with custom features     | `Ink.Editor.Plugin[]`                       | `[]`       |
 | `options.selections`            | Initialize the editor with selections      | `Ink.Editor.Selection[]`                    | `[]`       |
 | `options.toolbar.bold`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
 | `options.toolbar.code`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
@@ -110,6 +113,10 @@ editor.update(state.doc)
 | `options.toolbar.taskList`      | Include this button in the toolbar         | `boolean`                                   | `true`     |
 | `options.toolbar.upload`        | Include this button in the toolbar         | `boolean`                                   | `false`    |
 | `options.vim`                   | Use Vim keybindings to edit the doc        | `boolean`                                   | `false`    |
+
+### Plugins
+
+The editor can be extended with custom grammars, completions, and more through the Plugin API. Examples coming soon.
 
 ### Appearance
 

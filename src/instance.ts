@@ -82,7 +82,7 @@ export const makeInstance = (ref: InkInternal.Ref): Ink.Instance => {
   }
 }
 
-export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.DeepPartial<Ink.Options>) => {
+export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.Options) => {
   const { editor } = getState(ref)
 
   updateState(ref, { options: partialOptions })
