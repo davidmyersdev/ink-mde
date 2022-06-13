@@ -7,7 +7,6 @@
   "repository": "https://github.com/writewithocto/ink.git",
   "main": "./dist/ink.umd.js",
   "module": "./dist/ink.es.js",
-  "private": false,
   "type": "module",
   "types": "./types/ink.d.ts",
   "exports": {
@@ -18,12 +17,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && yarn build:unsafe && yarn build:types",
+    "build": "yarn prepack",
     "build:types": "tsc --project tsconfig.types.json",
     "build:unsafe": "vite build",
     "docs:check": "embedme --verify README.md",
     "docs:diff": "embedme --stdout README.md",
     "docs:update": "embedme README.md",
+    "prepack": "tsc && vite build && tsc --project tsconfig.types.json",
     "test": "vitest",
     "test:once": "vitest run"
   },
@@ -39,7 +39,7 @@
     "@replit/codemirror-vim": "^0.20.0",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^5.0.0",
-    "sinuous": "https://gitpkg.now.sh/voraciousdev/sinuous/packages/sinuous?live-fork"
+    "sinuous": "git+https://github.com/voraciousdev/sinuous.git#live-fork"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.37",
@@ -50,7 +50,7 @@
     "svelte-preprocess": "^4.10.3",
     "typescript": "^4.4.3",
     "vite": "^2.9.7",
-    "vitest": "https://gitpkg.now.sh/voraciousdev/vitest/packages/vitest?live-fork"
+    "vitest": "^0.14.2"
   },
   "files": [
     "dist",
@@ -70,5 +70,6 @@
     "simplemde",
     "ts",
     "typescript"
-  ]
+  ],
+  "packageManager": "yarn@3.2.1"
 }

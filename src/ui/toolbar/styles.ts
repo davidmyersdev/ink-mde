@@ -1,4 +1,4 @@
-import { html } from 'sinuous'
+import { html } from 'sinuous/packages/sinuous'
 
 export const styles = html`
   <style>
