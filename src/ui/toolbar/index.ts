@@ -1,4 +1,4 @@
-import { html, svg } from 'sinuous'
+import { html, svg } from 'sinuous/packages/sinuous'
 import { focus, format, insert } from '/src/instance'
 import { getState } from '/src/state'
 import * as InkValues from '/types/values'
