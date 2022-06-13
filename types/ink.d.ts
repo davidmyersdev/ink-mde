@@ -1,6 +1,12 @@
 // Type definitions for @writewithocto/ink
-
 import * as InkValues from './values'
+import type { CompletionSource } from '@codemirror/autocomplete'
+import type { Extension } from '@codemirror/state'
+import type { MarkdownConfig } from '@lezer/markdown'
+
+type VendorCompletion = CompletionSource
+type VendorExtension = Extension
+type VendorGrammar = MarkdownConfig
 
 export * from './values'
 
@@ -18,7 +24,7 @@ export namespace Editor {
   }
 }
 
-export type Initializer = (target: HTMLElement, options: DeepPartial<Options>) => Instance
+export type EnumString<T extends string> = `${T}`
 
 export interface Instance {
   destroy: () => void
@@ -68,22 +74,54 @@ export namespace Markup {
 }
 
 export interface Options {
+  doc?: string
+  files?: Partial<Options.Files>
+  hooks?: Partial<Options.Hooks>
+  interface?: Partial<Options.Interface>
+  plugins?: Options.Plugin[]
+  selections?: Editor.Selection[]
+  toolbar?: Partial<Options.Toolbar>
+  vim?: boolean
+}
+
+export interface OptionsResolved {
   doc: string
-  extensions: any[]
-  files: Options.Files
-  hooks: Options.Hooks
-  interface: Options.Interface
+  files: Required<Options.Files>
+  hooks: Required<Options.Hooks>
+  interface: Required<Options.Interface>
+  plugins: Options.Plugin[]
   selections: Editor.Selection[]
-  toolbar: Options.Toolbar
+  toolbar: Required<Options.Toolbar>
   vim: boolean
 }
 
 export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
 
+  export type Plugin = Plugins.Completion | Plugins.Default | Plugins.Grammar
+
+  export namespace Plugins {
+    export interface Completion {
+      type: EnumString<InkValues.PluginType.Completion>
+      value: VendorCompletion
+    }
+
+    export interface Default {
+      type: EnumString<InkValues.PluginType.Default>
+      value: VendorExtension
+    }
+
+    export interface Grammar {
+      type: EnumString<InkValues.PluginType.Grammar>
+      value: VendorGrammar
+    }
+  }
+
+
   export interface Extensions {
-    [InkValues.Extensions.Appearance]: `${InkValues.Appearance}`
+    [InkValues.Extensions.Appearance]: EnumString<InkValues.Appearance>
     [InkValues.Extensions.Attribution]: boolean
+    [InkValues.Extensions.Autocomplete]: boolean
     [InkValues.Extensions.Images]: boolean
     [InkValues.Extensions.ReadOnly]: boolean
     [InkValues.Extensions.Spellcheck]: boolean
@@ -111,6 +149,7 @@ export namespace Options {
   export interface Interface {
     [InkValues.Extensions.Appearance]: Options.Extensions[InkValues.Extensions.Appearance]
     [InkValues.Extensions.Attribution]: Options.Extensions[InkValues.Extensions.Attribution]
+    [InkValues.Extensions.Autocomplete]: Options.Extensions[InkValues.Extensions.Autocomplete]
     [InkValues.Extensions.Images]: Options.Extensions[InkValues.Extensions.Images]
     [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly]
     [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
@@ -137,9 +176,10 @@ export namespace Values {
   export type Appearance = InkValues.Appearance
   export type Extensions = InkValues.Extensions
   export type Markup = InkValues.Markup
+  export type PluginType = InkValues.PluginType
 }
 
-export declare function defineOptions(options: DeepPartial<Options>): DeepPartial<Options>
-export declare function ink(target: HTMLElement, options?: DeepPartial<Options>): Instance
+export declare function defineOptions(options: Options): Options
+export declare function ink(target: HTMLElement, options?: Options): Instance
 
 export default ink

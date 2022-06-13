@@ -1,5 +1,6 @@
 import { getState } from '/src/state'
 import DropZone from '/src/ui/DropZone.svelte'
+import { styles } from '/src/ui/styles'
 import { createToolbar } from '/src/ui/toolbar'
 import { buildVendorUpdates } from '/src/extensions'
 import * as InkValues from '/types/values'
@@ -29,9 +30,12 @@ export const mountComponent = <T>(Component: InkUi.MountableComponent<T>, { prop
 export const mountComponents = (ref: InkInternal.Ref): InkUi.MountedComponent<any>[] => {
   const { options, root } = getState(ref)
 
+  root.prepend(styles)
+
   if (options.interface.toolbar) {
     root.prepend(createToolbar(ref))
   }
+
 
   styleRoot(ref)
   watchMedia(ref)
@@ -89,6 +93,8 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'syntax-comment-font-style', default: 'italic' },
     { suffix: 'syntax-emphasis-color', default: 'inherit' },
     { suffix: 'syntax-emphasis-font-style', default: 'italic' },
+    { suffix: 'syntax-hashtag-background-color', default: '#222', light: '#eee' },
+    { suffix: 'syntax-hashtag-color', default: 'inherit' },
     { suffix: 'syntax-heading-color', default: 'inherit' },
     { suffix: 'syntax-heading-font-weight', default: '600' },
     { suffix: 'syntax-heading1-color', default: 'var(--ink-internal-syntax-heading-color, inherit)' },
@@ -109,6 +115,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'syntax-heading6-color', default: 'var(--ink-internal-syntax-heading-color, inherit)' },
     { suffix: 'syntax-heading6-font-size', default: '1.1em' },
     { suffix: 'syntax-heading6-font-weight', default: '600' },
+    { suffix: 'syntax-highlight-background-color', default: '#555555' },
     { suffix: 'syntax-keyword-color', default: '#c678dd' },
     { suffix: 'syntax-link-color', default: 'inherit' },
     { suffix: 'syntax-meta-color', default: '#abb2bf' },

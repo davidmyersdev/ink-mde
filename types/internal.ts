@@ -11,12 +11,6 @@ import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
 
 export namespace InkInternal {
-  export interface Configuration {
-    extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
-    options: Ink.Options
-    root: InkUi.Root
-  }
-
   export type Editor = InkInternal.Vendor.View
 
   export interface Extension {
@@ -35,9 +29,19 @@ export namespace InkInternal {
 
   export type Ref = {}
   export interface State {
+    components?: InkUi.MountedComponent<any>[]
+    extensions?: InkInternal.OptionExtension<Ink.Values.Extensions>[]
+    options?: Ink.Options
+    target?: HTMLElement
+    ref?: InkInternal.Ref
+    root?: InkUi.Root
+    editor?: InkInternal.Editor
+  }
+
+  export interface StateResolved {
     components: InkUi.MountedComponent<any>[]
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
-    options: Ink.Options
+    options: Ink.OptionsResolved
     target: HTMLElement
     ref: InkInternal.Ref
     root: InkUi.Root
@@ -49,7 +53,7 @@ export namespace InkInternal {
     export type Compartment = VendorCompartment
     export type Component = VendorComponent
     export type Extension = VendorExtension
-    export type ExtensionResolver = (options: Ink.Options) => InkInternal.Vendor.Extension
+    export type ExtensionResolver = (options: Ink.OptionsResolved) => InkInternal.Vendor.Extension
     export type ExtensionResolvers = {
       [ExtensionName in Ink.Options.ExtensionNames]: ExtensionResolver
     }

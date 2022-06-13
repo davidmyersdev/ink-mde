@@ -2,14 +2,6 @@ import { html } from 'sinuous/packages/sinuous'
 
 export const styles = html`
   <style>
-    .ink {
-      color: var(--ink-internal-color, inherit);
-      display: flex;
-      flex-direction: var(--ink-internal-flex-direction, column);
-      gap: 1rem;
-      padding: var(--ink-internal-editor-padding, 0);
-    }
-
     .ink .ink-toolbar {
       background-color: var(--ink-internal-block-background-color);
       border-radius: var(--ink-internal-border-radius);

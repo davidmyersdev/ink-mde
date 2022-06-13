@@ -1,8 +1,9 @@
 /// <reference types="vitest" />
 
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { dependencies } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,6 +20,7 @@ export default defineConfig({
       name: 'Ink',
     },
     rollupOptions: {
+      external: Object.keys(dependencies),
       output: [
         {
           esModule: true,
@@ -39,6 +41,9 @@ export default defineConfig({
         },
       ],
     },
+  },
+  optimizeDeps: {
+    exclude: Object.keys(dependencies),
   },
   plugins: [
     svelte({ emitCss: false }),

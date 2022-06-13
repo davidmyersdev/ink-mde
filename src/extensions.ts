@@ -1,6 +1,6 @@
+import { closeBrackets as autocompleteExtension } from '@codemirror/autocomplete'
 import { Compartment, EditorState } from '@codemirror/state'
 import { vim } from '@replit/codemirror-vim'
-
 import { getState } from '/src/state'
 import { isAutoDark } from '/src/ui'
 import { dark, light } from '/src/vendor/extensions/appearance'
@@ -12,7 +12,7 @@ import * as InkValues from '/types/values'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const buildVendor = (extension: InkInternal.OptionExtension<Ink.Values.Extensions>, options: Ink.Options) => {
+export const buildVendor = (extension: InkInternal.OptionExtension<Ink.Values.Extensions>, options: Ink.OptionsResolved) => {
   const result = extension.resolver(options)
 
   return extension.compartment.of(result)
@@ -26,7 +26,7 @@ export const buildVendors = (ref: InkInternal.Ref) => {
   })
 }
 
-export const buildVendorUpdate = (extension: InkInternal.OptionExtension<Ink.Values.Extensions>, options: Ink.Options) => {
+export const buildVendorUpdate = (extension: InkInternal.OptionExtension<Ink.Values.Extensions>, options: Ink.OptionsResolved) => {
   const result = extension.resolver(options)
 
   return extension.compartment.reconfigure(result)
@@ -55,6 +55,7 @@ export const createExtensions = () => {
   return [
     create(InkValues.Extensions.Appearance),
     create(InkValues.Extensions.Attribution),
+    create(InkValues.Extensions.Autocomplete),
     create(InkValues.Extensions.Images),
     create(InkValues.Extensions.ReadOnly),
     create(InkValues.Extensions.Spellcheck),
@@ -63,26 +64,29 @@ export const createExtensions = () => {
 }
 
 export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
-  appearance({ interface: { appearance } }: Ink.Options) {
+  appearance({ interface: { appearance } }: Ink.OptionsResolved) {
     if (appearance === InkValues.Appearance.Dark) { return dark() }
     if (appearance === InkValues.Appearance.Light) { return light() }
 
     // Automatically determine the correct color scheme.
     return isAutoDark() ? dark() : light()
   },
-  attribution(options: Ink.Options) {
+  attribution(options: Ink.OptionsResolved) {
     return options.interface.attribution ? attributionExtension() : []
   },
-  images(options: Ink.Options) {
+  autocomplete(options: Ink.OptionsResolved) {
+    return options.interface.autocomplete ? autocompleteExtension() : []
+  },
+  images(options: Ink.OptionsResolved) {
     return options.interface.images ? imagesExtension() : []
   },
-  readonly(options: Ink.Options) {
+  readonly(options: Ink.OptionsResolved) {
     return options.interface.readonly ? EditorState.readOnly.of(true) : EditorState.readOnly.of(false)
   },
-  spellcheck(options: Ink.Options) {
+  spellcheck(options: Ink.OptionsResolved) {
     return options.interface.spellcheck ? spellcheckExtension() : []
   },
-  vim(options: Ink.Options) {
+  vim(options: Ink.OptionsResolved) {
     return options.vim ? vim() : []
   },
 }
