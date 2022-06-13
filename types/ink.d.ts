@@ -68,6 +68,7 @@ export namespace Markup {
 }
 
 export interface Options {
+  autocompletions: any[]
   doc: string
   extensions: any[]
   files: Options.Files
@@ -84,6 +85,7 @@ export namespace Options {
   export interface Extensions {
     [InkValues.Extensions.Appearance]: `${InkValues.Appearance}`
     [InkValues.Extensions.Attribution]: boolean
+    [InkValues.Extensions.Autocomplete]: boolean
     [InkValues.Extensions.Images]: boolean
     [InkValues.Extensions.ReadOnly]: boolean
     [InkValues.Extensions.Spellcheck]: boolean

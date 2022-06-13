@@ -31,7 +31,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/autocomplete@npm:^6.0.0":
+"@codemirror/autocomplete@npm:^6.0.0, @codemirror/autocomplete@npm:^6.0.1":
   version: 6.0.2
   resolution: "@codemirror/autocomplete@npm:6.0.2"
   dependencies:
@@ -722,6 +722,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@writewithocto/ink@workspace:."
   dependencies:
+    "@codemirror/autocomplete": ^6.0.1
     "@codemirror/commands": ^6.0.0
     "@codemirror/lang-markdown": ^6.0.0
     "@codemirror/language": ^6.0.0

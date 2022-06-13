@@ -33,6 +33,7 @@
     "vue:build": "yarn workspace @writewithocto/vue-ink build"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.0.1",
     "@codemirror/commands": "^6.0.0",
     "@codemirror/lang-markdown": "^6.0.0",
     "@codemirror/language": "^6.0.0",

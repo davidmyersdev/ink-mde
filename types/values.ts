@@ -7,6 +7,7 @@ export enum Appearance {
 export enum Extensions {
   Appearance = 'appearance',
   Attribution = 'attribution',
+  Autocomplete = 'autocomplete',
   Images = 'images',
   ReadOnly = 'readonly',
   Spellcheck = 'spellcheck',

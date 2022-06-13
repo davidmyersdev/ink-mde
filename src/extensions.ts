@@ -5,6 +5,7 @@ import { getState } from '/src/state'
 import { isAutoDark } from '/src/ui'
 import { dark, light } from '/src/vendor/extensions/appearance'
 import { attribution as attributionExtension } from '/src/vendor/extensions/attribution'
+import { autocomplete as autocompleteExtension } from '/src/vendor/extensions/autocomplete'
 import { images as imagesExtension } from '/src/vendor/extensions/images'
 import { spellcheck as spellcheckExtension } from '/src/vendor/extensions/spellcheck'
 import * as InkValues from '/types/values'
@@ -55,6 +56,7 @@ export const createExtensions = () => {
   return [
     create(InkValues.Extensions.Appearance),
     create(InkValues.Extensions.Attribution),
+    create(InkValues.Extensions.Autocomplete),
     create(InkValues.Extensions.Images),
     create(InkValues.Extensions.ReadOnly),
     create(InkValues.Extensions.Spellcheck),
@@ -72,6 +74,9 @@ export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
   },
   attribution(options: Ink.Options) {
     return options.interface.attribution ? attributionExtension() : []
+  },
+  autocomplete(options: Ink.Options) {
+    return options.autocompletions?.length > 0 ? autocompleteExtension() : []
   },
   images(options: Ink.Options) {
     return options.interface.images ? imagesExtension() : []
