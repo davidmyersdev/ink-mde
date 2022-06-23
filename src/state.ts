@@ -28,6 +28,7 @@ export const blankState = (): InkInternal.State => {
         injectMarkup: true,
         types: ['image/*'],
       },
+      grammars: [],
       hooks: {
         afterUpdate: () => {},
         beforeUpdate: () => {},
@@ -41,6 +42,7 @@ export const blankState = (): InkInternal.State => {
         toolbar: false,
       },
       selections: [],
+      suggestions: [],
       toolbar: {
         bold: true,
         code: true,

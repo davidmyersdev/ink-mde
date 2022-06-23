@@ -1,6 +1,12 @@
 // Type definitions for @writewithocto/ink
-
 import * as InkValues from './values'
+import type { CompletionSource } from '@codemirror/autocomplete'
+import type { Extension } from '@codemirror/state'
+import type { MarkdownConfig } from '@lezer/markdown'
+
+type VendorExtension = Extension
+type VendorGrammar = MarkdownConfig
+type VendorSuggestion = CompletionSource
 
 export * from './values'
 
@@ -68,13 +74,14 @@ export namespace Markup {
 }
 
 export interface Options {
-  autocompletions: any[]
   doc: string
-  extensions: any[]
+  extensions: VendorExtension[]
   files: Options.Files
+  grammars: VendorGrammar[]
   hooks: Options.Hooks
   interface: Options.Interface
   selections: Editor.Selection[]
+  suggestions: VendorSuggestion[]
   toolbar: Options.Toolbar
   vim: boolean
 }

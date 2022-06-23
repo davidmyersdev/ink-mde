@@ -1,7 +1,7 @@
 // https://discuss.codemirror.net/t/adding-support-for-the-additional-inline-syntax-to-markdown/3099
 import { styleTags, Tag, tags } from '@lezer/highlight'
 import { hashSigns, hashtagBoundaryChars, matchHashtag } from '/lib/hashtag/parser'
-import type { DelimiterType, InlineContext, MarkdownConfig } from '@lezer/markdown'
+import type { InlineContext, MarkdownConfig } from '@lezer/markdown'
 
 interface ParserContext {
   charCode: number
@@ -24,18 +24,6 @@ const makeParser = (callback: ParserCallback): Parser => {
 
 const getCode = (char: string) => {
   return char.charCodeAt(0)
-}
-
-const getMatches = (context: ParserContext, regex: RegExp): RegExpExecArray | null => {
-  return regex.exec(context.inline.slice(context.index, context.inline.end))
-}
-
-const is = (context: InlineContext, token: string, position: number) => {
-  return context.slice(position, Math.min(position + token.length, context.end)) === token
-}
-
-const matches = (context: InlineContext, token: RegExp, position: number) => {
-  return token.test(context.slice(position, context.end))
 }
 
 const HighlightDelim = { resolve: 'Highlight', mark: 'HighlightMark' }
@@ -66,9 +54,8 @@ const Highlight: MarkdownConfig = {
   ],
 }
 
-const HashtagDelimiter: DelimiterType = { resolve: 'Hashtag', mark: 'HashtagMark' }
 const Hashtag: MarkdownConfig = {
-  defineNodes: ['Hashtag', 'HashtagMark', 'HashtagEnd'],
+  defineNodes: ['Hashtag', 'HashtagMark'],
   parseInline: [
     {
       name: 'Hashtag',
