@@ -10,6 +10,8 @@ import { code } from '/src/vendor/extensions/code'
 import { keymaps } from '/src/vendor/extensions/keymaps'
 import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
 import { theme } from '/src/vendor/extensions/theme'
+import { extensions } from '/src/vendor/extensions/markdown'
+import { references } from '/src/vendor/extensions/references'
 
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
@@ -30,12 +32,14 @@ export const createVendorState = (ref: InkInternal.Ref): InkInternal.Vendor.Stat
       ...buildVendors(ref),
       ...state.options.extensions,
       code(),
+      references(),
       history(),
       keymaps(),
       lineWrapping(),
       markdown({
         base: markdownLanguage,
         codeLanguages: languages,
+        extensions: extensions(),
       }),
       theme(),
     ],

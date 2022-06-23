@@ -2,6 +2,7 @@ import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
+import { hashtag, hashtagMark, highlight, reference } from '/src/vendor/extensions/markdown'
 
 export const theme = (): Extension => {
   const baseTheme = EditorView.baseTheme({
@@ -166,10 +167,32 @@ export const theme = (): Extension => {
         tag: tags.special(tags.string),
         color: 'var(--ink-internal-syntax-string-special-color)',
       },
+      {
+        tag: hashtag,
+        backgroundColor: 'var(--ink-internal-syntax-hashtag-background-color)',
+        color: 'var(--ink-internal-syntax-hashtag-color)',
+        borderRadius: '0.25rem',
+        padding: '0.125rem 0.25rem',
+      },
+      {
+        tag: hashtagMark,
+        backgroundColor: '#444',
+        color: 'var(--ink-internal-syntax-hashtag-color)',
+        borderRadius: '0.25rem',
+        padding: '0.125rem 0.25rem',
+      },
+      {
+        tag: reference,
+        color: 'var(--ink-internal-syntax-reference-color)',
+      },
       // processing instructions
       {
         tag: tags.processingInstruction,
         color: 'var(--ink-internal-syntax-processing-instruction-color)',
+      },
+      {
+        tag: highlight,
+        backgroundColor: 'var(--ink-internal-syntax-highlight-background-color)',
       },
     ])
   )

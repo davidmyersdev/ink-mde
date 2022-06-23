@@ -21,6 +21,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.3.1":
+  version: 7.18.6
+  resolution: "@babel/runtime@npm:7.18.6"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 8b707b64ae0524db617d0c49933b258b96376a38307dc0be8fb42db5697608bcc1eba459acce541e376cff5ed5c5287d24db5780bd776b7c75ba2c2e26ff8a2c
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.8.3":
   version: 7.18.4
   resolution: "@babel/types@npm:7.18.4"
@@ -731,6 +740,7 @@ __metadata:
     "@codemirror/state": ^6.0.0
     "@codemirror/view": ^6.0.0
     "@lezer/highlight": ^1.0.0
+    "@lezer/markdown": ^1.0.0
     "@replit/codemirror-vim": ^0.20.0
     "@sveltejs/vite-plugin-svelte": ^1.0.0-next.37
     "@types/node": ^17.0.35
@@ -741,6 +751,7 @@ __metadata:
     sinuous: "git+https://github.com/voraciousdev/sinuous.git#live-fork"
     svelte: ^3.46.4
     svelte-preprocess: ^4.10.3
+    twitter-text: ^3.1.0
     typescript: ^4.4.3
     vite: ^2.9.7
     vitest: ^0.14.2
@@ -1053,6 +1064,13 @@ __metadata:
   version: 1.1.0
   resolution: "console-control-strings@npm:1.1.0"
   checksum: 8755d76787f94e6cf79ce4666f0c5519906d7f5b02d4b884cf41e11dcd759ed69c57da0670afd9236d229a46e0f9cf519db0cd829c6dca820bb5a5c3def584ed
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^2.5.0":
+  version: 2.6.12
+  resolution: "core-js@npm:2.6.12"
+  checksum: 44fa9934a85f8c78d61e0c8b7b22436330471ffe59ec5076fe7f324d6e8cf7f824b14b1c81ca73608b13bdb0fef035bd820989bf059767ad6fa13123bb8bd016
   languageName: node
   linkType: hard
 
@@ -2265,6 +2283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"punycode@npm:1.4.1":
+  version: 1.4.1
+  resolution: "punycode@npm:1.4.1"
+  checksum: fa6e698cb53db45e4628559e557ddaf554103d2a96a1d62892c8f4032cd3bc8871796cae9eabc1bc700e2b6677611521ce5bb1d9a27700086039965d0cf34518
+  languageName: node
+  linkType: hard
+
 "punycode@npm:^2.1.1":
   version: 2.1.1
   resolution: "punycode@npm:2.1.1"
@@ -2280,6 +2305,13 @@ __metadata:
     string_decoder: ^1.1.1
     util-deprecate: ^1.0.1
   checksum: d4ea81502d3799439bb955a3a5d1d808592cf3133350ed352aeaa499647858b27b1c4013984900238b0873ec8d0d8defce72469fb7a83e61d53f5ad61cb80dc8
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.13.4":
+  version: 0.13.9
+  resolution: "regenerator-runtime@npm:0.13.9"
+  checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
   languageName: node
   linkType: hard
 
@@ -2676,6 +2708,25 @@ __metadata:
   dependencies:
     punycode: ^2.1.1
   checksum: 44c3cc6767fb800490e6e9fd64fd49041aa4e49e1f6a012b34a75de739cc9ed3a6405296072c1df8b6389ae139c5e7c6496f659cfe13a04a4bff3a1422981270
+  languageName: node
+  linkType: hard
+
+"twemoji-parser@npm:^11.0.2":
+  version: 11.0.2
+  resolution: "twemoji-parser@npm:11.0.2"
+  checksum: 79075c6512253f17713f236c4853dccdcc9c5a6c2d15b0109c02d684402a21ccdd80352e490cdf76072fe2c09c7c288e501ed41185ebef69df69fe355f9b7c37
+  languageName: node
+  linkType: hard
+
+"twitter-text@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "twitter-text@npm:3.1.0"
+  dependencies:
+    "@babel/runtime": ^7.3.1
+    core-js: ^2.5.0
+    punycode: 1.4.1
+    twemoji-parser: ^11.0.2
+  checksum: 1ba9481f292bd34f7b73fbec60f7705061c1054a899f26e060d74dd473c9dbcad81247a1e25174c43c4a6c4f2957d1b46d55353bdcfc5e9c195ac07ee0e8631f
   languageName: node
   linkType: hard
 

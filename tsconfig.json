@@ -15,6 +15,7 @@
     "outDir": "./dist",
     "paths": {
       "/examples/*": ["./examples/*"],
+      "/lib/*": ["./lib/*"],
       "/src/*": ["./src/*"],
       "/test/*": ["./test/*"],
       "/types/*": ["./types/*"],
@@ -29,6 +30,7 @@
   },
   "include": [
     "./examples/**/*",
+    "./lib/**/*",
     "./src/**/*",
     "./test/**/*",
     "./types/**/*"

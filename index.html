@@ -79,10 +79,39 @@
     <script type="module">
       import ink from '/src/index.ts'
 
+      const autocompletions = [
+        {
+          prefix: '[[',
+          suffix: ']]',
+          suggestions: [
+            { text: 'Hello, World!', insert: '123' },
+            { text: 'Goodbye, World!', insert: '456' },
+          ],
+        },
+        {
+          prefix: '#',
+          suffix: '',
+          suggestions: [
+            { text: 'octo', insert: 'octo' },
+            { text: 'test', insert: 'test' },
+            { text: 'testing', insert: 'testing' },
+            { text: 'dox', insert: 'dox' },
+          ],
+        },
+      ]
+
       window.ink = ink(document.getElementById('app'), {
-        autocompletions: [() => null],
+        autocompletions,
         doc: [
           '# Ink',
+          '',
+          '[[testing[[',
+          '',
+          '#hello #hi #whoa',
+          '',
+          '#what is  fkjd s fkdsjkfsd happening #uhmc',
+          '',
+          '[[testing more]]',
           '',
           'The flexible TypeScript Markdown editor that works the way *you* want it to.',
           '',

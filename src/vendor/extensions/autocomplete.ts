@@ -1,28 +1,44 @@
-import { autocompletion } from '@codemirror/autocomplete'
-import type { CompletionContext, CompletionSource } from '@codemirror/autocomplete'
+import { autocompletion, closeBrackets } from '@codemirror/autocomplete'
+import type { CompletionContext } from '@codemirror/autocomplete'
 
-const example: CompletionSource = (context: CompletionContext) => {
-  const match = context.matchBefore(/\[\[.+/)
+const escape = (text: string) => {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
 
-  if (!match) { return null }
-
-  console.log({ match })
-
+const fromSuggestion = (suggestion: any) => {
   return {
-    from: match.from + 2,
-    options: [
-      { label: 'Hello Friend', type: 'text', info: '(World)', apply: 'hi' },
-      { label: 'Goodbye Friend', type: 'text', info: '(World)', apply: 'bye' },
-      { label: 'What is up', type: 'text', info: '(World)', apply: 'what' },
-    ],
+    apply: suggestion.insert,
+    label: suggestion.text,
+    type: 'text',
   }
 }
 
-const completions = <CompletionSource[]>[example]
+export const autocomplete = (completions: any) => {
+  const overrides = completions.map((completion: any) => {
+    return (context: CompletionContext) => {
+      const regex = new RegExp(`${escape(completion.prefix)}.*?`)
+      const match = context.matchBefore(regex)
 
-export const autocomplete = () => {
-  return autocompletion({
-    defaultKeymap: false,
-    override: completions,
+      // Todo: Check match without suffix _and_ match with suffix. If matching without suffix, inject suffix too.
+      if (!match) { return null }
+
+      console.log('does this count')
+
+      return {
+        from: match.from + completion.prefix.length,
+        options: completion.suggestions.map(fromSuggestion),
+      }
+    }
   })
+
+  return [
+    autocompletion({
+      closeOnBlur: false, // Todo: Remove this.
+      defaultKeymap: true,
+      icons: false,
+      override: overrides,
+      optionClass: () => 'ink-tooltip-option',
+    }),
+    closeBrackets(),
+  ]
 }
