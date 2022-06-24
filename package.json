@@ -1,6 +1,6 @@
 {
   "name": "@writewithocto/ink",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "author": "David R. Myers <david@voracious.dev>",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "license": "MIT",
@@ -79,6 +79,9 @@
     "vue3"
   ],
   "packageManager": "yarn@3.2.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "workspaces": [
     ".",
     "packages/*"
