@@ -1,0 +1,52 @@
+{
+  "name": "@writewithocto/vue-ink",
+  "description": "The flexible TypeScript Markdown editor that powers https://octo.app - packaged as a Vue component.",
+  "license": "MIT",
+  "version": "v0.7.0",
+  "main": "./dist/ink.cjs",
+  "module": "./dist/ink.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/ink.js",
+      "require": "./dist/ink.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "build:demo": "vue-tsc --noEmit && vite --config demo.config.ts build --base /vue-ink",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.35",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@writewithocto/ink": "workspace:*",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
+    "vue": "^3.2.36",
+    "vue-tsc": "^0.34.16"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.35"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "codemirror",
+    "component",
+    "easymde",
+    "javascript",
+    "js",
+    "markdown",
+    "mde",
+    "octo",
+    "sfc",
+    "simplemde",
+    "ts",
+    "typescript",
+    "vue",
+    "vue3"
+  ]
+}
