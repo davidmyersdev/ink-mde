@@ -10,12 +10,13 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, './src/index.ts'),
       fileName: (format) => {
+        if (format === 'cjs') { return 'ink.cjs' }
         if (format === 'es') { return 'ink.js' }
-        if (format === 'umd') { return 'ink.cjs' }
 
-        return `ink.${format}.cjs`
+        return `ink.${format}.js`
       },
-      name: 'ink',
+      // The global name for UMD or IIFE builds.
+      name: 'Ink',
     },
     rollupOptions: {
       output: [
@@ -23,6 +24,12 @@ export default defineConfig({
           esModule: true,
           exports: 'named',
           format: 'es',
+        },
+        {
+          exports: 'named',
+          format: 'cjs',
+          inlineDynamicImports: true,
+          interop: 'esModule',
         },
         {
           exports: 'named',
