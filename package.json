@@ -59,10 +59,7 @@
   },
   "files": [
     "dist",
-    "package.json",
-    "packages/dist",
-    "packages/package.json",
-    "packages/src",
+    "packages",
     "src",
     "types"
   ],
