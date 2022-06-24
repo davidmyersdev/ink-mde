@@ -1,6 +1,6 @@
 {
   "name": "@writewithocto/ink",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "author": "David R. Myers <david@voracious.dev>",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "license": "MIT",
