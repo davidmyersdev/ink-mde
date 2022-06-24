@@ -58,10 +58,10 @@
     "vitest": "^0.14.2"
   },
   "files": [
-    "dist",
-    "packages",
-    "src",
-    "types"
+    "dist/**/*",
+    "packages/**/*",
+    "src/**/*",
+    "types/**/*"
   ],
   "keywords": [
     "codemirror",
