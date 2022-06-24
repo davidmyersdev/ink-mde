@@ -1,31 +1,36 @@
 {
-  "author": "David R. Myers <davidrmyersii@gmail.com>",
   "name": "@writewithocto/ink",
+  "version": "v0.7.1",
+  "author": "David R. Myers <davidrmyersii@gmail.com>",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "license": "MIT",
-  "version": "v0.7.1",
+  "main": "./dist/ink.cjs",
+  "module": "./dist/ink.js",
   "repository": "https://github.com/writewithocto/ink.git",
-  "main": "./dist/ink.umd.js",
-  "module": "./dist/ink.es.js",
   "type": "module",
   "types": "./types/ink.d.ts",
+  "typings": "./types/ink.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/ink.es.js",
-      "require": "./dist/ink.umd.js"
+      "import": "./dist/ink.js",
+      "require": "./dist/ink.cjs"
+    },
+    "./vue": {
+      "import": "./packages/vue/dist/ink.js",
+      "require": "./packages/vue/dist/ink.cjs"
     }
   },
   "scripts": {
+    "build": "yarn build:root && yarn vue:build",
+    "build:root": "tsc && vite build && tsc --project tsconfig.types.json",
     "dev": "vite",
-    "build": "yarn prepack",
-    "build:types": "tsc --project tsconfig.types.json",
-    "build:unsafe": "vite build",
     "docs:check": "embedme --verify README.md",
     "docs:diff": "embedme --stdout README.md",
     "docs:update": "embedme README.md",
-    "prepack": "tsc && vite build && tsc --project tsconfig.types.json",
+    "prepack": "yarn build",
     "test": "vitest",
-    "test:once": "vitest run"
+    "test:once": "vitest run",
+    "vue:build": "yarn workspace @writewithocto/vue-ink build"
   },
   "dependencies": {
     "@codemirror/commands": "^0.20.0",
@@ -54,6 +59,10 @@
   },
   "files": [
     "dist",
+    "package.json",
+    "packages/dist",
+    "packages/package.json",
+    "packages/src",
     "src",
     "types"
   ],
@@ -69,7 +78,13 @@
     "sfc",
     "simplemde",
     "ts",
-    "typescript"
+    "typescript",
+    "vue",
+    "vue3"
   ],
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "workspaces": [
+    ".",
+    "packages/*"
+  ]
 }

@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import path from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
@@ -8,21 +8,29 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/index.ts'),
-      fileName: (format) => `ink.${format}.js`,
-      name: 'Ink',
+      entry: resolve(__dirname, './src/index.ts'),
+      fileName: (format) => {
+        if (format === 'es') { return 'ink.js' }
+        if (format === 'umd') { return 'ink.cjs' }
+
+        return `ink.${format}.cjs`
+      },
+      name: 'ink',
     },
     rollupOptions: {
-      output: [{
-        esModule: true,
-        exports: 'named',
-        format: 'es',
-      }, {
-        format: 'umd',
-        inlineDynamicImports: true,
-        interop: 'esModule',
-        exports: 'named',
-      }],
+      output: [
+        {
+          esModule: true,
+          exports: 'named',
+          format: 'es',
+        },
+        {
+          exports: 'named',
+          format: 'umd',
+          inlineDynamicImports: true,
+          interop: 'esModule',
+        },
+      ],
     },
   },
   plugins: [
@@ -30,8 +38,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '/types': path.resolve(__dirname, './types'),
-      '@writewithocto/ink': path.resolve(__dirname, './src/index'),
+      '/types': resolve(__dirname, './types'),
+      '@writewithocto/ink': resolve(__dirname, './src/index'),
     },
   },
 })
