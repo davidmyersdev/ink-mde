@@ -15,6 +15,7 @@ export default defineConfig({
         return `ink.${format}.cjs`
       },
     },
+    outDir: '../../dist/vue',
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
