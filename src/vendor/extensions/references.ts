@@ -25,6 +25,8 @@ const referenceWidget = (text: string): ReferenceWidget => {
       const span = document.createElement('span')
 
       span.innerText = text
+      // Todo: Do we need to hide the overlay?
+      span.setAttribute('aria-hidden', 'true')
 
       return span
     },

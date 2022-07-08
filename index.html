@@ -79,29 +79,45 @@
     <script type="module">
       import ink from '/src/index.ts'
 
-      const autocompletions = [
+      const referenceSuggestion = (context) => {
+        const match = context.matchBefore(/\[\[.*/)
+
+        if (!match) { return null }
+
+        return {
+          from: match.from + 2,
+          options: [
+            { apply: '123', label: 'Hello, World!', type: 'text' },
+            { apply: '456', label: 'Hello, Friend!', type: 'text' },
+          ]
+        }
+      }
+
+      const tagSuggestion = (context) => {
+        const match = context.matchBefore(/\#.*/)
+
+        if (!match) { return null }
+
+        return {
+          from: match.from + 1,
+          options: [
+            { label: 'octo', apply: 'octo', type: 'text' },
+            { label: 'test', apply: 'test', type: 'text' },
+            { label: 'testing', apply: 'testing', type: 'text' },
+            { label: 'dox', apply: 'dox', type: 'text' },
+          ]
+        }
+      }
+
+      const extensions = [
         {
-          prefix: '[[',
-          suffix: ']]',
-          suggestions: [
-            { text: 'Hello, World!', insert: '123' },
-            { text: 'Goodbye, World!', insert: '456' },
-          ],
-        },
-        {
-          prefix: '#',
-          suffix: '',
-          suggestions: [
-            { text: 'octo', insert: 'octo' },
-            { text: 'test', insert: 'test' },
-            { text: 'testing', insert: 'testing' },
-            { text: 'dox', insert: 'dox' },
-          ],
-        },
+          extensions: [],
+          grammars: [],
+          suggestions: [referenceSuggestion, tagSuggestion],
+        }
       ]
 
       window.ink = ink(document.getElementById('app'), {
-        autocompletions,
         doc: [
           '# Ink',
           '',
@@ -124,6 +140,7 @@
           '}',
           '```',
         ].join("\n"),
+        extensions,
         files: {
           clipboard: true,
           dragAndDrop: true,

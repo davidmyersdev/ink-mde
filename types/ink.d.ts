@@ -75,19 +75,23 @@ export namespace Markup {
 
 export interface Options {
   doc: string
-  extensions: VendorExtension[]
+  extensions: Options.Extension[]
   files: Options.Files
-  grammars: VendorGrammar[]
   hooks: Options.Hooks
   interface: Options.Interface
   selections: Editor.Selection[]
-  suggestions: VendorSuggestion[]
   toolbar: Options.Toolbar
   vim: boolean
 }
 
 export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
+
+  export interface Extension {
+    extensions: VendorExtension[]
+    grammars: VendorGrammar[]
+    suggestions: VendorSuggestion[]
+  }
 
   export interface Extensions {
     [InkValues.Extensions.Appearance]: `${InkValues.Appearance}`

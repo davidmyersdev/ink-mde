@@ -76,7 +76,9 @@ export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
     return options.interface.attribution ? attributionExtension() : []
   },
   autocomplete(options: Ink.Options) {
-    return options.autocompletions?.length > 0 ? autocompleteExtension(options.autocompletions) : []
+    const suggestions = options.extensions.flatMap(ext => ext.suggestions)
+
+    return suggestions?.length > 0 ? autocompleteExtension(suggestions) : []
   },
   images(options: Ink.Options) {
     return options.interface.images ? imagesExtension() : []

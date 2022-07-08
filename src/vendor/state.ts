@@ -10,7 +10,7 @@ import { code } from '/src/vendor/extensions/code'
 import { keymaps } from '/src/vendor/extensions/keymaps'
 import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
 import { theme } from '/src/vendor/extensions/theme'
-import { extensions } from '/src/vendor/extensions/markdown'
+import { extensions as markdownExtensions } from '/src/vendor/extensions/markdown'
 import { references } from '/src/vendor/extensions/references'
 
 import type * as Ink from '/types/ink'
@@ -24,13 +24,15 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
 
 export const createVendorState = (ref: InkInternal.Ref): InkInternal.Vendor.State => {
   const state = getState(ref)
+  const extensions = state.options.extensions.flatMap(ext => ext.extensions)
+  const grammars = state.options.extensions.flatMap(ext => ext.grammars)
 
   return EditorState.create({
     doc: state.options.doc,
     selection: toVendorSelection(state.options.selections),
     extensions: [
       ...buildVendors(ref),
-      ...state.options.extensions,
+      ...extensions,
       code(),
       references(),
       history(),
@@ -39,7 +41,7 @@ export const createVendorState = (ref: InkInternal.Ref): InkInternal.Vendor.Stat
       markdown({
         base: markdownLanguage,
         codeLanguages: languages,
-        extensions: extensions(),
+        extensions: markdownExtensions().concat(grammars),
       }),
       theme(),
     ],
