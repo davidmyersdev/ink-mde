@@ -19,15 +19,15 @@
   },
   "devDependencies": {
     "@types/node": "17.0.35",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^3.0.0",
     "@writewithocto/ink": "workspace:*",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.9",
-    "vue": "^3.2.36",
-    "vue-tsc": "^0.34.16"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.0",
+    "vue": "^3.2.37",
+    "vue-tsc": "^0.38.3"
   },
   "peerDependencies": {
-    "vue": "^3.2.35"
+    "vue": ">=3.0.0"
   },
   "files": [
     "dist",

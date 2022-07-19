@@ -1,42 +1,32 @@
 import { autocompletion, closeBrackets } from '@codemirror/autocomplete'
-import type { CompletionContext, CompletionSource } from '@codemirror/autocomplete'
+import type { CompletionContext, CompletionResult, CompletionSource } from '@codemirror/autocomplete'
+import type { Options } from '/types/ink'
 
-const escape = (text: string) => {
-  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
+const fromSuggestion = (suggestion: Options.Extensions.Suggestion): CompletionSource => {
+  return (context: CompletionContext): CompletionResult | null => {
+    const match = context.matchBefore(suggestion.prefix)
 
-const fromSuggestion = (suggestion: any) => {
-  return {
-    apply: suggestion.insert,
-    label: suggestion.text,
-    type: 'text',
+    if (!match) { return null }
+
+    return {
+      from: match.from + suggestion.offset,
+      options: suggestion.values.map((value) => {
+        return {
+          apply: value.value,
+          label: value.label || value.value,
+          type: 'text',
+        }
+      })
+    }
   }
 }
 
-export const autocomplete = (suggestions: CompletionSource[]) => {
-  // const overrides = suggestions.map((suggestion: CompletionSource) => {
-  //   return (context: CompletionContext) => {
-  //     const regex = new RegExp(`${escape(completion.prefix)}.*?`)
-  //     const match = context.matchBefore(regex)
-
-  //     // Todo: Check match without suffix _and_ with suffix. If matching without suffix, inject suffix too.
-  //     if (!match) { return null }
-
-  //     console.log('does this count')
-
-  //     return {
-  //       from: match.from + completion.prefix.length,
-  //       options: completion.suggestions.map(fromSuggestion),
-  //     }
-  //   }
-  // })
-
+export const autocomplete = (options: Options) => {
   return [
     autocompletion({
-      closeOnBlur: false, // Todo: Remove this.
       defaultKeymap: true,
       icons: false,
-      override: suggestions,
+      override: suggestions.map(fromSuggestion),
       optionClass: () => 'ink-tooltip-option',
     }),
     closeBrackets(),

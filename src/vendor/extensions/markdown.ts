@@ -83,28 +83,7 @@ const Hashtag: MarkdownConfig = {
         )
 
         if (match) {
-          console.log(match)
-
           const offset = match.length
-
-          // Start of hashtag
-          // context.inline.addDelimiter(
-          //   HashtagDelimiter,
-          //   context.index,
-          //   context.index + 1,
-          //   true,
-          //   false
-          // )
-
-          // The following implementation will work if we want to keep the hashtag value and the token (#) separate. If
-          // so, change the starting point of the next element to `index + 1`.
-          // context.inline.addElement(
-          //   context.inline.elt(
-          //     'HashtagMark',
-          //     context.index,
-          //     context.index + 1
-          //   )
-          // )
 
           return context.inline.addElement(
             context.inline.elt(
@@ -113,9 +92,6 @@ const Hashtag: MarkdownConfig = {
               context.index + offset
             )
           )
-
-          // End of hashtag
-          // return context.inline.addDelimiter(HashtagDelimiter, context.index + offset, context.index + 1 + offset, false, true)
         }
 
         return -1
@@ -151,10 +127,7 @@ const Reference: MarkdownConfig = {
 
         // @ts-ignore
         const parts = cx.parts
-
         const openIndex = cx.findOpeningDelimiter(ReferenceStartDelimiter)
-
-        console.log({ openIndex })
 
         if (Number.isInteger(openIndex)) {
           const start = parts[openIndex].from

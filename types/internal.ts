@@ -37,7 +37,7 @@ export namespace InkInternal {
   export interface State {
     components: InkUi.MountedComponent<any>[]
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
-    options: Ink.Options
+    options: Ink.DeepRequired<Ink.Options>
     target: HTMLElement
     ref: InkInternal.Ref
     root: InkUi.Root

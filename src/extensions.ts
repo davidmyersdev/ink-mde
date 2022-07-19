@@ -1,11 +1,10 @@
+import { closeBrackets as autocompleteExtension } from '@codemirror/autocomplete'
 import { Compartment, EditorState } from '@codemirror/state'
 import { vim } from '@replit/codemirror-vim'
-
 import { getState } from '/src/state'
 import { isAutoDark } from '/src/ui'
 import { dark, light } from '/src/vendor/extensions/appearance'
 import { attribution as attributionExtension } from '/src/vendor/extensions/attribution'
-import { autocomplete as autocompleteExtension } from '/src/vendor/extensions/autocomplete'
 import { images as imagesExtension } from '/src/vendor/extensions/images'
 import { spellcheck as spellcheckExtension } from '/src/vendor/extensions/spellcheck'
 import * as InkValues from '/types/values'
@@ -76,9 +75,7 @@ export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
     return options.interface.attribution ? attributionExtension() : []
   },
   autocomplete(options: Ink.Options) {
-    const suggestions = options.extensions.flatMap(ext => ext.suggestions)
-
-    return suggestions?.length > 0 ? autocompleteExtension(suggestions) : []
+    return options.interface.autocomplete ? autocompleteExtension() : []
   },
   images(options: Ink.Options) {
     return options.interface.images ? imagesExtension() : []

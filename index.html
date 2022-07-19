@@ -79,42 +79,35 @@
     <script type="module">
       import ink from '/src/index.ts'
 
-      const referenceSuggestion = (context) => {
-        const match = context.matchBefore(/\[\[.*/)
-
-        if (!match) { return null }
-
-        return {
-          from: match.from + 2,
-          options: [
-            { apply: '123', label: 'Hello, World!', type: 'text' },
-            { apply: '456', label: 'Hello, Friend!', type: 'text' },
-          ]
-        }
+      const referenceSuggestion = {
+        prefix: /\[\[.*/,
+        offset: 2,
+        values: [
+          { value: '123', label: 'Hello, World!' },
+          { value: '456', label: 'Hello, Friend!' },
+        ],
       }
 
-      const tagSuggestion = (context) => {
-        const match = context.matchBefore(/\#.*/)
-
-        if (!match) { return null }
-
-        return {
-          from: match.from + 1,
-          options: [
-            { label: 'octo', apply: 'octo', type: 'text' },
-            { label: 'test', apply: 'test', type: 'text' },
-            { label: 'testing', apply: 'testing', type: 'text' },
-            { label: 'dox', apply: 'dox', type: 'text' },
-          ]
-        }
+      const tagSuggestion = {
+        prefix: /\#.*/,
+        offset: 1,
+        values: [
+          { value: 'dox' },
+          { value: 'octo' },
+          { value: 'test' },
+          { value: 'testing' },
+        ],
       }
 
-      const extensions = [
+      const plugins = [
+        // Todo: Use the following approach to organize plugin types.
+        // { type: 'completion', value: referenceSuggestion },
+        // { type: 'completion', value: tagSuggestion },
         {
-          extensions: [],
+          completions: [referenceSuggestion, tagSuggestion],
           grammars: [],
-          suggestions: [referenceSuggestion, tagSuggestion],
-        }
+          vendors: [],
+        },
       ]
 
       window.ink = ink(document.getElementById('app'), {
@@ -140,7 +133,7 @@
           '}',
           '```',
         ].join("\n"),
-        extensions,
+        plugins,
         files: {
           clipboard: true,
           dragAndDrop: true,
@@ -152,6 +145,7 @@
           injectMarkup: true,
         },
         interface: {
+          autocomplete: true,
           images: true,
           readonly: false,
           spellcheck: true,

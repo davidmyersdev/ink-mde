@@ -27,3 +27,9 @@ export enum Markup {
   Quote = 'quote',
   TaskList = 'task_list',
 }
+
+export enum PluginType {
+  Completion = 'completion',
+  Default = 'default',
+  Grammar = 'grammar',
+}

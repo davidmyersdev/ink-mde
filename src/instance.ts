@@ -74,6 +74,7 @@ export const makeInstance = (ref: InkInternal.Ref): Ink.Instance => {
     focus: (...args) => focus(ref, ...args),
     insert: (...args) => insert(ref, ...args),
     load: (...args) => load(ref, ...args),
+    // @ts-ignore
     reconfigure: (...args) => reconfigure(ref, ...args),
     select: (...args) => select(ref, ...args),
     selections: (...args) => selections(ref, ...args),
@@ -82,7 +83,7 @@ export const makeInstance = (ref: InkInternal.Ref): Ink.Instance => {
   }
 }
 
-export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.DeepPartial<Ink.Options>) => {
+export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.Options) => {
   const { editor } = getState(ref)
 
   updateState(ref, { options: partialOptions })
