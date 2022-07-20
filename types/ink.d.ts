@@ -1,4 +1,4 @@
-// Type definitions for @writewithocto/ink
+// Type definitions for ink-mde
 import * as InkValues from './values'
 import type { CompletionSource } from '@codemirror/autocomplete'
 import type { Extension } from '@codemirror/state'

@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import ink from '@writewithocto/ink'
+import ink from 'ink-mde'
 import { defineComponent } from 'vue'
 
-import type * as Ink from '@writewithocto/ink'
+import type * as Ink from 'ink-mde'
 import type { PropType } from 'vue'
 
 export default defineComponent({

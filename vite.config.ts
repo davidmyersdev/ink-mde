@@ -51,7 +51,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '/types': resolve(__dirname, './types'),
-      '@writewithocto/ink': resolve(__dirname, './src/index'),
+      'ink-mde': resolve(__dirname, './src/index'),
     },
   },
 })

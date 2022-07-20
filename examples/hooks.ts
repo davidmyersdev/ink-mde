@@ -1,4 +1,4 @@
-import { defineOptions, ink } from '@writewithocto/ink'
+import { defineOptions, ink } from 'ink-mde'
 
 // With hooks, you can keep your state in sync with the editor.
 const state = { doc: '# Start with some text' }

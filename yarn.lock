@@ -725,42 +725,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@writewithocto/ink@workspace:*, @writewithocto/ink@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@writewithocto/ink@workspace:."
-  dependencies:
-    "@codemirror/autocomplete": ^6.0.4
-    "@codemirror/commands": ^6.0.1
-    "@codemirror/lang-markdown": ^6.0.0
-    "@codemirror/language": ^6.2.0
-    "@codemirror/language-data": ^6.1.0
-    "@codemirror/search": ^6.0.0
-    "@codemirror/state": ^6.0.1
-    "@codemirror/view": ^6.0.3
-    "@lezer/highlight": ^1.0.0
-    "@lezer/markdown": ^1.0.1
-    "@replit/codemirror-vim": ^6.0.1
-    "@sveltejs/vite-plugin-svelte": ^1.0.1
-    "@types/node": ^18.0.6
-    deepmerge-ts: ^4.2.1
-    embedme: "git+https://github.com/voraciousdev/embedme.git#live-fork"
-    jsdom: ^20.0.0
-    sinuous: "git+https://github.com/voraciousdev/sinuous.git#live-fork"
-    svelte: ^3.49.0
-    svelte-preprocess: ^4.10.7
-    typescript: ^4.7.4
-    vite: ^3.0.2
-    vitest: ^0.18.1
-  languageName: unknown
-  linkType: soft
-
 "@writewithocto/vue-ink@workspace:packages/vue":
   version: 0.0.0-use.local
   resolution: "@writewithocto/vue-ink@workspace:packages/vue"
   dependencies:
     "@types/node": ^18.0.6
     "@vitejs/plugin-vue": ^3.0.0
-    "@writewithocto/ink": "workspace:*"
+    ink-mde: "workspace:*"
     typescript: ^4.7.4
     vite: ^3.0.2
     vue: ^3.2.37
@@ -1769,6 +1740,35 @@ __metadata:
   checksum: 4a48a733847879d6cf6691860a6b1e3f0f4754176e4d71494c41f3475553768b10f84b5ce1d40fbd0e34e6bfbb864ee35858ad4dd2cf31e02fc4a154b724d7f1
   languageName: node
   linkType: hard
+
+"ink-mde@workspace:*, ink-mde@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "ink-mde@workspace:."
+  dependencies:
+    "@codemirror/autocomplete": ^6.0.4
+    "@codemirror/commands": ^6.0.1
+    "@codemirror/lang-markdown": ^6.0.0
+    "@codemirror/language": ^6.2.0
+    "@codemirror/language-data": ^6.1.0
+    "@codemirror/search": ^6.0.0
+    "@codemirror/state": ^6.0.1
+    "@codemirror/view": ^6.0.3
+    "@lezer/highlight": ^1.0.0
+    "@lezer/markdown": ^1.0.1
+    "@replit/codemirror-vim": ^6.0.1
+    "@sveltejs/vite-plugin-svelte": ^1.0.1
+    "@types/node": ^18.0.6
+    deepmerge-ts: ^4.2.1
+    embedme: "git+https://github.com/voraciousdev/embedme.git#live-fork"
+    jsdom: ^20.0.0
+    sinuous: "git+https://github.com/voraciousdev/sinuous.git#live-fork"
+    svelte: ^3.49.0
+    svelte-preprocess: ^4.10.7
+    typescript: ^4.7.4
+    vite: ^3.0.2
+    vitest: ^0.18.1
+  languageName: unknown
+  linkType: soft
 
 "ip@npm:^1.1.5":
   version: 1.1.8

@@ -1,6 +1,6 @@
 {
-  "name": "@writewithocto/ink",
-  "version": "0.8.5",
+  "name": "ink-mde",
+  "version": "0.9.0",
   "author": "David R. Myers <david@voracious.dev>",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "license": "MIT",

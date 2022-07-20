@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineOptions } from '@writewithocto/ink'
+import { defineOptions } from 'ink-mde'
 import { computed, ref, watch } from 'vue'
 import Ink from '/src/components/Ink.vue'
 import doc from '/src/assets/example.md?raw'
