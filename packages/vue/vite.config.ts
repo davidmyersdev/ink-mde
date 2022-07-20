@@ -19,7 +19,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['@writewithocto/ink', 'vue'],
+      external: ['ink-mde', 'vue'],
       output: [
         {
           esModule: true,

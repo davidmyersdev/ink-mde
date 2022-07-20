@@ -2,7 +2,7 @@
 [![license](https://img.shields.io/github/license/writewithocto/vue-ink)](https://github.com/writewithocto/vue-ink/blob/master/LICENSE)
 [![open issues](https://img.shields.io/github/issues-raw/writewithocto/vue-ink)](https://github.com/writewithocto/vue-ink/issues)
 
-# @writewithocto/ink/vue
+# ink-mde/vue
 
 The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app) - packaged as a Vue 3 component. You can also check out the framework-agnostic package at [writewithocto/ink](https://github.com/writewithocto/ink).
 
@@ -24,10 +24,10 @@ The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app)
 
 ```bash
 # yarn
-yarn add @writewithocto/ink
+yarn add ink-mde
 
 # npm
-npm install --save @writewithocto/ink
+npm install --save ink-mde
 ```
 
 ## How to get started
@@ -42,7 +42,7 @@ There are many ways to customize Ink to fit your needs. Here are a few examples 
 </template>
 
 <script lang="ts" setup>
-import Ink from '@writewithocto/ink/vue'
+import Ink from 'ink-mde/vue'
 import { ref } from 'vue'
 
 const markdown = ref('# Hello, World!')
@@ -61,7 +61,7 @@ The `options` prop is an [`Ink.Options`](https://github.com/writewithocto/ink) o
 </template>
 
 <script lang="ts" setup>
-import Ink from '@writewithocto/ink/vue'
+import Ink from 'ink-mde/vue'
 import { reactive, ref } from 'vue'
 
 const markdown = ref('# Hello, World!')

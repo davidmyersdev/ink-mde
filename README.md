@@ -27,13 +27,13 @@ Ink is written in TypeScript and provides both ES and UMD packages.
 #### Yarn
 
 ```bash
-yarn add @writewithocto/ink
+yarn add ink-mde
 ```
 
 #### NPM
 
 ```bash
-npm install --save @writewithocto/ink
+npm install --save ink-mde
 ```
 
 ## Getting started
@@ -47,7 +47,7 @@ Mount the component and start writing.
 ```ts
 // ./examples/minimal.ts
 
-import ink from '@writewithocto/ink'
+import ink from 'ink-mde'
 
 // The only requirement is an HTML element.
 ink(document.getElementById('editor')!)
@@ -60,7 +60,7 @@ To sync the editor with your app's state, you can use the `afterUpdate` hook.
 ```ts
 // ./examples/hooks.ts
 
-import { defineOptions, ink } from '@writewithocto/ink'
+import { defineOptions, ink } from 'ink-mde'
 
 // With hooks, you can keep your state in sync with the editor.
 const state = { doc: '# Start with some text' }

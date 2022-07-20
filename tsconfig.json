@@ -18,7 +18,7 @@
       "/src/*": ["./src/*"],
       "/test/*": ["./test/*"],
       "/types/*": ["./types/*"],
-      "@writewithocto/ink": ["./src/index"]
+      "ink-mde": ["./src/index"]
     },
     "resolveJsonModule": true,
     "sourceMap": true,
