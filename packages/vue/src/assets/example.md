@@ -1,4 +1,4 @@
-# Ink
+# ink-mde
 
 The flexible TypeScript Markdown editor that works the way *you* want it to.
 

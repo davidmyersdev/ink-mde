@@ -22,10 +22,10 @@ class AttributionWidget extends WidgetType {
     container.style.position = 'absolute'
     container.style.right = '0'
 
-    text.innerText = 'Powered by '
+    text.innerText = 'powered by '
 
     link.href = 'https://github.com/voraciousdev/ink-mde'
-    link.innerText = 'Ink'
+    link.innerText = 'ink-mde'
     link.rel = 'noopener noreferrer'
     link.target = '_blank'
     link.style.color = 'var(--ink-internal-color)'

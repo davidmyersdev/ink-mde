@@ -2,7 +2,7 @@
 [![license](https://img.shields.io/github/license/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/master/LICENSE)
 [![open issues](https://img.shields.io/github/issues-raw/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/issues)
 
-# Ink
+# ink-mde
 
 The flexible TypeScript Markdown editor that powers https://octo.app.
 
@@ -19,26 +19,24 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 - [x] Configurable and stylable
 - [x] An optional formatting toolbar (great for mobile)
 - [x] Vim Mode
+- [x] Plugin API
 
-## How to install
+## Getting Started
 
-Ink is written in TypeScript and provides both ES and UMD packages.
+With your preferred package manager, add `ink-mde` to your project.
 
-#### Yarn
+```sh
+# npm
+npm i ink-mde
 
-```bash
+# pnpm
+pnpm i ink-mde
+
+# yarn
 yarn add ink-mde
 ```
 
-#### NPM
-
-```bash
-npm install --save ink-mde
-```
-
-## Getting started
-
-There are many ways to customize Ink to fit your needs. Here are a few examples to get you started.
+Next, import `ink-mde` and customize it to fit your needs.
 
 ### Minimal setup
 
@@ -83,34 +81,34 @@ editor.update(state.doc)
 
 Other features of the editor can be customized through the following options.
 
-| Option                          | Description                                | Type                                        | Default    |
-| ----                            | ----                                       | ----                                        | ----       |
-| `options.doc`                   | Initialize the editor with an existing doc | `string`                                    | `''`       |
-| `options.files.clipboard`       | Enable file uploads on paste               | `boolean`                                   | `false`    |
-| `options.files.dragAndDrop`     | Enable drag-and-drop file uploads          | `boolean`                                   | `false`    |
-| `options.files.handler`         | Handle file uploads (not handled by Ink)   | `(files: FileList) => Promise<any> \| void` | `() => {}` |
-| `options.hooks.afterUpdate`     | Run some code after the doc is updated     | `(doc: string) => void`                     | `() => {}` |
-| `options.hooks.beforeUpdate`    | Run some code before the doc is updated    | `(doc: string) => void`                     | `() => {}` |
-| `options.interface.appearance`  | Change the editor theme                    | `'auto' \| 'dark' \| 'light'`               | `'auto'`   |
-| `options.interface.attribution` | Show the "Powered by Ink" attribution      | `boolean`                                   | `true`     |
-| `options.interface.images`      | Render images in the editor                | `boolean`                                   | `false`    |
-| `options.interface.spellcheck`  | Enable spellcheck                          | `boolean`                                   | `true`     |
-| `options.interface.toolbar`     | Enable the formatting toolbar              | `boolean`                                   | `false`    |
-| `options.plugins`               | Extend the editor with custom features     | `Ink.Editor.Plugin[]`                       | `[]`       |
-| `options.selections`            | Initialize the editor with selections      | `Ink.Editor.Selection[]`                    | `[]`       |
-| `options.toolbar.bold`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.code`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.codeBlock`     | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.heading`       | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.image`         | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.italic`        | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.link`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.list`          | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.orderedList`   | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.quote`         | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.taskList`      | Include this button in the toolbar         | `boolean`                                   | `true`     |
-| `options.toolbar.upload`        | Include this button in the toolbar         | `boolean`                                   | `false`    |
-| `options.vim`                   | Use Vim keybindings to edit the doc        | `boolean`                                   | `false`    |
+| Option                          | Description                                  | Type                                        | Default    |
+| ----                            | ----                                         | ----                                        | ----       |
+| `options.doc`                   | Initialize the editor with an existing doc   | `string`                                    | `''`       |
+| `options.files.clipboard`       | Enable file uploads on paste                 | `boolean`                                   | `false`    |
+| `options.files.dragAndDrop`     | Enable drag-and-drop file uploads            | `boolean`                                   | `false`    |
+| `options.files.handler`         | Handle file uploads (not handled by ink-mde) | `(files: FileList) => Promise<any> \| void` | `() => {}` |
+| `options.hooks.afterUpdate`     | Run some code after the doc is updated       | `(doc: string) => void`                     | `() => {}` |
+| `options.hooks.beforeUpdate`    | Run some code before the doc is updated      | `(doc: string) => void`                     | `() => {}` |
+| `options.interface.appearance`  | Change the editor theme                      | `'auto' \| 'dark' \| 'light'`               | `'auto'`   |
+| `options.interface.attribution` | Show the "powered by ink-mde" attribution    | `boolean`                                   | `true`     |
+| `options.interface.images`      | Render images in the editor                  | `boolean`                                   | `false`    |
+| `options.interface.spellcheck`  | Enable spellcheck                            | `boolean`                                   | `true`     |
+| `options.interface.toolbar`     | Enable the formatting toolbar                | `boolean`                                   | `false`    |
+| `options.plugins`               | Extend the editor with custom features       | `Ink.Editor.Plugin[]`                       | `[]`       |
+| `options.selections`            | Initialize the editor with selections        | `Ink.Editor.Selection[]`                    | `[]`       |
+| `options.toolbar.bold`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.code`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.codeBlock`     | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.heading`       | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.image`         | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.italic`        | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.link`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.list`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.orderedList`   | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.quote`         | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.taskList`      | Include this button in the toolbar           | `boolean`                                   | `true`     |
+| `options.toolbar.upload`        | Include this button in the toolbar           | `boolean`                                   | `false`    |
+| `options.vim`                   | Use Vim keybindings to edit the doc          | `boolean`                                   | `false`    |
 
 ### Plugins
 
@@ -210,11 +208,11 @@ Your support is appreciated. Here are some ways you can help. ♥️
 
 ### Leave the Attribution enabled
 
-There is a small `Powered by Ink` attribution in the bottom-right corner of all Ink instances by default. Ink is a free MIT-licensed library under independent development, and that attribution helps to increase awareness of this project.
+There is a small `powered by ink-mde` attribution in the bottom-right corner of all editor instances by default. Being a free, MIT-licensed library under independent development, that attribution helps to increase awareness of this project and my work in general.
 
 ### Tell us what you think
 
-Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
+Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
 
 ### Open a Pull Request
 
