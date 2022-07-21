@@ -1,6 +1,6 @@
-[![latest tag](https://img.shields.io/github/v/tag/writewithocto/ink?color=blue&label=latest%20tag&sort=semver)](https://github.com/writewithocto/ink/releases)
-[![license](https://img.shields.io/github/license/writewithocto/ink)](https://github.com/writewithocto/ink/blob/master/LICENSE)
-[![open issues](https://img.shields.io/github/issues-raw/writewithocto/ink)](https://github.com/writewithocto/ink/issues)
+[![latest tag](https://img.shields.io/github/v/tag/voraciousdev/ink-mde?color=blue&label=latest%20tag&sort=semver&style=for-the-badge)](https://github.com/voraciousdev/ink-mde/releases)
+[![license](https://img.shields.io/github/license/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/master/LICENSE)
+[![open issues](https://img.shields.io/github/issues-raw/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/issues)
 
 # Ink
 
@@ -214,11 +214,11 @@ There is a small `Powered by Ink` attribution in the bottom-right corner of all 
 
 ### Tell us what you think
 
-Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/writewithocto/octo/discussions) under [Octo](https://github.com/writewithocto/octo) if you have a question or just want to chat about ideas!
+Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
 
 ### Open a Pull Request
 
-If you feel comfortable with [an existing issue](https://github.com/writewithocto/ink/issues), please consider opening a Pull Request. I would love to work with you to get it merged!
+If you feel comfortable with [an existing issue](https://github.com/voraciousdev/ink-mde/issues), please consider opening a Pull Request. I would love to work with you to get it merged!
 
 ### Become a financial backer
 

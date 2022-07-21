@@ -1,5 +1,5 @@
 {
-  "name": "@writewithocto/vue-ink",
+  "name": "@voraciousdev/vue-ink-mde",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app - packaged as a Vue component.",
   "license": "MIT",
   "version": "v0.7.0",

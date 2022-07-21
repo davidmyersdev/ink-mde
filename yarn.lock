@@ -613,6 +613,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@voraciousdev/vue-ink-mde@workspace:packages/vue":
+  version: 0.0.0-use.local
+  resolution: "@voraciousdev/vue-ink-mde@workspace:packages/vue"
+  dependencies:
+    "@types/node": ^18.0.6
+    "@vitejs/plugin-vue": ^3.0.1
+    ink-mde: "workspace:*"
+    typescript: ^4.7.4
+    vite: ^3.0.2
+    vue: ^3.2.37
+    vue-tsc: ^0.38.9
+  peerDependencies:
+    vue: ">=3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@vue/compiler-core@npm:3.2.37, @vue/compiler-core@npm:^3.2.37":
   version: 3.2.37
   resolution: "@vue/compiler-core@npm:3.2.37"
@@ -724,22 +740,6 @@ __metadata:
   checksum: 999ab8baeb13de190d07536e7dd0e74ab9354a864d8d903850a2127ae1a2aa2713a9edc0d957620ebf91165d6603d0cd2b0e8ee0db6cbaf8d57a6a0f912af810
   languageName: node
   linkType: hard
-
-"@writewithocto/vue-ink@workspace:packages/vue":
-  version: 0.0.0-use.local
-  resolution: "@writewithocto/vue-ink@workspace:packages/vue"
-  dependencies:
-    "@types/node": ^18.0.6
-    "@vitejs/plugin-vue": ^3.0.1
-    ink-mde: "workspace:*"
-    typescript: ^4.7.4
-    vite: ^3.0.2
-    vue: ^3.2.37
-    vue-tsc: ^0.38.9
-  peerDependencies:
-    vue: ">=3.0.0"
-  languageName: unknown
-  linkType: soft
 
 "abab@npm:^2.0.6":
   version: 2.0.6
