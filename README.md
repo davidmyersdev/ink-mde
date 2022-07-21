@@ -46,7 +46,6 @@ Mount the component and start writing.
 
 ```ts
 // ./examples/minimal.ts
-
 import ink from 'ink-mde'
 
 // The only requirement is an HTML element.
@@ -59,7 +58,6 @@ To sync the editor with your app's state, you can use the `afterUpdate` hook.
 
 ```ts
 // ./examples/hooks.ts
-
 import { defineOptions, ink } from 'ink-mde'
 
 // With hooks, you can keep your state in sync with the editor.

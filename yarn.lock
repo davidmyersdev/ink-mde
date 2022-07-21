@@ -1170,7 +1170,7 @@ __metadata:
 
 "embedme@git+https://github.com/voraciousdev/embedme.git#live-fork":
   version: 0.0.0-development
-  resolution: "embedme@https://github.com/voraciousdev/embedme.git#commit=3186926a59b2fdf74f88fea7e09a81ca93ad9482"
+  resolution: "embedme@https://github.com/voraciousdev/embedme.git#commit=5653b238b5905b5fddc1dae6e452b0001878e479"
   dependencies:
     chalk: 3.0.0
     commander: 5.1.0
@@ -1178,7 +1178,7 @@ __metadata:
     glob: ~7.1.4
   bin:
     embedme: ./dist/embedme.js
-  checksum: f17d6b766ad48bb0edec081e551c7a11d4f2502f6ac1fdc76f28f9f21aef6dd3a4d5baa75254b5b1b3a46ad099a5fb7502504ddff29593bdab544805e3ed5c32
+  checksum: b22d68cc70a4f04dc254a1f13b31590853c05cc33fcabe2ff5da40b49986567b2c54b72cbf28a27d2aaeb301c7a70d4efcaaa8a2cfe2556831ac32cf2b95a257
   languageName: node
   linkType: hard
 
