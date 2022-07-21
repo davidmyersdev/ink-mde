@@ -32,7 +32,7 @@ npm install --save ink-mde
 
 ## How to get started
 
-There are many ways to customize Ink to fit your needs. Here are a few examples to get you started.
+There are many ways to customize `ink-mde` to fit your needs. Here are a few examples to get you started.
 
 ### Minimal setup
 
@@ -101,7 +101,7 @@ Your support is appreciated. Here are some ways you can help. ♥️
 
 ### Tell us what you think
 
-Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
+Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
 
 ### Become a financial backer
 
