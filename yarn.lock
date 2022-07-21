@@ -561,13 +561,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@vitejs/plugin-vue@npm:3.0.0"
+"@vitejs/plugin-vue@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@vitejs/plugin-vue@npm:3.0.1"
   peerDependencies:
     vite: ^3.0.0
     vue: ^3.2.25
-  checksum: e2c3e31afc39f83b16174ef4742e88e07b5516688f02dcbe9814afd62c859925173ec2d6a9f088c6098eb45cdae926122308596a8ece90028ffea169f15c685f
+  checksum: 8a48888f0e97bb9f0a7c59ca55546f4fcc316609850630ae27e9702ca7030b19d3c023e8a52de8631c243bc32825bf1a88b7ddd2b0f802916d47171465959159
   languageName: node
   linkType: hard
 
@@ -730,7 +730,7 @@ __metadata:
   resolution: "@writewithocto/vue-ink@workspace:packages/vue"
   dependencies:
     "@types/node": ^18.0.6
-    "@vitejs/plugin-vue": ^3.0.0
+    "@vitejs/plugin-vue": ^3.0.1
     ink-mde: "workspace:*"
     typescript: ^4.7.4
     vite: ^3.0.2
