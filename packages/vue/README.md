@@ -1,10 +1,10 @@
-[![latest tag](https://img.shields.io/github/v/tag/writewithocto/vue-ink?color=blue&label=latest%20tag&sort=semver)](https://github.com/writewithocto/vue-ink/releases)
-[![license](https://img.shields.io/github/license/writewithocto/vue-ink)](https://github.com/writewithocto/vue-ink/blob/master/LICENSE)
-[![open issues](https://img.shields.io/github/issues-raw/writewithocto/vue-ink)](https://github.com/writewithocto/vue-ink/issues)
+[![latest tag](https://img.shields.io/github/v/tag/voraciousdev/ink-mde?color=blue&label=latest%20tag&sort=semver&style=for-the-badge)](https://github.com/voraciousdev/ink-mde/releases)
+[![license](https://img.shields.io/github/license/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/master/LICENSE)
+[![open issues](https://img.shields.io/github/issues-raw/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/issues)
 
 # ink-mde/vue
 
-The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app) - packaged as a Vue 3 component. You can also check out the framework-agnostic package at [writewithocto/ink](https://github.com/writewithocto/ink).
+The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app) - packaged as a Vue 3 component. You can also check out the framework-agnostic package at [voraciousdev/ink-mde](https://github.com/voraciousdev/ink-mde).
 
 ![](screenshot.png)
 
@@ -51,7 +51,7 @@ const markdown = ref('# Hello, World!')
 
 ### Configuration options
 
-The `options` prop is an [`Ink.Options`](https://github.com/writewithocto/ink) object.
+The `options` prop is an [`Ink.Options`](https://github.com/voraciousdev/ink-mde) object.
 
 ```vue
 <template>
@@ -101,7 +101,7 @@ Your support is appreciated. Here are some ways you can help. ♥️
 
 ### Tell us what you think
 
-Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/writewithocto/octo/discussions) under [Octo](https://github.com/writewithocto/octo) if you have a question or just want to chat about ideas!
+Your feedback is immensely important for building Ink into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
 
 ### Become a financial backer
 

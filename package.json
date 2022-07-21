@@ -1,36 +1,17 @@
 {
   "name": "ink-mde",
-  "version": "0.9.0",
-  "author": "David R. Myers <david@voracious.dev>",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
-  "license": "MIT",
-  "main": "./dist/ink.cjs",
-  "module": "./dist/ink.js",
-  "repository": "https://github.com/writewithocto/ink.git",
-  "type": "module",
-  "types": "./types/ink.d.ts",
-  "typings": "./types/ink.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/ink.js",
-      "require": "./dist/ink.cjs"
-    },
-    "./vue": {
-      "import": "./dist/vue/ink.js",
-      "require": "./dist/vue/ink.cjs"
-    }
+  "version": "0.9.1",
+  "author": "David R. Myers <david@voracious.dev>",
+  "bugs": {
+    "url": "https://github.com/voraciousdev/ink-mde/issues"
   },
-  "scripts": {
-    "build": "yarn build:root && yarn vue:build",
-    "build:root": "tsc && vite build && tsc --project tsconfig.types.json",
-    "dev": "vite",
-    "docs:check": "embedme --verify README.md",
-    "docs:diff": "embedme --stdout README.md",
-    "docs:update": "embedme README.md",
-    "prepack": "yarn build",
-    "test": "vitest",
-    "test:once": "vitest run",
-    "vue:build": "yarn workspace @writewithocto/vue-ink build"
+  "funding": "https://github.com/sponsors/voraciousdev",
+  "homepage": "https://github.com/voraciousdev/ink-mde",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voraciousdev/ink-mde.git"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.0.4",
@@ -58,6 +39,16 @@
     "vite": "^3.0.2",
     "vitest": "^0.18.1"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/ink.js",
+      "require": "./dist/ink.cjs"
+    },
+    "./vue": {
+      "import": "./dist/vue/ink.js",
+      "require": "./dist/vue/ink.cjs"
+    }
+  },
   "files": [
     "dist/**/*",
     "src/**/*",
@@ -79,10 +70,27 @@
     "vue",
     "vue3"
   ],
+  "main": "./dist/ink.cjs",
+  "module": "./dist/ink.js",
   "packageManager": "yarn@3.2.1",
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "yarn build:root && yarn vue:build",
+    "build:root": "tsc && vite build && tsc --project tsconfig.types.json",
+    "dev": "vite",
+    "docs:check": "embedme --verify README.md",
+    "docs:diff": "embedme --stdout README.md",
+    "docs:update": "embedme README.md",
+    "prepack": "yarn build",
+    "test": "vitest",
+    "test:once": "vitest run",
+    "vue:build": "yarn workspace @voraciousdev/vue-ink-mde build"
+  },
+  "type": "module",
+  "types": "./types/ink.d.ts",
+  "typings": "./types/ink.d.ts",
   "workspaces": [
     ".",
     "packages/*"
