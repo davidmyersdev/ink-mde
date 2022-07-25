@@ -200,7 +200,7 @@ You can customize the entire syntax theme too.
 | `--ink-syntax-string-special-color`           | `color`            | `inherit`      |                  |
 | `--ink-syntax-strong-color`                   | `color`            | `inherit`      |                  |
 | `--ink-syntax-strong-font-weight`             | `font-weight`      | `600`          |                  |
-| `--ink-syntax-url-color`                      | `color`            | `#96c0d8`      |                  |
+| `--ink-syntax-url-color`                      | `color`            | `#aaaaaa`      | `#666666`        |
 
 ## Support
 
