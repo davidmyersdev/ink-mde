@@ -139,7 +139,7 @@ export const styleRoot = (ref: InkInternal.Ref) => {
     { suffix: 'syntax-string-special-color', default: 'inherit' },
     { suffix: 'syntax-strong-color', default: 'inherit' },
     { suffix: 'syntax-strong-font-weight', default: '600' },
-    { suffix: 'syntax-url-color', default: '#96c0d8' },
+    { suffix: 'syntax-url-color', default: '#aaaaaa', light: '#666666' },
     // legacy --ink-* variables
     { suffix: 'all-border-radius', default: '0.25rem' },
     { suffix: 'all-color', default: '#fafafa', light: '#171717' },
