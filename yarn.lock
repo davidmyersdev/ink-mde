@@ -1753,6 +1753,7 @@ __metadata:
     "@codemirror/search": ^6.0.0
     "@codemirror/state": ^6.0.1
     "@codemirror/view": ^6.0.3
+    "@lezer/common": ^1.0.0
     "@lezer/highlight": ^1.0.0
     "@lezer/markdown": ^1.0.1
     "@replit/codemirror-vim": ^6.0.1
@@ -1762,6 +1763,7 @@ __metadata:
     embedme: "git+https://github.com/voraciousdev/embedme.git#live-fork"
     jsdom: ^20.0.0
     sinuous: "git+https://github.com/voraciousdev/sinuous.git#live-fork"
+    style-mod: ^4.0.0
     svelte: ^3.49.0
     svelte-preprocess: ^4.10.7
     typescript: ^4.7.4
@@ -1776,9 +1778,11 @@ __metadata:
     "@codemirror/search": ^6.0.0
     "@codemirror/state": ^6.0.1
     "@codemirror/view": ^6.0.3
+    "@lezer/common": ^1.0.0
     "@lezer/highlight": ^1.0.0
     "@lezer/markdown": ^1.0.1
     "@replit/codemirror-vim": ^6.0.1
+    style-mod: ^4.0.0
   languageName: unknown
   linkType: soft
 
@@ -2735,7 +2739,7 @@ __metadata:
 
 "typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
   version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver

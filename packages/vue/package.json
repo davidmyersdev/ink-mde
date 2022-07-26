@@ -2,7 +2,7 @@
   "name": "@voraciousdev/vue-ink-mde",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app - packaged as a Vue component.",
   "license": "MIT",
-  "version": "v0.7.0",
+  "version": "0.7.0",
   "main": "./dist/ink.cjs",
   "module": "./dist/ink.js",
   "type": "module",
@@ -17,10 +17,12 @@
     "build:demo": "vue-tsc --noEmit && vite --config demo.config.ts build --base /vue-ink",
     "dev": "vite"
   },
+  "dependencies": {
+    "ink-mde": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "^18.0.6",
     "@vitejs/plugin-vue": "^3.0.1",
-    "ink-mde": "workspace:*",
     "typescript": "^4.7.4",
     "vite": "^3.0.2",
     "vue": "^3.2.37",
