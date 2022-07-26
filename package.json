@@ -1,7 +1,7 @@
 {
   "name": "ink-mde",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "author": "David R. Myers <david@voracious.dev>",
   "bugs": {
     "url": "https://github.com/voraciousdev/ink-mde/issues"
