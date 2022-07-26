@@ -1767,6 +1767,18 @@ __metadata:
     typescript: ^4.7.4
     vite: ^3.0.2
     vitest: ^0.18.1
+  peerDependencies:
+    "@codemirror/autocomplete": ^6.0.4
+    "@codemirror/commands": ^6.0.1
+    "@codemirror/lang-markdown": ^6.0.0
+    "@codemirror/language": ^6.2.0
+    "@codemirror/language-data": ^6.1.0
+    "@codemirror/search": ^6.0.0
+    "@codemirror/state": ^6.0.1
+    "@codemirror/view": ^6.0.3
+    "@lezer/highlight": ^1.0.0
+    "@lezer/markdown": ^1.0.1
+    "@replit/codemirror-vim": ^6.0.1
   languageName: unknown
   linkType: soft
 
