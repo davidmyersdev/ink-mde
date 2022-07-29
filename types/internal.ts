@@ -6,7 +6,7 @@ import type {
   Transaction as VendorTransaction,
 } from '@codemirror/state'
 import type { EditorView as VendorView } from '@codemirror/view'
-import type { SvelteComponent as VendorComponent } from 'svelte'
+import type { SetStoreFunction } from 'solid-js/store'
 import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
 
@@ -27,31 +27,27 @@ export namespace InkInternal {
     name: OptionName
   }
 
-  export type Ref = {}
   export interface State {
-    components?: InkUi.MountedComponent<any>[]
     extensions?: InkInternal.OptionExtension<Ink.Values.Extensions>[]
     options?: Ink.Options
     target?: HTMLElement
-    ref?: InkInternal.Ref
     root?: InkUi.Root
     editor?: InkInternal.Editor
   }
 
   export interface StateResolved {
-    components: InkUi.MountedComponent<any>[]
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
     options: Ink.OptionsResolved
     target: HTMLElement
-    ref: InkInternal.Ref
     root: InkUi.Root
     editor: InkInternal.Editor
   }
 
+  export type Store = [get: InkInternal.StateResolved, set: SetStoreFunction<InkInternal.StateResolved>]
+
   export namespace Vendor {
     // All vendor types (and adapters) should be encapsulated here.
     export type Compartment = VendorCompartment
-    export type Component = VendorComponent
     export type Extension = VendorExtension
     export type ExtensionResolver = (options: Ink.OptionsResolved) => InkInternal.Vendor.Extension
     export type ExtensionResolvers = {

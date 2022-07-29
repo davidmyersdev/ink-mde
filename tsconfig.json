@@ -5,6 +5,8 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -24,7 +26,9 @@
     "sourceMap": true,
     "strict": true,
     "target": "ESNext",
-    "types": ["node", "svelte"],
+    "types": [
+      "node"
+    ],
     "useDefineForClassFields": true
   },
   "include": [

@@ -10,13 +10,6 @@ type VendorGrammar = MarkdownConfig
 
 export * from './values'
 
-export type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends (infer U)[] ? DeepPartial<U>[]
-    : T[K] extends Function ? T[K]
-    : T[K] extends object ? DeepPartial<T[K]>
-    : T[K]
-}
-
 export namespace Editor {
   export interface Selection {
     end: number

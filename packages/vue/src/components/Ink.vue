@@ -14,7 +14,7 @@ export default defineComponent({
   emits: ['input', 'update:modelValue'],
   props: {
     options: {
-      type: Object as PropType<Ink.DeepPartial<Ink.Options>>,
+      type: Object as PropType<Ink.Options>,
     },
     modelValue: {
       type: String,
