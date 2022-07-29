@@ -60,8 +60,10 @@ export const createExtensions = () => {
 
 export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
   appearance({ interface: { appearance } }: Ink.OptionsResolved) {
-    if (appearance === InkValues.Appearance.Dark) { return dark() }
-    if (appearance === InkValues.Appearance.Light) { return light() }
+    if (appearance === InkValues.Appearance.Dark)
+      return dark()
+    if (appearance === InkValues.Appearance.Light)
+      return light()
 
     // Automatically determine the correct color scheme.
     return isAutoDark() ? dark() : light()

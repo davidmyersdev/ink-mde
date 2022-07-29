@@ -1,5 +1,6 @@
 import { syntaxTree } from '@codemirror/language'
-import { Extension, RangeSetBuilder } from '@codemirror/state'
+import type { Extension } from '@codemirror/state'
+import { RangeSetBuilder } from '@codemirror/state'
 import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 
 const codeBlockBaseTheme = EditorView.baseTheme({
@@ -52,9 +53,9 @@ const codeBlockPlugin = ViewPlugin.define((view: EditorView) => {
   return {
     update: () => {
       return decorate(view)
-    }
+    },
   }
-}, { decorations: (plugin) => plugin.update() })
+}, { decorations: plugin => plugin.update() })
 
 const decorate = (view: EditorView) => {
   const builder = new RangeSetBuilder<Decoration>()
@@ -74,13 +75,11 @@ const decorate = (view: EditorView) => {
               const openLine = view.state.doc.lineAt(from)
               const closeLine = view.state.doc.lineAt(to)
 
-              if (openLine.number === line.number) {
+              if (openLine.number === line.number)
                 builder.add(line.from, line.from, codeBlockOpenDecoration)
-              }
 
-              if (closeLine.number === line.number) {
+              if (closeLine.number === line.number)
                 builder.add(line.from, line.from, codeBlockCloseDecoration)
-              }
 
               return false
             } else if (type.name === 'InlineCode') {

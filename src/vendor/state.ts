@@ -2,7 +2,8 @@ import { autocompletion } from '@codemirror/autocomplete'
 import { history } from '@codemirror/commands'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
-import { EditorSelection, EditorState } from '@codemirror/state'
+import type { EditorSelection } from '@codemirror/state'
+import { EditorState } from '@codemirror/state'
 
 import { toCodeMirror } from '/src/adapters/selections'
 import { buildVendors } from '/src/extensions'
@@ -16,9 +17,8 @@ import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
 const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {
-  if (selections.length > 0) {
+  if (selections.length > 0)
     return toCodeMirror(selections)
-  }
 }
 
 export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.State => {

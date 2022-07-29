@@ -22,9 +22,8 @@ export const doc = ([state, _setState]: InkInternal.Store) => {
 export const focus = ([state, _setState]: InkInternal.Store) => {
   const { editor } = state
 
-  if (!editor.hasFocus) {
+  if (!editor.hasFocus)
     editor.focus()
-  }
 }
 
 export const format = ([state, setState]: InkInternal.Store, type: `${Ink.Values.Markup}`, selection?: Ink.Editor.Selection) => {
@@ -54,7 +53,7 @@ export const insert = ([state, setState]: InkInternal.Store, text: string, selec
   }
 
   editor.dispatch(
-    editor.state.update(updates)
+    editor.state.update(updates),
   )
 }
 
@@ -97,7 +96,7 @@ export const select = ([state, _setState]: InkInternal.Store, selections: Ink.Ed
   editor.dispatch(
     editor.state.update({
       selection: toCodeMirror(selections),
-    })
+    }),
   )
 }
 
@@ -117,7 +116,7 @@ export const update = ([state, _setState]: InkInternal.Store, doc: string) => {
         to: editor.state.doc.length,
         insert: doc,
       },
-    })
+    }),
   )
 }
 

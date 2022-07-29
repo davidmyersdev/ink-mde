@@ -12,6 +12,25 @@
           "delimiter": "comma"
         }
       }
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      0,
+      {}
+    ],
+    "@typescript-eslint/brace-style": [
+      2,
+      "1tbs"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": "./.github/**/*",
+      "rules": {
+        "yml/no-empty-mapping-value": [
+          0,
+          {}
+        ]
+      }
+    }
+  ]
 }
