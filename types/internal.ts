@@ -1,7 +1,7 @@
 import type {
   Compartment as VendorCompartment,
-  EditorState as VendorState,
   Extension as VendorExtension,
+  EditorState as VendorState,
   StateEffect as VendorStateEffect,
   Transaction as VendorTransaction,
 } from '@codemirror/state'
@@ -14,8 +14,8 @@ export namespace InkInternal {
   export type Editor = InkInternal.Vendor.View
 
   export interface Extension {
-    compartment: InkInternal.Vendor.Compartment
-    resolver: InkInternal.Vendor.ExtensionResolver
+    compartment: InkInternal.Vendor.Compartment,
+    resolver: InkInternal.Vendor.ExtensionResolver,
   }
 
   export type Extensions = {
@@ -23,24 +23,24 @@ export namespace InkInternal {
   }
 
   export interface OptionExtension<OptionName extends Ink.Values.Extensions> extends InkInternal.Extension {
-    effect?: InkInternal.Vendor.StateEffect<any>
-    name: OptionName
+    effect?: InkInternal.Vendor.StateEffect<any>,
+    name: OptionName,
   }
 
   export interface State {
-    extensions?: InkInternal.OptionExtension<Ink.Values.Extensions>[]
-    options?: Ink.Options
-    target?: HTMLElement
-    root?: InkUi.Root
-    editor?: InkInternal.Editor
+    extensions?: InkInternal.OptionExtension<Ink.Values.Extensions>[],
+    options?: Ink.Options,
+    target?: HTMLElement,
+    root?: InkUi.Root,
+    editor?: InkInternal.Editor,
   }
 
   export interface StateResolved {
-    extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[]
-    options: Ink.OptionsResolved
-    target: HTMLElement
-    root: InkUi.Root
-    editor: InkInternal.Editor
+    extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[],
+    options: Ink.OptionsResolved,
+    target: HTMLElement,
+    root: InkUi.Root,
+    editor: InkInternal.Editor,
   }
 
   export type Store = [get: InkInternal.StateResolved, set: SetStoreFunction<InkInternal.StateResolved>]

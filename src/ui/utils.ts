@@ -12,8 +12,10 @@ export const isAutoDark = () => {
 }
 
 export const isDark = (appearance: string) => {
-  if (appearance === InkValues.Appearance.Dark) { return true }
-  if (appearance === InkValues.Appearance.Light) { return false }
+  if (appearance === InkValues.Appearance.Dark)
+    return true
+  if (appearance === InkValues.Appearance.Light)
+    return false
 
   return isAutoDark()
 }
@@ -33,9 +35,9 @@ export const makeVars = (state: InkInternal.StateResolved) => {
     { suffix: 'block-max-height', default: '20rem' },
     { suffix: 'block-padding', default: '0.5rem' },
     // --ink-code-*
-    { suffix: 'code-background-color', default: "var(--ink-internal-block-background-color)" },
-    { suffix: 'code-color', default: "inherit" },
-    { suffix: 'code-font-family', default: "'Monaco', Courier, monospace" },
+    { suffix: 'code-background-color', default: 'var(--ink-internal-block-background-color)' },
+    { suffix: 'code-color', default: 'inherit' },
+    { suffix: 'code-font-family', default: '\'Monaco\', Courier, monospace' },
     // --ink-editor-*
     { suffix: 'editor-font-size', default: '1em' },
     { suffix: 'editor-line-height', default: '2em' },

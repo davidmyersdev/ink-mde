@@ -11,8 +11,10 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, './src/index.tsx'),
       fileName: (format) => {
-        if (format === 'cjs') { return 'ink.cjs' }
-        if (format === 'es') { return 'ink.js' }
+        if (format === 'cjs')
+          return 'ink.cjs'
+        if (format === 'es')
+          return 'ink.js'
 
         return `ink.${format}.js`
       },

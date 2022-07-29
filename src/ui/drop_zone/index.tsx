@@ -1,5 +1,6 @@
+import type { Component } from 'solid-js'
+import { For, Show, createSignal, onCleanup, onMount } from 'solid-js'
 import { useStore } from '../app'
-import { Component, createSignal, For, Show, onMount, onCleanup } from 'solid-js'
 import { insert } from '/src/instance'
 import styles from './styles.css?inline'
 
@@ -46,9 +47,8 @@ export const DropZone: Component = () => {
 
       setDepth(depth() - 1)
 
-      if (depth() === 0) {
+      if (depth() === 0)
         setIsVisible(false)
-      }
     }
   }
 
@@ -75,14 +75,15 @@ export const DropZone: Component = () => {
 
       const transfer = event.clipboardData
 
-      if (transfer?.files && transfer.files.length > 0) {
+      if (transfer?.files && transfer.files.length > 0)
         uploadFiles(transfer.files)
-      }
     }
   }
 
   const uploadFiles = (userFiles: FileList) => {
-    Array.from(userFiles).forEach(file => { setFiles([...files(), file]) })
+    Array.from(userFiles).forEach((file) => {
+      setFiles([...files(), file])
+    })
 
     setIsLoading(true)
     setIsVisible(true)
@@ -124,17 +125,17 @@ export const DropZone: Component = () => {
       </style>
       <div class="ink-drop-zone" classList={{ visible: isVisible() }}>
         <div class="ink-drop-zone-modal">
-          <div class="ink-drop-zone-droppable-area" ondrop={dropOnZone}>
+          <div class="ink-drop-zone-droppable-area" onDrop={dropOnZone}>
             <div class="ink-drop-zone-file-preview">
-              <For each={files().slice(0, 8)}>{(file) => (
-                <img class="ink-drop-zone-file-preview-image" alt={file.name} src={URL.createObjectURL(file)}></img>
+              <For each={files().slice(0, 8)}>{file => (
+                <img class="ink-drop-zone-file-preview-image" alt={file.name} src={URL.createObjectURL(file)} />
               )}</For>
             </div>
             <Show when={isLoading()} fallback={<span>drop files here</span>}>
               <span>uploading files...</span>
             </Show>
           </div>
-          <div class="ink-drop-zone-hide" onclick={closeModal}>
+          <div class="ink-drop-zone-hide" onClick={closeModal}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>

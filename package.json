@@ -1,17 +1,67 @@
 {
   "name": "ink-mde",
-  "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
+  "type": "module",
   "version": "0.10.0",
+  "packageManager": "yarn@3.2.2",
+  "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "author": "David R. Myers <david@voracious.dev>",
-  "bugs": {
-    "url": "https://github.com/voraciousdev/ink-mde/issues"
-  },
+  "license": "MIT",
   "funding": "https://github.com/sponsors/voraciousdev",
   "homepage": "https://github.com/voraciousdev/ink-mde",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/voraciousdev/ink-mde.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voraciousdev/ink-mde/issues"
+  },
+  "keywords": [
+    "codemirror",
+    "component",
+    "easymde",
+    "javascript",
+    "js",
+    "markdown",
+    "mde",
+    "octo",
+    "sfc",
+    "simplemde",
+    "ts",
+    "typescript",
+    "vue",
+    "vue3"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/ink.cjs",
+      "import": "./dist/ink.js"
+    },
+    "./vue": {
+      "require": "./dist/vue/ink.cjs",
+      "import": "./dist/vue/ink.js"
+    }
+  },
+  "main": "./dist/ink.cjs",
+  "module": "./dist/ink.js",
+  "types": "./types/ink.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "types/**/*"
+  ],
+  "scripts": {
+    "build": "yarn build:root && yarn vue:build",
+    "build:root": "tsc && vite build && tsc --project tsconfig.types.json",
+    "dev": "vite",
+    "docs:check": "embedme --verify README.md",
+    "docs:diff": "embedme --stdout README.md",
+    "docs:update": "embedme README.md",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "prepack": "yarn build",
+    "test": "vitest",
+    "test:once": "vitest run",
+    "vue:build": "yarn workspace @voraciousdev/vue-ink-mde build"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.0.4",
@@ -42,59 +92,9 @@
     "vite-plugin-solid": "^2.3.0",
     "vitest": "^0.19.1"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/ink.js",
-      "require": "./dist/ink.cjs"
-    },
-    "./vue": {
-      "import": "./dist/vue/ink.js",
-      "require": "./dist/vue/ink.cjs"
-    }
-  },
-  "files": [
-    "dist/**/*",
-    "src/**/*",
-    "types/**/*"
-  ],
-  "keywords": [
-    "codemirror",
-    "component",
-    "easymde",
-    "javascript",
-    "js",
-    "markdown",
-    "mde",
-    "octo",
-    "sfc",
-    "simplemde",
-    "ts",
-    "typescript",
-    "vue",
-    "vue3"
-  ],
-  "main": "./dist/ink.cjs",
-  "module": "./dist/ink.js",
-  "packageManager": "yarn@3.2.2",
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "build": "yarn build:root && yarn vue:build",
-    "build:root": "tsc && vite build && tsc --project tsconfig.types.json",
-    "dev": "vite",
-    "docs:check": "embedme --verify README.md",
-    "docs:diff": "embedme --stdout README.md",
-    "docs:update": "embedme README.md",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prepack": "yarn build",
-    "test": "vitest",
-    "test:once": "vitest run",
-    "vue:build": "yarn workspace @voraciousdev/vue-ink-mde build"
-  },
-  "type": "module",
-  "types": "./types/ink.d.ts",
   "typings": "./types/ink.d.ts",
   "workspaces": [
     ".",
