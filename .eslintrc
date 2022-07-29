@@ -1,0 +1,17 @@
+{
+  "extends": ["@antfu/ts", "plugin:solid/typescript"],
+  "plugins": ["solid"],
+  "rules": {
+    "@typescript-eslint/member-delimiter-style": [
+      2,
+      {
+        "multiline": {
+          "delimiter": "comma"
+        },
+        "singleline": {
+          "delimiter": "comma"
+        }
+      }
+    ]
+  }
+}

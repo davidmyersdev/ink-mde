@@ -23,6 +23,15 @@ jobs:
           node-version: 16
       - run: yarn install --immutable
       - run: yarn docs:check
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: yarn install --immutable
+      - run: yarn lint
   test:
     runs-on: ubuntu-latest
     steps:
