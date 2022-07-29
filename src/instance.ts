@@ -1,45 +1,44 @@
-import { getState, updateState } from '/src/state'
+import { override } from './utils/deepmerge'
 import { toCodeMirror, toInk } from '/src/adapters/selections'
 import { buildVendorUpdates } from '/src/extensions'
 import * as formatter from '/src/formatter'
-import { updateComponents } from '/src/ui'
-import { createVendorState } from '/src/vendor/state'
+import { makeState } from '/src/vendor/state'
 
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const destroy = (ref: InkInternal.Ref) => {
-  const { editor } = getState(ref)
+export const destroy = ([state, _setState]: InkInternal.Store) => {
+  const { editor } = state
 
   editor.destroy()
 }
 
-export const doc = (ref: InkInternal.Ref) => {
-  const { editor } = getState(ref)
+export const doc = ([state, _setState]: InkInternal.Store) => {
+  const { editor } = state
 
   return editor.state.sliceDoc()
 }
 
-export const focus = (ref: InkInternal.Ref) => {
-  const { editor } = getState(ref)
+export const focus = ([state, _setState]: InkInternal.Store) => {
+  const { editor } = state
 
   if (!editor.hasFocus) {
     editor.focus()
   }
 }
 
-export const format = (ref: InkInternal.Ref, type: `${Ink.Values.Markup}`, selection?: Ink.Editor.Selection) => {
-  return formatter.format(ref, type, selection)
+export const format = ([state, setState]: InkInternal.Store, type: `${Ink.Values.Markup}`, selection?: Ink.Editor.Selection) => {
+  return formatter.format([state, setState], type, selection)
 }
 
-export const insert = (ref: InkInternal.Ref, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
-  const { editor } = getState(ref)
+export const insert = ([state, setState]: InkInternal.Store, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
+  const { editor } = state
 
   let start = selection?.start
   let end = selection?.end || selection?.start
 
   if (typeof start === 'undefined') {
-    const current = selections(ref).pop() as Ink.Editor.Selection
+    const current = selections([state, setState]).pop() as Ink.Editor.Selection
 
     start = current.start
     end = current.end
@@ -59,44 +58,41 @@ export const insert = (ref: InkInternal.Ref, text: string, selection?: Ink.Edito
   )
 }
 
-export const load = (ref: InkInternal.Ref, doc: string) => {
-  const { editor } = getState(ref)
+export const load = ([state, setState]: InkInternal.Store, doc: string) => {
+  setState(override(state, { options: { doc } }))
 
-  updateState(ref, { options: { doc } })
-
-  editor.setState(createVendorState(ref))
+  state.editor.setState(makeState(state))
 }
 
-export const makeInstance = (ref: InkInternal.Ref): Ink.Instance => {
+export const makeInstance = (store: InkInternal.Store): Ink.Instance => {
   return {
-    destroy: (...args) => destroy(ref, ...args),
-    doc: (...args) => doc(ref, ...args),
-    focus: (...args) => focus(ref, ...args),
-    insert: (...args) => insert(ref, ...args),
-    load: (...args) => load(ref, ...args),
-    reconfigure: (...args) => reconfigure(ref, ...args),
-    select: (...args) => select(ref, ...args),
-    selections: (...args) => selections(ref, ...args),
-    update: (...args) => update(ref, ...args),
-    wrap: (...args) => wrap(ref, ...args),
+    destroy: destroy.bind(undefined, store),
+    doc: doc.bind(undefined, store),
+    focus: focus.bind(undefined, store),
+    insert: insert.bind(undefined, store),
+    load: load.bind(undefined, store),
+    reconfigure: reconfigure.bind(undefined, store),
+    select: select.bind(undefined, store),
+    selections: selections.bind(undefined, store),
+    update: update.bind(undefined, store),
+    wrap: wrap.bind(undefined, store),
   }
 }
 
-export const reconfigure = (ref: InkInternal.Ref, partialOptions: Ink.Options) => {
-  const { editor } = getState(ref)
+export const reconfigure = ([state, setState]: InkInternal.Store, options: Ink.Options) => {
+  const { editor } = state
 
-  updateState(ref, { options: partialOptions })
-  updateComponents(ref)
+  setState(override(state, { options }))
 
-  const effects = buildVendorUpdates(ref)
+  const effects = buildVendorUpdates(state)
 
   editor.dispatch({
     effects,
   })
 }
 
-export const select = (ref: InkInternal.Ref, selections: Ink.Editor.Selection[]) => {
-  const { editor } = getState(ref)
+export const select = ([state, _setState]: InkInternal.Store, selections: Ink.Editor.Selection[]) => {
+  const { editor } = state
 
   editor.dispatch(
     editor.state.update({
@@ -105,14 +101,14 @@ export const select = (ref: InkInternal.Ref, selections: Ink.Editor.Selection[])
   )
 }
 
-export const selections = (ref: InkInternal.Ref): Ink.Editor.Selection[] => {
-  const { editor } = getState(ref)
+export const selections = ([state, _setState]: InkInternal.Store): Ink.Editor.Selection[] => {
+  const { editor } = state
 
   return toInk(editor.state.selection)
 }
 
-export const update = (ref: InkInternal.Ref, doc: string) => {
-  const { editor } = getState(ref)
+export const update = ([state, _setState]: InkInternal.Store, doc: string) => {
+  const { editor } = state
 
   editor.dispatch(
     editor.state.update({
@@ -125,12 +121,12 @@ export const update = (ref: InkInternal.Ref, doc: string) => {
   )
 }
 
-export const wrap = (ref: InkInternal.Ref, { after, before, selection: userSelection }: Ink.Instance.WrapOptions) => {
-  const { editor } = getState(ref)
+export const wrap = ([state, setState]: InkInternal.Store, { after, before, selection: userSelection }: Ink.Instance.WrapOptions) => {
+  const { editor } = state
 
-  const selection = userSelection || selections(ref).pop() || { start: 0, end: 0 }
+  const selection = userSelection || selections([state, setState]).pop() || { start: 0, end: 0 }
   const text = editor.state.sliceDoc(selection.start, selection.end)
 
-  insert(ref, `${before}${text}${after}`, selection)
-  select(ref, [{ start: selection.start + before.length, end: selection.end + before.length }])
+  insert([state, setState], `${before}${text}${after}`, selection)
+  select([state, setState], [{ start: selection.start + before.length, end: selection.end + before.length }])
 }

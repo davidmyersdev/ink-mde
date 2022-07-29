@@ -1,6 +1,5 @@
 import { syntaxTree } from '@codemirror/language'
 import { insert, selections, wrap } from '/src/instance'
-import { getState } from '/src/state'
 import * as InkValues from '/types/values'
 
 import type { NodeType } from '@lezer/common'
@@ -9,7 +8,6 @@ import type InkInternal from '/types/internal'
 
 // Todo:
 // - Handle multiline selections
-// - Respect readonly setting on all APIs
 
 interface FormatDefinition {
   block: boolean
@@ -103,16 +101,16 @@ export const formatting: Formats = {
   }),
 }
 
-const getBlockSelection = (ref: InkInternal.Ref, selection: Ink.Editor.Selection): Ink.Editor.Selection => {
-  const { editor } = getState(ref)
+const getBlockSelection = ([state, _setState]: InkInternal.Store, selection: Ink.Editor.Selection): Ink.Editor.Selection => {
+  const { editor } = state
   const startLine = editor.lineBlockAt(selection.start)
   const endLine = editor.lineBlockAt(selection.end)
 
   return { start: startLine.from, end: endLine.to }
 }
 
-const splitSelectionByLines = (ref: InkInternal.Ref, selection: Ink.Editor.Selection) => {
-  const { editor } = getState(ref)
+const splitSelectionByLines = ([state, _setState]: InkInternal.Store, selection: Ink.Editor.Selection) => {
+  const { editor } = state
 
   let position = selection.start
   let selections: Ink.Editor.Selection[] = []
@@ -130,8 +128,8 @@ const splitSelectionByLines = (ref: InkInternal.Ref, selection: Ink.Editor.Selec
   return selections
 }
 
-const getInlineSelection = (ref: InkInternal.Ref, selection: Ink.Editor.Selection) => {
-  const { editor } = getState(ref)
+const getInlineSelection = ([state, _setState]: InkInternal.Store, selection: Ink.Editor.Selection) => {
+  const { editor } = state
 
   const start = editor.state.wordAt(selection.start)?.from || selection.start
   const end = editor.state.wordAt(selection.end)?.to || selection.end
@@ -139,25 +137,24 @@ const getInlineSelection = (ref: InkInternal.Ref, selection: Ink.Editor.Selectio
   return { start, end }
 }
 
-const getSelection = (ref: InkInternal.Ref, userSelection?: Ink.Editor.Selection) => {
+const getSelection = ([state, setState]: InkInternal.Store, userSelection?: Ink.Editor.Selection) => {
   // Todo: expose an actual API for getting the current selection or fallback
-  return userSelection || selections(ref).pop() || { start: 0, end: 0 }
+  return userSelection || selections([state, setState]).pop() || { start: 0, end: 0 }
 }
 
-const getText = (ref: InkInternal.Ref, userSelection: Ink.Editor.Selection) => {
-  const { editor } = getState(ref)
+const getText = ([state, _setState]: InkInternal.Store, userSelection: Ink.Editor.Selection) => {
+  const { editor } = state
 
   return editor.state.sliceDoc(userSelection.start, userSelection.end)
 }
 
-const getNode = (ref: InkInternal.Ref, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const selectionNodes = getNodes(ref, selection)
+const getNode = ([state, _setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
+  const selectionNodes = getNodes(state, selection)
 
   return selectionNodes.find(({ type }) => definition.nodes.includes(type.name))
 }
 
-const getNodes = (ref: InkInternal.Ref, selection: Ink.Editor.Selection) => {
-  const { editor: { state } } = getState(ref)
+const getNodes = ({ editor: { state } }: InkInternal.StateResolved, selection: Ink.Editor.Selection) => {
   const types: { type: NodeType, from: number, to: number }[] = []
 
   syntaxTree(state).iterate({
@@ -171,43 +168,43 @@ const getNodes = (ref: InkInternal.Ref, selection: Ink.Editor.Selection) => {
   return types
 }
 
-const unformat = (ref: InkInternal.Ref, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const text = getText(ref, selection)
+const unformat = ([state, setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
+  const text = getText([state, setState], selection)
   const sliceStart = definition.prefix.length
   const sliceEnd = definition.suffix.length * -1 || text.length
   const unformatted = text.slice(sliceStart, sliceEnd)
 
-  insert(ref, unformatted, selection)
+  insert([state, setState], unformatted, selection)
 }
 
-const formatBlock = (ref: InkInternal.Ref, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const blockSelection = getBlockSelection(ref, selection)
-  const blockNode = getNode(ref, definition, blockSelection)
+const formatBlock = ([state, setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
+  const blockSelection = getBlockSelection([state, setState], selection)
+  const blockNode = getNode([state, setState], definition, blockSelection)
 
   if (blockNode) {
     const start = blockNode.from
     const end = blockNode.to
 
-    unformat(ref, definition, { start, end })
+    unformat([state, setState], definition, { start, end })
   } else {
     const before = definition.prefix
     const after = definition.suffix
 
-    wrap(ref, { before, after, selection: blockSelection })
+    wrap([state, setState], { before, after, selection: blockSelection })
   }
 }
 
-const formatMultiline = (ref: InkInternal.Ref, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const selections = splitSelectionByLines(ref, selection)
+const formatMultiline = ([state, setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
+  const selections = splitSelectionByLines([state, setState], selection)
 
   selections.forEach((lineSelection) => {
-    formatLine(ref, definition, lineSelection)
+    formatLine([state, setState], definition, lineSelection)
   })
 }
 
-const formatLine = (ref: InkInternal.Ref, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const lineSelection = getBlockSelection(ref, selection)
-  const lineNode = getNode(ref, definition, lineSelection)
+const formatLine = ([state, setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
+  const lineSelection = getBlockSelection([state, setState], selection)
+  const lineNode = getNode([state, setState], definition, lineSelection)
   const hasPrefixStates = definition.prefixStates.length > 0
 
   if (lineNode && hasPrefixStates) {
@@ -216,11 +213,11 @@ const formatLine = (ref: InkInternal.Ref, definition: FormatDefinition, selectio
       // This would allow headings to be toggled within quote blocks, for example.
       const start = lineNode.from
       const end = lineNode.to
-      const text = getText(ref, { start, end })
+      const text = getText([state, setState], { start, end })
       const isMatch = text.startsWith(prefix)
 
       if (isMatch) {
-        insert(ref, text.replace(new RegExp(`^${prefix}`), definition.prefixStates[index + 1]), { start, end })
+        insert([state, setState], text.replace(new RegExp(`^${prefix}`), definition.prefixStates[index + 1]), { start, end })
       }
 
       return isMatch
@@ -229,45 +226,45 @@ const formatLine = (ref: InkInternal.Ref, definition: FormatDefinition, selectio
     const start = lineNode.from
     const end = lineNode.to
 
-    unformat(ref, definition, { start, end })
+    unformat([state, setState], definition, { start, end })
   } else {
     const before = definition.prefix
     const after = definition.suffix
 
-    wrap(ref, { before, after, selection: lineSelection })
+    wrap([state, setState], { before, after, selection: lineSelection })
   }
 }
 
-const formatInline = (ref: InkInternal.Ref, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const node = getNode(ref, definition, selection)
+const formatInline = ([state, setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
+  const node = getNode([state, setState], definition, selection)
 
   if (node) {
     const start = node.from
     const end = node.to
 
-    unformat(ref, definition, { start, end })
+    unformat([state, setState], definition, { start, end })
   } else {
-    const { start, end } = getInlineSelection(ref, selection)
+    const { start, end } = getInlineSelection([state, setState], selection)
     const before = Array.isArray(definition.prefix) ? definition.prefix[0] : definition.prefix
     const after = definition.suffix
 
-    wrap(ref, { before, after, selection: { start, end } })
+    wrap([state, setState], { before, after, selection: { start, end } })
   }
 }
 
-export const format = (ref: InkInternal.Ref, formatType: `${Ink.Values.Markup}`, userSelection?: Ink.Editor.Selection) => {
+export const format = ([state, setState]: InkInternal.Store, formatType: `${Ink.Values.Markup}`, userSelection?: Ink.Editor.Selection) => {
   const definition = formatting[formatType]
-  const selection = getSelection(ref, userSelection)
+  const selection = getSelection([state, setState], userSelection)
 
   if (definition.block) {
-    formatBlock(ref, definition, selection)
+    formatBlock([state, setState], definition, selection)
   } else if (definition.multiline) {
     // Todo: Handle progressive selection updates (each line throws off following updates)
     // Todo: Perform all updates in a single transaction.
-    formatMultiline(ref, definition, selection)
+    formatMultiline([state, setState], definition, selection)
   } else if (definition.line) {
-    formatLine(ref, definition, selection)
+    formatLine([state, setState], definition, selection)
   } else {
-    formatInline(ref, definition, selection)
+    formatInline([state, setState], definition, selection)
   }
 }

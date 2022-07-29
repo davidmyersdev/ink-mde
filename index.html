@@ -75,9 +75,8 @@
     <div class="app-wrapper">
       <div id="app"></div>
     </div>
-    <script type="module" src="/src/index.ts"></script>
     <script type="module">
-      import ink from '/src/index.ts'
+      import ink from '/src/index.tsx'
 
       window.ink = ink(document.getElementById('app'), {
         doc: [
@@ -110,6 +109,9 @@
           spellcheck: true,
           toolbar: true,
         },
+        toolbar: {
+          upload: true,
+        }
       })
 
       window.ink.focus()
