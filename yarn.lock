@@ -2231,7 +2231,7 @@ __metadata:
     typescript: ^4.7.4
     vite: ^3.0.2
     vite-plugin-solid: ^2.3.0
-    vitest: ^0.18.1
+    vitest: ^0.19.1
   languageName: unknown
   linkType: soft
 
@@ -3225,9 +3225,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^0.18.1":
-  version: 0.18.1
-  resolution: "vitest@npm:0.18.1"
+"vitest@npm:^0.19.1":
+  version: 0.19.1
+  resolution: "vitest@npm:0.19.1"
   dependencies:
     "@types/chai": ^4.3.1
     "@types/chai-subset": ^1.3.3
@@ -3240,12 +3240,15 @@ __metadata:
     vite: ^2.9.12 || ^3.0.0-0
   peerDependencies:
     "@edge-runtime/vm": "*"
+    "@vitest/browser": "*"
     "@vitest/ui": "*"
     c8: "*"
     happy-dom: "*"
     jsdom: "*"
   peerDependenciesMeta:
     "@edge-runtime/vm":
+      optional: true
+    "@vitest/browser":
       optional: true
     "@vitest/ui":
       optional: true
@@ -3257,7 +3260,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: 0d3a77625eb542bae27715cb24c91b7f4379d1084ce154ff54c991ab669fe0977a927121d232e6659e97b71b852060ca85c0b1825612f2e092b436e24cca276c
+  checksum: f5f6bd69f2c196c072d9729805323d31dce06240cd18218e1b4387502d8c0f9cc4d2fad1e1f99a0fcbfe187d5c5e04d4ea2dd352cb99d3f06227b343e5cb4c6d
   languageName: node
   linkType: hard
 
