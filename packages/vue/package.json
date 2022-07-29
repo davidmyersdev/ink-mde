@@ -1,40 +1,9 @@
 {
   "name": "@voraciousdev/vue-ink-mde",
+  "type": "module",
+  "version": "0.7.0",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app - packaged as a Vue component.",
   "license": "MIT",
-  "version": "0.7.0",
-  "main": "./dist/ink.cjs",
-  "module": "./dist/ink.js",
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/ink.js",
-      "require": "./dist/ink.cjs"
-    }
-  },
-  "scripts": {
-    "build": "vue-tsc --noEmit && vite build",
-    "build:demo": "vue-tsc --noEmit && vite --config demo.config.ts build --base /vue-ink",
-    "dev": "vite"
-  },
-  "dependencies": {
-    "ink-mde": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/node": "^18.0.6",
-    "@vitejs/plugin-vue": "^3.0.1",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.2",
-    "vue": "^3.2.37",
-    "vue-tsc": "^0.38.9"
-  },
-  "peerDependencies": {
-    "vue": ">=3.0.0"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
   "keywords": [
     "codemirror",
     "component",
@@ -50,5 +19,36 @@
     "typescript",
     "vue",
     "vue3"
-  ]
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/ink.cjs",
+      "import": "./dist/ink.js"
+    }
+  },
+  "main": "./dist/ink.cjs",
+  "module": "./dist/ink.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "build:demo": "vue-tsc --noEmit && vite --config demo.config.ts build --base /vue-ink",
+    "dev": "vite"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "dependencies": {
+    "ink-mde": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.6",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.2",
+    "vue": "^3.2.37",
+    "vue-tsc": "^0.38.9"
+  }
 }

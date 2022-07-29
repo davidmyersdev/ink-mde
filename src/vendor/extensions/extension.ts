@@ -1,6 +1,8 @@
-import { EditorState, Extension, RangeSet, StateField } from '@codemirror/state'
-import { Decoration, DecorationSet, EditorView, WidgetType } from '@codemirror/view'
-import { StyleSpec } from 'style-mod'
+import type { EditorState, Extension } from '@codemirror/state'
+import { RangeSet, StateField } from '@codemirror/state'
+import type { DecorationSet, WidgetType } from '@codemirror/view'
+import { Decoration, EditorView } from '@codemirror/view'
+import type { StyleSpec } from 'style-mod'
 
 export interface CustomExtensionOptions {
   theme: { [selector: string]: StyleSpec },
@@ -17,7 +19,7 @@ export const extension = ({ theme, decorator }: CustomExtensionOptions): Extensi
   const customTheme = EditorView.baseTheme(theme)
 
   const decoration = (widget: WidgetType) => Decoration.widget({
-    widget: widget,
+    widget,
     side: -1,
     block: true,
   })
@@ -36,9 +38,8 @@ export const extension = ({ theme, decorator }: CustomExtensionOptions): Extensi
       return evaluate(state)
     },
     update(customs, transaction) {
-      if (transaction.docChanged) {
+      if (transaction.docChanged)
         return evaluate(transaction.state)
-      }
 
       return customs.map(transaction.changes)
     },

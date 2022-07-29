@@ -1,10 +1,10 @@
 import { Show } from 'solid-js'
+import type { Component } from 'solid-js'
 import { Button } from '../components/button'
 import styles from './styles.css?inline'
 import { focus, format, insert } from '/src/instance'
 import { useStore } from '/src/ui/app'
 import * as InkValues from '/types/values'
-import type { Component } from 'solid-js'
 
 export const Toolbar: Component = () => {
   const [state, setState] = useStore()

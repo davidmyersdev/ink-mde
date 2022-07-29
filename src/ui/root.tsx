@@ -1,11 +1,11 @@
 import { Show } from 'solid-js'
+import type { Component } from 'solid-js'
 import { useStore } from './app'
 import { DropZone } from './drop_zone'
 import { Editor } from './editor'
 import { Toolbar } from './toolbar/toolbar'
 import { Styles } from '/src/ui/styles'
 import { override } from '/src/utils/deepmerge'
-import type { Component } from 'solid-js'
 
 export const Root: Component = () => {
   const [state, setState] = useStore()

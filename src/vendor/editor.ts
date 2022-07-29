@@ -10,9 +10,8 @@ export const makeEditor = (state: InkInternal.StateResolved): InkInternal.Editor
       options.hooks.beforeUpdate(transaction.newDoc.toString())
       editor.update([transaction])
 
-      if (transaction.docChanged) {
+      if (transaction.docChanged)
         options.hooks.afterUpdate(transaction.newDoc.toString())
-      }
     },
     state: makeState(state),
   })

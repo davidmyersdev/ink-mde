@@ -10,13 +10,13 @@ import type InkInternal from '/types/internal'
 // - Handle multiline selections
 
 interface FormatDefinition {
-  block: boolean
-  line: boolean
-  multiline: boolean
-  nodes: string[]
-  prefix: string
-  prefixStates: string[]
-  suffix: string
+  block: boolean,
+  line: boolean,
+  multiline: boolean,
+  nodes: string[],
+  prefix: string,
+  prefixStates: string[],
+  suffix: string,
 }
 
 type Formats = {
@@ -113,7 +113,7 @@ const splitSelectionByLines = ([state, _setState]: InkInternal.Store, selection:
   const { editor } = state
 
   let position = selection.start
-  let selections: Ink.Editor.Selection[] = []
+  const selections: Ink.Editor.Selection[] = []
 
   while (position <= selection.end) {
     const line = editor.lineBlockAt(position)
@@ -216,9 +216,8 @@ const formatLine = ([state, setState]: InkInternal.Store, definition: FormatDefi
       const text = getText([state, setState], { start, end })
       const isMatch = text.startsWith(prefix)
 
-      if (isMatch) {
+      if (isMatch)
         insert([state, setState], text.replace(new RegExp(`^${prefix}`), definition.prefixStates[index + 1]), { start, end })
-      }
 
       return isMatch
     })

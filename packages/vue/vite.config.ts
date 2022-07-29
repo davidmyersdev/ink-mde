@@ -9,8 +9,10 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/components/Ink.vue'),
       name: 'Ink',
       fileName: (format) => {
-        if (format === 'es') { return 'ink.js' }
-        if (format === 'umd') { return 'ink.cjs' }
+        if (format === 'es')
+          return 'ink.js'
+        if (format === 'umd')
+          return 'ink.cjs'
 
         return `ink.${format}.cjs`
       },
@@ -26,7 +28,7 @@ export default defineConfig({
           exports: 'named',
           format: 'es',
           globals: {
-            vue: 'Vue'
+            vue: 'Vue',
           },
         },
         {
@@ -35,11 +37,11 @@ export default defineConfig({
           inlineDynamicImports: true,
           interop: 'esModule',
           globals: {
-            vue: 'Vue'
+            vue: 'Vue',
           },
         },
-      ]
-    }
+      ],
+    },
   },
   plugins: [
     vue(),

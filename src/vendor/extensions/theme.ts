@@ -1,5 +1,5 @@
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
-import { Extension } from '@codemirror/state'
+import type { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
 
@@ -171,7 +171,7 @@ export const theme = (): Extension => {
         tag: tags.processingInstruction,
         color: 'var(--ink-internal-syntax-processing-instruction-color)',
       },
-    ])
+    ]),
   )
 
   return [

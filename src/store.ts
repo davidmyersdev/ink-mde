@@ -60,7 +60,8 @@ export const makeState = (partialState: InkInternal.State): InkInternal.StateRes
   return override(blankState(), partialState)
 }
 
-
 export const makeStore = (options: Options): InkInternal.Store => {
-  return createStore(makeState({ options }))
+  const [state, setState] = createStore(makeState({ options }))
+
+  return [state, setState]
 }

@@ -1,4 +1,4 @@
-import { createSignal, onMount, type Component } from 'solid-js'
+import { type Component, createSignal, onMount } from 'solid-js'
 import { buildVendorUpdates } from '/src/extensions'
 import styles from './styles.css?inline'
 import { makeVars } from './utils'
