@@ -1,6 +1,6 @@
-[![latest tag](https://img.shields.io/github/v/tag/voraciousdev/ink-mde?color=blue&label=latest%20tag&sort=semver&style=for-the-badge)](https://github.com/voraciousdev/ink-mde/releases)
-[![license](https://img.shields.io/github/license/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/master/LICENSE)
-[![open issues](https://img.shields.io/github/issues-raw/voraciousdev/ink-mde?style=for-the-badge)](https://github.com/voraciousdev/ink-mde/issues)
+[![NPM Package](https://img.shields.io/npm/v/ink-mde?color=blue&style=for-the-badge)](https://npmjs.com/package/ink-mde)
+[![License](https://img.shields.io/github/license/voraciousdev/ink-mde?color=blue&style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/main/LICENSE)
+[![Chat on Discord](https://img.shields.io/discord/776165182560403547?color=blue&style=for-the-badge)](https://voracious.link/chat)
 
 # ink-mde/vue
 
