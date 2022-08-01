@@ -1,10 +1,10 @@
 [![NPM Package](https://img.shields.io/npm/v/ink-mde?color=blue&style=for-the-badge)](https://npmjs.com/package/ink-mde)
-[![License](https://img.shields.io/github/license/voraciousdev/ink-mde?color=blue&style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/voracious/ink-mde?color=blue&style=for-the-badge)](https://github.com/voracious/ink-mde/blob/main/LICENSE)
 [![Chat on Discord](https://img.shields.io/discord/776165182560403547?color=blue&style=for-the-badge)](https://voracious.link/chat)
 
 # ink-mde/vue
 
-The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app) - packaged as a Vue 3 component. You can also check out the framework-agnostic package at [voraciousdev/ink-mde](https://github.com/voraciousdev/ink-mde).
+The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app) - packaged as a Vue 3 component. You can also check out the framework-agnostic package at [voracious/ink-mde](https://github.com/voracious/ink-mde).
 
 ![](screenshot.png)
 
@@ -51,7 +51,7 @@ const markdown = ref('# Hello, World!')
 
 ### Configuration options
 
-The `options` prop is an [`Ink.Options`](https://github.com/voraciousdev/ink-mde) object.
+The `options` prop is an [`Ink.Options`](https://github.com/voracious/ink-mde) object.
 
 ```vue
 <template>
@@ -101,11 +101,11 @@ Your support is appreciated. Here are some ways you can help. ♥️
 
 ### Tell us what you think
 
-Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
+Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voracious/octo/discussions) under [Octo](https://github.com/voracious/octo) if you have a question or just want to chat about ideas!
 
 ### Become a financial backer
 
-- [GitHub Sponsors](https://github.com/sponsors/voraciousdev)
+- [GitHub Sponsors](https://github.com/sponsors/voracious)
 - [Patreon](https://patreon.com/voraciousdev)
 - [Ko-Fi](https://ko-fi.com/voraciousdev)
 - [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)
