@@ -1,5 +1,5 @@
 [![NPM Package](https://img.shields.io/npm/v/ink-mde?color=blue&style=for-the-badge)](https://npmjs.com/package/ink-mde)
-[![License](https://img.shields.io/github/license/voraciousdev/ink-mde?color=blue&style=for-the-badge)](https://github.com/voraciousdev/ink-mde/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/voracious/ink-mde?color=blue&style=for-the-badge)](https://github.com/voracious/ink-mde/blob/main/LICENSE)
 [![Chat on Discord](https://img.shields.io/discord/776165182560403547?color=blue&style=for-the-badge)](https://voracious.link/chat)
 
 # ink-mde
@@ -212,15 +212,15 @@ There is a small `powered by ink-mde` attribution in the bottom-right corner of 
 
 ### Tell us what you think
 
-Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voraciousdev/octo/discussions) under [Octo](https://github.com/voraciousdev/octo) if you have a question or just want to chat about ideas!
+Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voracious/octo/discussions) under [Octo](https://github.com/voracious/octo) if you have a question or just want to chat about ideas!
 
 ### Open a Pull Request
 
-If you feel comfortable with [an existing issue](https://github.com/voraciousdev/ink-mde/issues), please consider opening a Pull Request. I would love to work with you to get it merged!
+If you feel comfortable with [an existing issue](https://github.com/voracious/ink-mde/issues), please consider opening a Pull Request. I would love to work with you to get it merged!
 
 ### Become a financial backer
 
-- [GitHub Sponsors](https://github.com/sponsors/voraciousdev)
+- [GitHub Sponsors](https://github.com/sponsors/voracious)
 - [Patreon](https://patreon.com/voraciousdev)
 - [Ko-Fi](https://ko-fi.com/voraciousdev)
 - [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)

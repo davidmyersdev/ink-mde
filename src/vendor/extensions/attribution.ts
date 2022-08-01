@@ -26,7 +26,7 @@ class AttributionWidget extends WidgetType {
 
     text.innerText = 'powered by '
 
-    link.href = 'https://github.com/voraciousdev/ink-mde'
+    link.href = 'https://github.com/voracious/ink-mde'
     link.innerText = 'ink-mde'
     link.rel = 'noopener noreferrer'
     link.target = '_blank'

@@ -2112,9 +2112,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embedme@git+https://github.com/voraciousdev/embedme.git#live-fork":
+"embedme@git+https://github.com/voracious/embedme.git#live-fork":
   version: 0.0.0-development
-  resolution: "embedme@https://github.com/voraciousdev/embedme.git#commit=5653b238b5905b5fddc1dae6e452b0001878e479"
+  resolution: "embedme@https://github.com/voracious/embedme.git#commit=5653b238b5905b5fddc1dae6e452b0001878e479"
   dependencies:
     chalk: 3.0.0
     commander: 5.1.0
@@ -3405,7 +3405,7 @@ __metadata:
     "@replit/codemirror-vim": ^6.0.1
     "@types/node": ^18.0.6
     deepmerge-ts: ^4.2.1
-    embedme: "git+https://github.com/voraciousdev/embedme.git#live-fork"
+    embedme: "git+https://github.com/voracious/embedme.git#live-fork"
     eslint: ^8.20.0
     eslint-plugin-solid: ^0.7.1
     jsdom: ^20.0.0

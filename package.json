@@ -6,14 +6,14 @@
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "author": "David R. Myers <david@voracious.dev>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/voraciousdev",
-  "homepage": "https://github.com/voraciousdev/ink-mde",
+  "funding": "https://github.com/sponsors/voracious",
+  "homepage": "https://github.com/voracious/ink-mde",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/voraciousdev/ink-mde.git"
+    "url": "git+https://github.com/voracious/ink-mde.git"
   },
   "bugs": {
-    "url": "https://github.com/voraciousdev/ink-mde/issues"
+    "url": "https://github.com/voracious/ink-mde/issues"
   },
   "keywords": [
     "codemirror",
@@ -83,7 +83,7 @@
     "@antfu/eslint-config-ts": "^0.25.2",
     "@types/node": "^18.0.6",
     "deepmerge-ts": "^4.2.1",
-    "embedme": "git+https://github.com/voraciousdev/embedme.git#live-fork",
+    "embedme": "git+https://github.com/voracious/embedme.git#live-fork",
     "eslint": "^8.20.0",
     "eslint-plugin-solid": "^0.7.1",
     "jsdom": "^20.0.0",
