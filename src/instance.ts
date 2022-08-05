@@ -8,19 +8,19 @@ import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
 export const destroy = ([state, _setState]: InkInternal.Store) => {
-  const { editor } = state
+  const { editor } = state()
 
   editor.destroy()
 }
 
 export const doc = ([state, _setState]: InkInternal.Store) => {
-  const { editor } = state
+  const { editor } = state()
 
   return editor.state.sliceDoc()
 }
 
 export const focus = ([state, _setState]: InkInternal.Store) => {
-  const { editor } = state
+  const { editor } = state()
 
   if (!editor.hasFocus)
     editor.focus()
@@ -31,7 +31,7 @@ export const format = ([state, setState]: InkInternal.Store, type: `${Ink.Values
 }
 
 export const insert = ([state, setState]: InkInternal.Store, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
-  const { editor } = state
+  const { editor } = state()
 
   let start = selection?.start
   let end = selection?.end || selection?.start
@@ -58,9 +58,9 @@ export const insert = ([state, setState]: InkInternal.Store, text: string, selec
 }
 
 export const load = ([state, setState]: InkInternal.Store, doc: string) => {
-  setState(override(state, { options: { doc } }))
+  setState(override(state(), { options: { doc } }))
 
-  state.editor.setState(makeState(state))
+  state().editor.setState(makeState(state()))
 }
 
 export const makeInstance = (store: InkInternal.Store): Ink.Instance => {
@@ -79,19 +79,15 @@ export const makeInstance = (store: InkInternal.Store): Ink.Instance => {
 }
 
 export const reconfigure = ([state, setState]: InkInternal.Store, options: Ink.Options) => {
-  const { editor } = state
+  const effects = buildVendorUpdates(setState(override(state(), { options })))
 
-  setState(override(state, { options }))
-
-  const effects = buildVendorUpdates(state)
-
-  editor.dispatch({
+  state().editor.dispatch({
     effects,
   })
 }
 
 export const select = ([state, _setState]: InkInternal.Store, selections: Ink.Editor.Selection[]) => {
-  const { editor } = state
+  const { editor } = state()
 
   editor.dispatch(
     editor.state.update({
@@ -101,13 +97,13 @@ export const select = ([state, _setState]: InkInternal.Store, selections: Ink.Ed
 }
 
 export const selections = ([state, _setState]: InkInternal.Store): Ink.Editor.Selection[] => {
-  const { editor } = state
+  const { editor } = state()
 
   return toInk(editor.state.selection)
 }
 
 export const update = ([state, _setState]: InkInternal.Store, doc: string) => {
-  const { editor } = state
+  const { editor } = state()
 
   editor.dispatch(
     editor.state.update({
@@ -121,7 +117,7 @@ export const update = ([state, _setState]: InkInternal.Store, doc: string) => {
 }
 
 export const wrap = ([state, setState]: InkInternal.Store, { after, before, selection: userSelection }: Ink.Instance.WrapOptions) => {
-  const { editor } = state
+  const { editor } = state()
 
   const selection = userSelection || selections([state, setState]).pop() || { start: 0, end: 0 }
   const text = editor.state.sliceDoc(selection.start, selection.end)
