@@ -6,7 +6,7 @@ import type {
   Transaction as VendorTransaction,
 } from '@codemirror/state'
 import type { EditorView as VendorView } from '@codemirror/view'
-import type { SetStoreFunction } from 'solid-js/store'
+import type { Accessor, Setter } from 'solid-js'
 import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
 
@@ -43,7 +43,7 @@ export namespace InkInternal {
     editor: InkInternal.Editor,
   }
 
-  export type Store = [get: InkInternal.StateResolved, set: SetStoreFunction<InkInternal.StateResolved>]
+  export type Store = [get: Accessor<InkInternal.StateResolved>, set: Setter<InkInternal.StateResolved>]
 
   export namespace Vendor {
     // All vendor types (and adapters) should be encapsulated here.

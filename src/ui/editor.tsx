@@ -5,9 +5,9 @@ import type { Component } from 'solid-js'
 
 export const Editor: Component = () => {
   const [state, setState] = useStore()
-  const editor = makeEditor(state)
+  const editor = makeEditor(state())
 
-  setState(override(state, { editor }))
+  setState(override(state(), { editor }))
 
   return editor.dom
 }

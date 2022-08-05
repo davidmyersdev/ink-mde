@@ -102,7 +102,7 @@ export const formatting: Formats = {
 }
 
 const getBlockSelection = ([state, _setState]: InkInternal.Store, selection: Ink.Editor.Selection): Ink.Editor.Selection => {
-  const { editor } = state
+  const { editor } = state()
   const startLine = editor.lineBlockAt(selection.start)
   const endLine = editor.lineBlockAt(selection.end)
 
@@ -110,7 +110,7 @@ const getBlockSelection = ([state, _setState]: InkInternal.Store, selection: Ink
 }
 
 const splitSelectionByLines = ([state, _setState]: InkInternal.Store, selection: Ink.Editor.Selection) => {
-  const { editor } = state
+  const { editor } = state()
 
   let position = selection.start
   const selections: Ink.Editor.Selection[] = []
@@ -129,7 +129,7 @@ const splitSelectionByLines = ([state, _setState]: InkInternal.Store, selection:
 }
 
 const getInlineSelection = ([state, _setState]: InkInternal.Store, selection: Ink.Editor.Selection) => {
-  const { editor } = state
+  const { editor } = state()
 
   const start = editor.state.wordAt(selection.start)?.from || selection.start
   const end = editor.state.wordAt(selection.end)?.to || selection.end
@@ -143,13 +143,13 @@ const getSelection = ([state, setState]: InkInternal.Store, userSelection?: Ink.
 }
 
 const getText = ([state, _setState]: InkInternal.Store, userSelection: Ink.Editor.Selection) => {
-  const { editor } = state
+  const { editor } = state()
 
   return editor.state.sliceDoc(userSelection.start, userSelection.end)
 }
 
 const getNode = ([state, _setState]: InkInternal.Store, definition: FormatDefinition, selection: Ink.Editor.Selection) => {
-  const selectionNodes = getNodes(state, selection)
+  const selectionNodes = getNodes(state(), selection)
 
   return selectionNodes.find(({ type }) => definition.nodes.includes(type.name))
 }

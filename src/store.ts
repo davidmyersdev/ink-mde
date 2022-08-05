@@ -1,5 +1,5 @@
 import { EditorView } from '@codemirror/view'
-import { createStore } from 'solid-js/store'
+import { createSignal } from 'solid-js'
 import { override } from '/src/utils/deepmerge'
 import { createExtensions } from '/src/extensions'
 import { createElement } from './ui/utils'
@@ -61,7 +61,7 @@ export const makeState = (partialState: InkInternal.State): InkInternal.StateRes
 }
 
 export const makeStore = (options: Options): InkInternal.Store => {
-  const [state, setState] = createStore(makeState({ options }))
+  const [state, setState] = createSignal(makeState({ options }))
 
   return [state, setState]
 }

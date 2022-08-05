@@ -6,7 +6,7 @@
   inset: 0;
   justify-content: center;
   position: var(--ink-internal-modal-position);
-  z-index: 10;
+  z-index: 100;
 }
 
 .ink-drop-zone:not(.visible) {

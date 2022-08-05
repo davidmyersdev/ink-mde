@@ -25,7 +25,7 @@ export const Toolbar: Component = () => {
     const target = event.target as HTMLInputElement
 
     if (target?.files) {
-      Promise.resolve(state.options.files.handler(target.files)).then((url) => {
+      Promise.resolve(state().options.files.handler(target.files)).then((url) => {
         const markup = `![](${url})`
 
         insert([state, setState], markup)
@@ -40,21 +40,21 @@ export const Toolbar: Component = () => {
         {styles}
       </style>
       <div class='ink-toolbar-group'>
-        <Show when={state.options.toolbar.heading}>
+        <Show when={state().options.toolbar.heading}>
           <Button onclick={() => formatAs(InkValues.Markup.Heading)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M6 4V10M6 16V10M6 10H14M14 10V4M14 10V16'/>
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.bold}>
+        <Show when={state().options.toolbar.bold}>
           <Button onclick={() => formatAs(InkValues.Markup.Bold)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-width='1.5' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M6.5 10H10.5C12.1569 10 13.5 11.3431 13.5 13C13.5 14.6569 12.1569 16 10.5 16H6.5V4H9.5C11.1569 4 12.5 5.34315 12.5 7C12.5 8.65686 11.1569 10 9.5 10'/>
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.italic}>
+        <Show when={state().options.toolbar.italic}>
           <Button onclick={() => formatAs(InkValues.Markup.Italic)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M11 4L9 16M13 4H9M7 16H11'/>
@@ -63,14 +63,14 @@ export const Toolbar: Component = () => {
         </Show>
       </div>
       <div class='ink-toolbar-group'>
-        <Show when={state.options.toolbar.quote}>
+        <Show when={state().options.toolbar.quote}>
           <Button onclick={() => formatAs(InkValues.Markup.Quote)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M2.00257 16H17.9955M2.00055 4H18M7 10H18.0659M2 8.5V11.4999C2.4 11.5 2.5 11.5 2.5 11.5V11V10.5M4 8.5V11.4999H4.5V11V10.5'/>
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.codeBlock}>
+        <Show when={state().options.toolbar.codeBlock}>
           <Button onclick={() => formatAs(InkValues.Markup.CodeBlock)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M13 4L7 16'/>
@@ -79,7 +79,7 @@ export const Toolbar: Component = () => {
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.code}>
+        <Show when={state().options.toolbar.code}>
           <Button onclick={() => formatAs(InkValues.Markup.Code)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M7 4L8 6'/>
@@ -88,7 +88,7 @@ export const Toolbar: Component = () => {
         </Show>
       </div>
       <div class='ink-toolbar-group'>
-        <Show when={state.options.toolbar.list}>
+        <Show when={state().options.toolbar.list}>
           <Button onclick={() => formatAs(InkValues.Markup.List)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M7 16H17.8294'/>
@@ -100,7 +100,7 @@ export const Toolbar: Component = () => {
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.orderedList}>
+        <Show when={state().options.toolbar.orderedList}>
           <Button onclick={() => formatAs(InkValues.Markup.OrderedList)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M7 16H18'/>
@@ -112,7 +112,7 @@ export const Toolbar: Component = () => {
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.taskList}>
+        <Show when={state().options.toolbar.taskList}>
           <Button onclick={() => formatAs(InkValues.Markup.TaskList)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M7 16H17.8294'/>
@@ -126,14 +126,14 @@ export const Toolbar: Component = () => {
         </Show>
       </div>
       <div class='ink-toolbar-group'>
-        <Show when={state.options.toolbar.link}>
+        <Show when={state().options.toolbar.link}>
           <Button onclick={() => formatAs(InkValues.Markup.Link)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M9.12127 10.881C10.02 11.78 11.5237 11.7349 12.4771 10.7813L15.2546 8.00302C16.2079 7.04937 16.253 5.54521 15.3542 4.6462C14.4555 3.74719 12.9512 3.79174 11.9979 4.74539L10.3437 6.40007M10.8787 9.11903C9.97997 8.22002 8.47626 8.26509 7.52288 9.21874L4.74545 11.997C3.79208 12.9506 3.74701 14.4548 4.64577 15.3538C5.54452 16.2528 7.04876 16.2083 8.00213 15.2546L9.65633 13.5999'/>
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.image}>
+        <Show when={state().options.toolbar.image}>
           <Button onclick={() => formatAs(InkValues.Markup.Image)}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <rect x='2' y='4' width='16' height='12' rx='1'/>
@@ -143,7 +143,7 @@ export const Toolbar: Component = () => {
             </svg>
           </Button>
         </Show>
-        <Show when={state.options.toolbar.upload}>
+        <Show when={state().options.toolbar.upload}>
           <Button onclick={handler}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M10 13V4M10 4L13 7M10 4L7 7'/>
