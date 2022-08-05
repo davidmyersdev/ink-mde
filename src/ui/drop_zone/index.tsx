@@ -16,7 +16,7 @@ export const DropZone: Component = () => {
   }
 
   const dropOnZone = (event: DragEvent) => {
-    if (state.options.files.dragAndDrop) {
+    if (state().options.files.dragAndDrop) {
       event.preventDefault()
       event.stopPropagation()
 
@@ -33,7 +33,7 @@ export const DropZone: Component = () => {
   }
 
   const onDragEnter = (event: DragEvent) => {
-    if (state.options.files.dragAndDrop) {
+    if (state().options.files.dragAndDrop) {
       event.preventDefault()
 
       setDepth(depth() + 1)
@@ -42,7 +42,7 @@ export const DropZone: Component = () => {
   }
 
   const onDragLeave = (event: DragEvent) => {
-    if (state.options.files.dragAndDrop) {
+    if (state().options.files.dragAndDrop) {
       event.preventDefault()
 
       setDepth(depth() - 1)
@@ -53,7 +53,7 @@ export const DropZone: Component = () => {
   }
 
   const onDragOver = (event: DragEvent) => {
-    if (state.options.files.dragAndDrop) {
+    if (state().options.files.dragAndDrop) {
       event.preventDefault()
 
       setIsVisible(true)
@@ -61,7 +61,7 @@ export const DropZone: Component = () => {
   }
 
   const onDrop = (event: DragEvent) => {
-    if (state.options.files.dragAndDrop) {
+    if (state().options.files.dragAndDrop) {
       event.preventDefault()
 
       setDepth(0)
@@ -70,7 +70,7 @@ export const DropZone: Component = () => {
   }
 
   const onPaste = (event: ClipboardEvent) => {
-    if (state.options.files.clipboard) {
+    if (state().options.files.clipboard) {
       event.preventDefault()
 
       const transfer = event.clipboardData
@@ -88,8 +88,8 @@ export const DropZone: Component = () => {
     setIsLoading(true)
     setIsVisible(true)
 
-    Promise.resolve(state.options.files.handler(userFiles)).then((url?: string) => {
-      if (state.options.files.injectMarkup && url) {
+    Promise.resolve(state().options.files.handler(userFiles)).then((url?: string) => {
+      if (state().options.files.injectMarkup && url) {
         const markup = `![](${url})`
 
         insert([state, setState], markup)
@@ -107,7 +107,7 @@ export const DropZone: Component = () => {
     document.addEventListener('dragleave', onDragLeave)
     document.addEventListener('dragover', onDragOver)
     document.addEventListener('drop', onDrop)
-    state.root.addEventListener('paste', onPaste)
+    state().root.addEventListener('paste', onPaste)
   })
 
   onCleanup(() => {
@@ -115,7 +115,7 @@ export const DropZone: Component = () => {
     document.removeEventListener('dragleave', onDragLeave)
     document.removeEventListener('dragover', onDragOver)
     document.removeEventListener('drop', onDrop)
-    state.root.removeEventListener('paste', onPaste)
+    state().root.removeEventListener('paste', onPaste)
   })
 
   return (
