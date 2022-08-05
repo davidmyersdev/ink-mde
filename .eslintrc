@@ -20,6 +20,14 @@
     "@typescript-eslint/brace-style": [
       2,
       "1tbs"
+    ],
+    "antfu/if-newline": [
+      0,
+      {}
+    ],
+    "curly": [
+      0,
+      {}
     ]
   },
   "overrides": [
