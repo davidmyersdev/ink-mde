@@ -50,6 +50,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '/test': resolve(__dirname, './test'),
       '/types': resolve(__dirname, './types'),
       'ink-mde': resolve(__dirname, './src/index'),
     },
