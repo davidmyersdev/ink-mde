@@ -224,3 +224,7 @@ If you feel comfortable with [an existing issue](https://github.com/voracious/in
 - [Patreon](https://patreon.com/voraciousdev)
 - [Ko-Fi](https://ko-fi.com/voraciousdev)
 - [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)
+
+## A note about v0 releases
+
+Since `ink-mde` is a v0 project, you should consider **minor** version increments to be **breaking** changes. Semantic Versioning [considers _all_ v0 releases to be breaking](https://semver.org/#spec-item-4), but I do my best to make patch releases non-breaking.
