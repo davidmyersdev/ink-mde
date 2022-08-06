@@ -25,7 +25,8 @@ export interface Instance {
   focus: () => void
   insert: (text: string, selection: Editor.Selection) => void
   load: (doc: string) => void
-  reconfigure: (updates: Partial<Options>) => void
+  options: () => OptionsResolved
+  reconfigure: (updates: Options) => void
   select: (selections: Editor.Selection[]) => void
   selections: () => Editor.Selection[]
   update: (doc: string) => void
