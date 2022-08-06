@@ -5,7 +5,7 @@ import { DropZone } from './drop_zone'
 import { Editor } from './editor'
 import { Toolbar } from './toolbar/toolbar'
 import { Styles } from '/src/ui/styles'
-import { override } from '/src/utils/deepmerge'
+import { override } from '/src/utils/merge'
 import type InkInternal from '/types/internal'
 
 export const Root: Component<{ store: InkInternal.Store }> = () => {
