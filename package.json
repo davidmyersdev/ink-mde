@@ -82,7 +82,6 @@
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.25.2",
     "@types/node": "^18.0.6",
-    "deepmerge-ts": "^4.2.1",
     "embedme": "git+https://github.com/voracious/embedme.git#live-fork",
     "eslint": "^8.20.0",
     "eslint-plugin-solid": "^0.7.1",
