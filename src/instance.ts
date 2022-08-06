@@ -70,12 +70,17 @@ export const makeInstance = (store: InkInternal.Store): Ink.Instance => {
     focus: focus.bind(undefined, store),
     insert: insert.bind(undefined, store),
     load: load.bind(undefined, store),
+    options: options.bind(undefined, store),
     reconfigure: reconfigure.bind(undefined, store),
     select: select.bind(undefined, store),
     selections: selections.bind(undefined, store),
     update: update.bind(undefined, store),
     wrap: wrap.bind(undefined, store),
   }
+}
+
+export const options = ([state]: InkInternal.Store) => {
+  return state().options
 }
 
 export const reconfigure = ([state, setState]: InkInternal.Store, options: Ink.Options) => {
