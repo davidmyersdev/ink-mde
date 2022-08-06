@@ -1,6 +1,6 @@
 import { makeEditor } from '/src/vendor/editor'
 import { useStore } from '/src/ui/app'
-import { override } from '/src/utils/deepmerge'
+import { override } from '/src/utils/merge'
 import type { Component } from 'solid-js'
 
 export const Editor: Component = () => {

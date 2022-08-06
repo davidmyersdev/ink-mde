@@ -1,6 +1,6 @@
 import { EditorView } from '@codemirror/view'
 import { createSignal } from 'solid-js'
-import { override } from '/src/utils/deepmerge'
+import { override } from '/src/utils/merge'
 import { createExtensions } from '/src/extensions'
 import { createElement } from './ui/utils'
 import * as InkValues from '/types/values'
