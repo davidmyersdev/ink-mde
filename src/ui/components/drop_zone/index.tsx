@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js'
 import { For, Show, createSignal, onCleanup, onMount } from 'solid-js'
-import { useStore } from '../app'
+import { useStore } from '../../app'
 import { insert } from '/src/instance'
 import styles from './styles.css?inline'
 

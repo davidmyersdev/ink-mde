@@ -2,7 +2,7 @@ import { createContext, useContext } from 'solid-js'
 import type { Component, JSX } from 'solid-js'
 import type InkInternal from '/types/internal'
 import { blankState } from '../store'
-import { Root } from './root'
+import { Root } from './components/root'
 
 const defaultState = blankState()
 const AppContext = createContext<InkInternal.Store>([() => defaultState, value => (typeof value === 'function' ? value(defaultState) : value)])
