@@ -236,6 +236,7 @@ If you feel comfortable with [an existing issue](https://github.com/voracious/in
 ### Become a financial backer
 
 - [GitHub Sponsors](https://github.com/sponsors/voracious)
+- [Open Collective](https://opencollective.com/voracious)
 - [Patreon](https://patreon.com/voraciousdev)
 - [Ko-Fi](https://ko-fi.com/voraciousdev)
 - [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)
