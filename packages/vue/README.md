@@ -1,38 +1,25 @@
-[![NPM Package](https://img.shields.io/npm/v/ink-mde?color=blue&style=for-the-badge)](https://npmjs.com/package/ink-mde)
-[![License](https://img.shields.io/github/license/voracious/ink-mde?color=blue&style=for-the-badge)](https://github.com/voracious/ink-mde/blob/main/LICENSE)
-[![Chat on Discord](https://img.shields.io/discord/776165182560403547?color=blue&style=for-the-badge)](https://voracious.link/chat)
-
 # ink-mde/vue
 
-The flexible TypeScript Markdown editor that powers [octo.app](https://octo.app) - packaged as a Vue 3 component. You can also check out the framework-agnostic package at [voracious/ink-mde](https://github.com/voracious/ink-mde).
-
-![](screenshot.png)
-
-## Features
-
-- [x] Dark and light themes
-- [x] Hybrid plain-text Markdown rendering
-- [x] Supports GitHub Flavored Markdown ([an extension of CommonMark](https://github.github.com/gfm/#what-is-github-flavored-markdown-))
-- [x] Syntax highlighting for many common languages (in code blocks)
-- [x] Drag-and-drop or paste to upload files
-- [x] Inline Markdown image previews
-- [x] Configurable and stylable
-- [x] An optional formatting toolbar (great for mobile)
-- [x] Vim Mode
+The [`ink-mde`](https://github.com/voracious/ink-mde) library packaged as a Vue 3 component.
 
 ## Install the package
 
+This package is a separate module that ships with `ink-mde`, so you install it the same way.
+
 ```bash
+# npm
+npm i ink-mde
+
+# pnpm
+pnpm i ink-mde
+
 # yarn
 yarn add ink-mde
-
-# npm
-npm install --save ink-mde
 ```
 
-## How to get started
+## Getting Started
 
-There are many ways to customize `ink-mde` to fit your needs. Here are a few examples to get you started.
+The Vue 3 component supports all options that `ink-mde` supports.
 
 ### Minimal setup
 
@@ -51,7 +38,7 @@ const markdown = ref('# Hello, World!')
 
 ### Configuration options
 
-The `options` prop is an [`Ink.Options`](https://github.com/voracious/ink-mde) object.
+The `options` prop is an [`ink-mde` options](https://github.com/voracious/ink-mde) object.
 
 ```vue
 <template>
@@ -72,40 +59,3 @@ const options = reactive({
 })
 </script>
 ```
-
-## Contributing
-
-This library uses `yarn`.
-
-### Install dependencies
-
-```shell
-yarn install
-```
-
-### Compile and hot-reload for development
-
-```shell
-yarn dev
-```
-
-### Compile for production
-
-```shell
-yarn build
-```
-
-## Support
-
-Your support is appreciated. Here are some ways you can help. ♥️
-
-### Tell us what you think
-
-Your feedback is immensely important for building `ink-mde` into a library that we all love. Consider [starting a discussion](https://github.com/voracious/octo/discussions) under [Octo](https://github.com/voracious/octo) if you have a question or just want to chat about ideas!
-
-### Become a financial backer
-
-- [GitHub Sponsors](https://github.com/sponsors/voracious)
-- [Patreon](https://patreon.com/voraciousdev)
-- [Ko-Fi](https://ko-fi.com/voraciousdev)
-- [Buy Me a Coffee](https://www.buymeacoffee.com/voraciousdev)
