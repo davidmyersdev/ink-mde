@@ -1,6 +1,6 @@
 import { Show } from 'solid-js'
 import type { Component } from 'solid-js'
-import { Button } from '../components/button'
+import { Button } from '../button'
 import styles from './styles.css?inline'
 import { focus, format, insert } from '/src/instance'
 import { useStore } from '/src/ui/app'
