@@ -77,22 +77,10 @@
     </div>
     <script type="module">
       import ink from '/src/index.tsx'
+      import example from '/test/assets/example.md?raw'
 
       window.ink = ink(document.getElementById('app'), {
-        doc: [
-          '# ink-mde',
-          '',
-          'The flexible TypeScript Markdown editor that works the way *you* want it to.',
-          '',
-          'Preview those beautiful images. ![kitten](https://placekitten.com/2000/200)',
-          '',
-          '```ts',
-          '// Write code with syntax highlighting.',
-          'const add = (a: number, b: number): number => {',
-          '  return a + b',
-          '}',
-          '```',
-        ].join("\n"),
+        doc: example,
         files: {
           clipboard: true,
           dragAndDrop: true,
