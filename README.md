@@ -79,36 +79,51 @@ editor.update(state.doc)
 
 ## Further customization
 
-Other features of the editor can be customized through the following options.
+These are the default options, and any of them can be overridden when initializing (or reconfiguring) an instance of `ink-mde`.
 
-| Option                          | Description                                  | Type                                        | Default    |
-| ----                            | ----                                         | ----                                        | ----       |
-| `options.doc`                   | Initialize the editor with an existing doc   | `string`                                    | `''`       |
-| `options.files.clipboard`       | Enable file uploads on paste                 | `boolean`                                   | `false`    |
-| `options.files.dragAndDrop`     | Enable drag-and-drop file uploads            | `boolean`                                   | `false`    |
-| `options.files.handler`         | Handle file uploads (not handled by ink-mde) | `(files: FileList) => Promise<any> \| void` | `() => {}` |
-| `options.hooks.afterUpdate`     | Run some code after the doc is updated       | `(doc: string) => void`                     | `() => {}` |
-| `options.hooks.beforeUpdate`    | Run some code before the doc is updated      | `(doc: string) => void`                     | `() => {}` |
-| `options.interface.appearance`  | Change the editor theme                      | `'auto' \| 'dark' \| 'light'`               | `'auto'`   |
-| `options.interface.attribution` | Show the "powered by ink-mde" attribution    | `boolean`                                   | `true`     |
-| `options.interface.images`      | Render images in the editor                  | `boolean`                                   | `false`    |
-| `options.interface.spellcheck`  | Enable spellcheck                            | `boolean`                                   | `true`     |
-| `options.interface.toolbar`     | Enable the formatting toolbar                | `boolean`                                   | `false`    |
-| `options.plugins`               | Extend the editor with custom features       | `Ink.Editor.Plugin[]`                       | `[]`       |
-| `options.selections`            | Initialize the editor with selections        | `Ink.Editor.Selection[]`                    | `[]`       |
-| `options.toolbar.bold`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.code`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.codeBlock`     | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.heading`       | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.image`         | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.italic`        | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.link`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.list`          | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.orderedList`   | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.quote`         | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.taskList`      | Include this button in the toolbar           | `boolean`                                   | `true`     |
-| `options.toolbar.upload`        | Include this button in the toolbar           | `boolean`                                   | `false`    |
-| `options.vim`                   | Use Vim keybindings to edit the doc          | `boolean`                                   | `false`    |
+```ts
+// ./src/store.ts#L11-L50
+const options = {
+  doc: '',
+  files: {
+    clipboard: false,
+    dragAndDrop: false,
+    handler: () => {},
+    injectMarkup: true,
+    types: ['image/*'],
+  },
+  hooks: {
+    afterUpdate: () => {},
+    beforeUpdate: () => {},
+  },
+  interface: {
+    appearance: InkValues.Appearance.Auto,
+    attribution: true,
+    autocomplete: false,
+    images: false,
+    readonly: false,
+    spellcheck: true,
+    toolbar: false,
+  },
+  plugins: [],
+  selections: [],
+  toolbar: {
+    bold: true,
+    code: true,
+    codeBlock: true,
+    heading: true,
+    image: true,
+    italic: true,
+    link: true,
+    list: true,
+    orderedList: true,
+    quote: true,
+    taskList: true,
+    upload: false,
+  },
+  vim: false,
+}
+```
 
 ### Plugins
 
