@@ -5,7 +5,7 @@ import { languages } from '@codemirror/language-data'
 import type { EditorSelection } from '@codemirror/state'
 import { EditorState } from '@codemirror/state'
 
-import { toCodeMirror } from '/src/adapters/selections'
+import { toCodeMirror } from './adapters/selections'
 import { buildVendors } from '/src/extensions'
 import { code } from '/src/vendor/extensions/code'
 import { keymaps } from '/src/vendor/extensions/keymaps'
