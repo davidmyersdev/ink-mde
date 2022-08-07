@@ -1,5 +1,5 @@
 import { override } from '/src/utils/merge'
-import { toCodeMirror, toInk } from '/src/adapters/selections'
+import { toCodeMirror, toInk } from '/src/vendor/adapters/selections'
 import { buildVendorUpdates } from '/src/extensions'
 import * as formatter from '/src/formatter'
 import { makeState } from '/src/vendor/state'
