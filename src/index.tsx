@@ -19,4 +19,6 @@ export const ink = (target: HTMLElement, options: Ink.Options = {}): Ink.Instanc
   return makeInstance(store)
 }
 
+export { ssr } from '/ssr/server'
+
 export default ink

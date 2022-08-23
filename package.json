@@ -33,12 +33,54 @@
   ],
   "exports": {
     ".": {
+      "browser": {
+        "types": "./types/ink.d.ts",
+        "require": "./dist/ink.cjs",
+        "import": "./dist/ink.js"
+      },
+      "node": {
+        "types": "./types/ink.d.ts",
+        "require": "./dist/ink.cjs",
+        "import": "./dist/ink.js"
+      },
+      "types": "./types/ink.d.ts",
       "require": "./dist/ink.cjs",
       "import": "./dist/ink.js"
     },
+    "./ssr": {
+      "browser": {
+        "types": "./types/ink.d.ts",
+        "require": "./dist/ssr/client.cjs",
+        "import": "./dist/ssr/client.js"
+      },
+      "node": {
+        "types": "./types/ink.d.ts",
+        "require": "./dist/ssr/server.cjs",
+        "import": "./dist/ssr/server.js"
+      },
+      "types": "./types/ink.d.ts",
+      "require": "./dist/ssr/client.cjs",
+      "import": "./dist/ssr/client.js"
+    },
     "./vue": {
-      "require": "./dist/vue/ink.cjs",
-      "import": "./dist/vue/ink.js"
+      "types": "./dist/vue/InkMde.vue.d.ts",
+      "require": "./dist/vue/InkMde.cjs",
+      "import": "./dist/vue/InkMde.js"
+    },
+    "./vue/ssr": {
+      "browser": {
+        "types": "./dist/vue/InkMde.vue.d.ts",
+        "require": "./dist/vue/ssr/Client.cjs",
+        "import": "./dist/vue/ssr/Client.js"
+      },
+      "node": {
+        "types": "./dist/vue/InkMde.vue.d.ts",
+        "require": "./dist/vue/ssr/InkMde.cjs",
+        "import": "./dist/vue/ssr/InkMde.js"
+      },
+      "types": "./dist/vue/InkMde.vue.d.ts",
+      "require": "./dist/vue/ssr/Client.cjs",
+      "import": "./dist/vue/ssr/Client.js"
     }
   },
   "main": "./dist/ink.cjs",
@@ -50,9 +92,15 @@
     "types/**/*"
   ],
   "scripts": {
-    "build": "yarn build:root && yarn vue:build",
-    "build:root": "tsc && vite build && tsc --project tsconfig.types.json",
+    "build": "yarn build:root && yarn build:root:ssr && yarn build:vue",
+    "build:root": "tsc && vite build && tsc --project ./tsconfig.types.json",
+    "build:root:ssr": "vite build -c ./ssr/vite.config.ts && VITE_SSR=1 vite build -c ./ssr/vite.config.ts --ssr ./ssr/server.tsx",
+    "build:vue": "yarn build:vue:root && yarn build:vue:ssr",
+    "build:vue:root": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && yarn build:vue:types",
+    "build:vue:ssr": "vite build -c ./vue/ssr/vite.config.ts && VITE_SSR=1 vite build -c ./vue/ssr/vite.config.ts --ssr ./vue/ssr/InkMde.vue",
+    "build:vue:types": "vue-tsc --project ./vue/tsconfig.types.json",
     "dev": "vite",
+    "dev:vue": "vite -c ./vue/vite.config.ts",
     "docs:check": "embedme --verify README.md",
     "docs:diff": "embedme --stdout README.md",
     "docs:update": "embedme README.md",
@@ -60,8 +108,15 @@
     "lint:fix": "eslint --fix .",
     "prepack": "yarn build",
     "test": "vitest",
-    "test:once": "vitest run",
-    "vue:build": "yarn workspace @voraciousdev/vue-ink-mde build"
+    "test:once": "vitest run"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.0.4",
@@ -76,27 +131,31 @@
     "@lezer/highlight": "^1.0.0",
     "@lezer/markdown": "^1.0.1",
     "@replit/codemirror-vim": "^6.0.1",
-    "solid-js": "^1.4.8",
+    "solid-js": "^1.5.1",
     "style-mod": "^4.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.25.2",
-    "@types/node": "^18.0.6",
+    "@types/node": "^18.7.13",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@vue/tsconfig": "^0.1.3",
     "embedme": "git+https://github.com/voracious/embedme.git#live-fork",
     "eslint": "^8.20.0",
     "eslint-plugin-solid": "^0.7.1",
     "jsdom": "^20.0.0",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.2",
+    "typescript": "^4.8.2",
+    "vite": "^3.0.9",
+    "vite-plugin-externalize-deps": "^0.1.4",
     "vite-plugin-solid": "^2.3.0",
-    "vitest": "^0.19.1"
+    "vitest": "^0.22.1",
+    "vue": "^3.2.37",
+    "vue-tsc": "^0.40.1"
   },
   "publishConfig": {
     "access": "public"
   },
   "typings": "./types/ink.d.ts",
   "workspaces": [
-    ".",
-    "packages/*"
+    "."
   ]
 }
