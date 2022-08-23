@@ -83,12 +83,6 @@ export const images = (): Extension => {
     return widgets.length > 0 ? RangeSet.of(widgets) : Decoration.none
   }
 
-  const imagesTheme = EditorView.baseTheme({
-    '.cm-image-backdrop': {
-      backgroundColor: 'var(--ink-internal-block-background-color)',
-    },
-  })
-
   const imagesField = StateField.define<DecorationSet>({
     create(state) {
       return decorate(state)
@@ -105,7 +99,6 @@ export const images = (): Extension => {
   })
 
   return [
-    imagesTheme,
     imagesField,
   ]
 }

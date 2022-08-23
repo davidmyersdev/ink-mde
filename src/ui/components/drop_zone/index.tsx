@@ -119,29 +119,25 @@ export const DropZone: Component = () => {
   })
 
   return (
-    <>
-      <style>
-        {styles}
-      </style>
-      <div class="ink-drop-zone" classList={{ visible: isVisible() }}>
-        <div class="ink-drop-zone-modal">
-          <div class="ink-drop-zone-droppable-area" onDrop={dropOnZone}>
-            <div class="ink-drop-zone-file-preview">
-              <For each={files().slice(0, 8)}>{file => (
-                <img class="ink-drop-zone-file-preview-image" alt={file.name} src={URL.createObjectURL(file)} />
-              )}</For>
-            </div>
-            <Show when={isLoading()} fallback={<span>drop files here</span>}>
-              <span>uploading files...</span>
-            </Show>
+    <div class="ink-drop-zone" classList={{ visible: isVisible() }}>
+      <style textContent={styles} />
+      <div class="ink-drop-zone-modal">
+        <div class="ink-drop-zone-droppable-area" onDrop={dropOnZone}>
+          <div class="ink-drop-zone-file-preview">
+            <For each={files().slice(0, 8)}>{file => (
+              <img class="ink-drop-zone-file-preview-image" alt={file.name} src={URL.createObjectURL(file)} />
+            )}</For>
           </div>
-          <div class="ink-drop-zone-hide" onClick={closeModal}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
+          <Show when={isLoading()} fallback={<span>drop files here</span>}>
+            <span>uploading files...</span>
+          </Show>
+        </div>
+        <div class="ink-drop-zone-hide" onClick={closeModal}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
         </div>
       </div>
-    </>
+    </div>
   )
 }

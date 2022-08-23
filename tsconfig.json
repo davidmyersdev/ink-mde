@@ -16,13 +16,11 @@
     "noUnusedParameters": true,
     "outDir": "./dist",
     "paths": {
-      "/examples/*": ["./examples/*"],
-      "/src/*": ["./src/*"],
-      "/test/*": ["./test/*"],
-      "/types/*": ["./types/*"],
+      "/*": ["./*"],
       "ink-mde": ["./src/index"]
     },
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "ESNext",
@@ -32,9 +30,9 @@
     "useDefineForClassFields": true
   },
   "include": [
-    "./examples/**/*",
-    "./src/**/*",
-    "./test/**/*",
-    "./types/**/*"
+    "./**/*"
+  ],
+  "exclude": [
+    "./vue"
   ]
 }

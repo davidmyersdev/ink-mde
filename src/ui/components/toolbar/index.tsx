@@ -1,4 +1,4 @@
-import { Show } from 'solid-js'
+import { Show, createSignal } from 'solid-js'
 import type { Component } from 'solid-js'
 import { Button } from '../button'
 import styles from './styles.css?inline'
@@ -8,20 +8,14 @@ import * as InkValues from '/types/values'
 
 export const Toolbar: Component = () => {
   const [state, setState] = useStore()
+  const [uploader, setUploader] = createSignal<HTMLInputElement>()
 
   const formatAs = (type: InkValues.Markup) => {
     format([state, setState], type)
     focus([state, setState])
   }
 
-  const uploader = document.createElement('input')
-  const handler = () => {
-    uploader.click()
-  }
-
-  uploader.style.display = 'none'
-  uploader.type = 'file'
-  uploader.onchange = (event: Event) => {
+  const uploadChangeHandler = (event: Event) => {
     const target = event.target as HTMLInputElement
 
     if (target?.files) {
@@ -34,11 +28,13 @@ export const Toolbar: Component = () => {
     }
   }
 
+  const uploadClickHandler = () => {
+    uploader()?.click()
+  }
+
   return (
     <div class='ink-toolbar'>
-      <style>
-        {styles}
-      </style>
+      <style textContent={styles} />
       <div class='ink-toolbar-group'>
         <Show when={state().options.toolbar.heading}>
           <Button onclick={() => formatAs(InkValues.Markup.Heading)}>
@@ -144,12 +140,12 @@ export const Toolbar: Component = () => {
           </Button>
         </Show>
         <Show when={state().options.toolbar.upload}>
-          <Button onclick={handler}>
+          <Button onclick={uploadClickHandler}>
             <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
               <path d='M10 13V4M10 4L13 7M10 4L7 7'/>
               <path d='M2 13V15C2 15.5523 2.44772 16 3 16H17C17.5523 16 18 15.5523 18 15V13'/>
             </svg>
-            {uploader}
+            <input style={{ display: 'none' }} type='file' onChange={uploadChangeHandler} ref={setUploader} />
           </Button>
         </Show>
       </div>

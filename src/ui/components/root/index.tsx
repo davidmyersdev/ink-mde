@@ -15,7 +15,7 @@ export const Root: Component<{ store: InkInternal.Store }> = () => {
   }
 
   return (
-    <div class='ink' ref={setRoot}>
+    <div class='ink ink-mde' ref={setRoot}>
       <Styles />
       <DropZone />
       <Show when={state().options.interface.toolbar}>

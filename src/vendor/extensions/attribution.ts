@@ -3,6 +3,7 @@ import { RangeSet, StateField } from '@codemirror/state'
 import type { DecorationSet } from '@codemirror/view'
 import { Decoration, EditorView, WidgetType } from '@codemirror/view'
 
+// Todo: Make this a normal DOM element instead of a CM extension.
 class AttributionWidget extends WidgetType {
   constructor() {
     super()

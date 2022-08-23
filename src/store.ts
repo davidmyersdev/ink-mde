@@ -1,4 +1,3 @@
-import { EditorView } from '@codemirror/view'
 import { createSignal } from 'solid-js'
 import { override } from '/src/utils/merge'
 import { createExtensions } from '/src/extensions'
@@ -50,7 +49,7 @@ export const blankState = (): InkInternal.StateResolved => {
   }
 
   return {
-    editor: new EditorView(),
+    editor: {} as InkInternal.Editor,
     extensions: createExtensions(),
     options,
     root: createElement(),

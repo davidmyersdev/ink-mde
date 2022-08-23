@@ -34,9 +34,6 @@ export const Styles: Component = () => {
   })
 
   return (
-    <style>
-      {`.ink {\n  ${vars().join('\n  ')}\n}`}
-      {styles}
-    </style>
+    <style textContent={`.ink {\n  ${vars().join('\n  ')}\n}\n${styles}`} />
   )
 }
