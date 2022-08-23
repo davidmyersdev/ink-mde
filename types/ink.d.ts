@@ -175,5 +175,6 @@ export namespace Values {
 
 export declare function defineOptions(options: Options): Options
 export declare function ink(target: HTMLElement, options?: Options): Instance
+export declare function ssr(options?: Options): string
 
 export default ink

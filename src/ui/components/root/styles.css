@@ -29,3 +29,82 @@
 .ink .cm-completionLabel {
   font-family: inherit;
 }
+
+.ink-mde, .ink-mde * {
+  box-sizing: border-box;
+}
+
+.ink-mde .cm-editor {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.ink-mde .cm-scroller {
+  align-items: flex-start;
+  display: flex;
+  font-family: var(--ink-internal-font-family);
+  font-size: var(--ink-internal-editor-font-size);
+  line-height: var(--ink-internal-editor-line-height);
+  overflow-x: auto;
+  position: relative;
+}
+
+.ink-mde .cm-content {
+  display: block;
+  flex-grow: 2;
+  flex-shrink: 0;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.ink-mde .cm-lineWrapping {
+  flex-shrink: 1;
+  overflow-wrap: anywhere;
+  white-space: break-spaces;
+  word-break: break-word;
+}
+
+.ink-mde .cm-line {
+  font-family: var(--ink-internal-font-family);
+  padding: 0;
+}
+
+.ink-mde .cm-line.cm-codeblock {
+  background-color: var(--ink-internal-block-background-color);
+  font-family: var(--ink-internal-code-font-family);
+  padding: 0 var(--ink-internal-block-padding);
+}
+
+.ink-mde .cm-line.cm-codeblock.cm-codeblock-open {
+  border-radius: var(--ink-internal-border-radius) var(--ink-internal-border-radius) 0 0;
+  padding-top: var(--ink-internal-block-padding);
+}
+
+.ink-mde .cm-line.cm-codeblock.cm-codeblock-close {
+  border-radius: 0 0 var(--ink-internal-border-radius) var(--ink-internal-border-radius);
+  padding-bottom: var(--ink-internal-block-padding);
+}
+
+.ink-mde .cm-line .cm-code {
+  background-color: var(--ink-internal-block-background-color);
+  font-family: var(--ink-internal-code-font-family);
+  padding: var(--ink-internal-inline-padding) 0;
+}
+
+.ink-mde .cm-line .cm-code.cm-code-open {
+  border-radius: var(--ink-internal-border-radius) 0 0 var(--ink-internal-border-radius);
+  padding-left: var(--ink-internal-inline-padding);
+}
+
+.ink-mde .cm-line .cm-code.cm-code-close {
+  border-radius: 0 var(--ink-internal-border-radius) var(--ink-internal-border-radius) 0;
+  padding-right: var(--ink-internal-inline-padding);
+}
+
+.ink-mde .cm-image-backdrop {
+  background-color: var(--ink-internal-block-background-color);
+}

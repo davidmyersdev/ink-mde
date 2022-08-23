@@ -1,23 +1,8 @@
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import type { Extension } from '@codemirror/state'
-import { EditorView } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
 
 export const theme = (): Extension => {
-  const baseTheme = EditorView.baseTheme({
-    '&': {
-      // .cm-editor
-    },
-    '.cm-scroller': {
-      lineHeight: 'var(--ink-internal-editor-line-height)',
-      fontFamily: 'var(--ink-internal-font-family)',
-      fontSize: 'var(--ink-internal-editor-font-size)',
-    },
-    '.cm-line': {
-      padding: '0',
-    },
-  })
-
   const extension = syntaxHighlighting(
     HighlightStyle.define([
       // ordered by lowest to highest precedence
@@ -175,7 +160,6 @@ export const theme = (): Extension => {
   )
 
   return [
-    baseTheme,
     extension,
   ]
 }

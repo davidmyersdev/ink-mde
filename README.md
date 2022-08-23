@@ -18,7 +18,10 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 - [x] Inline Markdown image previews
 - [x] Configurable and stylable
 - [x] An optional formatting toolbar (great for mobile)
-- [x] Vim Mode
+- [x] Optionally enable Vim Mode
+- [x] All frameworks supported with the `ink-mde` base export
+- [x] Ready-to-use Vue component with the `ink-mde/vue` subpath export
+- [x] SSR Support with the `ink-mde/ssr` and `ink-mde/vue/ssr` subpath exports
 - [x] Plugin API
 
 ## Getting Started
@@ -38,7 +41,8 @@ yarn add ink-mde
 
 Next, import `ink-mde` and customize it to fit your needs.
 
-### Minimal setup
+### Examples for `ink-mde`
+#### Minimal setup
 
 Mount the component and start writing.
 
@@ -50,7 +54,7 @@ import ink from 'ink-mde'
 ink(document.getElementById('editor')!)
 ```
 
-### Track state changes with hooks
+#### Track state changes with hooks
 
 To sync the editor with your app's state, you can use the `afterUpdate` hook.
 
@@ -77,12 +81,55 @@ const editor = ink(document.getElementById('editor')!, options)
 editor.update(state.doc)
 ```
 
+### Examples for `ink-mde/vue`
+
+The `ink-mde/vue` subpath exports a Vue 3 component.
+
+#### Minimal setup
+
+```vue
+<template>
+  <InkMde v-model="markdown" />
+</template>
+
+<script lang="ts" setup>
+import InkMde from 'ink-mde/vue'
+import { ref } from 'vue'
+
+const markdown = ref('# Hello, World!')
+</script>
+```
+
+#### Custom Options
+
+The Vue component forwards all options that `ink-mde` supports, and it uses a deep watcher to ensure your `options` are reactive.
+
+```vue
+<template>
+  <input v-model="options.interface.appearance" type="radio" value="dark"> dark
+  <input v-model="options.interface.appearance" type="radio" value="light"> light
+  <InkMde v-model="markdown" :options="options" />
+</template>
+
+<script lang="ts" setup>
+import InkMde from 'ink-mde/vue'
+import { reactive, ref } from 'vue'
+
+const markdown = ref('# Hello, World!')
+const options = reactive({
+  interface: {
+    appearance: 'dark',
+  },
+})
+</script>
+```
+
 ## Further customization
 
 These are the default options, and any of them can be overridden when initializing (or reconfiguring) an instance of `ink-mde`.
 
 ```ts
-// ./src/store.ts#L11-L50
+// ./src/store.ts#L10-L49
 const options = {
   doc: '',
   files: {

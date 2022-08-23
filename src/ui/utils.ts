@@ -4,10 +4,21 @@ import type InkInternal from '/types/internal'
 import type InkUi from '/types/ui'
 
 export const createElement = (): InkUi.Element => {
+  // Needed for tree-shaking purposes.
+  if (import.meta.env.VITE_SSR) {
+    return {} as InkUi.Element
+  }
+
   return document.createElement('div')
 }
 
 export const isAutoDark = () => {
+  // Needed for tree-shaking purposes.
+  if (import.meta.env.VITE_SSR) {
+    // Todo: Allow user to specify a default theme for SSR.
+    return true
+  }
+
   return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 

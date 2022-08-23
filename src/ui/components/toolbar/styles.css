@@ -4,6 +4,7 @@
   bottom: 0.25rem;
   color: inherit;
   display: flex;
+  flex-shrink: 0;
   gap: 2rem;
   overflow: auto;
   padding: 0.25rem;

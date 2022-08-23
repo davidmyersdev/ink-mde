@@ -3,7 +3,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import solidjs from 'vite-plugin-solid'
-import { dependencies } from './package.json'
+import { externalizeDeps } from 'vite-plugin-externalize-deps'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,11 +18,9 @@ export default defineConfig({
 
         return `ink.${format}.js`
       },
-      // The global name for UMD or IIFE builds.
-      name: 'Ink',
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: Object.keys(dependencies),
       output: [
         {
           esModule: true,
@@ -35,17 +33,12 @@ export default defineConfig({
           inlineDynamicImports: true,
           interop: 'esModule',
         },
-        {
-          exports: 'named',
-          format: 'umd',
-          inlineDynamicImports: true,
-          interop: 'esModule',
-        },
       ],
     },
     target: 'esnext',
   },
   plugins: [
+    externalizeDeps(),
     solidjs(),
   ],
   resolve: {
@@ -58,11 +51,15 @@ export default defineConfig({
       'browser',
     ],
   },
+  // @ts-expect-error Vitest uses this section.
   test: {
     deps: {
       inline: [
         'solid-js',
       ],
+    },
+    transformMode: {
+      web: [/\.tsx?$/],
     },
   },
 })

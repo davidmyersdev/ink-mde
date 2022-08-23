@@ -3,7 +3,7 @@
 exports[`ink > matches the snapshot 1`] = `
 <div>
   <div
-    class="ink"
+    class="ink ink-mde"
   >
     <style>
       .ink {
@@ -76,12 +76,12 @@ exports[`ink > matches the snapshot 1`] = `
   --ink-internal-syntax-strong-font-weight: var(--ink-syntax-strong-font-weight, 600);
   --ink-internal-syntax-url-color: var(--ink-syntax-url-color, #666666);
 }
-      
+
     </style>
-    <style />
     <div
       class="ink-drop-zone"
     >
+      <style />
       <div
         class="ink-drop-zone-modal"
       >
@@ -378,7 +378,7 @@ exports[`ink > matches the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="cm-editor ͼ1 ͼ2 ͼ3e"
+      class="cm-editor ͼ1 ͼ2 ͼ3e ink-mde-editor"
     >
       <div
         aria-live="polite"
@@ -393,7 +393,7 @@ exports[`ink > matches the snapshot 1`] = `
           aria-multiline="true"
           autocapitalize="off"
           autocorrect="off"
-          class="cm-content cm-lineWrapping"
+          class="cm-content cm-lineWrapping ink-mde-editor-content"
           contenteditable="true"
           role="textbox"
           spellcheck="true"
