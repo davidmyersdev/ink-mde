@@ -51,7 +51,6 @@ export default defineConfig({
       'browser',
     ],
   },
-  // @ts-expect-error Vitest uses this section.
   test: {
     deps: {
       inline: [
