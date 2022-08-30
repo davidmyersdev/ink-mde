@@ -7,19 +7,20 @@ import { makeState } from '/src/vendor/state'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const destroy = ([state, _setState]: InkInternal.Store) => {
+export const destroy = ([state]: InkInternal.Store) => {
   const { editor } = state()
 
   editor.destroy()
 }
 
-export const doc = ([state, _setState]: InkInternal.Store) => {
-  const { editor } = state()
-
-  return editor.state.sliceDoc()
+/**
+ * @deprecated Use `getDoc` instead.
+ */
+export const doc = ([state, setState]: InkInternal.Store) => {
+  return getDoc([state, setState])
 }
 
-export const focus = ([state, _setState]: InkInternal.Store) => {
+export const focus = ([state]: InkInternal.Store) => {
   const { editor } = state()
 
   if (!editor.hasFocus)
@@ -28,6 +29,12 @@ export const focus = ([state, _setState]: InkInternal.Store) => {
 
 export const format = ([state, setState]: InkInternal.Store, type: `${Ink.Values.Markup}`, selection?: Ink.Editor.Selection) => {
   return formatter.format([state, setState], type, selection)
+}
+
+export const getDoc = ([state]: InkInternal.Store) => {
+  const { editor } = state()
+
+  return editor.state.sliceDoc()
 }
 
 export const insert = ([state, setState]: InkInternal.Store, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
@@ -91,7 +98,7 @@ export const reconfigure = ([state, setState]: InkInternal.Store, options: Ink.O
   })
 }
 
-export const select = ([state, _setState]: InkInternal.Store, selections: Ink.Editor.Selection[]) => {
+export const select = ([state]: InkInternal.Store, selections: Ink.Editor.Selection[]) => {
   const { editor } = state()
 
   editor.dispatch(
@@ -101,13 +108,13 @@ export const select = ([state, _setState]: InkInternal.Store, selections: Ink.Ed
   )
 }
 
-export const selections = ([state, _setState]: InkInternal.Store): Ink.Editor.Selection[] => {
+export const selections = ([state]: InkInternal.Store): Ink.Editor.Selection[] => {
   const { editor } = state()
 
   return toInk(editor.state.selection)
 }
 
-export const update = ([state, _setState]: InkInternal.Store, doc: string) => {
+export const update = ([state]: InkInternal.Store, doc: string) => {
   const { editor } = state()
 
   editor.dispatch(

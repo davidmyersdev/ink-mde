@@ -26,6 +26,12 @@
       "rules": {
         "yml/no-empty-mapping-value": [0, {}]
       }
+    },
+    {
+      "files": "./src/index.tsx",
+      "rules": {
+        "eslint-comments/no-unlimited-disable": [0, {}]
+      }
     }
   ]
 }

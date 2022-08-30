@@ -6,9 +6,6 @@
     "paths": {
       "ink-mde": [
         "../"
-      ],
-      "ink-mde/ssr": [
-        "../"
       ]
     },
     "rootDir": "."

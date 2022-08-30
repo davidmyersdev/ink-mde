@@ -5,21 +5,18 @@ import { externalizeDeps } from 'vite-plugin-externalize-deps'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: resolve(__dirname),
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, 'src/InkMde.vue'),
-      fileName: 'InkMde',
+      fileName: 'Client',
       formats: [],
     },
-    outDir: '../dist/vue',
+    outDir: 'dist/vue',
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: [
-        'ink-mde',
-        'ink-mde/ssr',
-        'vue',
+        /^ink-mde(?:\/.+)?$/,
+        /^vue(?:\/.+)?$/,
       ],
       output: [
         {
@@ -41,9 +38,16 @@ export default defineConfig({
         },
       ],
     },
+    sourcemap: true,
   },
   plugins: [
     externalizeDeps(),
     vue(),
   ],
+  resolve: {
+    conditions: [
+      'browser',
+      'node',
+    ],
+  },
 })

@@ -174,7 +174,9 @@ export namespace Values {
 }
 
 export declare function defineOptions(options: Options): Options
+export declare function hydrate(target: HTMLElement, options?: Options): Instance
 export declare function ink(target: HTMLElement, options?: Options): Instance
-export declare function ssr(options?: Options): string
+export declare function render(target: HTMLElement, options?: Options): Instance
+export declare function renderToString(options?: Options): string
 
 export default ink
