@@ -1,17 +1,15 @@
 <template>
-  <div ref="ink"></div>
+  <div ref="ink" v-html="html"></div>
 </template>
 
 <script lang="ts">
-import { ink } from 'ink-mde'
-import { defineComponent } from 'vue'
-
+import { ink, renderToString } from 'ink-mde'
+import { defineComponent, type PropType } from 'vue'
 import type * as Ink from 'ink-mde'
-import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'InkMde',
-  emits: ['input', 'update:modelValue'],
+  emits: ['update:modelValue'],
   props: {
     modelValue: {
       type: String,
@@ -19,21 +17,12 @@ export default defineComponent({
     options: {
       type: Object as PropType<Ink.Options>,
     },
-    value: {
-      type: String,
-    },
-    version: {
-      type: Number,
-      default: () => 3,
-      validator: (value: number) => (
-        [2, 3].includes(value)
-      ),
-    },
   },
   data() {
     return {
+      html: '',
       instance: undefined,
-    } as { instance?: Ink.Instance }
+    } as { html: string, instance?: Ink.Instance }
   },
   watch: {
     modelValue(value) {
@@ -46,16 +35,6 @@ export default defineComponent({
       handler(newValue, _oldValue) {
         this.instance?.reconfigure(newValue)
       },
-    },
-    value(value) { // Vue 2 support
-      if (this.instance?.doc() !== value) {
-        this.instance?.update(value)
-      }
-    },
-  },
-  computed: {
-    doc() {
-      return (this.version === 3 ? this.modelValue : this.value) || ''
     },
   },
   methods: {
@@ -72,15 +51,11 @@ export default defineComponent({
       if (this.$refs.ink && !this.instance) {
         this.instance = ink(this.$refs.ink as HTMLElement, {
           ...this.options,
-          doc: this.doc,
+          doc: this.modelValue,
           hooks: {
             ...this.options?.hooks,
             afterUpdate: (doc: string) => {
-              if (this.version === 3) {
-                this.$emit('update:modelValue', doc)
-              } else {
-                this.$emit('input', doc) // Vue 2 support
-              }
+              this.$emit('update:modelValue', doc)
 
               if (this.options?.hooks?.afterUpdate) {
                 this.options.hooks.afterUpdate(doc)
@@ -97,6 +72,11 @@ export default defineComponent({
         this.instance.focus()
       }
     },
+  },
+  created() {
+    if (import.meta.env.VITE_SSR) {
+      this.html = renderToString(this.options)
+    }
   },
   mounted() {
     this.tryInit()

@@ -28,19 +28,20 @@ export namespace InkInternal {
   }
 
   export interface State {
+    editor?: InkInternal.Editor,
     extensions?: InkInternal.OptionExtension<Ink.Values.Extensions>[],
     options?: Ink.Options,
-    target?: HTMLElement,
     root?: InkUi.Root,
-    editor?: InkInternal.Editor,
+    ssr?: boolean,
+    target?: HTMLElement,
   }
 
   export interface StateResolved {
+    editor: InkInternal.Editor,
     extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[],
     options: Ink.OptionsResolved,
-    target: HTMLElement,
     root: InkUi.Root,
-    editor: InkInternal.Editor,
+    target: HTMLElement,
   }
 
   export type Store = [get: Accessor<InkInternal.StateResolved>, set: Setter<InkInternal.StateResolved>]
