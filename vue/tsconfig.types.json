@@ -11,6 +11,7 @@
     "sourceRoot": "./src"
   },
   "include": [
+    "./env.d.ts",
     "./src/**/*"
   ]
 }

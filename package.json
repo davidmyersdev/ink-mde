@@ -31,60 +31,41 @@
     "vue",
     "vue3"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "browser": {
         "types": "./types/ink.d.ts",
-        "require": "./dist/ink.cjs",
-        "import": "./dist/ink.js"
+        "require": "./dist/client.cjs",
+        "import": "./dist/client.js"
       },
       "node": {
         "types": "./types/ink.d.ts",
-        "require": "./dist/ink.cjs",
-        "import": "./dist/ink.js"
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.js"
       },
       "types": "./types/ink.d.ts",
-      "require": "./dist/ink.cjs",
-      "import": "./dist/ink.js"
-    },
-    "./ssr": {
-      "browser": {
-        "types": "./types/ink.d.ts",
-        "require": "./dist/ssr/client.cjs",
-        "import": "./dist/ssr/client.js"
-      },
-      "node": {
-        "types": "./types/ink.d.ts",
-        "require": "./dist/ssr/server.cjs",
-        "import": "./dist/ssr/server.js"
-      },
-      "types": "./types/ink.d.ts",
-      "require": "./dist/ssr/client.cjs",
-      "import": "./dist/ssr/client.js"
+      "require": "./dist/client.cjs",
+      "import": "./dist/client.js"
     },
     "./vue": {
-      "types": "./dist/vue/InkMde.vue.d.ts",
-      "require": "./dist/vue/InkMde.cjs",
-      "import": "./dist/vue/InkMde.js"
-    },
-    "./vue/ssr": {
       "browser": {
         "types": "./dist/vue/InkMde.vue.d.ts",
-        "require": "./dist/vue/ssr/Client.cjs",
-        "import": "./dist/vue/ssr/Client.js"
+        "require": "./dist/vue/Client.cjs",
+        "import": "./dist/vue/Client.js"
       },
       "node": {
         "types": "./dist/vue/InkMde.vue.d.ts",
-        "require": "./dist/vue/ssr/InkMde.cjs",
-        "import": "./dist/vue/ssr/InkMde.js"
+        "require": "./dist/vue/InkMde.cjs",
+        "import": "./dist/vue/InkMde.js"
       },
       "types": "./dist/vue/InkMde.vue.d.ts",
-      "require": "./dist/vue/ssr/Client.cjs",
-      "import": "./dist/vue/ssr/Client.js"
+      "require": "./dist/vue/Client.cjs",
+      "import": "./dist/vue/Client.js"
     }
   },
-  "main": "./dist/ink.cjs",
-  "module": "./dist/ink.js",
+  "main": "./dist/client.cjs",
+  "module": "./dist/client.js",
   "types": "./types/ink.d.ts",
   "files": [
     "dist/**/*",
@@ -92,13 +73,9 @@
     "types/**/*"
   ],
   "scripts": {
-    "build": "yarn build:root && yarn build:root:ssr && yarn build:vue",
-    "build:root": "tsc && vite build && tsc --project ./tsconfig.types.json",
-    "build:root:ssr": "vite build -c ./ssr/vite.config.ts && VITE_SSR=1 vite build -c ./ssr/vite.config.ts --ssr ./ssr/server.tsx",
-    "build:vue": "yarn build:vue:root && yarn build:vue:ssr",
-    "build:vue:root": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && yarn build:vue:types",
-    "build:vue:ssr": "vite build -c ./vue/ssr/vite.config.ts && VITE_SSR=1 vite build -c ./vue/ssr/vite.config.ts --ssr ./vue/ssr/InkMde.vue",
-    "build:vue:types": "vue-tsc --project ./vue/tsconfig.types.json",
+    "build": "yarn build:root && yarn build:vue",
+    "build:root": "tsc && tsc --project ./tsconfig.types.json && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx",
+    "build:vue": "vue-tsc --project ./vue/tsconfig.json && vue-tsc --project ./vue/tsconfig.types.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue",
     "dev": "vite",
     "dev:vue": "vite -c ./vue/vite.config.ts",
     "docs:check": "embedme --verify README.md",
