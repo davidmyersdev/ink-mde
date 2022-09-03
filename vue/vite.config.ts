@@ -11,7 +11,7 @@ export default defineConfig(({ ssrBuild }) => {
       emptyOutDir: !ssrBuild,
       lib: {
         entry: './src/InkMde.vue',
-        fileName: 'Client',
+        fileName: 'client',
         formats: [],
       },
       outDir: './dist',
