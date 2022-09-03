@@ -21,7 +21,7 @@ The flexible TypeScript Markdown editor that powers https://octo.app.
 - [x] Optionally enable Vim Mode
 - [x] All frameworks supported with the `ink-mde` base export
 - [x] Ready-to-use Vue component with the `ink-mde/vue` subpath export
-- [x] SSR Support with the `ink-mde/ssr` and `ink-mde/vue/ssr` subpath exports
+- [x] Supports Server-Side Rendering (SSR) via conditional exports
 - [x] Plugin API
 
 ## Getting Started
