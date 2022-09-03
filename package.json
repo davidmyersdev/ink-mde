@@ -35,38 +35,42 @@
   "exports": {
     ".": {
       "browser": {
-        "types": "./types/ink.d.ts",
+        "types": "./types/index.d.ts",
         "require": "./dist/client.cjs",
         "import": "./dist/client.js"
       },
       "node": {
-        "types": "./types/ink.d.ts",
-        "require": "./dist/index.cjs",
-        "import": "./dist/index.js"
+        "types": "./types/index.d.ts",
+        "require": "./dist/server.cjs",
+        "import": "./dist/server.js"
       },
-      "types": "./types/ink.d.ts",
+      "types": "./types/index.d.ts",
       "require": "./dist/client.cjs",
       "import": "./dist/client.js"
     },
     "./vue": {
       "browser": {
-        "types": "./vue/dist/InkMde.vue.d.ts",
-        "require": "./vue/dist/Client.cjs",
-        "import": "./vue/dist/Client.js"
+        "types": "./vue/dist/index.d.ts",
+        "require": "./vue/dist/client.cjs",
+        "import": "./vue/dist/client.js"
       },
       "node": {
-        "types": "./vue/dist/InkMde.vue.d.ts",
-        "require": "./vue/dist/InkMde.cjs",
-        "import": "./vue/dist/InkMde.js"
+        "types": "./vue/dist/index.d.ts",
+        "require": "./vue/dist/server.cjs",
+        "import": "./vue/dist/server.js"
       },
-      "types": "./vue/dist/InkMde.vue.d.ts",
-      "require": "./vue/dist/Client.cjs",
-      "import": "./vue/dist/Client.js"
+      "types": "./vue/dist/index.d.ts",
+      "require": "./vue/dist/client.cjs",
+      "import": "./vue/dist/client.js"
     }
   },
-  "main": "./dist/client.cjs",
-  "module": "./dist/client.js",
-  "types": "./types/ink.d.ts",
+  "browser": {
+    "./dist/server.cjs": "./dist/client.cjs",
+    "./dist/server.js": "./dist/client.js"
+  },
+  "main": "./dist/server.cjs",
+  "module": "./dist/server.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/**/*",
     "src/**/*",
@@ -75,8 +79,8 @@
   ],
   "scripts": {
     "build": "yarn build:root && yarn build:vue",
-    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json",
-    "build:vue": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json",
+    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts && mv ./dist/index.js ./dist/server.js && mv ./dist/index.cjs ./dist/server.cjs",
+    "build:vue": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/server.js && mv ./vue/dist/InkMde.cjs ./vue/dist/server.cjs",
     "dev": "vite",
     "dev:vue": "vite -c ./vue/vite.config.ts",
     "docs:check": "embedme --verify README.md",
@@ -132,7 +136,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "typings": "./types/ink.d.ts",
   "workspaces": [
     "."
   ]
