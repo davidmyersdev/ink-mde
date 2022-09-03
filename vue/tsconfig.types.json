@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "../dist/vue",
+    "declarationDir": "./dist",
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "noEmit": false,

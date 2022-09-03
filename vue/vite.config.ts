@@ -4,50 +4,53 @@ import { defineConfig } from 'vite'
 import { externalizeDeps } from 'vite-plugin-externalize-deps'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  build: {
-    emptyOutDir: false,
-    lib: {
-      entry: resolve(__dirname, 'src/InkMde.vue'),
-      fileName: 'Client',
-      formats: [],
-    },
-    outDir: 'dist/vue',
-    rollupOptions: {
-      external: [
-        /^ink-mde(?:\/.+)?$/,
-        /^vue(?:\/.+)?$/,
-      ],
-      output: [
-        {
-          esModule: true,
-          exports: 'named',
-          format: 'es',
-          globals: {
-            vue: 'Vue',
+export default defineConfig(({ ssrBuild }) => {
+  return {
+    root: resolve(__dirname),
+    build: {
+      emptyOutDir: !ssrBuild,
+      lib: {
+        entry: './src/InkMde.vue',
+        fileName: 'Client',
+        formats: [],
+      },
+      outDir: './dist',
+      rollupOptions: {
+        external: [
+          /^ink-mde(?:\/.+)?$/,
+          /^vue(?:\/.+)?$/,
+        ],
+        output: [
+          {
+            esModule: true,
+            exports: 'named',
+            format: 'es',
+            globals: {
+              vue: 'Vue',
+            },
           },
-        },
-        {
-          exports: 'named',
-          format: 'cjs',
-          inlineDynamicImports: true,
-          interop: 'esModule',
-          globals: {
-            vue: 'Vue',
+          {
+            exports: 'named',
+            format: 'cjs',
+            inlineDynamicImports: true,
+            interop: 'esModule',
+            globals: {
+              vue: 'Vue',
+            },
           },
-        },
-      ],
+        ],
+      },
+      sourcemap: true,
     },
-    sourcemap: true,
-  },
-  plugins: [
-    externalizeDeps(),
-    vue(),
-  ],
-  resolve: {
-    conditions: [
-      'browser',
-      'node',
+    plugins: [
+      externalizeDeps(),
+      vue(),
     ],
-  },
+    resolve: {
+      conditions: [
+        'browser',
+        'node',
+      ],
+    },
+  }
 })
