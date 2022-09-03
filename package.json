@@ -50,18 +50,18 @@
     },
     "./vue": {
       "browser": {
-        "types": "./dist/vue/InkMde.vue.d.ts",
-        "require": "./dist/vue/Client.cjs",
-        "import": "./dist/vue/Client.js"
+        "types": "./vue/dist/InkMde.vue.d.ts",
+        "require": "./vue/dist/Client.cjs",
+        "import": "./vue/dist/Client.js"
       },
       "node": {
-        "types": "./dist/vue/InkMde.vue.d.ts",
-        "require": "./dist/vue/InkMde.cjs",
-        "import": "./dist/vue/InkMde.js"
+        "types": "./vue/dist/InkMde.vue.d.ts",
+        "require": "./vue/dist/InkMde.cjs",
+        "import": "./vue/dist/InkMde.js"
       },
-      "types": "./dist/vue/InkMde.vue.d.ts",
-      "require": "./dist/vue/Client.cjs",
-      "import": "./dist/vue/Client.js"
+      "types": "./vue/dist/InkMde.vue.d.ts",
+      "require": "./vue/dist/Client.cjs",
+      "import": "./vue/dist/Client.js"
     }
   },
   "main": "./dist/client.cjs",
@@ -70,12 +70,13 @@
   "files": [
     "dist/**/*",
     "src/**/*",
-    "types/**/*"
+    "types/**/*",
+    "vue/**/*"
   ],
   "scripts": {
     "build": "yarn build:root && yarn build:vue",
-    "build:root": "tsc && tsc --project ./tsconfig.types.json && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx",
-    "build:vue": "vue-tsc --project ./vue/tsconfig.json && vue-tsc --project ./vue/tsconfig.types.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue",
+    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json",
+    "build:vue": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json",
     "dev": "vite",
     "dev:vue": "vite -c ./vue/vite.config.ts",
     "docs:check": "embedme --verify README.md",
