@@ -94,6 +94,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -112,6 +113,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -131,6 +133,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -153,6 +156,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -171,6 +175,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -195,6 +200,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -217,6 +223,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -250,6 +257,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -283,6 +291,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -320,6 +329,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
@@ -338,6 +348,7 @@ exports[`ink > matches the snapshot 1`] = `
         <!--#-->
         <button
           class="ink-button"
+          type="button"
         >
           <svg
             fill="none"
