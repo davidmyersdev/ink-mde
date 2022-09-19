@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
 
 declare module '*.vue' {
-  export { Component as default } from 'vue'
+  export { defineComponent as default } from 'vue'
 }

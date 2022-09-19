@@ -6,7 +6,6 @@ import { externalizeDeps } from 'vite-plugin-externalize-deps'
 // https://vitejs.dev/config/
 export default defineConfig(({ ssrBuild }) => {
   return {
-    root: resolve(__dirname),
     build: {
       emptyOutDir: !ssrBuild,
       lib: {
@@ -46,11 +45,9 @@ export default defineConfig(({ ssrBuild }) => {
       externalizeDeps(),
       vue(),
     ],
-    resolve: {
-      conditions: [
-        'browser',
-        'node',
-      ],
+    root: resolve(__dirname),
+    server: {
+      port: 5173,
     },
   }
 })
