@@ -7,6 +7,7 @@ import { EditorState } from '@codemirror/state'
 
 import { toCodeMirror } from './adapters/selections'
 import { buildVendors } from '/src/extensions'
+import { blockquote } from '/src/vendor/extensions/blockquote'
 import { code } from '/src/vendor/extensions/code'
 import { ink } from '/src/vendor/extensions/ink'
 import { keymaps } from '/src/vendor/extensions/keymaps'
@@ -38,6 +39,7 @@ export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.
         override: completions,
         optionClass: () => 'ink-tooltip-option',
       }),
+      blockquote(),
       code(),
       history(),
       ink(),
