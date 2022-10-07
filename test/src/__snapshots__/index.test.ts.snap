@@ -427,9 +427,14 @@ exports[`ink > matches the snapshot 1`] = `
             <br />
           </div>
           <div
-            class="cm-line"
+            class="cm-blockquote cm-blockquote-open cm-blockquote-close cm-line"
           >
-            The flexible TypeScript Markdown editor that works the way 
+            <span
+              class="ͼ49"
+            >
+              &gt;
+            </span>
+             The flexible TypeScript Markdown editor that works the way 
             <span
               class="ͼ3h ͼ49"
             >
