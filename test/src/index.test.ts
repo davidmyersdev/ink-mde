@@ -1,11 +1,11 @@
-// @vitest-environment jsdom
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { mockAll } from '/test/helpers/dom'
 import { ink } from '/src/index'
 import example from '/test/assets/example.md?raw'
 
 describe('ink', () => {
   beforeEach(() => {
+    vi.restoreAllMocks()
     mockAll()
   })
 
@@ -20,7 +20,7 @@ describe('ink', () => {
       doc: '# Hello',
     })
 
-    expect(instance.doc()).toEqual('# Hello')
+    expect(instance.getDoc()).toEqual('# Hello')
   })
 
   it('can be reconfigured', () => {

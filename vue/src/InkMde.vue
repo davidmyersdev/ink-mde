@@ -26,7 +26,7 @@ export default defineComponent({
   },
   watch: {
     modelValue(value) {
-      if (this.instance?.doc() !== value) {
+      if (this.instance?.getDoc() !== value) {
         this.instance?.update(value)
       }
     },
@@ -38,15 +38,6 @@ export default defineComponent({
     },
   },
   methods: {
-    focus() {
-      this.instance?.focus()
-    },
-    select(selections: Ink.Editor.Selection[]) {
-      this.instance?.select(selections)
-    },
-    selections() {
-      return this.instance?.selections()
-    },
     tryInit() {
       if (this.$refs.ink && !this.instance) {
         this.instance = ink(this.$refs.ink as HTMLElement, {

@@ -33,3 +33,8 @@ export enum PluginType {
   Default = 'default',
   Grammar = 'grammar',
 }
+
+export enum Selection {
+  End = 'end',
+  Start = 'start',
+}
