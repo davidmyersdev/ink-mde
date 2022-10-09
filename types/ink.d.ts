@@ -21,23 +21,34 @@ export type EnumString<T extends string> = `${T}`
 
 export interface Instance {
   destroy: () => void
-  doc: () => string
   focus: () => void
+  format: (type: EnumString<InkValues.Markup>, options: Instance.FormatOptions) => void
+  getDoc: () => string
   insert: (text: string, selection: Editor.Selection) => void
   load: (doc: string) => void
   options: () => OptionsResolved
   reconfigure: (updates: Options) => void
-  select: (selections: Editor.Selection[]) => void
+  select: (options: Instance.SelectOptions) => void
   selections: () => Editor.Selection[]
   update: (doc: string) => void
   wrap: (options: Instance.WrapOptions) => void
 }
 
 export namespace Instance {
+  export interface FormatOptions {
+    selection?: Ink.Editor.Selection,
+  }
+
+  export interface SelectOptions {
+    at?: EnumString<InkValues.Selection>,
+    selection?: Editor.Selection,
+    selections?: Editor.Selection[],
+  }
+
   export interface WrapOptions {
-    after: string
-    before: string
-    selection?: Editor.Selection
+    after: string,
+    before: string,
+    selection?: Editor.Selection,
   }
 }
 
@@ -167,10 +178,11 @@ export namespace Options {
 }
 
 export namespace Values {
-  export type Appearance = InkValues.Appearance
-  export type Extensions = InkValues.Extensions
-  export type Markup = InkValues.Markup
-  export type PluginType = InkValues.PluginType
+  export type Appearance = EnumString<InkValues.Appearance>
+  export type Extensions = EnumString<InkValues.Extensions>
+  export type Markup = EnumString<InkValues.Markup>
+  export type PluginType = EnumString<InkValues.PluginType>
+  export type Selection = EnumString<InkValues.Selection>
 }
 
 export declare function defineOptions(options: Options): Options
