@@ -54,14 +54,13 @@ export default defineConfig(({ ssrBuild }) => {
       ],
     },
     test: {
+      clearMocks: true,
       deps: {
         inline: [
           'solid-js',
         ],
       },
-      transformMode: {
-        web: [/\.tsx?$/],
-      },
+      environment: 'jsdom',
     },
   }
 })

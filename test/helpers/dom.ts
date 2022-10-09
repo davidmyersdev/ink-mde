@@ -1,4 +1,3 @@
-// @vitest-environment jsdom
 import { vi } from 'vitest'
 
 export const mockAll = () => {

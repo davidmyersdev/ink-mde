@@ -2,7 +2,7 @@ import { Show, createSignal } from 'solid-js'
 import type { Component } from 'solid-js'
 import { Button } from '../button'
 import styles from './styles.css?inline'
-import { focus, format, insert } from '/src/instance'
+import { focus, format, insert } from '/src/api'
 import { useStore } from '/src/ui/app'
 import * as InkValues from '/types/values'
 
