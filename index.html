@@ -85,6 +85,7 @@
           clipboard: true,
           dragAndDrop: true,
           handler(files) {
+            // eslint-disable-next-line no-console
             console.log({ files })
 
             return URL.createObjectURL(Array.from(files).pop())
