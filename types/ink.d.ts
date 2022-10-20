@@ -157,6 +157,7 @@ export namespace Options {
     [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly]
     [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
     attribution: boolean
+    lists: boolean
     toolbar: boolean
   }
 

@@ -25,6 +25,7 @@ export const blankState = (): InkInternal.StateResolved => {
       attribution: true,
       autocomplete: false,
       images: false,
+      lists: false,
       readonly: false,
       spellcheck: true,
       toolbar: false,
