@@ -462,75 +462,43 @@ undefined
             <div
               class="cm-line"
             >
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
               <span
-                aria-hidden="true"
+                class="ͼ4b"
               >
-                •
+                -
               </span>
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
                This is a list item
             </div>
             <div
               class="cm-line"
             >
                 
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
               <span
-                aria-hidden="true"
+                class="ͼ4b"
               >
-                •
+                -
               </span>
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
                This is a nested list item
             </div>
             <div
               class="cm-line"
             >
                   
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
               <span
-                aria-hidden="true"
+                class="ͼ4b"
               >
-                •
+                -
               </span>
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
                This is a deeply nested list item
             </div>
             <div
               class="cm-line"
             >
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
               <span
-                aria-hidden="true"
+                class="ͼ4b"
               >
-                •
+                -
               </span>
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
                This is another list item
             </div>
             <div
@@ -541,23 +509,17 @@ undefined
             <div
               class="cm-line"
             >
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
               <span
-                aria-hidden="true"
-                class="ink-mde-task-toggle-wrapper"
+                class="ͼ4b"
               >
-                <input
-                  class="ink-mde-task-toggle"
-                  type="checkbox"
-                />
+                -
               </span>
-              <img
-                aria-hidden="true"
-                class="cm-widgetBuffer"
-              />
+               
+              <span
+                class="ͼ3h"
+              >
+                [ ]
+              </span>
                This is a task
             </div>
             <div

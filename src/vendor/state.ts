@@ -9,7 +9,6 @@ import { code } from '/src/vendor/extensions/code'
 import { ink } from '/src/vendor/extensions/ink'
 import { keymaps } from '/src/vendor/extensions/keymaps'
 import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
-import { lists } from '/src/vendor/extensions/lists'
 import { theme } from '/src/vendor/extensions/theme'
 import { PluginType } from '/types/values'
 import type * as Ink from '/types/ink'
@@ -35,7 +34,6 @@ export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.
       ink(),
       keymaps(),
       lineWrapping(),
-      lists(),
       markdown({
         base: markdownLanguage,
         codeLanguages: languages,
