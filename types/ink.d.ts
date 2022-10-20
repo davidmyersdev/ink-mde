@@ -125,7 +125,6 @@ export namespace Options {
 
   export interface Extensions {
     [InkValues.Extensions.Appearance]: EnumString<InkValues.Appearance>
-    [InkValues.Extensions.Attribution]: boolean
     [InkValues.Extensions.Autocomplete]: boolean
     [InkValues.Extensions.Images]: boolean
     [InkValues.Extensions.ReadOnly]: boolean
@@ -153,11 +152,11 @@ export namespace Options {
 
   export interface Interface {
     [InkValues.Extensions.Appearance]: Options.Extensions[InkValues.Extensions.Appearance]
-    [InkValues.Extensions.Attribution]: Options.Extensions[InkValues.Extensions.Attribution]
     [InkValues.Extensions.Autocomplete]: Options.Extensions[InkValues.Extensions.Autocomplete]
     [InkValues.Extensions.Images]: Options.Extensions[InkValues.Extensions.Images]
     [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly]
     [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
+    attribution: boolean
     toolbar: boolean
   }
 

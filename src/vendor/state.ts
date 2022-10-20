@@ -1,10 +1,7 @@
-import { autocompletion } from '@codemirror/autocomplete'
 import { history } from '@codemirror/commands'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
-import type { EditorSelection } from '@codemirror/state'
-import { EditorState } from '@codemirror/state'
-
+import { type EditorSelection, EditorState } from '@codemirror/state'
 import { toCodeMirror } from './adapters/selections'
 import { buildVendors } from '/src/extensions'
 import { blockquote } from '/src/vendor/extensions/blockquote'
@@ -15,7 +12,6 @@ import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
 import { lists } from '/src/vendor/extensions/lists'
 import { theme } from '/src/vendor/extensions/theme'
 import { PluginType } from '/types/values'
-
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
@@ -25,7 +21,6 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
 }
 
 export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.State => {
-  const completions = state.options.plugins.flatMap(plugin => plugin.type === PluginType.Completion ? plugin.value : [])
   const extensions = state.options.plugins.flatMap(plugin => plugin.type === PluginType.Default ? plugin.value : [])
   const grammars = state.options.plugins.flatMap(plugin => plugin.type === PluginType.Grammar ? plugin.value : [])
 
@@ -34,12 +29,6 @@ export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.
     selection: toVendorSelection(state.options.selections),
     extensions: [
       ...buildVendors(state),
-      autocompletion({
-        defaultKeymap: true,
-        icons: false,
-        override: completions,
-        optionClass: () => 'ink-tooltip-option',
-      }),
       blockquote(),
       code(),
       history(),

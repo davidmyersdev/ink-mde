@@ -18,13 +18,13 @@ export const Styles: Component = () => {
       const { editor, root } = state()
 
       if (root.isConnected) {
-        const effects = buildVendorUpdates(state())
+        buildVendorUpdates(state()).then((effects) => {
+          editor.dispatch({
+            effects,
+          })
 
-        editor.dispatch({
-          effects,
+          setVars(makeVars(state()))
         })
-
-        setVars(makeVars(state()))
       } else {
         mediaQueryList.removeEventListener('change', listener)
       }

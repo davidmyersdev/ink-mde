@@ -1,14 +1,8 @@
-import type { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
+import type { Extension } from '@codemirror/state'
 
-export const dark = (): Extension => {
+export const appearance = (isDark: boolean): Extension => {
   return [
-    EditorView.theme({}, { dark: true }),
-  ]
-}
-
-export const light = (): Extension => {
-  return [
-    EditorView.theme({}, { dark: false }),
+    EditorView.theme({}, { dark: isDark }),
   ]
 }

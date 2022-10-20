@@ -24,7 +24,14 @@ export const Root: Component<{ store: InkInternal.Store }> = () => {
       <Show when={state().options.interface.toolbar}>
         <Toolbar />
       </Show>
-      <Editor />
+      <div class='ink-mde-editor-container'>
+        <Editor />
+        <Show when={state().options.interface.attribution}>
+          <div class='ink-mde-attribution'>
+            <span>powered by <a class='ink-mde-attribution-link' href='https://github.com/voracious/ink-mde' rel='noopener noreferrer' target='_blank'>ink-mde</a></span>
+          </div>
+        </Show>
+      </div>
     </div>
   )
 }

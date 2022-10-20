@@ -15,8 +15,20 @@ export namespace InkInternal {
 
   export interface Extension {
     compartment: InkInternal.Vendor.Compartment,
-    resolver: InkInternal.Vendor.ExtensionResolver,
+    initialValue: (state: InkInternal.StateResolved) => InkInternal.Vendor.Extension,
+    reconfigure: (options: Ink.OptionsResolved) => InkInternal.Vendor.StateEffect<unknown>,
   }
+
+  export interface LazyExtension {
+    compartment: InkInternal.Vendor.Compartment,
+    initialValue: (state: InkInternal.StateResolved) => InkInternal.Vendor.Extension,
+    reconfigure: (options: Ink.OptionsResolved) => Promise<InkInternal.Vendor.StateEffect<unknown>>,
+  }
+
+  export type ExtensionResolver = (options: Ink.OptionsResolved) => InkInternal.Vendor.Extension
+  export type ExtensionResolvers = ExtensionResolver[]
+  export type LazyExtensionResolver = (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => Promise<InkInternal.Vendor.StateEffect<unknown>>
+  export type LazyExtensionResolvers = LazyExtensionResolver[]
 
   export type Extensions = {
     [ExtensionName in Ink.Options.ExtensionNames]: InkInternal.Extension
@@ -29,7 +41,7 @@ export namespace InkInternal {
 
   export interface State {
     editor?: InkInternal.Editor,
-    extensions?: InkInternal.OptionExtension<Ink.Values.Extensions>[],
+    extensions?: Array<InkInternal.Extension | InkInternal.LazyExtension>,
     options?: Ink.Options,
     root?: InkUi.Root,
     ssr?: boolean,
@@ -38,7 +50,7 @@ export namespace InkInternal {
 
   export interface StateResolved {
     editor: InkInternal.Editor,
-    extensions: InkInternal.OptionExtension<Ink.Values.Extensions>[],
+    extensions: Array<InkInternal.Extension | InkInternal.LazyExtension>,
     options: Ink.OptionsResolved,
     root: InkUi.Root,
     target: HTMLElement,
