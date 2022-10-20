@@ -34,6 +34,39 @@
   box-sizing: border-box;
 }
 
+.ink-mde .ink-mde-editor-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.ink-mde .ink-mde-attribution {
+  display: flex;
+  font-size: 0.75em;
+  justify-content: flex-end;
+  opacity: 0.5;
+}
+
+.ink-mde .ink-mde-attribution-link {
+  color: currentColor;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ink-mde .ink-mde-task-toggle-wrapper {
+  align-items: center;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.ink-mde .ink-mde-task-toggle {
+  cursor: pointer;
+  height: 1.25em;
+  margin: 0;
+  width: 1.25em;
+}
+
 .ink-mde .cm-editor {
   display: flex;
   flex-direction: column;
