@@ -1,89 +1,111 @@
-import { closeBrackets as autocompleteExtension } from '@codemirror/autocomplete'
-import { Compartment, EditorState } from '@codemirror/state'
-import { vim } from '@replit/codemirror-vim'
-import { isAutoDark } from './ui/utils'
-import { dark, light } from '/src/vendor/extensions/appearance'
-import { attribution as attributionExtension } from '/src/vendor/extensions/attribution'
-import { images as imagesExtension } from '/src/vendor/extensions/images'
-import { spellcheck as spellcheckExtension } from '/src/vendor/extensions/spellcheck'
+import { Compartment } from '@codemirror/state'
+import { isAutoDark } from '/src/ui/utils'
+import { appearance } from '/src/vendor/extensions/appearance'
 import * as InkValues from '/types/values'
-
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const buildVendor = (extension: InkInternal.OptionExtension<Ink.Values.Extensions>, options: Ink.OptionsResolved) => {
-  const result = extension.resolver(options)
-
-  return extension.compartment.of(result)
-}
-
 export const buildVendors = (state: InkInternal.StateResolved) => {
-  return state.extensions.map((extension) => {
-    return buildVendor(extension, state.options)
-  })
-}
-
-export const buildVendorUpdate = (extension: InkInternal.OptionExtension<Ink.Values.Extensions>, options: Ink.OptionsResolved) => {
-  const result = extension.resolver(options)
-
-  return extension.compartment.reconfigure(result)
+  return state.extensions.map(e => e.initialValue(state))
 }
 
 export const buildVendorUpdates = (state: InkInternal.StateResolved) => {
-  return state.extensions.map((extension) => {
-    return buildVendorUpdate(extension, state.options)
-  })
+  return Promise.all(
+    state.extensions.map((extension) => {
+      return extension.reconfigure(state.options)
+    }),
+  )
 }
 
-export const create = <T extends Ink.Options.ExtensionNames>(name: T): InkInternal.OptionExtension<T> => {
+export const extension = (resolver: InkInternal.ExtensionResolver): InkInternal.Extension => {
   const compartment = new Compartment()
-  const resolver = resolvers[name]
 
   return {
     compartment,
-    name,
-    resolver,
+    initialValue: (state: InkInternal.StateResolved) => {
+      return compartment.of(resolver(state.options))
+    },
+    reconfigure: (options: Ink.OptionsResolved) => {
+      return compartment.reconfigure(resolver(options))
+    },
+  }
+}
+
+export const lazyExtension = (reconfigure: InkInternal.LazyExtensionResolver): InkInternal.LazyExtension => {
+  const compartment = new Compartment()
+
+  return {
+    compartment,
+    initialValue: (_state: InkInternal.StateResolved) => {
+      return compartment.of([])
+    },
+    reconfigure: (options: Ink.OptionsResolved) => {
+      return reconfigure(options, compartment)
+    },
   }
 }
 
 export const createExtensions = () => {
   return [
-    create(InkValues.Extensions.Appearance),
-    create(InkValues.Extensions.Attribution),
-    create(InkValues.Extensions.Autocomplete),
-    create(InkValues.Extensions.Images),
-    create(InkValues.Extensions.ReadOnly),
-    create(InkValues.Extensions.Spellcheck),
-    create(InkValues.Extensions.Vim),
+    ...resolvers.map(r => extension(r)),
+    ...lazyResolvers.map(r => lazyExtension(r)),
   ]
 }
 
-export const resolvers: InkInternal.Vendor.ExtensionResolvers = {
-  appearance({ interface: { appearance } }: Ink.OptionsResolved) {
-    if (appearance === InkValues.Appearance.Dark)
-      return dark()
-    if (appearance === InkValues.Appearance.Light)
-      return light()
+export const resolvers: InkInternal.ExtensionResolvers = [
+  (options: Ink.OptionsResolved) => {
+    const isDark = options.interface.appearance === InkValues.Appearance.Dark
+    const isAuto = options.interface.appearance === InkValues.Appearance.Auto
+    const extension = appearance(isDark || (isAuto && isAutoDark()))
 
-    // Automatically determine the correct color scheme.
-    return isAutoDark() ? dark() : light()
+    return extension
   },
-  attribution(options: Ink.OptionsResolved) {
-    return options.interface.attribution ? attributionExtension() : []
+]
+
+export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.interface.autocomplete) {
+      const { autocomplete } = await import('/src/vendor/extensions/autocomplete')
+
+      return compartment.reconfigure(autocomplete(options))
+    }
+
+    return compartment.reconfigure([])
   },
-  autocomplete(options: Ink.OptionsResolved) {
-    return options.interface.autocomplete ? autocompleteExtension() : []
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.interface.images) {
+      const { images } = await import('/src/vendor/extensions/images')
+
+      return compartment.reconfigure(images())
+    }
+
+    return compartment.reconfigure([])
   },
-  images(options: Ink.OptionsResolved) {
-    return options.interface.images ? imagesExtension() : []
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.interface.readonly) {
+      const { readonly } = await import('/src/vendor/extensions/readonly')
+
+      return compartment.reconfigure(readonly())
+    }
+
+    return compartment.reconfigure([])
   },
-  readonly(options: Ink.OptionsResolved) {
-    return options.interface.readonly ? EditorState.readOnly.of(true) : EditorState.readOnly.of(false)
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.interface.spellcheck) {
+      const { spellcheck } = await import('/src/vendor/extensions/spellcheck')
+
+      return compartment.reconfigure(spellcheck())
+    }
+
+    return compartment.reconfigure([])
   },
-  spellcheck(options: Ink.OptionsResolved) {
-    return options.interface.spellcheck ? spellcheckExtension() : []
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.vim) {
+      const { vim } = await import('/src/vendor/extensions/vim')
+
+      return compartment.reconfigure(vim())
+    }
+
+    return compartment.reconfigure([])
   },
-  vim(options: Ink.OptionsResolved) {
-    return options.vim ? vim() : []
-  },
-}
+]

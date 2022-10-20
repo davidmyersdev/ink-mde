@@ -3,10 +3,9 @@ import { override } from '/src/utils/merge'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const reconfigure = ([state, setState]: InkInternal.Store, options: Ink.Options) => {
-  const effects = buildVendorUpdates(setState(override(state(), { options })))
+export const reconfigure = async ([state, setState]: InkInternal.Store, options: Ink.Options) => {
+  const updatedState = setState(override(state(), { options }))
+  const effects = await buildVendorUpdates(updatedState)
 
-  state().editor.dispatch({
-    effects,
-  })
+  updatedState.editor.dispatch({ effects })
 }
