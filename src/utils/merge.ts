@@ -32,7 +32,7 @@ const deepAssign = (target: any, source: any) => {
 
     if (is(target, types.object) && is(source, types.object)) {
       return Object.keys(target).reduce((replacement: Record<PropertyKey, unknown>, key: PropertyKey) => {
-        if (Object.hasOwn(source, key)) {
+        if (Object.hasOwnProperty.call(source, key)) {
           replacement[key] = assign(target[key], source[key])
         } else {
           replacement[key] = target[key]
