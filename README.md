@@ -129,7 +129,7 @@ const options = reactive({
 These are the default options, and any of them can be overridden when initializing (or reconfiguring) an instance of `ink-mde`.
 
 ```ts
-// ./src/store.ts#L10-L49
+// ./src/store.ts#L10-L50
 const options = {
   doc: '',
   files: {
@@ -148,6 +148,7 @@ const options = {
     attribution: true,
     autocomplete: false,
     images: false,
+    lists: false,
     readonly: false,
     spellcheck: true,
     toolbar: false,
