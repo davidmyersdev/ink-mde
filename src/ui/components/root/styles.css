@@ -53,18 +53,8 @@
   text-decoration: none;
 }
 
-.ink-mde .ink-mde-task-toggle-wrapper {
-  align-items: center;
-  display: inline-flex;
-  vertical-align: middle;
-  margin-top: -2px;
-}
-
 .ink-mde .ink-mde-task-toggle {
   cursor: pointer;
-  height: 1.25em;
-  margin: 0;
-  width: 1.25em;
 }
 
 .ink-mde .cm-editor {
