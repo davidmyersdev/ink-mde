@@ -45,17 +45,14 @@ const taskWidget = (isChecked: boolean): Widget => {
     ignoreEvent: () => false,
     isChecked,
     toDOM: () => {
-      const node = document.createElement('span')
       const input = document.createElement('input')
 
-      node.setAttribute('aria-hidden', 'true')
-      node.className = 'ink-mde-task-toggle-wrapper'
+      input.setAttribute('aria-hidden', 'true')
       input.className = 'ink-mde-task-toggle'
       input.type = 'checkbox'
       input.checked = isChecked
-      node.appendChild(input)
 
-      return node
+      return input
     },
     updateDOM: () => false,
   }
@@ -72,12 +69,12 @@ const isCursorInRange = (state: EditorState, from: number, to: number) => {
 }
 
 const toggleTask = (view: EditorView, position: number) => {
-  const before = view.state.sliceDoc(position - 3, position)
+  const before = view.state.sliceDoc(position + 2, position + 5)
 
   view.dispatch({
     changes: {
-      from: position - 3,
-      to: position,
+      from: position + 2,
+      to: position + 5,
       insert: before === '[ ]' ? '[x]' : '[ ]',
     },
   })
