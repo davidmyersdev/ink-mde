@@ -11,12 +11,20 @@ const codeBlockSyntaxNodes = [
   'CommentBlock',
 ]
 
-const codeBlockDecoration = Decoration.line({ attributes: { class: 'cm-codeblock' } })
-const codeBlockOpenDecoration = Decoration.line({ attributes: { class: 'cm-codeblock-open' } })
-const codeBlockCloseDecoration = Decoration.line({ attributes: { class: 'cm-codeblock-close' } })
-const codeDecoration = Decoration.mark({ attributes: { class: 'cm-code' } })
-const codeOpenDecoration = Decoration.mark({ attributes: { class: 'cm-code cm-code-open' } })
-const codeCloseDecoration = Decoration.mark({ attributes: { class: 'cm-code cm-code-close' } })
+const sharedAttributes = {
+  // Prevent spellcheck in all code blocks. The Grammarly extension might not respect these values.
+  'data-enable-grammarly': 'false',
+  'data-gramm': 'false',
+  'data-grammarly-skip': 'true',
+  'spellcheck': 'false',
+}
+
+const codeBlockDecoration = Decoration.line({ attributes: { ...sharedAttributes, class: 'cm-codeblock' } })
+const codeBlockOpenDecoration = Decoration.line({ attributes: { ...sharedAttributes, class: 'cm-codeblock-open' } })
+const codeBlockCloseDecoration = Decoration.line({ attributes: { ...sharedAttributes, class: 'cm-codeblock-close' } })
+const codeDecoration = Decoration.mark({ attributes: { ...sharedAttributes, class: 'cm-code' } })
+const codeOpenDecoration = Decoration.mark({ attributes: { ...sharedAttributes, class: 'cm-code cm-code-open' } })
+const codeCloseDecoration = Decoration.mark({ attributes: { ...sharedAttributes, class: 'cm-code cm-code-close' } })
 
 const codeBlockPlugin = ViewPlugin.define((view: EditorView) => {
   return {
