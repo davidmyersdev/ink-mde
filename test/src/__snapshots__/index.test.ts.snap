@@ -404,6 +404,7 @@ undefined
             autocorrect="off"
             class="cm-content cm-lineWrapping ink-mde-editor-content"
             contenteditable="true"
+            data-language="markdown"
             role="textbox"
             spellcheck="false"
             style="tab-size: 4"
