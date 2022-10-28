@@ -569,6 +569,10 @@ undefined
             </div>
             <div
               class="cm-codeblock cm-codeblock-open cm-line"
+              data-enable-grammarly="false"
+              data-gramm="false"
+              data-grammarly-skip="true"
+              spellcheck="false"
             >
               <span
                 class="ͼ4b"
@@ -583,26 +587,46 @@ undefined
             </div>
             <div
               class="cm-codeblock cm-line"
+              data-enable-grammarly="false"
+              data-gramm="false"
+              data-grammarly-skip="true"
+              spellcheck="false"
             >
               // Write code with syntax highlighting.
             </div>
             <div
               class="cm-codeblock cm-line"
+              data-enable-grammarly="false"
+              data-gramm="false"
+              data-grammarly-skip="true"
+              spellcheck="false"
             >
               const add = (a: number, b: number): number =&gt; {
             </div>
             <div
               class="cm-codeblock cm-line"
+              data-enable-grammarly="false"
+              data-gramm="false"
+              data-grammarly-skip="true"
+              spellcheck="false"
             >
                 return a + b
             </div>
             <div
               class="cm-codeblock cm-line"
+              data-enable-grammarly="false"
+              data-gramm="false"
+              data-grammarly-skip="true"
+              spellcheck="false"
             >
               }
             </div>
             <div
               class="cm-codeblock cm-codeblock-close cm-line"
+              data-enable-grammarly="false"
+              data-gramm="false"
+              data-grammarly-skip="true"
+              spellcheck="false"
             >
               <span
                 class="ͼ4b"
