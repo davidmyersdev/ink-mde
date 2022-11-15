@@ -1,4 +1,6 @@
 import { Compartment } from '@codemirror/state'
+import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
+import { languages } from '@codemirror/language-data'
 import { isAutoDark } from '/src/ui/utils'
 import { appearance } from '/src/vendor/extensions/appearance'
 import * as InkValues from '/types/values'
@@ -53,6 +55,32 @@ export const createExtensions = () => {
 }
 
 export const resolvers: InkInternal.ExtensionResolvers = [
+  (options: Ink.OptionsResolved) => {
+    const extensions = options.plugins.reduce((matches, plugin) => {
+      if (plugin.type === InkValues.PluginType.Default) {
+        matches.push(plugin.value)
+      }
+
+      return matches
+    }, <Ink.VendorExtension[]>[])
+
+    return extensions
+  },
+  (options: Ink.OptionsResolved) => {
+    const grammarPlugins = options.plugins.reduce((matches, plugin) => {
+      if (plugin.type === InkValues.PluginType.Grammar) {
+        matches.push(plugin.value)
+      }
+
+      return matches
+    }, <Ink.VendorGrammar[]>[])
+
+    return markdown({
+      base: markdownLanguage,
+      codeLanguages: languages,
+      extensions: grammarPlugins,
+    })
+  },
   (options: Ink.OptionsResolved) => {
     const isDark = options.interface.appearance === InkValues.Appearance.Dark
     const isAuto = options.interface.appearance === InkValues.Appearance.Auto

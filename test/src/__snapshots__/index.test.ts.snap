@@ -388,7 +388,7 @@ undefined
     >
       <!--#-->
       <div
-        class="cm-editor ͼ1 ͼ2 ͼ3g ink-mde-editor"
+        class="cm-editor ͼ1 ͼ2 ͼ4b ink-mde-editor"
       >
         <div
           aria-live="polite"
@@ -414,12 +414,12 @@ undefined
               class="cm-line"
             >
               <span
-                class="ͼ3x ͼ4b"
+                class="ͼ3w ͼ4a"
               >
                 #
               </span>
               <span
-                class="ͼ3x"
+                class="ͼ3w"
               >
                  ink-mde
               </span>
@@ -433,23 +433,23 @@ undefined
               class="cm-blockquote cm-blockquote-open cm-blockquote-close cm-line"
             >
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 &gt;
               </span>
                The flexible TypeScript Markdown editor that works the way 
               <span
-                class="ͼ3j ͼ4b"
+                class="ͼ3i ͼ4a"
               >
                 *
               </span>
               <span
-                class="ͼ3j"
+                class="ͼ3i"
               >
                 you
               </span>
               <span
-                class="ͼ3j ͼ4b"
+                class="ͼ3i ͼ4a"
               >
                 *
               </span>
@@ -464,7 +464,7 @@ undefined
               class="cm-line"
             >
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 -
               </span>
@@ -475,7 +475,7 @@ undefined
             >
                 
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 -
               </span>
@@ -486,7 +486,7 @@ undefined
             >
                   
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 -
               </span>
@@ -496,7 +496,7 @@ undefined
               class="cm-line"
             >
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 -
               </span>
@@ -511,13 +511,13 @@ undefined
               class="cm-line"
             >
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 -
               </span>
                
               <span
-                class="ͼ3h"
+                class="ͼ3g"
               >
                 [ ]
               </span>
@@ -533,32 +533,32 @@ undefined
             >
               Preview those beautiful images. 
               <span
-                class="ͼ47 ͼ4b"
+                class="ͼ46 ͼ4a"
               >
                 ![
               </span>
               <span
-                class="ͼ47"
+                class="ͼ46"
               >
                 kitten
               </span>
               <span
-                class="ͼ47 ͼ4b"
+                class="ͼ46 ͼ4a"
               >
                 ]
               </span>
               <span
-                class="ͼ47 ͼ4b"
+                class="ͼ46 ͼ4a"
               >
                 (
               </span>
               <span
-                class="ͼ47 ͼ48"
+                class="ͼ46 ͼ47"
               >
                 https://placekitten.com/2000/200
               </span>
               <span
-                class="ͼ47 ͼ4b"
+                class="ͼ46 ͼ4a"
               >
                 )
               </span>
@@ -576,12 +576,12 @@ undefined
               spellcheck="false"
             >
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 \`\`\`
               </span>
               <span
-                class="ͼ3p"
+                class="ͼ3o"
               >
                 ts
               </span>
@@ -630,7 +630,7 @@ undefined
               spellcheck="false"
             >
               <span
-                class="ͼ4b"
+                class="ͼ4a"
               >
                 \`\`\`
               </span>
