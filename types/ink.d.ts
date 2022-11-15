@@ -1,12 +1,12 @@
 // Type definitions for ink-mde
 import * as InkValues from './values'
-import type { CompletionSource } from '@codemirror/autocomplete'
-import type { Extension } from '@codemirror/state'
-import type { MarkdownConfig } from '@lezer/markdown'
+import { type CompletionSource } from '@codemirror/autocomplete'
+import { type Extension } from '@codemirror/state'
+import { type MarkdownConfig } from '@lezer/markdown'
 
-type VendorCompletion = CompletionSource
-type VendorExtension = Extension
-type VendorGrammar = MarkdownConfig
+export type VendorCompletion = CompletionSource
+export type VendorExtension = Extension
+export type VendorGrammar = MarkdownConfig
 
 export * from './values'
 
