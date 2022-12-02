@@ -1,7 +1,7 @@
 {
   "name": "ink-mde",
   "type": "module",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "packageManager": "yarn@3.2.2",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "author": "David R. Myers <david@voracious.dev>",
