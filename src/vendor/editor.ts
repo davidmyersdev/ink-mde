@@ -2,18 +2,22 @@ import { EditorView } from '@codemirror/view'
 import { makeState } from '/src/vendor/state'
 import type InkInternal from '/types/internal'
 
-export const makeEditor = (state: InkInternal.StateResolved): InkInternal.Editor => {
+export const makeEditor = ([state, setState]: InkInternal.Store): InkInternal.Editor => {
   const editor = new EditorView({
     dispatch: (transaction: InkInternal.Vendor.Transaction) => {
-      const { options } = state
+      const { options } = state()
+      const newDoc = transaction.newDoc.toString()
 
-      options.hooks.beforeUpdate(transaction.newDoc.toString())
+      options.hooks.beforeUpdate(newDoc)
       editor.update([transaction])
 
-      if (transaction.docChanged)
-        options.hooks.afterUpdate(transaction.newDoc.toString())
+      if (transaction.docChanged) {
+        setState({ ...state(), doc: newDoc })
+
+        options.hooks.afterUpdate(newDoc)
+      }
     },
-    state: makeState(state),
+    state: makeState(state()),
   })
 
   return editor

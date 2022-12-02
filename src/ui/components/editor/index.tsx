@@ -21,7 +21,7 @@ export const Editor: Component = () => {
   }
 
   const [state, setState] = useStore()
-  const editor = makeEditor(state())
+  const editor = makeEditor([state, setState])
 
   setState(override(state(), { editor }))
   buildVendorUpdates(state()).then((effects) => {

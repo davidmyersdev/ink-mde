@@ -43,15 +43,21 @@
 
 .ink-mde .ink-mde-attribution {
   display: flex;
-  font-size: 0.75em;
   justify-content: flex-end;
-  opacity: 0.5;
 }
 
 .ink-mde .ink-mde-attribution-link {
   color: currentColor;
   font-weight: 600;
   text-decoration: none;
+}
+
+.ink-mde .ink-mde-details {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.75em;
+  justify-content: flex-end;
+  opacity: 0.25;
 }
 
 .ink-mde .ink-mde-task-toggle {

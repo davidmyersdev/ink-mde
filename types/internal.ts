@@ -40,6 +40,7 @@ export namespace InkInternal {
   }
 
   export interface State {
+    doc?: string,
     editor?: InkInternal.Editor,
     extensions?: Array<InkInternal.Extension | InkInternal.LazyExtension>,
     options?: Ink.Options,
@@ -49,6 +50,7 @@ export namespace InkInternal {
   }
 
   export interface StateResolved {
+    doc: string,
     editor: InkInternal.Editor,
     extensions: Array<InkInternal.Extension | InkInternal.LazyExtension>,
     options: Ink.OptionsResolved,
