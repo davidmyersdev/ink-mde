@@ -31,6 +31,7 @@ export const blankState = (): InkInternal.StateResolved => {
       toolbar: false,
     },
     plugins: [],
+    readability: false,
     selections: [],
     toolbar: {
       bold: true,
@@ -50,6 +51,7 @@ export const blankState = (): InkInternal.StateResolved => {
   }
 
   return {
+    doc: '',
     editor: {} as InkInternal.Editor,
     extensions: createExtensions(),
     options,
@@ -63,7 +65,7 @@ export const makeState = (partialState: InkInternal.State): InkInternal.StateRes
 }
 
 export const makeStore = (options: Options, overrides: InkInternal.State = {}): InkInternal.Store => {
-  const [state, setState] = createSignal(makeState({ ...overrides, options }))
+  const [state, setState] = createSignal(makeState({ ...overrides, doc: options.doc || '', options }))
 
   return [state, setState]
 }

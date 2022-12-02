@@ -4,6 +4,7 @@ import { useStore } from '../../app'
 import { DropZone } from '../drop_zone'
 import { Editor } from '../editor'
 import { Toolbar } from '../toolbar'
+import { Details } from '../details'
 import { Styles } from './styles'
 import { getHydrationMarkerProps } from '/src/constants'
 import { override } from '/src/utils/merge'
@@ -26,11 +27,7 @@ export const Root: Component<{ store: InkInternal.Store }> = () => {
       </Show>
       <div class='ink-mde-editor-container'>
         <Editor />
-        <Show when={state().options.interface.attribution}>
-          <div class='ink-mde-attribution'>
-            <span>powered by <a class='ink-mde-attribution-link' href='https://github.com/voracious/ink-mde' rel='noopener noreferrer' target='_blank'>ink-mde</a></span>
-          </div>
-        </Show>
+        <Details store={[state, setState]} />
       </div>
     </div>
   )
