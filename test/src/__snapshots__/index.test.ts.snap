@@ -646,19 +646,31 @@ undefined
       <!--/-->
       <!--#-->
       <div
-        class="ink-mde-attribution"
+        class="ink-mde-details"
       >
-        <span>
-          powered by 
-          <a
-            class="ink-mde-attribution-link"
-            href="https://github.com/voracious/ink-mde"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            ink-mde
-          </a>
-        </span>
+        <!--#-->
+        
+        <!--/-->
+        <!--#-->
+        
+        <!--/-->
+        <!--#-->
+        <div
+          class="ink-mde-attribution"
+        >
+          <span>
+             powered by 
+            <a
+              class="ink-mde-attribution-link"
+              href="https://github.com/voracious/ink-mde"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              ink-mde
+            </a>
+          </span>
+        </div>
+        <!--/-->
       </div>
       <!--/-->
     </div>

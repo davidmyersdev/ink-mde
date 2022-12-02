@@ -95,6 +95,7 @@ export interface OptionsResolved {
   hooks: Required<Options.Hooks>
   interface: Required<Options.Interface>
   plugins: Options.Plugin[]
+  readability: boolean,
   selections: Editor.Selection[]
   toolbar: Required<Options.Toolbar>
   vim: boolean
