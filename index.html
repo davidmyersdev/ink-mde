@@ -23,64 +23,33 @@
 
       @media (prefers-color-scheme: dark) {
         body {
-          background-color: #151515;
+          background-color: rgb(24, 24, 27);
           color: #fafafa;
-        }
-
-        #app {
-          background-color: #151515;
         }
       }
 
       @media (prefers-color-scheme: light) {
         body {
           background-color: #fafafa;
-          color: #171717;
+          color: rgb(24, 24, 27);
         }
-
-        #app {
-          background-color: #fafafa;
-        }
-      }
-
-      .dark body {
-        background-color: #121212;
-        color: #fafafa;
-      }
-
-      .light body {
-        background-color: #fafafa;
-        color: #171717;
-      }
-
-      .dark #app {
-        background-color: #171717;
-      }
-
-      .light #app {
-        background-color: #fafafa;
       }
 
       .app-wrapper {
         margin: auto;
-        max-width: 90ch;
-        /* padding: 0.5rem; */
-      }
-
-      #app {
-        border-radius: 0.25rem;
+        max-width: 80ch;
       }
 
       #app .cm-editor.cm-focused {
         outline: none;
       }
 
-      body {
-        padding: 0.5rem;
-      }
-
       html, body, .app-wrapper, #app, .ink-mde {
         height: 100%;
+      }
+
+      .app-wrapper {
+        padding: 0.5rem;
       }
 
       /* .ink-mde-container {
@@ -131,14 +100,14 @@
         window.ink.reconfigure({ interface: { appearance: theme } })
       }
 
-      window.lightsOn = () => {
+      window.light = () => {
         document.documentElement.classList.remove('dark')
         document.documentElement.classList.add('light')
 
         window.ink.reconfigure({ interface: { appearance: 'light' } })
       }
 
-      window.lightsOff = () => {
+      window.dark = () => {
         document.documentElement.classList.remove('light')
         document.documentElement.classList.add('dark')
 
