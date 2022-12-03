@@ -1,32 +1,32 @@
-.ink {
+.ink-mde {
+  border: 2px solid var(--ink-internal-block-background-color);
+  border-radius: var(--ink-internal-border-radius);
   color: var(--ink-internal-color, inherit);
   display: flex;
   flex-direction: var(--ink-internal-flex-direction, column);
-  gap: 1rem;
-  padding: var(--ink-internal-editor-padding, 0);
 }
 
-.ink .cm-tooltip {
+.ink-mde .cm-tooltip {
   background-color: var(--ink-internal-block-background-color);
   border-radius: var(--ink-internal-border-radius);
   font-family: inherit;
   padding: 0.25rem;
 }
 
-.ink .cm-tooltip.cm-tooltip-autocomplete ul {
+.ink-mde .cm-tooltip.cm-tooltip-autocomplete ul {
   font-family: inherit;
 }
 
-.ink .cm-tooltip.cm-tooltip-autocomplete ul li.ink-tooltip-option {
+.ink-mde .cm-tooltip.cm-tooltip-autocomplete ul li.ink-tooltip-option {
   border-radius: var(--ink-internal-border-radius);
   padding: 0.25rem;
 }
 
-.ink .cm-tooltip.cm-tooltip-autocomplete ul li.ink-tooltip-option[aria-selected] {
+.ink-mde .cm-tooltip.cm-tooltip-autocomplete ul li.ink-tooltip-option[aria-selected] {
   background-color: rgba(150, 150, 150, 0.25);
 }
 
-.ink .cm-completionLabel {
+.ink-mde .cm-completionLabel {
   font-family: inherit;
 }
 
@@ -34,11 +34,29 @@
   box-sizing: border-box;
 }
 
-.ink-mde .ink-mde-editor-container {
+.ink-mde,
+.ink-mde .ink-mde-editor {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 2em;
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.ink-mde .ink-mde-editor {
+  overflow: auto;
+  padding: 0.5rem;
+}
+
+.ink-mde .ink-mde-toolbar,
+.ink-mde .ink-mde-details {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.ink-mde .ink-mde-details {
+  background-color: var(--ink-internal-block-background-color);
 }
 
 .ink-mde .ink-mde-attribution {
@@ -52,12 +70,35 @@
   text-decoration: none;
 }
 
+.ink-mde .ink-mde-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
 .ink-mde .ink-mde-details {
   display: flex;
   flex-wrap: wrap;
   font-size: 0.75em;
   justify-content: flex-end;
-  opacity: 0.25;
+  padding: 0.5rem;
+}
+
+.ink-mde .ink-mde-details > * {
+  color: inherit;
+  filter: brightness(0.75);
+}
+
+.ink-mde .ink-mde-details .ink-mde-container {
+  display: flex;
+  justify-content: end;
+}
+
+.ink-mde .ink-mde-editor-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2em;
 }
 
 .ink-mde .ink-mde-task-toggle {

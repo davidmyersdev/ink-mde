@@ -4,7 +4,7 @@ import { EditorView } from '@codemirror/view'
 const inkClassExtensions = () => {
   return [
     EditorView.editorAttributes.of({
-      class: 'ink-mde-editor',
+      class: 'ink-mde-container',
     }),
     EditorView.contentAttributes.of({
       class: 'ink-mde-editor-content',

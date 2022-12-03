@@ -8,28 +8,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@300;400;700&display=swap">
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       :root {
         --ink-code-font-family: 'Fira Code';
       }
 
       body {
         font-family: 'Inter', Helvetica, sans-serif;
+        margin: 0;
       }
 
       @media (prefers-color-scheme: dark) {
         body {
-          background-color: #121212;
+          background-color: #151515;
           color: #fafafa;
         }
 
         #app {
-          background-color: #171717;
+          background-color: #151515;
         }
       }
 
       @media (prefers-color-scheme: light) {
         body {
-          background-color: #f5f5f5;
+          background-color: #fafafa;
           color: #171717;
         }
 
@@ -44,7 +49,7 @@
       }
 
       .light body {
-        background-color: #f5f5f5;
+        background-color: #fafafa;
         color: #171717;
       }
 
@@ -59,7 +64,7 @@
       .app-wrapper {
         margin: auto;
         max-width: 90ch;
-        padding: 0.5rem;
+        /* padding: 0.5rem; */
       }
 
       #app {
@@ -69,6 +74,18 @@
       #app .cm-editor.cm-focused {
         outline: none;
       }
+
+      body {
+        padding: 0.5rem;
+      }
+
+      html, body, .app-wrapper, #app, .ink-mde {
+        height: 100%;
+      }
+
+      /* .ink-mde-container {
+        max-width: 30rem;
+      } */
     </style>
   </head>
   <body>

@@ -1,23 +1,22 @@
-.ink .ink-toolbar {
+.ink-mde .ink-mde-toolbar {
   background-color: var(--ink-internal-block-background-color);
-  border-radius: var(--ink-internal-border-radius);
-  bottom: 0.25rem;
   color: inherit;
   display: flex;
   flex-shrink: 0;
   gap: 2rem;
-  overflow: auto;
+  overflow-x: auto;
   padding: 0.25rem;
-  position: sticky;
-  top: 0.25rem;
-  z-index: 10;
 }
 
-.ink .ink-toolbar-group {
+.ink-mde .ink-mde-toolbar .ink-mde-container {
   display: flex;
 }
 
-.ink .ink-toolbar .ink-button {
+.ink-mde .ink-mde-toolbar-group {
+  display: flex;
+}
+
+.ink-mde .ink-mde-toolbar .ink-button {
   align-items: center;
   background: none;
   border: none;
@@ -31,11 +30,11 @@
   width: 2.25rem;
 }
 
-.ink .ink-toolbar .ink-button:hover {
+.ink-mde .ink-mde-toolbar .ink-button:hover {
   background-color: var(--ink-internal-block-background-color-on-hover);
 }
 
-.ink .ink-toolbar .ink-button > * {
+.ink-mde .ink-mde-toolbar .ink-button > * {
   align-items: center;
   display: flex;
   height: 100%;

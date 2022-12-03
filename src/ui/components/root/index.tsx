@@ -25,10 +25,12 @@ export const Root: Component<{ store: InkInternal.Store }> = () => {
       <Show when={state().options.interface.toolbar}>
         <Toolbar />
       </Show>
-      <div class='ink-mde-editor-container'>
+      <div class='ink-mde-editor'>
         <Editor />
-        <Details store={[state, setState]} />
       </div>
+      <Show when={state().options.readability || state().options.interface.attribution}>
+        <Details store={[state, setState]} />
+      </Show>
     </div>
   )
 }
