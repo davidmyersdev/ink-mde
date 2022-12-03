@@ -3,13 +3,13 @@
   color: inherit;
   display: flex;
   flex-shrink: 0;
-  gap: 2rem;
   overflow-x: auto;
   padding: 0.25rem;
 }
 
 .ink-mde .ink-mde-toolbar .ink-mde-container {
   display: flex;
+  gap: 2rem;
 }
 
 .ink-mde .ink-mde-toolbar-group {
