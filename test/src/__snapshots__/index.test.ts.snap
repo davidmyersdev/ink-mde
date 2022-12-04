@@ -433,28 +433,48 @@ undefined
               <br />
             </div>
             <div
-              class="cm-blockquote cm-blockquote-open cm-blockquote-close cm-line"
+              class="cm-blockquote cm-blockquote-open cm-line"
             >
               <span
                 class="ͼ4a"
               >
                 &gt;
               </span>
-               The flexible TypeScript Markdown editor that works the way 
+               Dreams don't work unless you take action. The surest way to make your dreams come true is to live them.
+            </div>
+            <div
+              class="cm-blockquote cm-blockquote-close cm-line"
+            >
               <span
-                class="ͼ3i ͼ4a"
+                class="ͼ4a"
               >
-                *
+                &gt;
+              </span>
+               Roy T. Bennett
+            </div>
+            <div
+              class="cm-line"
+            >
+              <br />
+            </div>
+            <div
+              class="cm-line"
+            >
+              The flexible TypeScript Markdown editor that works the way 
+              <span
+                class="ͼ3j ͼ4a"
+              >
+                **
               </span>
               <span
-                class="ͼ3i"
+                class="ͼ3j"
               >
                 you
               </span>
               <span
-                class="ͼ3i ͼ4a"
+                class="ͼ3j ͼ4a"
               >
-                *
+                **
               </span>
                want it to.
             </div>
@@ -466,75 +486,7 @@ undefined
             <div
               class="cm-line"
             >
-              <span
-                class="ͼ4a"
-              >
-                -
-              </span>
-               This is a list item
-            </div>
-            <div
-              class="cm-line"
-            >
-                
-              <span
-                class="ͼ4a"
-              >
-                -
-              </span>
-               This is a nested list item
-            </div>
-            <div
-              class="cm-line"
-            >
-                  
-              <span
-                class="ͼ4a"
-              >
-                -
-              </span>
-               This is a deeply nested list item
-            </div>
-            <div
-              class="cm-line"
-            >
-              <span
-                class="ͼ4a"
-              >
-                -
-              </span>
-               This is another list item
-            </div>
-            <div
-              class="cm-line"
-            >
-              <br />
-            </div>
-            <div
-              class="cm-line"
-            >
-              <span
-                class="ͼ4a"
-              >
-                -
-              </span>
-               
-              <span
-                class="ͼ3g"
-              >
-                [ ]
-              </span>
-               This is a task
-            </div>
-            <div
-              class="cm-line"
-            >
-              <br />
-            </div>
-            <div
-              class="cm-line"
-            >
-              Preview those beautiful images. 
+              Inline image previews. 
               <span
                 class="ͼ46 ͼ4a"
               >
@@ -565,6 +517,56 @@ undefined
               >
                 )
               </span>
+            </div>
+            <div
+              class="cm-line"
+            >
+              <br />
+            </div>
+            <div
+              class="cm-line"
+            >
+              Inline code (e.g. 
+              <span
+                class="cm-code cm-code-open"
+                data-enable-grammarly="false"
+                data-gramm="false"
+                data-grammarly-skip="true"
+                spellcheck="false"
+              >
+                <span
+                  class="ͼ4a"
+                >
+                  \`
+                </span>
+              </span>
+              <span
+                class="cm-code"
+                data-enable-grammarly="false"
+                data-gramm="false"
+                data-grammarly-skip="true"
+                spellcheck="false"
+              >
+                <span
+                  class="ͼ3m"
+                >
+                  const a = 10
+                </span>
+              </span>
+              <span
+                class="cm-code cm-code-close"
+                data-enable-grammarly="false"
+                data-gramm="false"
+                data-grammarly-skip="true"
+                spellcheck="false"
+              >
+                <span
+                  class="ͼ4a"
+                >
+                  \`
+                </span>
+              </span>
+              ) and code blocks highlighted in real time.
             </div>
             <div
               class="cm-line"
@@ -643,6 +645,167 @@ undefined
             >
               <br />
             </div>
+            <div
+              class="cm-line"
+            >
+              Stay 
+              <span
+                class="ͼ3i ͼ4a"
+              >
+                *
+              </span>
+              <span
+                class="ͼ3i"
+              >
+                focused
+              </span>
+              <span
+                class="ͼ3i ͼ4a"
+              >
+                *
+              </span>
+               on what you write instead of breaking concentration to check formatting.
+            </div>
+            <div
+              class="cm-line"
+            >
+              <br />
+            </div>
+            <div
+              class="cm-line"
+            >
+              Links and lists.
+            </div>
+            <div
+              class="cm-line"
+            >
+              <br />
+            </div>
+            <div
+              class="cm-line"
+            >
+              <span
+                class="ͼ4a"
+              >
+                -
+              </span>
+               
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                [
+              </span>
+              <span
+                class="ͼ46"
+              >
+                voracious
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                ]
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                (
+              </span>
+              <span
+                class="ͼ46 ͼ47"
+              >
+                https://github.com/voracious
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                )
+              </span>
+            </div>
+            <div
+              class="cm-line"
+            >
+              <span
+                class="ͼ4a"
+              >
+                -
+              </span>
+               
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                [
+              </span>
+              <span
+                class="ͼ46"
+              >
+                voracious/ink-mde
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                ]
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                (
+              </span>
+              <span
+                class="ͼ46 ͼ47"
+              >
+                https://github.com/voracious/ink-mde
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                )
+              </span>
+            </div>
+            <div
+              class="cm-line"
+            >
+              <span
+                class="ͼ4a"
+              >
+                -
+              </span>
+               
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                [
+              </span>
+              <span
+                class="ͼ46"
+              >
+                voracious/octo
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                ]
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                (
+              </span>
+              <span
+                class="ͼ46 ͼ47"
+              >
+                https://github.com/voracious/octo
+              </span>
+              <span
+                class="ͼ46 ͼ4a"
+              >
+                )
+              </span>
+            </div>
+            <div
+              class="cm-line"
+            >
+              <br />
+            </div>
           </div>
         </div>
       </div>
@@ -654,29 +817,33 @@ undefined
       <div
         class="ink-mde-container"
       >
-        <!--#-->
-        
-        <!--/-->
-        <!--#-->
-        
-        <!--/-->
-        <!--#-->
         <div
-          class="ink-mde-attribution"
+          class="ink-mde-details-content"
         >
-          <span>
-             powered by 
-            <a
-              class="ink-mde-attribution-link"
-              href="https://github.com/voracious/ink-mde"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              ink-mde
-            </a>
-          </span>
+          <!--#-->
+          
+          <!--/-->
+          <!--#-->
+          
+          <!--/-->
+          <!--#-->
+          <div
+            class="ink-mde-attribution"
+          >
+            <span>
+               powered by 
+              <a
+                class="ink-mde-attribution-link"
+                href="https://github.com/voracious/ink-mde"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                ink-mde
+              </a>
+            </span>
+          </div>
+          <!--/-->
         </div>
-        <!--/-->
       </div>
     </div>
     <!--/-->
