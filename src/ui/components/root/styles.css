@@ -57,6 +57,17 @@
 
 .ink-mde .ink-mde-details {
   background-color: var(--ink-internal-block-background-color);
+  display: flex;
+  padding: 0.5rem;
+}
+
+.ink-mde .ink-mde-details-content {
+  color: inherit;
+  display: flex;
+  filter: brightness(0.75);
+  flex-wrap: wrap;
+  font-size: 0.75em;
+  justify-content: flex-end;
 }
 
 .ink-mde .ink-mde-attribution {
@@ -74,31 +85,6 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-}
-
-.ink-mde .ink-mde-details {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 0.75em;
-  justify-content: flex-end;
-  padding: 0.5rem;
-}
-
-.ink-mde .ink-mde-details > * {
-  color: inherit;
-  filter: brightness(0.75);
-}
-
-.ink-mde .ink-mde-details .ink-mde-container {
-  display: flex;
-  justify-content: end;
-}
-
-.ink-mde .ink-mde-editor-container {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 2em;
 }
 
 .ink-mde .ink-mde-task-toggle {
