@@ -124,6 +124,8 @@ const options = reactive({
 </script>
 ```
 
+### [Examples for `ink-mde/svelte`](svelte/README.md)
+
 ## Further customization
 
 These are the default options, and any of them can be overridden when initializing (or reconfiguring) an instance of `ink-mde`.
