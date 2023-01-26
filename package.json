@@ -41,16 +41,16 @@
       },
       "node": {
         "types": "./types/index.d.ts",
-        "require": "./dist/server.cjs",
-        "import": "./dist/server.js"
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.js"
       },
       "types": "./types/index.d.ts",
       "require": "./dist/client.cjs",
       "import": "./dist/client.js"
     },
     "./svelte": {
-      "types": "./svelte/package/index.d.ts",
-      "import": "./svelte/package/index.js"
+      "types": "./svelte/dist/index.d.ts",
+      "import": "./svelte/dist/index.js"
     },
     "./vue": {
       "browser": {
@@ -60,8 +60,8 @@
       },
       "node": {
         "types": "./vue/dist/index.d.ts",
-        "require": "./vue/dist/server.cjs",
-        "import": "./vue/dist/server.js"
+        "require": "./vue/dist/index.cjs",
+        "import": "./vue/dist/index.js"
       },
       "types": "./vue/dist/index.d.ts",
       "require": "./vue/dist/client.cjs",
@@ -69,11 +69,11 @@
     }
   },
   "browser": {
-    "./dist/server.cjs": "./dist/client.cjs",
-    "./dist/server.js": "./dist/client.js"
+    "./dist/index.cjs": "./dist/client.cjs",
+    "./dist/index.js": "./dist/client.js"
   },
-  "main": "./dist/server.cjs",
-  "module": "./dist/server.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**/*",
@@ -84,7 +84,7 @@
   ],
   "scripts": {
     "build": "pnpm build:root && pnpm vue:build",
-    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts && mv ./dist/index.js ./dist/server.js && mv ./dist/index.cjs ./dist/server.cjs",
+    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts",
     "ci": "pnpm build && pnpm test:once && pnpm lint && pnpm docs:check && pnpm dedupe:check",
     "dedupe": "pnpm-deduplicate",
     "dedupe:check": "pnpm-deduplicate --list",
@@ -94,10 +94,10 @@
     "docs:update": "embedme README.md",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepack": "pnpm build",
+    "prepack": "pnpm -r build",
     "test": "vitest",
     "test:once": "vitest run",
-    "vue:build": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/server.js && mv ./vue/dist/InkMde.cjs ./vue/dist/server.cjs",
+    "vue:build": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/index.js && mv ./vue/dist/InkMde.cjs ./vue/dist/index.cjs",
     "vue:dev": "tsx ./vue/server.ts"
   },
   "peerDependencies": {
