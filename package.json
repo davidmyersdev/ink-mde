@@ -2,7 +2,7 @@
   "name": "ink-mde",
   "type": "module",
   "version": "0.18.1",
-  "packageManager": "yarn@3.2.2",
+  "packageManager": "pnpm@7.25.1",
   "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
   "author": "David R. Myers <david@voracious.dev>",
   "license": "MIT",
@@ -48,6 +48,10 @@
       "require": "./dist/client.cjs",
       "import": "./dist/client.js"
     },
+    "./svelte": {
+      "types": "./svelte/package/index.d.ts",
+      "import": "./svelte/package/index.js"
+    },
     "./vue": {
       "browser": {
         "types": "./vue/dist/index.d.ts",
@@ -78,16 +82,18 @@
     "vue/**/*"
   ],
   "scripts": {
-    "build": "yarn build:root && yarn vue:build",
+    "build": "pnpm build:root && pnpm vue:build",
     "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts && mv ./dist/index.js ./dist/server.js && mv ./dist/index.cjs ./dist/server.cjs",
-    "ci": "yarn build && yarn test:once && yarn lint && yarn docs:check && yarn dedupe --check",
+    "ci": "pnpm build && pnpm test:once && pnpm lint && pnpm docs:check && pnpm dedupe:check",
+    "dedupe": "pnpm-deduplicate",
+    "dedupe:check": "pnpm-deduplicate --list",
     "dev": "vite",
     "docs:check": "embedme --verify README.md",
     "docs:diff": "embedme --stdout README.md",
     "docs:update": "embedme README.md",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepack": "yarn build",
+    "prepack": "pnpm build",
     "test": "vitest",
     "test:once": "vitest run",
     "vue:build": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/server.js && mv ./vue/dist/InkMde.cjs ./vue/dist/server.cjs",
@@ -129,6 +135,7 @@
     "eslint-plugin-solid": "^0.7.3",
     "express": "^4.18.1",
     "jsdom": "^20.0.1",
+    "pnpm-deduplicate": "^0.4.1",
     "tsx": "^3.9.0",
     "typescript": "^4.8.2",
     "vite": "^3.1.6",
@@ -140,8 +147,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "workspaces": [
-    "."
-  ]
+  }
 }
