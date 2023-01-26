@@ -14,7 +14,7 @@ jobs:
           node-version: 16
       - uses: pnpm/action-setup@v2
       - run: pnpm install
-      - run: pnpm build
+      - run: pnpm -r build
   deps:
     runs-on: ubuntu-latest
     steps:
@@ -43,8 +43,8 @@ jobs:
         with:
           node-version: 16
       - uses: pnpm/action-setup@v2
-      - run: pnpm install --immutable
-      - run: pnpm lint
+      - run: pnpm install
+      - run: pnpm -r lint
   test:
     runs-on: ubuntu-latest
     steps:

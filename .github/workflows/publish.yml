@@ -12,6 +12,6 @@ jobs:
         with:
           node-version: 16
       - run: pnpm install
-      - run: pnpm build
+      - run: pnpm -r build
       - run: pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_PUBLISH_TOKEN }}
       - run: pnpm publish --access public
