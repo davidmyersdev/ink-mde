@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install --immutable
-      - run: yarn build
-      - run: yarn config set npmAuthToken ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - run: yarn npm publish --access public
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - run: pnpm publish --access public

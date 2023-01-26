@@ -29,6 +29,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"ink-mde": "^0.18.1"
+		"ink-mde": "workspace:*"
 	}
 }

@@ -12,8 +12,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install --immutable
-      - run: yarn build
+      - run: pnpm install
+      - run: pnpm build
   deps:
     runs-on: ubuntu-latest
     steps:
@@ -21,8 +21,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install --immutable
-      - run: yarn dedupe --check
+      - run: pnpm install
+      - run: pnpm dedupe:check
   docs:
     runs-on: ubuntu-latest
     steps:
@@ -30,8 +30,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install --immutable
-      - run: yarn docs:check
+      - run: pnpm install
+      - run: pnpm docs:check
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -39,8 +39,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install --immutable
-      - run: yarn lint
+      - run: pnpm install --immutable
+      - run: pnpm lint
   test:
     runs-on: ubuntu-latest
     steps:
@@ -48,5 +48,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install --immutable
-      - run: yarn test:once
+      - run: pnpm install
+      - run: pnpm test:once
