@@ -78,12 +78,10 @@
     "vue/**/*"
   ],
   "scripts": {
-    "build": "yarn build:root && yarn build:vue",
+    "build": "yarn build:root && yarn vue:build",
     "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts && mv ./dist/index.js ./dist/server.js && mv ./dist/index.cjs ./dist/server.cjs",
-    "build:vue": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/server.js && mv ./vue/dist/InkMde.cjs ./vue/dist/server.cjs",
     "ci": "yarn build && yarn test:once && yarn lint && yarn docs:check && yarn dedupe --check",
     "dev": "vite",
-    "dev:vue": "tsx ./vue/server.ts",
     "docs:check": "embedme --verify README.md",
     "docs:diff": "embedme --stdout README.md",
     "docs:update": "embedme README.md",
@@ -91,7 +89,9 @@
     "lint:fix": "eslint --fix .",
     "prepack": "yarn build",
     "test": "vitest",
-    "test:once": "vitest run"
+    "test:once": "vitest run",
+    "vue:build": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/server.js && mv ./vue/dist/InkMde.cjs ./vue/dist/server.cjs",
+    "vue:dev": "tsx ./vue/server.ts"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
