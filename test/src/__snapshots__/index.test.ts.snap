@@ -77,7 +77,7 @@ exports[`ink > matches the snapshot 1`] = `
   --ink-internal-syntax-strong-font-weight: var(--ink-syntax-strong-font-weight, 600);
   --ink-internal-syntax-url-color: var(--ink-syntax-url-color, #666666);
 }
-undefined
+
     </style>
     <!--/-->
     <!--#-->
@@ -395,7 +395,7 @@ undefined
       >
         <div
           aria-live="polite"
-          style="position: absolute; top: -10000px;"
+          style="position: fixed; top: -10000px;"
         />
         <div
           class="cm-scroller"
