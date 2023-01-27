@@ -124,7 +124,54 @@ const options = reactive({
 </script>
 ```
 
-### [Examples for `ink-mde/svelte`](svelte/README.md)
+### Examples for `ink-mde/svelte`
+
+The `ink-mde/svelte` subpath exports a Svelte component.
+
+#### Minimal setup
+
+```svelte
+<script lang="ts">
+  import InkMde from 'ink-mde/svelte'
+
+  // doc
+  let value = '# Hello, world'
+</script>
+
+<InkMde
+  bind:value
+  options={{
+    interface: {
+      appearance: 'dark'
+    }
+  }}
+/>
+```
+
+#### Reactive options and the editor instance
+
+```svelte
+<script lang="ts">
+  import InkMde from 'ink-mde/svelte'
+  import type { Instance } from 'ink-mde'
+
+  // doc
+  let value = '# Hello, world'
+  // reactive option, if this change, the editor will be reconfigured.
+  let isDarkTheme = false
+</script>
+
+<input type="checkbox" bind:checked={isDarkTheme} name="isDarkTheme" />
+
+<InkMde
+  bind:value
+  options={{
+    interface: {
+      appearance: isDarkTheme ? 'dark' : 'light',
+    },
+  }}
+/>
+```
 
 ## Further customization
 
