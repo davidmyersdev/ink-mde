@@ -79,26 +79,28 @@ export namespace Markup {
 }
 
 export interface Options {
-  doc?: string
-  files?: Partial<Options.Files>
-  hooks?: Partial<Options.Hooks>
-  interface?: Partial<Options.Interface>
-  plugins?: Options.Plugin[]
-  selections?: Editor.Selection[]
-  toolbar?: Partial<Options.Toolbar>
-  vim?: boolean
+  doc?: string,
+  files?: Partial<Options.Files>,
+  hooks?: Partial<Options.Hooks>,
+  interface?: Partial<Options.Interface>,
+  placeholder?: string,
+  plugins?: Options.Plugin[],
+  selections?: Editor.Selection[],
+  toolbar?: Partial<Options.Toolbar>,
+  vim?: boolean,
 }
 
 export interface OptionsResolved {
-  doc: string
-  files: Required<Options.Files>
-  hooks: Required<Options.Hooks>
-  interface: Required<Options.Interface>
-  plugins: Options.Plugin[]
+  doc: string,
+  files: Required<Options.Files>,
+  hooks: Required<Options.Hooks>,
+  interface: Required<Options.Interface>,
+  placeholder: string,
+  plugins: Options.Plugin[],
   readability: boolean,
-  selections: Editor.Selection[]
-  toolbar: Required<Options.Toolbar>
-  vim: boolean
+  selections: Editor.Selection[],
+  toolbar: Required<Options.Toolbar>,
+  vim: boolean,
 }
 
 export namespace Options {
