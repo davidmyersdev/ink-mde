@@ -76,11 +76,15 @@
   "module": "./dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
+    "dist",
     "dist/**/*",
-    "src/**/*",
-    "svelte/**/*",
+    "svelte/dist",
+    "svelte/dist/**/*",
+    "svelte/package.json",
+    "types",
     "types/**/*",
-    "vue/**/*"
+    "vue/dist",
+    "vue/dist/**/*"
   ],
   "scripts": {
     "build": "pnpm build:root && pnpm vue:build",
