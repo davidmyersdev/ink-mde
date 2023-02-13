@@ -13,6 +13,5 @@ jobs:
           node-version: 16
       - uses: pnpm/action-setup@v2
       - run: pnpm install
-      - run: pnpm -r build
       - run: pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_PUBLISH_TOKEN }}
       - run: pnpm publish --access public --no-git-checks
