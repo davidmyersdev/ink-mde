@@ -119,6 +119,15 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
     return compartment.reconfigure([])
   },
   async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.placeholder) {
+      const { placeholder } = await import('/src/vendor/extensions/placeholder')
+
+      return compartment.reconfigure(placeholder(options.placeholder))
+    }
+
+    return compartment.reconfigure([])
+  },
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
     if (options.interface.readonly) {
       const { readonly } = await import('/src/vendor/extensions/readonly')
 
