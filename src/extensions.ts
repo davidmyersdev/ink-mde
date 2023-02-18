@@ -74,10 +74,17 @@ export const resolvers: InkInternal.ExtensionResolvers = [
 
       return matches
     }, <Ink.VendorGrammar[]>[])
+    const languagePlugins = options.plugins.reduce((matches, plugin) => {
+      if (plugin.type === InkValues.PluginType.Language) {
+        matches.push(plugin.value)
+      }
+
+      return matches
+    }, <Ink.VendorLanguage[]>[])
 
     return markdown({
       base: markdownLanguage,
-      codeLanguages: languages,
+      codeLanguages: [...languages, ...languagePlugins],
       extensions: grammarPlugins,
     })
   },
