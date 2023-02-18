@@ -32,6 +32,7 @@ export enum PluginType {
   Completion = 'completion',
   Default = 'default',
   Grammar = 'grammar',
+  Language = 'language',
 }
 
 export enum Selection {

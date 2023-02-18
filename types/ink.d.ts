@@ -1,12 +1,14 @@
 // Type definitions for ink-mde
 import * as InkValues from './values'
 import { type CompletionSource } from '@codemirror/autocomplete'
+import { type LanguageDescription } from '@codemirror/language'
 import { type Extension } from '@codemirror/state'
 import { type MarkdownConfig } from '@lezer/markdown'
 
 export type VendorCompletion = CompletionSource
 export type VendorExtension = Extension
 export type VendorGrammar = MarkdownConfig
+export type VendorLanguage = LanguageDescription
 
 export * from './values'
 
@@ -106,7 +108,7 @@ export interface OptionsResolved {
 export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
 
-  export type Plugin = Plugins.Completion | Plugins.Default | Plugins.Grammar
+  export type Plugin = Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language
 
   export namespace Plugins {
     export interface Completion {
@@ -122,6 +124,11 @@ export namespace Options {
     export interface Grammar {
       type: EnumString<InkValues.PluginType.Grammar>
       value: VendorGrammar
+    }
+
+    export interface Language {
+      type: EnumString<InkValues.PluginType.Language>
+      value: VendorLanguage
     }
   }
 
