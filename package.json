@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.20.1",
   "packageManager": "pnpm@7.27.0",
-  "description": "The flexible TypeScript Markdown editor that powers https://octo.app.",
+  "description": "A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and TypeScript.",
   "author": "David R. Myers <david@voracious.dev>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/voracious",
