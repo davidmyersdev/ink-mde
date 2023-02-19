@@ -4,7 +4,7 @@
 
 # ink-mde
 
-The flexible TypeScript Markdown editor that powers https://octo.app.
+A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and TypeScript. See it in action at https://octo.app.
 
 ![](screenshot.png)
 
