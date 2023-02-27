@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ink > matches the snapshot 1`] = `
 <div>
@@ -433,24 +433,9 @@ exports[`ink > matches the snapshot 1`] = `
               <br />
             </div>
             <div
-              class="cm-blockquote cm-blockquote-open cm-line"
+              class="cm-line"
             >
-              <span
-                class="ͼ4a"
-              >
-                &gt;
-              </span>
-               Dreams don't work unless you take action. The surest way to make your dreams come true is to live them.
-            </div>
-            <div
-              class="cm-blockquote cm-blockquote-close cm-line"
-            >
-              <span
-                class="ͼ4a"
-              >
-                &gt;
-              </span>
-               Roy T. Bennett
+              A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and TypeScript.
             </div>
             <div
               class="cm-line"
@@ -460,33 +445,7 @@ exports[`ink > matches the snapshot 1`] = `
             <div
               class="cm-line"
             >
-              The flexible TypeScript Markdown editor that works the way 
-              <span
-                class="ͼ3j ͼ4a"
-              >
-                **
-              </span>
-              <span
-                class="ͼ3j"
-              >
-                you
-              </span>
-              <span
-                class="ͼ3j ͼ4a"
-              >
-                **
-              </span>
-               want it to.
-            </div>
-            <div
-              class="cm-line"
-            >
-              <br />
-            </div>
-            <div
-              class="cm-line"
-            >
-              Inline image previews. 
+              Images can be previewed in-place. 
               <span
                 class="ͼ46 ͼ4a"
               >
@@ -566,7 +525,7 @@ exports[`ink > matches the snapshot 1`] = `
                   \`
                 </span>
               </span>
-              ) and code blocks highlighted in real time.
+              ) and code blocks are highlighted in-place.
             </div>
             <div
               class="cm-line"
@@ -665,16 +624,6 @@ exports[`ink > matches the snapshot 1`] = `
                 *
               </span>
                on what you write instead of breaking concentration to check formatting.
-            </div>
-            <div
-              class="cm-line"
-            >
-              <br />
-            </div>
-            <div
-              class="cm-line"
-            >
-              Links and lists.
             </div>
             <div
               class="cm-line"
