@@ -114,7 +114,7 @@ export const makeVars = (state: InkInternal.StateResolved) => {
   const isLight = !isDark(state.options.interface.appearance)
 
   return styles.map((style) => {
-    const value = isLight && style.light ? style.light : style.default
+    const value = (isLight && style.light) ? style.light : style.default
 
     return `--ink-internal-${style.suffix}: var(--ink-${style.suffix}, ${value});`
   })
