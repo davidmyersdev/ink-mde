@@ -48,6 +48,11 @@
       "require": "./dist/client.cjs",
       "import": "./dist/client.js"
     },
+    "./bundle": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/bundle.js",
+      "require": "./dist/bundle.cjs"
+    },
     "./svelte": {
       "types": "./svelte/dist/index.d.ts",
       "import": "./svelte/dist/index.js"
@@ -88,7 +93,7 @@
   ],
   "scripts": {
     "build": "pnpm build:root && pnpm vue:build",
-    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts",
+    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsx ./dev/build.ts && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts",
     "ci": "pnpm build && pnpm test:once && pnpm lint && pnpm docs:check && pnpm dedupe:check",
     "dedupe:check": "pnpm dedupe --use-stderr",
     "dev": "vite",
