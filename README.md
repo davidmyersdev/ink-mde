@@ -40,9 +40,24 @@ pnpm i ink-mde
 yarn add ink-mde
 ```
 
-Next, import `ink-mde` and customize it to fit your needs.
+#### Import from a CDN
+
+The officially supported CDN for `ink-mde` is [esm.sh](https://esm.sh). Visit [esm.sh/ink-mde](https://esm.sh/ink-mde) and you will be redirected to the latest version. The URL will look something like this.
+
+```
+https://esm.sh/ink-mde@0.21.0
+```
+
+Then, import `ink` from that URL in your project.
+
+```ts
+import { ink } from 'https://esm.sh/ink-mde@0.21.0'
+```
 
 ### Examples for `ink-mde`
+
+Next, import `ink-mde` and customize it to fit your needs.
+
 #### Minimal setup
 
 Mount the component and start writing.
