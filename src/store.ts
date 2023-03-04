@@ -33,6 +33,7 @@ export const blankState = (): InkInternal.StateResolved => {
     placeholder: '',
     plugins: [],
     readability: false,
+    search: true,
     selections: [],
     toolbar: {
       bold: true,

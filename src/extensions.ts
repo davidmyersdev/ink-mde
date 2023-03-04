@@ -144,6 +144,15 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
     return compartment.reconfigure([])
   },
   async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
+    if (options.search) {
+      const { search } = await import('/src/vendor/extensions/search')
+
+      return compartment.reconfigure(search())
+    }
+
+    return compartment.reconfigure([])
+  },
+  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
     if (options.interface.spellcheck) {
       const { spellcheck } = await import('/src/vendor/extensions/spellcheck')
 

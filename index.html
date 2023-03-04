@@ -21,15 +21,25 @@
         margin: 0;
       }
 
+      .dark body {
+        background-color: rgb(24, 24, 27);
+        color: #fafafa;
+      }
+
+      .light body {
+        background-color: #fafafa;
+        color: rgb(24, 24, 27);
+      }
+
       @media (prefers-color-scheme: dark) {
-        body {
+        .auto body {
           background-color: rgb(24, 24, 27);
           color: #fafafa;
         }
       }
 
       @media (prefers-color-scheme: light) {
-        body {
+        .auto body {
           background-color: #fafafa;
           color: rgb(24, 24, 27);
         }
@@ -98,25 +108,11 @@
 
       window.ink.focus()
 
-      window.lights = (theme) => {
+      window.theme = (theme) => {
         document.documentElement.classList.remove('auto', 'dark', 'light')
         document.documentElement.classList.add(theme)
 
         window.ink.reconfigure({ interface: { appearance: theme } })
-      }
-
-      window.light = () => {
-        document.documentElement.classList.remove('dark')
-        document.documentElement.classList.add('light')
-
-        window.ink.reconfigure({ interface: { appearance: 'light' } })
-      }
-
-      window.dark = () => {
-        document.documentElement.classList.remove('light')
-        document.documentElement.classList.add('dark')
-
-        window.ink.reconfigure({ interface: { appearance: 'dark' } })
       }
 
       window.imagesShow = () => {
