@@ -38,7 +38,7 @@ export interface Instance {
 
 export namespace Instance {
   export interface FormatOptions {
-    selection?: Ink.Editor.Selection,
+    selection?: Editor.Selection,
   }
 
   export interface SelectOptions {
