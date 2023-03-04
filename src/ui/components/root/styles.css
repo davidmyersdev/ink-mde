@@ -34,6 +34,10 @@
   box-sizing: border-box;
 }
 
+.ink-mde span {
+  display: inline-block;
+}
+
 .ink-mde,
 .ink-mde .ink-mde-editor {
   display: flex;
@@ -87,6 +91,31 @@
   width: 100%;
 }
 
+.ink-mde .ink-mde-search-panel {
+  background-color: var(--ink-internal-block-background-color);
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+  width: clamp(10rem, 30%, 100%);
+}
+
+.ink-mde .ink-mde-search-panel:focus-within {
+  outline-color: cornflowerblue;
+  outline-style: solid;
+}
+
+.ink-mde .ink-mde-search-input {
+  background-color: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  color: inherit;
+  font-size: inherit;
+  outline: none;
+  width: 100%;
+}
+
 .ink-mde .ink-mde-task-toggle {
   cursor: pointer;
   height: 1rem;
@@ -102,6 +131,20 @@
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.ink-mde .cm-panels {
+  background-color: unset;
+  border: unset;
+  z-index: 10;
+}
+
+.ink-mde .cm-searchMatch {
+  background-color: #6495ed50;
+}
+
+.ink-mde .cm-searchMatch-selected {
+  background-color: #6495edcc;
 }
 
 .ink-mde .cm-scroller {

@@ -100,6 +100,7 @@ export interface OptionsResolved {
   placeholder: string,
   plugins: Options.Plugin[],
   readability: boolean,
+  search: boolean,
   selections: Editor.Selection[],
   toolbar: Required<Options.Toolbar>,
   vim: boolean,
