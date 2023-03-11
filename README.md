@@ -45,13 +45,13 @@ yarn add ink-mde
 The officially supported CDN for `ink-mde` is [esm.sh](https://esm.sh). Visit [esm.sh/ink-mde](https://esm.sh/ink-mde) and you will be redirected to the latest version. The URL will look something like this.
 
 ```
-https://esm.sh/ink-mde@0.21.0
+https://esm.sh/ink-mde@0.22.0
 ```
 
 Then, import `ink` from that URL in your project.
 
 ```ts
-import { ink } from 'https://esm.sh/ink-mde@0.21.0'
+import { ink } from 'https://esm.sh/ink-mde@0.22.0'
 ```
 
 ### Examples for `ink-mde`
