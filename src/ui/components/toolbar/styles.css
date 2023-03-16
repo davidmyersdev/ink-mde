@@ -9,11 +9,12 @@
 
 .ink-mde .ink-mde-toolbar .ink-mde-container {
   display: flex;
-  gap: 2rem;
+  gap: var(--ink-internal-toolbar-group-spacing);
 }
 
 .ink-mde .ink-mde-toolbar-group {
   display: flex;
+  gap: var(--ink-internal-toolbar-item-spacing);
 }
 
 .ink-mde .ink-mde-toolbar .ink-button {
