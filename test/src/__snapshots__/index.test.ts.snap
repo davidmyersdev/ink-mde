@@ -76,6 +76,8 @@ exports[`ink > matches the snapshot 1`] = `
   --ink-internal-syntax-strong-color: var(--ink-syntax-strong-color, inherit);
   --ink-internal-syntax-strong-font-weight: var(--ink-syntax-strong-font-weight, 600);
   --ink-internal-syntax-url-color: var(--ink-syntax-url-color, #666666);
+  --ink-internal-toolbar-group-spacing: var(--ink-toolbar-group-spacing, 2rem);
+  --ink-internal-toolbar-item-spacing: var(--ink-toolbar-item-spacing, 0);
 }
 
     </style>
