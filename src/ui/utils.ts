@@ -109,6 +109,8 @@ export const makeVars = (state: InkInternal.StateResolved) => {
     { suffix: 'syntax-strong-color', default: 'inherit' },
     { suffix: 'syntax-strong-font-weight', default: '600' },
     { suffix: 'syntax-url-color', default: '#aaaaaa', light: '#666666' },
+    { suffix: 'toolbar-group-spacing', default: '2rem' },
+    { suffix: 'toolbar-item-spacing', default: '0' },
   ]
 
   const isLight = !isDark(state.options.interface.appearance)
