@@ -23,6 +23,7 @@ A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and Ty
 - [x] Vue wrapper (`ink-mde/vue` subpath export)
 - [x] Svelte wrapper (`ink-mde/svelte` subpath export)
 - [x] Supports Server-Side Rendering (SSR)
+- [x] Wrap a native `textarea` element with the `wrap` export
 - [x] Plugin API (experimental)
 
 ## Getting Started
@@ -64,10 +65,20 @@ Mount the component and start writing.
 
 ```ts
 // ./examples/minimal.ts
-import ink from 'ink-mde'
+import { ink } from 'ink-mde'
 
 // The only requirement is an HTML element.
 ink(document.getElementById('editor')!)
+```
+
+##### Wrap a native `textarea` with `wrap`
+
+To wrap a native `textarea` element, use the `wrap` export.
+
+```ts
+import { wrap } from 'ink-mde'
+
+wrap(document.querySelector('textarea')!)
 ```
 
 #### Track state changes with hooks
