@@ -26,7 +26,7 @@ export interface Instance {
   focus: () => void
   format: (type: EnumString<InkValues.Markup>, options: Instance.FormatOptions) => void
   getDoc: () => string
-  insert: (text: string, selection: Editor.Selection) => void
+  insert: (text: string, selection?: Editor.Selection) => void
   load: (doc: string) => void
   options: () => OptionsResolved
   reconfigure: (updates: Options) => void
