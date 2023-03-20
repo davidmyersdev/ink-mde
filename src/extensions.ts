@@ -8,7 +8,9 @@ import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
 export const buildVendors = (state: InkInternal.StateResolved) => {
-  return state.extensions.map(e => e.initialValue(state))
+  const extensions = state.extensions.map(e => e.initialValue(state))
+
+  return extensions
 }
 
 export const buildVendorUpdates = (state: InkInternal.StateResolved) => {

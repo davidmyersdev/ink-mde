@@ -9,6 +9,7 @@ import type { EditorView as VendorView } from '@codemirror/view'
 import type { Accessor, Setter } from 'solid-js'
 import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
+import { type Queue } from '/src/utils/queue'
 
 export namespace InkInternal {
   export type Editor = InkInternal.Vendor.View
@@ -47,6 +48,7 @@ export namespace InkInternal {
     root?: InkUi.Root,
     ssr?: boolean,
     target?: HTMLElement,
+    workQueue?: Queue,
   }
 
   export interface StateResolved {
@@ -56,6 +58,7 @@ export namespace InkInternal {
     options: Ink.OptionsResolved,
     root: InkUi.Root,
     target: HTMLElement,
+    workQueue: Queue,
   }
 
   export type Store = [get: Accessor<InkInternal.StateResolved>, set: Setter<InkInternal.StateResolved>]
