@@ -2,6 +2,7 @@ import { createSignal } from 'solid-js'
 import { override } from '/src/utils/merge'
 import { createExtensions } from '/src/extensions'
 import { createElement } from './ui/utils'
+import { makeQueue } from '/src/utils/queue'
 import * as InkValues from '/types/values'
 import type { Options } from '/types/ink'
 import type InkInternal from '/types/internal'
@@ -59,6 +60,7 @@ export const blankState = (): InkInternal.StateResolved => {
     options,
     root: createElement(),
     target: createElement(),
+    workQueue: makeQueue(),
   }
 }
 

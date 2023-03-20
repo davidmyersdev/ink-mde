@@ -2,6 +2,8 @@
   "extends": ["@antfu/ts", "plugin:solid/typescript"],
   "plugins": ["solid"],
   "rules": {
+    "@typescript-eslint/brace-style": [2, "1tbs"],
+    "@typescript-eslint/consistent-type-definitions": [0, {}],
     "@typescript-eslint/member-delimiter-style": [
       2,
       {
@@ -14,7 +16,6 @@
       }
     ],
     "@typescript-eslint/no-use-before-define": [0, {}],
-    "@typescript-eslint/brace-style": [2, "1tbs"],
     "antfu/if-newline": [0, {}],
     "curly": [0, {}],
     "indent": ["error", 2],
