@@ -121,16 +121,16 @@
     "@codemirror/lang-markdown": "^6.1.0",
     "@codemirror/language": "^6.6.0",
     "@codemirror/language-data": "^6.1.0",
-    "@codemirror/search": "^6.2.3",
+    "@codemirror/search": "^6.3.0",
     "@codemirror/state": "^6.2.0",
-    "@codemirror/view": "^6.9.2",
+    "@codemirror/view": "^6.9.3",
     "@lezer/common": "^1.0.2",
     "@lezer/highlight": "^1.1.3",
     "@lezer/markdown": "^1.0.2",
-    "@replit/codemirror-vim": "^6.0.9",
+    "@replit/codemirror-vim": "^6.0.10",
     "ink-mde": "workspace:*",
-    "solid-js": "^1.6.11",
-    "style-mod": "^4.0.0"
+    "solid-js": "^1.6.15",
+    "style-mod": "^4.0.2"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.35.3",

@@ -15,14 +15,13 @@ export const Styles: Component = () => {
   onMount(() => {
     const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
     const listener = (_event: MediaQueryListEvent) => {
-      const { editor, root } = state()
+      const { editor, root, workQueue } = state()
 
       if (root.isConnected) {
-        buildVendorUpdates(state()).then((effects) => {
-          editor.dispatch({
-            effects,
-          })
+        workQueue.enqueue(async () => {
+          const effects = await buildVendorUpdates(state())
 
+          editor.dispatch({ effects })
           setVars(makeVars(state()))
         })
       } else {
