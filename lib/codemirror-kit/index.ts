@@ -2,7 +2,7 @@ import { Decoration, type WidgetType } from '@codemirror/view'
 
 export type CustomWidget<T> = T & WidgetSpec & { compare: (other: CustomWidget<T>) => boolean }
 export type CustomWidgetArgs = Partial<WidgetSpec> & Record<string, any>
-export type CustomWidgetDecoration<T> = T & WidgetDecorationSpec
+export type CustomWidgetDecoration<T> = T & WidgetDecorationSpec & Decoration
 export type CustomWidgetDecorationArgs = Partial<WidgetDecorationSpec> & Record<string, any>
 export type WidgetSpec = WidgetType & { id?: string }
 export type WidgetDecorationSpec = { block: boolean, side: number, widget: CustomWidgetArgs }
@@ -21,18 +21,14 @@ export const buildWidget = <T extends CustomWidgetArgs>(options: T): CustomWidge
     estimatedHeight: -1,
     ignoreEvent: () => true,
     toDOM: () => {
-      const text = document.createElement('span')
-
-      text.innerText = 'Testing'
-
-      return text
+      return document.createElement('span')
     },
     updateDOM: () => false,
     ...options,
   }
 }
 
-export const buildWidgetDecoration = <T extends CustomWidgetDecorationArgs>(options: T) => {
+export const buildWidgetDecoration = <T extends CustomWidgetDecorationArgs>(options: T): CustomWidgetDecoration<T> => {
   return Decoration.widget({
     block: false,
     side: 0,
@@ -40,5 +36,5 @@ export const buildWidgetDecoration = <T extends CustomWidgetDecorationArgs>(opti
     widget: buildWidget({
       ...options.widget,
     }),
-  })
+  }) as CustomWidgetDecoration<T>
 }
