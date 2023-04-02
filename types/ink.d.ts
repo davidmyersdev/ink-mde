@@ -109,7 +109,7 @@ export interface OptionsResolved {
 export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
 
-  export type Plugin = Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language
+  export type Plugin = (Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language) | Plugin[]
 
   export namespace Plugins {
     export interface Completion {
