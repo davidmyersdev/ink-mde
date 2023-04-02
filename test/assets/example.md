@@ -15,6 +15,6 @@ const add = (a: number, b: number): number => {
 
 Stay *focused* on what you write instead of breaking concentration to check formatting.
 
-- [voracious](https://github.com/voracious)
-- [voracious/ink-mde](https://github.com/voracious/ink-mde)
-- [voracious/octo](https://github.com/voracious/octo)
+- [davidmyersdev](https://github.com/davidmyersdev)
+- [davidmyersdev/ink-mde](https://github.com/davidmyersdev/ink-mde)
+- [davidmyersdev/octo](https://github.com/davidmyersdev/octo)
