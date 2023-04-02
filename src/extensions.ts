@@ -2,6 +2,7 @@ import { Compartment } from '@codemirror/state'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { isAutoDark } from '/src/ui/utils'
+import { flatten } from '/src/utils/options'
 import { appearance } from '/src/vendor/extensions/appearance'
 import * as InkValues from '/types/values'
 import type * as Ink from '/types/ink'
@@ -14,11 +15,13 @@ export const buildVendors = (state: InkInternal.StateResolved) => {
 }
 
 export const buildVendorUpdates = (state: InkInternal.StateResolved) => {
-  return Promise.all(
+  const effects = Promise.all(
     state.extensions.map((extension) => {
       return extension.reconfigure(state.options)
     }),
   )
+
+  return effects
 }
 
 export const extension = (resolver: InkInternal.ExtensionResolver): InkInternal.Extension => {
@@ -58,7 +61,7 @@ export const createExtensions = () => {
 
 export const resolvers: InkInternal.ExtensionResolvers = [
   (options: Ink.OptionsResolved) => {
-    const extensions = options.plugins.reduce((matches, plugin) => {
+    const extensions = flatten(options.plugins).reduce((matches, plugin) => {
       if (plugin.type === InkValues.PluginType.Default) {
         matches.push(plugin.value)
       }
@@ -69,14 +72,14 @@ export const resolvers: InkInternal.ExtensionResolvers = [
     return extensions
   },
   (options: Ink.OptionsResolved) => {
-    const grammarPlugins = options.plugins.reduce((matches, plugin) => {
+    const grammarPlugins = flatten(options.plugins).reduce((matches, plugin) => {
       if (plugin.type === InkValues.PluginType.Grammar) {
         matches.push(plugin.value)
       }
 
       return matches
     }, <Ink.VendorGrammar[]>[])
-    const languagePlugins = options.plugins.reduce((matches, plugin) => {
+    const languagePlugins = flatten(options.plugins).reduce((matches, plugin) => {
       if (plugin.type === InkValues.PluginType.Language) {
         matches.push(plugin.value)
       }
@@ -87,7 +90,7 @@ export const resolvers: InkInternal.ExtensionResolvers = [
     return markdown({
       base: markdownLanguage,
       codeLanguages: [...languages, ...languagePlugins],
-      extensions: grammarPlugins,
+      extensions: [...grammarPlugins],
     })
   },
   (options: Ink.OptionsResolved) => {

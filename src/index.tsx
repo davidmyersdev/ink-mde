@@ -7,9 +7,9 @@ import type * as Ink from '/types/ink'
 
 export * from '/types/values'
 
-export const defineOptions = (options: Ink.Options): Ink.Options => {
-  return options
-}
+export const defineConfig = <T extends Ink.Options>(config: T) => config
+export const defineOptions = <T extends Ink.Options>(options: T) => options
+export const definePlugin = <T extends Ink.Options.Plugin>(plugin: T) => plugin
 
 export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.Instance => {
   const store = makeStore(options)

@@ -31,6 +31,7 @@ export const blankState = (): InkInternal.StateResolved => {
       spellcheck: true,
       toolbar: false,
     },
+    katex: false,
     placeholder: '',
     plugins: [],
     readability: false,

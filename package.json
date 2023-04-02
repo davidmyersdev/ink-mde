@@ -129,12 +129,14 @@
     "@lezer/markdown": "^1.0.2",
     "@replit/codemirror-vim": "^6.0.10",
     "ink-mde": "workspace:*",
+    "katex": "^0.16.4",
     "solid-js": "^1.6.15",
     "style-mod": "^4.0.2"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.35.3",
     "@types/express": "^4.17.17",
+    "@types/katex": "^0.16.0",
     "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/tsconfig": "^0.1.3",

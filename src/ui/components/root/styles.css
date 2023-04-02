@@ -233,3 +233,13 @@
 .ink-mde .cm-image-backdrop {
   background-color: var(--ink-internal-block-background-color);
 }
+
+.ink-mde .ink-mde-block-widget-container {
+  padding: 0.5rem 0;
+}
+
+.ink-mde .ink-mde-block-widget {
+  background-color: var(--ink-internal-block-background-color);
+  border-radius: var(--ink-internal-border-radius);
+  padding: var(--ink-internal-block-padding);
+}
