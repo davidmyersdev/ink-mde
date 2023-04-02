@@ -4,16 +4,16 @@
   "version": "0.25.1",
   "packageManager": "pnpm@8.4.0",
   "description": "A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and TypeScript.",
-  "author": "David R. Myers <david@voracious.dev>",
+  "author": "David R. Myers <hello@davidmyers.dev>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/voracious",
-  "homepage": "https://github.com/voracious/ink-mde",
+  "funding": "https://github.com/sponsors/davidmyersdev",
+  "homepage": "https://github.com/davidmyersdev/ink-mde",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/voracious/ink-mde.git"
+    "url": "git+https://github.com/davidmyersdev/ink-mde.git"
   },
   "bugs": {
-    "url": "https://github.com/voracious/ink-mde/issues"
+    "url": "https://github.com/davidmyersdev/ink-mde/issues"
   },
   "keywords": [
     "codemirror",
