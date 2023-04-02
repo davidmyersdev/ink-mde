@@ -1,8 +1,9 @@
 import { ink } from 'ink-mde'
-import { buildBlockWidgetDecoration, nodeDecorator } from '/lib/codemirror-kit'
+import { buildBlockWidgetDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
+import { katex } from '/plugins/katex'
 
 ink(document.querySelector('#app')!, {
-  doc: '# Start with some text\n\n```\nhi\n```\n\n```\nhello\n```',
+  doc: '# Start with some text\n\nThis is some \$inline math\$\n\n\$\$\nc = \\pm\\sqrt{a^2 + b^2}\n\$\$\n\n```\nhi\n```\n\n```\nhello\n```',
   plugins: [
     {
       type: 'default',
@@ -13,7 +14,7 @@ ink(document.querySelector('#app')!, {
 
           if (text) {
             return buildBlockWidgetDecoration({
-              widget: {
+              widget: buildWidget({
                 // You can see the results of optimization when there is no id specified. Because CodeMirror has no way of knowing
                 // whether the decoration matches, it usually has to rebuild the DOM on each change. With the optimization setting,
                 // the DOM only has to be rebuilt if the changes overlap with the existing decoration.
@@ -30,7 +31,7 @@ ink(document.querySelector('#app')!, {
                     </div>
                   ) as HTMLElement
                 },
-              },
+              }),
             })
           }
         },
@@ -38,5 +39,6 @@ ink(document.querySelector('#app')!, {
         optimize: true,
       }),
     },
+    katex(),
   ],
 })
