@@ -76,62 +76,7 @@
     <div class="app-wrapper">
       <div id="app"></div>
     </div>
+    <!-- <script type="module" src="/examples/demo.ts"></script> -->
     <script type="module" src="/examples/plugins.tsx"></script>
-    <script type="text">
-      import ink from '/src/index.tsx'
-      import example from '/test/assets/example.md?raw'
-
-      window.ink = ink(document.getElementById('app'), {
-        doc: example,
-        files: {
-          clipboard: true,
-          dragAndDrop: true,
-          handler(files) {
-            // eslint-disable-next-line no-console
-            console.log({ files })
-
-            return URL.createObjectURL(Array.from(files).pop())
-          },
-          injectMarkup: true,
-        },
-        interface: {
-          images: true,
-          lists: true,
-          readonly: false,
-          spellcheck: true,
-          toolbar: true,
-        },
-        placeholder: 'Start typing...',
-        readability: true,
-        toolbar: {
-          upload: true,
-        },
-      })
-
-      window.ink.focus()
-
-      window.theme = (theme) => {
-        document.documentElement.classList.remove('auto', 'dark', 'light')
-        document.documentElement.classList.add(theme)
-
-        window.ink.reconfigure({ interface: { appearance: theme } })
-      }
-
-      window.imagesShow = () => {
-        window.ink.reconfigure({ interface: { images: true } })
-      }
-
-      window.imagesHide = () => {
-        window.ink.reconfigure({ interface: { images: false } })
-      }
-
-      window.readonly = (enabled) => {
-        window.ink.reconfigure({ interface: { readonly: enabled } })
-      }
-
-      window.dragAndDrop = (enabled) => {
-        window.ink.reconfigure({ files: { dragAndDrop: enabled } })
-      }
-    </script>
   </body>
 </html>
