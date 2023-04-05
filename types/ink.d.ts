@@ -87,6 +87,8 @@ export interface Options {
   interface?: Partial<Options.Interface>,
   placeholder?: string,
   plugins?: Options.Plugin[],
+  readability?: boolean,
+  search?: boolean,
   selections?: Editor.Selection[],
   toolbar?: Partial<Options.Toolbar>,
   vim?: boolean,
@@ -146,7 +148,7 @@ export namespace Options {
   export interface Files {
     clipboard: boolean
     dragAndDrop: boolean
-    handler: (files: FileList) => Promise<any> | void
+    handler: (files: FileList) => Promise<string | void> | string | void
     injectMarkup: boolean
     types: string[]
   }

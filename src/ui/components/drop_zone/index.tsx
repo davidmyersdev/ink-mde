@@ -88,7 +88,7 @@ export const DropZone: Component = () => {
     setIsLoading(true)
     setIsVisible(true)
 
-    Promise.resolve(state().options.files.handler(userFiles)).then((url?: string) => {
+    Promise.resolve(state().options.files.handler(userFiles)).then((url) => {
       if (state().options.files.injectMarkup && url) {
         const markup = `![](${url})`
 
