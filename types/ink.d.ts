@@ -85,8 +85,9 @@ export interface Options {
   files?: Partial<Options.Files>,
   hooks?: Partial<Options.Hooks>,
   interface?: Partial<Options.Interface>,
+  katex?: boolean,
   placeholder?: string,
-  plugins?: Options.Plugin[],
+  plugins?: Options.RecursivePlugin[],
   readability?: boolean,
   search?: boolean,
   selections?: Editor.Selection[],
@@ -99,8 +100,9 @@ export interface OptionsResolved {
   files: Required<Options.Files>,
   hooks: Required<Options.Hooks>,
   interface: Required<Options.Interface>,
+  katex: boolean,
   placeholder: string,
-  plugins: Options.Plugin[],
+  plugins: Options.RecursivePlugin[],
   readability: boolean,
   search: boolean,
   selections: Editor.Selection[],
@@ -111,27 +113,32 @@ export interface OptionsResolved {
 export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
 
-  export type Plugin = (Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language) | Plugin[]
+  export type Plugin = Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language
+  export type RecursivePlugin = Plugin | RecursivePlugin[]
 
   export namespace Plugins {
     export interface Completion {
-      type: EnumString<InkValues.PluginType.Completion>
-      value: VendorCompletion
+      key?: string,
+      type: EnumString<InkValues.PluginType.Completion>,
+      value: VendorCompletion | Promise<VendorCompletion>,
     }
 
     export interface Default {
-      type: EnumString<InkValues.PluginType.Default>
-      value: VendorExtension
+      key?: string,
+      type: EnumString<InkValues.PluginType.Default>,
+      value: VendorExtension | Promise<VendorExtension>,
     }
 
     export interface Grammar {
-      type: EnumString<InkValues.PluginType.Grammar>
-      value: VendorGrammar
+      key?: string,
+      type: EnumString<InkValues.PluginType.Grammar>,
+      value: VendorGrammar | Promise<VendorGrammar>,
     }
 
     export interface Language {
-      type: EnumString<InkValues.PluginType.Language>
-      value: VendorLanguage
+      key?: string,
+      type: EnumString<InkValues.PluginType.Language>,
+      value: VendorLanguage | Promise<VendorLanguage>,
     }
   }
 

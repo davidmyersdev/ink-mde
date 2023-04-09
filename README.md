@@ -205,7 +205,7 @@ The `ink-mde/svelte` subpath exports a Svelte component.
 These are the default options, and any of them can be overridden when initializing (or reconfiguring) an instance of `ink-mde`.
 
 ```ts
-// ./src/store.ts#L11-L54
+// ./src/store.ts#L12-L58
 const options = {
   doc: '',
   files: {
@@ -229,8 +229,11 @@ const options = {
     spellcheck: true,
     toolbar: false,
   },
+  katex: false,
   placeholder: '',
-  plugins: [],
+  plugins: [
+    katex(),
+  ],
   readability: false,
   search: true,
   selections: [],
