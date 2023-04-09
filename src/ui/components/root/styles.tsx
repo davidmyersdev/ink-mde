@@ -5,7 +5,7 @@ import { useStore } from '../../app'
 import styles from './styles.css?inline'
 
 export const Styles: Component = () => {
-  const [state] = useStore()
+  const [state, setState] = useStore()
   const [vars, setVars] = createSignal(makeVars(state()))
 
   createEffect(() => {
@@ -19,7 +19,7 @@ export const Styles: Component = () => {
 
       if (root.isConnected) {
         workQueue.enqueue(async () => {
-          const effects = await buildVendorUpdates(state())
+          const effects = await buildVendorUpdates([state, setState])
 
           editor.dispatch({ effects })
           setVars(makeVars(state()))

@@ -17,7 +17,7 @@ export const makeEditor = ([state, setState]: InkInternal.Store): InkInternal.Ed
         options.hooks.afterUpdate(newDoc)
       }
     },
-    state: makeState(state()),
+    state: makeState([state, setState]),
   })
 
   return editor

@@ -16,10 +16,10 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
     return toCodeMirror(selections)
 }
 
-export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.State => {
+export const makeState = ([state, setState]: InkInternal.Store): InkInternal.Vendor.State => {
   return EditorState.create({
-    doc: state.options.doc,
-    selection: toVendorSelection(state.options.selections),
+    doc: state().options.doc,
+    selection: toVendorSelection(state().options.selections),
     extensions: [
       blockquote(),
       code(),
@@ -28,7 +28,7 @@ export const makeState = (state: InkInternal.StateResolved): InkInternal.Vendor.
       keymaps(),
       lineWrapping(),
       theme(),
-      ...buildVendors(state),
+      ...buildVendors([state, setState]),
     ],
   })
 }
