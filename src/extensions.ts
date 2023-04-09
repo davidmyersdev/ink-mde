@@ -1,23 +1,21 @@
 import { Compartment } from '@codemirror/state'
-import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
-import { languages } from '@codemirror/language-data'
 import { isAutoDark } from '/src/ui/utils'
-import { flatten } from '/src/utils/options'
+import { filterPlugins, partitionPlugins } from '/src/utils/options'
 import { appearance } from '/src/vendor/extensions/appearance'
-import * as InkValues from '/types/values'
-import type * as Ink from '/types/ink'
-import type InkInternal from '/types/internal'
+import { appearanceTypes, pluginTypes } from '/types/values'
+import { type InkInternal } from '/types'
+import { markdown } from '/src/markdown'
 
-export const buildVendors = (state: InkInternal.StateResolved) => {
-  const extensions = state.extensions.map(e => e.initialValue(state))
+export const buildVendors = ([state, setState]: InkInternal.Store) => {
+  const extensions = state().extensions.map(e => e.initialValue([state, setState]))
 
   return extensions
 }
 
-export const buildVendorUpdates = (state: InkInternal.StateResolved) => {
+export const buildVendorUpdates = ([state, setState]: InkInternal.Store) => {
   const effects = Promise.all(
-    state.extensions.map((extension) => {
-      return extension.reconfigure(state.options)
+    state().extensions.map((extension) => {
+      return extension.reconfigure([state, setState])
     }),
   )
 
@@ -29,11 +27,11 @@ export const extension = (resolver: InkInternal.ExtensionResolver): InkInternal.
 
   return {
     compartment,
-    initialValue: (state: InkInternal.StateResolved) => {
-      return compartment.of(resolver(state.options))
+    initialValue: (store: InkInternal.Store) => {
+      return compartment.of(resolver(store))
     },
-    reconfigure: (options: Ink.OptionsResolved) => {
-      return compartment.reconfigure(resolver(options))
+    reconfigure: (store: InkInternal.Store) => {
+      return compartment.reconfigure(resolver(store))
     },
   }
 }
@@ -43,59 +41,32 @@ export const lazyExtension = (reconfigure: InkInternal.LazyExtensionResolver): I
 
   return {
     compartment,
-    initialValue: (_state: InkInternal.StateResolved) => {
+    initialValue: () => {
       return compartment.of([])
     },
-    reconfigure: (options: Ink.OptionsResolved) => {
-      return reconfigure(options, compartment)
+    reconfigure: (store: InkInternal.Store) => {
+      return reconfigure(store, compartment)
     },
   }
 }
 
 export const createExtensions = () => {
   return [
+    markdown(),
     ...resolvers.map(r => extension(r)),
     ...lazyResolvers.map(r => lazyExtension(r)),
   ]
 }
 
 export const resolvers: InkInternal.ExtensionResolvers = [
-  (options: Ink.OptionsResolved) => {
-    const extensions = flatten(options.plugins).reduce((matches, plugin) => {
-      if (plugin.type === InkValues.PluginType.Default) {
-        matches.push(plugin.value)
-      }
-
-      return matches
-    }, <Ink.VendorExtension[]>[])
+  ([state]: InkInternal.Store) => {
+    const [_lazyExtensions, extensions] = partitionPlugins(filterPlugins(pluginTypes.default, state().options))
 
     return extensions
   },
-  (options: Ink.OptionsResolved) => {
-    const grammarPlugins = flatten(options.plugins).reduce((matches, plugin) => {
-      if (plugin.type === InkValues.PluginType.Grammar) {
-        matches.push(plugin.value)
-      }
-
-      return matches
-    }, <Ink.VendorGrammar[]>[])
-    const languagePlugins = flatten(options.plugins).reduce((matches, plugin) => {
-      if (plugin.type === InkValues.PluginType.Language) {
-        matches.push(plugin.value)
-      }
-
-      return matches
-    }, <Ink.VendorLanguage[]>[])
-
-    return markdown({
-      base: markdownLanguage,
-      codeLanguages: [...languages, ...languagePlugins],
-      extensions: [...grammarPlugins],
-    })
-  },
-  (options: Ink.OptionsResolved) => {
-    const isDark = options.interface.appearance === InkValues.Appearance.Dark
-    const isAuto = options.interface.appearance === InkValues.Appearance.Auto
+  ([state]: InkInternal.Store) => {
+    const isDark = state().options.interface.appearance === appearanceTypes.dark
+    const isAuto = state().options.interface.appearance === appearanceTypes.auto
     const extension = appearance(isDark || (isAuto && isAutoDark()))
 
     return extension
@@ -103,17 +74,26 @@ export const resolvers: InkInternal.ExtensionResolvers = [
 ]
 
 export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.interface.autocomplete) {
-      const { autocomplete } = await import('/src/vendor/extensions/autocomplete')
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    const [lazyExtensions] = partitionPlugins(filterPlugins(pluginTypes.default, state().options))
 
-      return compartment.reconfigure(autocomplete(options))
+    if (lazyExtensions.length > 0) {
+      return compartment.reconfigure(await Promise.all(lazyExtensions))
     }
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.interface.images) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.interface.autocomplete) {
+      const { autocomplete } = await import('/src/vendor/extensions/autocomplete')
+
+      return compartment.reconfigure(autocomplete(state().options))
+    }
+
+    return compartment.reconfigure([])
+  },
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.interface.images) {
       const { images } = await import('/src/vendor/extensions/images')
 
       return compartment.reconfigure(images())
@@ -121,8 +101,8 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.interface.lists) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.interface.lists) {
       const { lists } = await import('/src/vendor/extensions/lists')
 
       return compartment.reconfigure(lists())
@@ -130,17 +110,17 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.placeholder) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.placeholder) {
       const { placeholder } = await import('/src/vendor/extensions/placeholder')
 
-      return compartment.reconfigure(placeholder(options.placeholder))
+      return compartment.reconfigure(placeholder(state().options.placeholder))
     }
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.interface.readonly) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.interface.readonly) {
       const { readonly } = await import('/src/vendor/extensions/readonly')
 
       return compartment.reconfigure(readonly())
@@ -148,8 +128,8 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.search) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.search) {
       const { search } = await import('/src/vendor/extensions/search')
 
       return compartment.reconfigure(search())
@@ -157,8 +137,8 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.interface.spellcheck) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.interface.spellcheck) {
       const { spellcheck } = await import('/src/vendor/extensions/spellcheck')
 
       return compartment.reconfigure(spellcheck())
@@ -166,8 +146,8 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
 
     return compartment.reconfigure([])
   },
-  async (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => {
-    if (options.vim) {
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    if (state().options.vim) {
       const { vim } = await import('/src/vendor/extensions/vim')
 
       return compartment.reconfigure(vim())

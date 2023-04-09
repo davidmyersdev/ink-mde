@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js'
+import { katex } from '/plugins/katex'
 import { override } from '/src/utils/merge'
 import { createExtensions } from '/src/extensions'
 import { createElement } from './ui/utils'
@@ -33,7 +34,9 @@ export const blankState = (): InkInternal.StateResolved => {
     },
     katex: false,
     placeholder: '',
-    plugins: [],
+    plugins: [
+      katex(),
+    ],
     readability: false,
     search: true,
     selections: [],

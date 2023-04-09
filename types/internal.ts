@@ -16,19 +16,19 @@ export namespace InkInternal {
 
   export interface Extension {
     compartment: InkInternal.Vendor.Compartment,
-    initialValue: (state: InkInternal.StateResolved) => InkInternal.Vendor.Extension,
-    reconfigure: (options: Ink.OptionsResolved) => InkInternal.Vendor.StateEffect<unknown>,
+    initialValue: (store: InkInternal.Store) => InkInternal.Vendor.Extension,
+    reconfigure: (store: InkInternal.Store) => InkInternal.Vendor.StateEffect<unknown>,
   }
 
   export interface LazyExtension {
     compartment: InkInternal.Vendor.Compartment,
-    initialValue: (state: InkInternal.StateResolved) => InkInternal.Vendor.Extension,
-    reconfigure: (options: Ink.OptionsResolved) => Promise<InkInternal.Vendor.StateEffect<unknown>>,
+    initialValue: (store: InkInternal.Store) => InkInternal.Vendor.Extension,
+    reconfigure: (store: InkInternal.Store) => Promise<InkInternal.Vendor.StateEffect<unknown>>,
   }
 
-  export type ExtensionResolver = (options: Ink.OptionsResolved) => InkInternal.Vendor.Extension
+  export type ExtensionResolver = (store: InkInternal.Store) => InkInternal.Vendor.Extension
   export type ExtensionResolvers = ExtensionResolver[]
-  export type LazyExtensionResolver = (options: Ink.OptionsResolved, compartment: InkInternal.Vendor.Compartment) => Promise<InkInternal.Vendor.StateEffect<unknown>>
+  export type LazyExtensionResolver = (store: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => Promise<InkInternal.Vendor.StateEffect<unknown>>
   export type LazyExtensionResolvers = LazyExtensionResolver[]
 
   export type Extensions = {
@@ -61,7 +61,9 @@ export namespace InkInternal {
     workQueue: Queue,
   }
 
-  export type Store = [get: Accessor<InkInternal.StateResolved>, set: Setter<InkInternal.StateResolved>]
+  export type Store = [get: StoreStateGetter, set: StoreStateSetter]
+  export type StoreStateGetter = Accessor<InkInternal.StateResolved>
+  export type StoreStateSetter = Setter<InkInternal.StateResolved>
 
   export namespace Vendor {
     // All vendor types (and adapters) should be encapsulated here.

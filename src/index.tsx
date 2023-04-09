@@ -1,15 +1,17 @@
 import { hydrate as solidHydrate, render as solidRender, renderToString as solidRenderToString } from 'solid-js/web'
 import { HYDRATION_MARKER_SELECTOR } from '/src/constants'
-import { makeStore } from '/src/store'
 import { makeInstance } from '/src/instance'
+import { makeStore } from '/src/store'
 import { App } from '/src/ui/app'
+import { isPromise } from '/src/utils/inspect'
+import { type PluginValueForType } from '/src/utils/options'
 import type * as Ink from '/types/ink'
 
 export * from '/types/values'
 
 export const defineConfig = <T extends Ink.Options>(config: T) => config
 export const defineOptions = <T extends Ink.Options>(options: T) => options
-export const definePlugin = <T extends Ink.Options.Plugin>(plugin: T) => plugin
+export const definePlugin = <T extends Ink.Options.RecursivePlugin>(plugin: T) => plugin
 
 export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.Instance => {
   const store = makeStore(options)
@@ -30,6 +32,24 @@ export const ink = (target: HTMLElement, options: Ink.Options = {}): Ink.Instanc
   }
 
   return render(target, options)
+}
+
+export const inkPlugin = <T extends Ink.Values.PluginType>(type: T, value: () => PluginValueForType<T>, key = '') => {
+  return new Proxy({ type, key } as Ink.Options.Plugin, {
+    get: (target, prop: keyof Ink.Options.Plugin, _receiver) => {
+      if (prop === 'value' && !target[prop]) {
+        target.value = value()
+
+        if (isPromise(target.value)) {
+          return target.value.then(val => target.value = val)
+        }
+
+        return target.value
+      }
+
+      return target[prop]
+    },
+  })
 }
 
 export const render = (target: HTMLElement, options: Ink.Options = {}): Ink.Instance => {

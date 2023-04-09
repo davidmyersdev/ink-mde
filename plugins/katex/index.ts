@@ -1,6 +1,6 @@
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { EditorView } from '@codemirror/view'
-import { definePlugin } from 'ink-mde'
+import { definePlugin, inkPlugin, pluginTypes } from 'ink-mde'
 import { useModule } from '/src/modules'
 import { buildBlockWidgetDecoration, buildLineDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
 import { grammar, mathInline, mathInlineMark, mathInlineMarkClose, mathInlineMarkOpen } from './grammar'
@@ -13,13 +13,9 @@ const render = (text: string, element: HTMLElement) => {
 
 export const katex = () => {
   return definePlugin([
-    {
-      type: 'grammar',
-      value: grammar,
-    },
-    {
-      type: 'default',
-      value: nodeDecorator({
+    inkPlugin(pluginTypes.grammar, () => grammar),
+    inkPlugin(pluginTypes.default, () => {
+      return nodeDecorator({
         nodes: ['MathBlock', 'MathBlockMarkClose', 'MathBlockMarkOpen'],
         onMatch: (_state, node) => {
           // Either: only match the top node (inline) and iterate over the children, or: match both and keep track of opening/closing tokens.
@@ -38,11 +34,10 @@ export const katex = () => {
         },
         // When set to true, only the nodes that overlap changed ranges will be reprocessed.
         optimize: false,
-      }),
-    },
-    {
-      type: 'default',
-      value: nodeDecorator({
+      })
+    }),
+    inkPlugin(pluginTypes.default, async () => {
+      return nodeDecorator({
         nodes: ['MathBlock'],
         onMatch: (state, node) => {
           const text = state.sliceDoc(node.from, node.to).split('\n').slice(1, -1).join('\n')
@@ -79,11 +74,10 @@ export const katex = () => {
           }
         },
         optimize: false,
-      }),
-    },
-    {
-      type: 'default',
-      value: syntaxHighlighting(
+      })
+    }, 'katex'),
+    inkPlugin(pluginTypes.default, () => {
+      return syntaxHighlighting(
         HighlightStyle.define([
           {
             tag: [mathInline.tag, mathInlineMark.tag],
@@ -102,11 +96,10 @@ export const katex = () => {
             paddingLeft: 'var(--ink-internal-inline-padding)',
           },
         ]),
-      ),
-    },
-    {
-      type: 'default',
-      value: EditorView.theme({
+      )
+    }),
+    inkPlugin(pluginTypes.default, () => {
+      return EditorView.theme({
         '.ink-mde-line-math-block': {
           backgroundColor: 'var(--ink-internal-block-background-color)',
           padding: '0 var(--ink-internal-block-padding) !important',
@@ -117,7 +110,7 @@ export const katex = () => {
         '.ink-mde-line-math-block-close': {
           borderRadius: '0 0 var(--ink-internal-border-radius) var(--ink-internal-border-radius)',
         },
-      }),
-    },
+      })
+    }),
   ])
 }

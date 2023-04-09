@@ -401,7 +401,7 @@ exports[`ink > ink > matches the snapshot 1`] = `
       class="ink-mde-editor"
     >
       <div
-        class="cm-editor ͼ1 ͼ2 ͼ4a ink-mde-container"
+        class="cm-editor ͼ1 ͼ2 ͼ4p ͼ4q ink-mde-container"
       >
         <div
           aria-live="polite"
@@ -427,12 +427,12 @@ exports[`ink > ink > matches the snapshot 1`] = `
               class="cm-line"
             >
               <span
-                class="ͼ3v ͼ49"
+                class="ͼ47 ͼ4l"
               >
                 #
               </span>
               <span
-                class="ͼ3v"
+                class="ͼ47"
               >
                  ink-mde
               </span>
@@ -457,32 +457,32 @@ exports[`ink > ink > matches the snapshot 1`] = `
             >
               Images can be previewed in-place. 
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 ![
               </span>
               <span
-                class="ͼ45"
+                class="ͼ4h"
               >
                 kitten
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 ]
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 (
               </span>
               <span
-                class="ͼ45 ͼ46"
+                class="ͼ4h ͼ4i"
               >
                 https://placekitten.com/2000/200
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 )
               </span>
@@ -504,7 +504,7 @@ exports[`ink > ink > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ49"
+                  class="ͼ4l"
                 >
                   \`
                 </span>
@@ -517,7 +517,7 @@ exports[`ink > ink > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ3l"
+                  class="ͼ3x"
                 >
                   const a = 10
                 </span>
@@ -530,7 +530,7 @@ exports[`ink > ink > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ49"
+                  class="ͼ4l"
                 >
                   \`
                 </span>
@@ -550,12 +550,12 @@ exports[`ink > ink > matches the snapshot 1`] = `
               spellcheck="false"
             >
               <span
-                class="ͼ49"
+                class="ͼ4l"
               >
                 \`\`\`
               </span>
               <span
-                class="ͼ3n"
+                class="ͼ3z"
               >
                 ts
               </span>
@@ -604,7 +604,7 @@ exports[`ink > ink > matches the snapshot 1`] = `
               spellcheck="false"
             >
               <span
-                class="ͼ49"
+                class="ͼ4l"
               >
                 \`\`\`
               </span>
@@ -619,17 +619,17 @@ exports[`ink > ink > matches the snapshot 1`] = `
             >
               Stay 
               <span
-                class="ͼ3h ͼ49"
+                class="ͼ3t ͼ4l"
               >
                 *
               </span>
               <span
-                class="ͼ3h"
+                class="ͼ3t"
               >
                 focused
               </span>
               <span
-                class="ͼ3h ͼ49"
+                class="ͼ3t ͼ4l"
               >
                 *
               </span>
@@ -644,38 +644,38 @@ exports[`ink > ink > matches the snapshot 1`] = `
               class="cm-line"
             >
               <span
-                class="ͼ49"
+                class="ͼ4l"
               >
                 -
               </span>
                
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 [
               </span>
               <span
-                class="ͼ45"
+                class="ͼ4h"
               >
                 davidmyersdev
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 ]
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 (
               </span>
               <span
-                class="ͼ45 ͼ46"
+                class="ͼ4h ͼ4i"
               >
                 https://github.com/davidmyersdev
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 )
               </span>
@@ -684,38 +684,38 @@ exports[`ink > ink > matches the snapshot 1`] = `
               class="cm-line"
             >
               <span
-                class="ͼ49"
+                class="ͼ4l"
               >
                 -
               </span>
                
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 [
               </span>
               <span
-                class="ͼ45"
+                class="ͼ4h"
               >
                 davidmyersdev/ink-mde
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 ]
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 (
               </span>
               <span
-                class="ͼ45 ͼ46"
+                class="ͼ4h ͼ4i"
               >
                 https://github.com/davidmyersdev/ink-mde
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 )
               </span>
@@ -724,38 +724,38 @@ exports[`ink > ink > matches the snapshot 1`] = `
               class="cm-line"
             >
               <span
-                class="ͼ49"
+                class="ͼ4l"
               >
                 -
               </span>
                
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 [
               </span>
               <span
-                class="ͼ45"
+                class="ͼ4h"
               >
                 davidmyersdev/octo
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 ]
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 (
               </span>
               <span
-                class="ͼ45 ͼ46"
+                class="ͼ4h ͼ4i"
               >
                 https://github.com/davidmyersdev/octo
               </span>
               <span
-                class="ͼ45 ͼ49"
+                class="ͼ4h ͼ4l"
               >
                 )
               </span>

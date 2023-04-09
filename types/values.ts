@@ -39,3 +39,16 @@ export enum Selection {
   End = 'end',
   Start = 'start',
 }
+
+export const appearanceTypes = {
+  auto: 'auto',
+  dark: 'dark',
+  light: 'light',
+}
+
+export const pluginTypes = {
+  completion: 'completion',
+  default: 'default',
+  grammar: 'grammar',
+  language: 'language',
+} as const

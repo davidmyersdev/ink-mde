@@ -8,7 +8,7 @@ export const reconfigure = async ([state, setState]: InkInternal.Store, options:
   setState(override(state(), { options }))
 
   return workQueue.enqueue(async () => {
-    const effects = await buildVendorUpdates(state())
+    const effects = await buildVendorUpdates([state, setState])
 
     state().editor.dispatch({ effects })
   })

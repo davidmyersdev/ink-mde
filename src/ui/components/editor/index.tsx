@@ -27,7 +27,7 @@ export const Editor: Component = () => {
   setState(override(state(), { editor }))
 
   workQueue.enqueue(async () => {
-    const effects = await buildVendorUpdates(state())
+    const effects = await buildVendorUpdates([state, setState])
 
     editor.dispatch({ effects })
   })
