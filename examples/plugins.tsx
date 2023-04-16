@@ -2,7 +2,7 @@ import { ink, inkPlugin, pluginTypes } from 'ink-mde'
 import { buildBlockWidgetDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
 import { katex } from '/plugins/katex'
 
-ink(document.querySelector('#app')!, {
+const editor = await ink(document.querySelector('#app')!, {
   doc: '# Start with some text\n\nThis is some \$inline math\$\n\n\$\$\nc = \\pm\\sqrt{a^2 + b^2}\n\$\$\n\n```\nhi\n```\n\n```\nhello\n```',
   katex: true,
   plugins: [
