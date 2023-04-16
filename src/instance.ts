@@ -12,11 +12,12 @@ import {
   update,
   wrap,
 } from '/src/api'
+import { awaitable } from '/src/utils/awaitable'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const makeInstance = (store: InkInternal.Store): Ink.Instance => {
-  return {
+export const makeInstance = (store: InkInternal.Store): Ink.AwaitableInstance => {
+  const instance = {
     destroy: destroy.bind(undefined, store),
     focus: focus.bind(undefined, store),
     format: format.bind(undefined, store),
@@ -30,4 +31,15 @@ export const makeInstance = (store: InkInternal.Store): Ink.Instance => {
     update: update.bind(undefined, store),
     wrap: wrap.bind(undefined, store),
   }
+
+  return awaitable(instance, (resolve, reject) => {
+    try {
+      const [state] = store
+
+      // Ensure all other queued tasks are finished before resolving.
+      state().workQueue.enqueue(() => resolve(instance))
+    } catch (error: any) {
+      reject(error)
+    }
+  })
 }

@@ -21,6 +21,9 @@ export namespace Editor {
 
 export type EnumString<T extends string> = `${T}`
 
+export type Awaitable<T> = T & Promise<T>
+export type AwaitableInstance = Awaitable<Instance>
+
 export interface Instance {
   destroy: () => void
   focus: () => void

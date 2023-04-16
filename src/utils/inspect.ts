@@ -1,6 +1,7 @@
 export type ObjectTypeKey = keyof ObjectTypes
 export type ObjectTypeValue = ObjectTypes[ObjectTypeKey]
 export type ObjectTypes = typeof objectTypes
+export type Thenable<T> = T extends { then: (...args: any[]) => any } ? T : never
 
 export const objectTypes = {
   array: '[object Array]',
@@ -33,3 +34,9 @@ export const isString = <T extends string>(object: T | any): object is T => is(o
 export const isSymbol = <T extends symbol>(object: T | any): object is T => is(objectTypes.symbol, object)
 export const isUndefined = <T extends undefined>(object: T | any): object is T => is(objectTypes.undefined, object)
 export const isWindow = <T extends Window>(object: T | any): object is T => is(objectTypes.window, object)
+
+export const isThenable = <T extends { then: <A, R>(...args: A[]) => R }>(object: T | any): object is T => {
+  if (isPromise(object)) return true
+
+  return isObject(object) && ('then' in object) && (typeof object.then === 'function')
+}

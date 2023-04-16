@@ -13,7 +13,7 @@ export const defineConfig = <T extends Ink.Options>(config: T) => config
 export const defineOptions = <T extends Ink.Options>(options: T) => options
 export const definePlugin = <T extends Ink.Options.RecursivePlugin>(plugin: T) => plugin
 
-export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.Instance => {
+export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.AwaitableInstance => {
   const store = makeStore(options)
 
   if (!import.meta.env.VITE_SSR) {
@@ -24,7 +24,7 @@ export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.Ins
   return makeInstance(store)
 }
 
-export const ink = (target: HTMLElement, options: Ink.Options = {}): Ink.Instance => {
+export const ink = (target: HTMLElement, options: Ink.Options = {}): Ink.AwaitableInstance => {
   const hasHydrationMarker = !!target.querySelector(HYDRATION_MARKER_SELECTOR)
 
   if (hasHydrationMarker) {
@@ -52,7 +52,7 @@ export const inkPlugin = <T extends Ink.Values.PluginType>(type: T, value: () =>
   })
 }
 
-export const render = (target: HTMLElement, options: Ink.Options = {}): Ink.Instance => {
+export const render = (target: HTMLElement, options: Ink.Options = {}): Ink.AwaitableInstance => {
   const store = makeStore(options)
 
   if (!import.meta.env.VITE_SSR) {
