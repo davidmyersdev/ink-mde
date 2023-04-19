@@ -34,8 +34,8 @@ export const ink = (target: HTMLElement, options: Ink.Options = {}): Ink.Awaitab
   return render(target, options)
 }
 
-export const inkPlugin = <T extends Ink.Values.PluginType>(type: T, value: () => PluginValueForType<T>, key = '') => {
-  return new Proxy({ type, key } as Ink.Options.Plugin, {
+export const inkPlugin = <T extends Ink.Values.PluginType>({ key = '', type, value }: { key?: string, type?: T, value: () => PluginValueForType<T> }) => {
+  return new Proxy({ key, type: type || 'default' } as Ink.Options.Plugin, {
     get: (target, prop: keyof Ink.Options.Plugin, _receiver) => {
       if (prop === 'value' && !target[prop]) {
         target.value = value()
@@ -51,6 +51,8 @@ export const inkPlugin = <T extends Ink.Values.PluginType>(type: T, value: () =>
     },
   })
 }
+
+export const plugin = inkPlugin
 
 export const render = (target: HTMLElement, options: Ink.Options = {}): Ink.AwaitableInstance => {
   const store = makeStore(options)

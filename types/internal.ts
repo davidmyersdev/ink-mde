@@ -17,7 +17,7 @@ export namespace InkInternal {
   export interface Extension {
     compartment: InkInternal.Vendor.Compartment,
     initialValue: (store: InkInternal.Store) => InkInternal.Vendor.Extension,
-    reconfigure: (store: InkInternal.Store) => InkInternal.Vendor.StateEffect<unknown>,
+    reconfigure: (store: InkInternal.Store) => Promise<InkInternal.Vendor.StateEffect<unknown>> | InkInternal.Vendor.StateEffect<unknown>,
   }
 
   export interface LazyExtension {
