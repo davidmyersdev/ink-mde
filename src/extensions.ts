@@ -12,10 +12,10 @@ export const buildVendors = ([state, setState]: InkInternal.Store) => {
   return extensions
 }
 
-export const buildVendorUpdates = ([state, setState]: InkInternal.Store) => {
-  const effects = Promise.all(
-    state().extensions.map((extension) => {
-      return extension.reconfigure([state, setState])
+export const buildVendorUpdates = async ([state, setState]: InkInternal.Store) => {
+  const effects = await Promise.all(
+    state().extensions.map(async (extension) => {
+      return await extension.reconfigure([state, setState])
     }),
   )
 
