@@ -87,8 +87,7 @@
     "vue/dist/**/*"
   ],
   "scripts": {
-    "build": "pnpm build:root && pnpm vue:build",
-    "build:root": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts",
+    "build": "pnpm root:build && pnpm vue:build",
     "ci": "pnpm build && pnpm test:once && pnpm lint && pnpm docs:check && pnpm dedupe:check",
     "dedupe:check": "pnpm dedupe --use-stderr",
     "dev": "vite",
@@ -98,6 +97,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prepack": "pnpm -r build",
+    "root:build": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts",
     "test": "vitest",
     "test:once": "vitest run",
     "vue:build": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/index.js && mv ./vue/dist/InkMde.cjs ./vue/dist/index.cjs",
