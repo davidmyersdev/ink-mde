@@ -5,9 +5,9 @@ import type InkInternal from '/types/internal'
 
 export const reconfigure = async ([state, setState]: InkInternal.Store, options: Ink.Options) => {
   const { workQueue } = state()
-  setState(override(state(), { options }))
 
   return workQueue.enqueue(async () => {
+    setState(override(state(), { options }))
     const effects = await buildVendorUpdates([state, setState])
 
     state().editor.dispatch({ effects })
