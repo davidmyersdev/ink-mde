@@ -59,8 +59,6 @@ export default defineComponent({
         this.$refs.ink.addEventListener('input', (event: InputEvent) => {
           event.stopPropagation()
         })
-
-        this.instance.focus()
       }
     },
   },
