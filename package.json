@@ -2,7 +2,7 @@
   "name": "ink-mde",
   "type": "module",
   "version": "0.25.1",
-  "packageManager": "pnpm@7.27.0",
+  "packageManager": "pnpm@8.4.0",
   "description": "A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and TypeScript.",
   "author": "David R. Myers <david@voracious.dev>",
   "license": "MIT",
