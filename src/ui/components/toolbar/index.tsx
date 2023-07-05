@@ -20,10 +20,12 @@ export const Toolbar: Component = () => {
 
     if (target?.files) {
       Promise.resolve(state().options.files.handler(target.files)).then((url) => {
-        const markup = `![](${url})`
+        if (url) {
+          const markup = `![](${url})`
 
-        insert([state, setState], markup)
-        focus([state, setState])
+          insert([state, setState], markup)
+          focus([state, setState])
+        }
       })
     }
   }
