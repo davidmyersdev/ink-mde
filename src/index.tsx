@@ -83,11 +83,12 @@ export const solidPrepareForHydration = () => {
 
 export const wrap = (textarea: HTMLTextAreaElement, options: Ink.Options = {}) => {
   const replacement = <div class='ink-mde-textarea' /> as HTMLDivElement
+  const doc = textarea.value
 
   textarea.after(replacement)
   textarea.style.display = 'none'
 
-  const instance = render(replacement, options)
+  const instance = render(replacement, { doc, ...options })
 
   if (textarea.form) {
     textarea.form.addEventListener('submit', () => {
