@@ -87,7 +87,7 @@ export const wrap = (textarea: HTMLTextAreaElement, options: Ink.Options = {}) =
   textarea.after(replacement)
   textarea.style.display = 'none'
 
-  const instance = render(textarea, options)
+  const instance = render(replacement, options)
 
   if (textarea.form) {
     textarea.form.addEventListener('submit', () => {
