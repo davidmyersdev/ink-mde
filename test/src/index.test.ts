@@ -77,5 +77,45 @@ describe('ink', () => {
 
       expect(textarea.value).toEqual('testing')
     })
+
+    it('sets the textarea to `display: none`', () => {
+      const form = document.createElement('form')
+      const textarea = document.createElement('textarea')
+
+      form.appendChild(textarea)
+
+      wrap(textarea)
+
+      expect(textarea.style.display).toEqual('none')
+    })
+
+    it('mounts ink after the textarea', () => {
+      const form = document.createElement('form')
+      const textarea = document.createElement('textarea')
+
+      form.appendChild(textarea)
+
+      wrap(textarea)
+
+      expect(form.children[0]).toEqual(textarea)
+      expect(form.children[1].classList.contains('ink-mde-textarea')).toBe(true)
+    })
+
+    it('matches the snapshot', () => {
+      const form = document.createElement('form')
+      const textarea = document.createElement('textarea')
+
+      form.appendChild(textarea)
+
+      wrap(textarea, {
+        doc: example,
+        interface: {
+          images: true,
+          toolbar: true,
+        },
+      })
+
+      expect(form).toMatchSnapshot()
+    })
   })
 })
