@@ -53,6 +53,7 @@ export const filterPlugins = <T extends PluginType>(pluginType: T, options: Opti
       // Todo: These "plugin" keys might be better suited under a namespace, but they are top-level for now.
       // Individual key resolvers might be a good idea down the road to check for more fine-grained configuration options.
       if (!plugin.key || (isOptionsKey(plugin.key, options) && options[plugin.key])) {
+        // @ts-expect-error Todo: Fix this type definition.
         matches.push(plugin.value)
       }
     }
