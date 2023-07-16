@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "alwaysStrict": true,
     "declaration": true,
     "declarationMap": true,
@@ -9,7 +10,7 @@
     "jsxImportSource": "solid-js",
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
