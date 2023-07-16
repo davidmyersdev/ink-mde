@@ -81,8 +81,6 @@
     "svelte/dist",
     "svelte/dist/**/*",
     "svelte/package.json",
-    "types",
-    "types/**/*",
     "vue/dist",
     "vue/dist/**/*"
   ],
