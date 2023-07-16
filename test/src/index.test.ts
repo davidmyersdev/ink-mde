@@ -36,11 +36,11 @@ describe('ink', () => {
       expect(instance.options().interface.appearance).toEqual('light')
     })
 
-    it('matches the snapshot', () => {
+    it('matches the snapshot', async () => {
       const target = document.createElement('div')
 
       // Todo: Use a comprehensive starter doc.
-      ink(target, {
+      await ink(target, {
         doc: example,
         interface: {
           images: true,
@@ -101,13 +101,13 @@ describe('ink', () => {
       expect(form.children[1].classList.contains('ink-mde-textarea')).toBe(true)
     })
 
-    it('matches the snapshot', () => {
+    it('matches the snapshot', async () => {
       const form = document.createElement('form')
       const textarea = document.createElement('textarea')
 
       form.appendChild(textarea)
 
-      wrap(textarea, {
+      await wrap(textarea, {
         doc: example,
         interface: {
           images: true,
