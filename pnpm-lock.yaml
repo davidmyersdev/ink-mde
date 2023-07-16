@@ -136,7 +136,7 @@ importers:
   examples/template-ts:
     dependencies:
       ink-mde:
-        specifier: 0.26.0
+        specifier: npm:ink-mde@latest
         version: link:../..
     devDependencies:
       typescript:
