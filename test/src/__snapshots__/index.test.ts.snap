@@ -401,7 +401,7 @@ exports[`ink > ink > matches the snapshot 1`] = `
       class="ink-mde-editor"
     >
       <div
-        class="cm-editor ͼ1 ͼ2 ͼ4a ink-mde-container"
+        class="cm-editor ͼ1 ͼ2 ͼ4b ink-mde-container"
       >
         <div
           aria-live="polite"
@@ -419,8 +419,8 @@ exports[`ink > ink > matches the snapshot 1`] = `
             contenteditable="true"
             data-language="markdown"
             role="textbox"
-            spellcheck="false"
-            style="tab-size: 4"
+            spellcheck="true"
+            style="tab-size: 4;"
             translate="no"
           >
             <div
@@ -451,6 +451,27 @@ exports[`ink > ink > matches the snapshot 1`] = `
               class="cm-line"
             >
               <br />
+            </div>
+            <div
+              aria-hidden="true"
+              class="cm-image-container"
+              style="padding-bottom: 0.5rem; padding-top: 0.5rem;"
+            >
+              <div
+                class="cm-image-backdrop"
+                style="border-radius: var(--ink-internal-border-radius); display: flex; align-items: center; justify-content: center; overflow: hidden; max-width: 100%;"
+              >
+                <figure
+                  class="cm-image-figure"
+                  style="margin: 0px;"
+                >
+                  <img
+                    class="cm-image-img"
+                    src="https://placekitten.com/2000/200"
+                    style="display: block; max-height: var(--ink-internal-block-max-height); max-width: 100%; width: 100%;"
+                  />
+                </figure>
+              </div>
             </div>
             <div
               class="cm-line"
@@ -567,7 +588,11 @@ exports[`ink > ink > matches the snapshot 1`] = `
               data-grammarly-skip="true"
               spellcheck="false"
             >
-              // Write code with syntax highlighting.
+              <span
+                class="ͼ3k"
+              >
+                // Write code with syntax highlighting.
+              </span>
             </div>
             <div
               class="cm-codeblock cm-line"
@@ -576,7 +601,95 @@ exports[`ink > ink > matches the snapshot 1`] = `
               data-grammarly-skip="true"
               spellcheck="false"
             >
-              const add = (a: number, b: number): number =&gt; {
+              <span
+                class="ͼ41"
+              >
+                const
+              </span>
+               
+              <span
+                class="ͼ3r"
+              >
+                add
+              </span>
+               
+              <span
+                class="ͼ43"
+              >
+                =
+              </span>
+               
+              <span
+                class="ͼ44"
+              >
+                (
+              </span>
+              <span
+                class="ͼ3r"
+              >
+                a
+              </span>
+              <span
+                class="ͼ44"
+              >
+                :
+              </span>
+               
+              <span
+                class="ͼ3m"
+              >
+                number
+              </span>
+              <span
+                class="ͼ44"
+              >
+                ,
+              </span>
+               
+              <span
+                class="ͼ3r"
+              >
+                b
+              </span>
+              <span
+                class="ͼ44"
+              >
+                :
+              </span>
+               
+              <span
+                class="ͼ3m"
+              >
+                number
+              </span>
+              <span
+                class="ͼ44"
+              >
+                )
+              </span>
+              <span
+                class="ͼ44"
+              >
+                :
+              </span>
+               
+              <span
+                class="ͼ3m"
+              >
+                number
+              </span>
+               
+              <span
+                class="ͼ44"
+              >
+                =&gt;
+              </span>
+               
+              <span
+                class="ͼ44"
+              >
+                {
+              </span>
             </div>
             <div
               class="cm-codeblock cm-line"
@@ -585,7 +698,30 @@ exports[`ink > ink > matches the snapshot 1`] = `
               data-grammarly-skip="true"
               spellcheck="false"
             >
-                return a + b
+                
+              <span
+                class="ͼ41"
+              >
+                return
+              </span>
+               
+              <span
+                class="ͼ3q"
+              >
+                a
+              </span>
+               
+              <span
+                class="ͼ43"
+              >
+                +
+              </span>
+               
+              <span
+                class="ͼ3q"
+              >
+                b
+              </span>
             </div>
             <div
               class="cm-codeblock cm-line"
@@ -594,7 +730,11 @@ exports[`ink > ink > matches the snapshot 1`] = `
               data-grammarly-skip="true"
               spellcheck="false"
             >
-              }
+              <span
+                class="ͼ44"
+              >
+                }
+              </span>
             </div>
             <div
               class="cm-codeblock cm-codeblock-close cm-line"
@@ -1217,7 +1357,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
         class="ink-mde-editor"
       >
         <div
-          class="cm-editor ͼ1 ͼ2 ͼ8v ink-mde-container"
+          class="cm-editor ͼ1 ͼ2 ͼ8x ink-mde-container"
         >
           <div
             aria-live="polite"
@@ -1235,20 +1375,20 @@ exports[`ink > wrap > matches the snapshot 1`] = `
               contenteditable="true"
               data-language="markdown"
               role="textbox"
-              spellcheck="false"
-              style="tab-size: 4"
+              spellcheck="true"
+              style="tab-size: 4;"
               translate="no"
             >
               <div
                 class="cm-line"
               >
                 <span
-                  class="ͼ8g ͼ8u"
+                  class="ͼ8h ͼ8v"
                 >
                   #
                 </span>
                 <span
-                  class="ͼ8g"
+                  class="ͼ8h"
                 >
                    ink-mde
                 </span>
@@ -1269,36 +1409,57 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 <br />
               </div>
               <div
+                aria-hidden="true"
+                class="cm-image-container"
+                style="padding-bottom: 0.5rem; padding-top: 0.5rem;"
+              >
+                <div
+                  class="cm-image-backdrop"
+                  style="border-radius: var(--ink-internal-border-radius); display: flex; align-items: center; justify-content: center; overflow: hidden; max-width: 100%;"
+                >
+                  <figure
+                    class="cm-image-figure"
+                    style="margin: 0px;"
+                  >
+                    <img
+                      class="cm-image-img"
+                      src="https://placekitten.com/2000/200"
+                      style="display: block; max-height: var(--ink-internal-block-max-height); max-width: 100%; width: 100%;"
+                    />
+                  </figure>
+                </div>
+              </div>
+              <div
                 class="cm-line"
               >
                 Images can be previewed in-place. 
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   ![
                 </span>
                 <span
-                  class="ͼ8q"
+                  class="ͼ8r"
                 >
                   kitten
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   ]
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   (
                 </span>
                 <span
-                  class="ͼ8q ͼ8r"
+                  class="ͼ8r ͼ8s"
                 >
                   https://placekitten.com/2000/200
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   )
                 </span>
@@ -1320,7 +1481,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                   spellcheck="false"
                 >
                   <span
-                    class="ͼ8u"
+                    class="ͼ8v"
                   >
                     \`
                   </span>
@@ -1333,7 +1494,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                   spellcheck="false"
                 >
                   <span
-                    class="ͼ86"
+                    class="ͼ87"
                   >
                     const a = 10
                   </span>
@@ -1346,7 +1507,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                   spellcheck="false"
                 >
                   <span
-                    class="ͼ8u"
+                    class="ͼ8v"
                   >
                     \`
                   </span>
@@ -1366,12 +1527,12 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ8u"
+                  class="ͼ8v"
                 >
                   \`\`\`
                 </span>
                 <span
-                  class="ͼ88"
+                  class="ͼ89"
                 >
                   ts
                 </span>
@@ -1384,7 +1545,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ85"
+                  class="ͼ86"
                 >
                   // Write code with syntax highlighting.
                 </span>
@@ -1397,91 +1558,91 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ8m"
+                  class="ͼ8n"
                 >
                   const
                 </span>
                  
                 <span
-                  class="ͼ8c"
+                  class="ͼ8d"
                 >
                   add
                 </span>
                  
                 <span
-                  class="ͼ8o"
+                  class="ͼ8p"
                 >
                   =
                 </span>
                  
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   (
                 </span>
                 <span
-                  class="ͼ8c"
+                  class="ͼ8d"
                 >
                   a
                 </span>
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   :
                 </span>
                  
                 <span
-                  class="ͼ87"
+                  class="ͼ88"
                 >
                   number
                 </span>
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   ,
                 </span>
                  
                 <span
-                  class="ͼ8c"
+                  class="ͼ8d"
                 >
                   b
                 </span>
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   :
                 </span>
                  
                 <span
-                  class="ͼ87"
+                  class="ͼ88"
                 >
                   number
                 </span>
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   )
                 </span>
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   :
                 </span>
                  
                 <span
-                  class="ͼ87"
+                  class="ͼ88"
                 >
                   number
                 </span>
                  
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   =&gt;
                 </span>
                  
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   {
                 </span>
@@ -1495,25 +1656,25 @@ exports[`ink > wrap > matches the snapshot 1`] = `
               >
                   
                 <span
-                  class="ͼ8m"
+                  class="ͼ8n"
                 >
                   return
                 </span>
                  
                 <span
-                  class="ͼ8b"
+                  class="ͼ8c"
                 >
                   a
                 </span>
                  
                 <span
-                  class="ͼ8o"
+                  class="ͼ8p"
                 >
                   +
                 </span>
                  
                 <span
-                  class="ͼ8b"
+                  class="ͼ8c"
                 >
                   b
                 </span>
@@ -1526,7 +1687,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ8p"
+                  class="ͼ8q"
                 >
                   }
                 </span>
@@ -1539,7 +1700,7 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 spellcheck="false"
               >
                 <span
-                  class="ͼ8u"
+                  class="ͼ8v"
                 >
                   \`\`\`
                 </span>
@@ -1554,17 +1715,17 @@ exports[`ink > wrap > matches the snapshot 1`] = `
               >
                 Stay 
                 <span
-                  class="ͼ82 ͼ8u"
+                  class="ͼ83 ͼ8v"
                 >
                   *
                 </span>
                 <span
-                  class="ͼ82"
+                  class="ͼ83"
                 >
                   focused
                 </span>
                 <span
-                  class="ͼ82 ͼ8u"
+                  class="ͼ83 ͼ8v"
                 >
                   *
                 </span>
@@ -1579,38 +1740,38 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 class="cm-line"
               >
                 <span
-                  class="ͼ8u"
+                  class="ͼ8v"
                 >
                   -
                 </span>
                  
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   [
                 </span>
                 <span
-                  class="ͼ8q"
+                  class="ͼ8r"
                 >
                   davidmyersdev
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   ]
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   (
                 </span>
                 <span
-                  class="ͼ8q ͼ8r"
+                  class="ͼ8r ͼ8s"
                 >
                   https://github.com/davidmyersdev
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   )
                 </span>
@@ -1619,38 +1780,38 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 class="cm-line"
               >
                 <span
-                  class="ͼ8u"
+                  class="ͼ8v"
                 >
                   -
                 </span>
                  
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   [
                 </span>
                 <span
-                  class="ͼ8q"
+                  class="ͼ8r"
                 >
                   davidmyersdev/ink-mde
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   ]
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   (
                 </span>
                 <span
-                  class="ͼ8q ͼ8r"
+                  class="ͼ8r ͼ8s"
                 >
                   https://github.com/davidmyersdev/ink-mde
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   )
                 </span>
@@ -1659,38 +1820,38 @@ exports[`ink > wrap > matches the snapshot 1`] = `
                 class="cm-line"
               >
                 <span
-                  class="ͼ8u"
+                  class="ͼ8v"
                 >
                   -
                 </span>
                  
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   [
                 </span>
                 <span
-                  class="ͼ8q"
+                  class="ͼ8r"
                 >
                   davidmyersdev/octo
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   ]
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   (
                 </span>
                 <span
-                  class="ͼ8q ͼ8r"
+                  class="ͼ8r ͼ8s"
                 >
                   https://github.com/davidmyersdev/octo
                 </span>
                 <span
-                  class="ͼ8q ͼ8u"
+                  class="ͼ8r ͼ8v"
                 >
                   )
                 </span>
