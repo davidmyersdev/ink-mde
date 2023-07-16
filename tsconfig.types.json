@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "emitDeclarationOnly": true,
-    "noEmit": false
-  },
-  "extends": "./tsconfig.json",
-  "files": ["./types/ink.d.ts"],
-  "include": []
-}

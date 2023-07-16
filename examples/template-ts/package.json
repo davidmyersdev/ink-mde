@@ -1,19 +1,19 @@
 {
   "name": "template-ts",
+  "type": "module",
+  "version": "0.0.0",
   "private": true,
   "root": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "ink-mde": "0.26.0"
+  },
   "devDependencies": {
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
-  },
-  "dependencies": {
-    "ink-mde": "0.26.0"
   }
 }

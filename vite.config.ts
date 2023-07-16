@@ -9,7 +9,7 @@ import { externalizeDeps } from 'vite-plugin-externalize-deps'
 export default defineConfig(({ ssrBuild }) => {
   return {
     build: {
-      emptyOutDir: !ssrBuild,
+      emptyOutDir: false,
       lib: {
         entry: './src/index.tsx',
         fileName: 'client',

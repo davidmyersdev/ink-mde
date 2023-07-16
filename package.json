@@ -35,16 +35,16 @@
   "exports": {
     ".": {
       "browser": {
-        "types": "./types/index.d.ts",
+        "types": "./dist/client.d.ts",
         "require": "./dist/client.cjs",
         "import": "./dist/client.js"
       },
       "node": {
-        "types": "./types/index.d.ts",
+        "types": "./dist/index.d.ts",
         "require": "./dist/index.cjs",
         "import": "./dist/index.js"
       },
-      "types": "./types/index.d.ts",
+      "types": "./dist/client.d.ts",
       "require": "./dist/client.cjs",
       "import": "./dist/client.js"
     },
@@ -54,7 +54,7 @@
     },
     "./vue": {
       "browser": {
-        "types": "./vue/dist/index.d.ts",
+        "types": "./vue/dist/client.d.ts",
         "require": "./vue/dist/client.cjs",
         "import": "./vue/dist/client.js"
       },
@@ -63,7 +63,7 @@
         "require": "./vue/dist/index.cjs",
         "import": "./vue/dist/index.js"
       },
-      "types": "./vue/dist/index.d.ts",
+      "types": "./vue/dist/client.d.ts",
       "require": "./vue/dist/client.cjs",
       "import": "./vue/dist/client.js"
     }
@@ -87,22 +87,40 @@
     "vue/dist/**/*"
   ],
   "scripts": {
-    "build": "pnpm root:build && pnpm vue:build",
-    "ci": "pnpm build && pnpm test:once && pnpm lint && pnpm docs:check && pnpm dedupe:check",
-    "dedupe:check": "pnpm dedupe --use-stderr",
-    "dev": "vite",
+    "build": "run-s core:build && run-p svelte:build vue:build",
+    "ci": "run-p ci:*",
+    "ci:build": "run-s build",
+    "ci:test": "run-s test:once",
+    "ci:lint": "run-s lint",
+    "ci:docs": "run-s docs:check",
+    "ci:dedupe": "pnpm dedupe --use-stderr",
+    "core:build": "run-s core:clean && run-p core:build:*",
+    "core:build:client": "vite build",
+    "core:build:server": "VITE_SSR=1 vite build --ssr",
+    "core:build:types": "run-s core:typecheck && rollup -c types.config.js",
+    "core:clean": "rimraf ./dist ./tmp",
+    "core:dev": "vite",
+    "core:typecheck": "tsc",
+    "dev": "run-s core:dev",
     "docs:check": "embedme --verify README.md",
     "docs:diff": "embedme --stdout README.md",
     "docs:update": "embedme README.md",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepack": "pnpm -r build",
-    "root:build": "tsc && vite build && VITE_SSR=1 vite build --ssr ./src/index.tsx && tsc --project ./tsconfig.types.json && cp ./types/ink.d.ts ./dist/index.d.ts",
-    "test": "vitest",
+    "prepack": "run-s build",
+    "svelte:build": "run-s svelte:clean && pnpm --filter svelte build",
+    "svelte:clean": "rimraf ./svelte/dist",
+    "test": "run-s test:watch",
     "test:once": "vitest run",
-    "typecheck": "tsc && vue-tsc --project ./vue/tsconfig.json",
-    "vue:build": "vue-tsc --project ./vue/tsconfig.json && vite build -c ./vue/vite.config.ts && VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr ./vue/src/InkMde.vue && vue-tsc --project ./vue/tsconfig.types.json && mv ./vue/dist/InkMde.vue.d.ts ./vue/dist/index.d.ts && mv ./vue/dist/InkMde.js ./vue/dist/index.js && mv ./vue/dist/InkMde.cjs ./vue/dist/index.cjs",
-    "vue:dev": "tsx ./vue/server.ts"
+    "test:watch": "vitest",
+    "typecheck": "run-p core:typecheck vue:typecheck",
+    "vue:build": "run-s vue:clean && run-p vue:typecheck vue:build:*",
+    "vue:build:client": "vite build -c ./vue/vite.config.ts",
+    "vue:build:server": "VITE_SSR=1 vite build -c ./vue/vite.config.ts --ssr",
+    "vue:build:types": "run-s vue:typecheck && rollup -c ./vue/types.config.js",
+    "vue:clean": "rimraf ./vue/dist",
+    "vue:dev": "tsx ./vue/server.ts",
+    "vue:typecheck": "vue-tsc --project ./vue/tsconfig.json"
   },
   "peerDependencies": {
     "svelte": "^3.0.0",
@@ -136,6 +154,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.35.3",
+    "@rollup/plugin-alias": "^5.0.0",
     "@types/express": "^4.17.17",
     "@types/katex": "^0.16.0",
     "@types/node": "^18.14.2",
@@ -146,9 +165,13 @@
     "eslint-plugin-solid": "^0.7.4",
     "express": "^4.18.2",
     "jsdom": "^20.0.3",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.26.2",
+    "rollup-plugin-dts": "^5.3.0",
     "tsx": "^3.12.3",
     "typescript": "~5.1.6",
-    "vite": "^4.1.4",
+    "vite": "^4.4.4",
     "vite-plugin-externalize-deps": "^0.5.0",
     "vite-plugin-solid": "2.5.0",
     "vitest": "^0.29.2",
