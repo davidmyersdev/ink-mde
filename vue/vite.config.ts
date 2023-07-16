@@ -1,19 +1,20 @@
-import { resolve } from 'path'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import { externalizeDeps } from 'vite-plugin-externalize-deps'
+
+const root = dirname(fileURLToPath(import.meta.url))
 
 // https://vitejs.dev/config/
 export default defineConfig(({ ssrBuild }) => {
   return {
     build: {
-      emptyOutDir: !ssrBuild,
+      emptyOutDir: false,
       lib: {
-        entry: './src/InkMde.vue',
-        fileName: 'client',
-        formats: [],
+        entry: join(root, './src/index.ts'),
+        fileName: ssrBuild ? 'index' : 'client',
       },
-      outDir: './dist',
       rollupOptions: {
         external: [
           /^ink-mde(?:\/.+)?$/,
@@ -45,7 +46,7 @@ export default defineConfig(({ ssrBuild }) => {
       externalizeDeps(),
       vue(),
     ],
-    root: resolve(__dirname),
+    root,
     server: {
       port: 5173,
     },

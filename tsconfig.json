@@ -3,7 +3,9 @@
     "allowImportingTsExtensions": true,
     "alwaysStrict": true,
     "declaration": true,
+    "declarationDir": "./tmp/types",
     "declarationMap": true,
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -11,11 +13,9 @@
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "noEmit": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./dist",
     "paths": {
       "/*": ["./*"],
       "ink-mde": ["./src/index"]
@@ -30,10 +30,6 @@
     ],
     "useDefineForClassFields": true
   },
-  "include": [
-    "./**/*"
-  ],
-  "exclude": [
-    "./vue"
-  ]
+  "exclude": ["./tmp", "./vue"],
+  "include": ["./**/*.d.ts", "./**/*.ts"]
 }

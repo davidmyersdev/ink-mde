@@ -10,7 +10,7 @@ export type {
   VendorExtension,
   VendorGrammar,
   VendorLanguage,
-} from './ink.d'
+} from './ink'
 export * from './internal'
 export {
   appearanceTypes,

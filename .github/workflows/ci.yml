@@ -5,7 +5,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,44 +14,4 @@ jobs:
           node-version: 16
       - uses: pnpm/action-setup@v2
       - run: pnpm install
-      - run: pnpm -r build
-  deps:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - uses: pnpm/action-setup@v2
-      - run: pnpm install
-      - run: pnpm dedupe:check
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - uses: pnpm/action-setup@v2
-      - run: pnpm install
-      - run: pnpm docs:check
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - uses: pnpm/action-setup@v2
-      - run: pnpm install
-      - run: pnpm -r lint
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - uses: pnpm/action-setup@v2
-      - run: pnpm install
-      - run: pnpm test:once
+      - run: pnpm run ci

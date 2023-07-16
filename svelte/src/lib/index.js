@@ -1,4 +1,2 @@
-// Reexport your entry components here
-import InkMde from './InkMde.svelte'
-
-export default InkMde
+export { default } from './InkMde.svelte'
+export { default as InkMde } from './InkMde.svelte'

@@ -12,6 +12,8 @@ describe('api', () => {
       const [state] = store
       const { editor } = state()
 
+      vi.spyOn(editor, 'destroy')
+
       destroy(store)
 
       expect(editor.destroy).toHaveBeenCalledOnce()
@@ -25,6 +27,7 @@ describe('api', () => {
       const { editor } = state()
 
       vi.spyOn(editor, 'hasFocus', 'get').mockReturnValue(false)
+      vi.spyOn(editor, 'focus')
 
       focus(store)
 
@@ -37,6 +40,7 @@ describe('api', () => {
       const { editor } = state()
 
       vi.spyOn(editor, 'hasFocus', 'get').mockReturnValue(true)
+      vi.spyOn(editor, 'focus')
 
       focus(store)
 

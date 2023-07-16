@@ -7,7 +7,8 @@ import { isPromise } from '/src/utils/inspect'
 import { type PluginValueForType } from '/src/utils/options'
 import type * as Ink from '/types/ink'
 
-export * from '/types/values'
+export type * from '/types/ink'
+export { appearanceTypes, pluginTypes } from '/types/values'
 
 export const defineConfig = <T extends Ink.Options>(config: T) => config
 export const defineOptions = <T extends Ink.Options>(options: T) => options

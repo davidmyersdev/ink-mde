@@ -1,21 +1,19 @@
 // Type definitions for ink-mde
-import * as InkValues from './values'
 import { type CompletionSource } from '@codemirror/autocomplete'
 import { type LanguageDescription } from '@codemirror/language'
 import { type Extension } from '@codemirror/state'
 import { type MarkdownConfig } from '@lezer/markdown'
+import type * as InkValues from './values'
 
 export type VendorCompletion = CompletionSource
 export type VendorExtension = Extension
 export type VendorGrammar = MarkdownConfig
 export type VendorLanguage = LanguageDescription
 
-export * from './values'
-
 export namespace Editor {
   export interface Selection {
-    end: number
-    start: number
+    end: number,
+    start: number,
   }
 }
 
@@ -25,18 +23,18 @@ export type Awaitable<T> = T & Promise<T>
 export type AwaitableInstance = Awaitable<Instance>
 
 export interface Instance {
-  destroy: () => void
-  focus: () => void
-  format: (type: EnumString<InkValues.Markup>, options: Instance.FormatOptions) => void
-  getDoc: () => string
-  insert: (text: string, selection?: Editor.Selection) => void
-  load: (doc: string) => void
-  options: () => OptionsResolved
-  reconfigure: (updates: Options) => void
-  select: (options: Instance.SelectOptions) => void
-  selections: () => Editor.Selection[]
-  update: (doc: string) => void
-  wrap: (options: Instance.WrapOptions) => void
+  destroy: () => void,
+  focus: () => void,
+  format: (type: EnumString<InkValues.Markup>, options: Instance.FormatOptions) => void,
+  getDoc: () => string,
+  insert: (text: string, selection?: Editor.Selection) => void,
+  load: (doc: string) => void,
+  options: () => OptionsResolved,
+  reconfigure: (updates: Options) => void,
+  select: (options: Instance.SelectOptions) => void,
+  selections: () => Editor.Selection[],
+  update: (doc: string) => void,
+  wrap: (options: Instance.WrapOptions) => void,
 }
 
 export namespace Instance {
@@ -58,28 +56,28 @@ export namespace Instance {
 }
 
 export interface Markup {
-  [InkValues.Markup.Bold]: Markup.Definition
-  [InkValues.Markup.Code]: Markup.Definition
-  [InkValues.Markup.CodeBlock]: Markup.Definition
-  [InkValues.Markup.Heading]: Markup.Definition
-  [InkValues.Markup.Image]: Markup.Definition
-  [InkValues.Markup.Italic]: Markup.Definition
-  [InkValues.Markup.Link]: Markup.Definition
-  [InkValues.Markup.List]: Markup.Definition
-  [InkValues.Markup.OrderedList]: Markup.Definition
-  [InkValues.Markup.Quote]: Markup.Definition
-  [InkValues.Markup.TaskList]: Markup.Definition
+  [InkValues.Markup.Bold]: Markup.Definition,
+  [InkValues.Markup.Code]: Markup.Definition,
+  [InkValues.Markup.CodeBlock]: Markup.Definition,
+  [InkValues.Markup.Heading]: Markup.Definition,
+  [InkValues.Markup.Image]: Markup.Definition,
+  [InkValues.Markup.Italic]: Markup.Definition,
+  [InkValues.Markup.Link]: Markup.Definition,
+  [InkValues.Markup.List]: Markup.Definition,
+  [InkValues.Markup.OrderedList]: Markup.Definition,
+  [InkValues.Markup.Quote]: Markup.Definition,
+  [InkValues.Markup.TaskList]: Markup.Definition,
 }
 
 export namespace Markup {
   export interface Definition {
-    block: boolean
-    line: boolean
-    multiline: boolean
-    nodes: string[]
-    prefix: string
-    prefixStates: string[]
-    suffix: string
+    block: boolean,
+    line: boolean,
+    multiline: boolean,
+    nodes: string[],
+    prefix: string,
+    prefixStates: string[],
+    suffix: string,
   }
 }
 
@@ -145,27 +143,26 @@ export namespace Options {
     }
   }
 
-
   export interface Extensions {
-    [InkValues.Extensions.Appearance]: EnumString<InkValues.Appearance>
-    [InkValues.Extensions.Autocomplete]: boolean
-    [InkValues.Extensions.Images]: boolean
-    [InkValues.Extensions.ReadOnly]: boolean
-    [InkValues.Extensions.Spellcheck]: boolean
-    [InkValues.Extensions.Vim]: boolean
+    [InkValues.Extensions.Appearance]: EnumString<InkValues.Appearance>,
+    [InkValues.Extensions.Autocomplete]: boolean,
+    [InkValues.Extensions.Images]: boolean,
+    [InkValues.Extensions.ReadOnly]: boolean,
+    [InkValues.Extensions.Spellcheck]: boolean,
+    [InkValues.Extensions.Vim]: boolean,
   }
 
   export interface Files {
-    clipboard: boolean
-    dragAndDrop: boolean
-    handler: (files: FileList) => Promise<string | void> | string | void
-    injectMarkup: boolean
-    types: string[]
+    clipboard: boolean,
+    dragAndDrop: boolean,
+    handler: (files: FileList) => Promise<string | void> | string | void,
+    injectMarkup: boolean,
+    types: string[],
   }
 
   export interface Hooks {
-    afterUpdate: (doc: string) => void
-    beforeUpdate: (doc: string) => void
+    afterUpdate: (doc: string) => void,
+    beforeUpdate: (doc: string) => void,
   }
 
   export namespace Hooks {
@@ -174,29 +171,29 @@ export namespace Options {
   }
 
   export interface Interface {
-    [InkValues.Extensions.Appearance]: Options.Extensions[InkValues.Extensions.Appearance]
-    [InkValues.Extensions.Autocomplete]: Options.Extensions[InkValues.Extensions.Autocomplete]
-    [InkValues.Extensions.Images]: Options.Extensions[InkValues.Extensions.Images]
-    [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly]
-    [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck]
-    attribution: boolean
-    lists: boolean
-    toolbar: boolean
+    [InkValues.Extensions.Appearance]: Options.Extensions[InkValues.Extensions.Appearance],
+    [InkValues.Extensions.Autocomplete]: Options.Extensions[InkValues.Extensions.Autocomplete],
+    [InkValues.Extensions.Images]: Options.Extensions[InkValues.Extensions.Images],
+    [InkValues.Extensions.ReadOnly]: Options.Extensions[InkValues.Extensions.ReadOnly],
+    [InkValues.Extensions.Spellcheck]: Options.Extensions[InkValues.Extensions.Spellcheck],
+    attribution: boolean,
+    lists: boolean,
+    toolbar: boolean,
   }
 
   export interface Toolbar {
-    bold: boolean
-    code: boolean
-    codeBlock: boolean
-    heading: boolean
-    image: boolean
-    italic: boolean
-    link: boolean
-    list: boolean
-    orderedList: boolean
-    quote: boolean
-    taskList: boolean
-    upload: boolean
+    bold: boolean,
+    code: boolean,
+    codeBlock: boolean,
+    heading: boolean,
+    image: boolean,
+    italic: boolean,
+    link: boolean,
+    list: boolean,
+    orderedList: boolean,
+    quote: boolean,
+    taskList: boolean,
+    upload: boolean,
   }
 }
 

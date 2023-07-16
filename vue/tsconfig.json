@@ -1,8 +1,10 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
-    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./tmp/types",
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
     "paths": {
       "ink-mde": [
         "../"
