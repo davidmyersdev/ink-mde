@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ink-mde": "0.26.0"
+    "ink-mde": "npm:ink-mde@latest"
   },
   "devDependencies": {
     "typescript": "^5.0.2",
