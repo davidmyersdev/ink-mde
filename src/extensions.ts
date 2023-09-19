@@ -102,6 +102,19 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
     return compartment.reconfigure([])
   },
   async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+    const { keybindings, trapTab } = state().options
+    const tab = trapTab ?? keybindings.tab
+    const shiftTab = trapTab ?? keybindings.shiftTab
+
+    if (tab || shiftTab) {
+      const { indentWithTab } = await import('/src/vendor/extensions/indentWithTab')
+
+      return compartment.reconfigure(indentWithTab({ tab, shiftTab }))
+    }
+
+    return compartment.reconfigure([])
+  },
+  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
     if (state().options.interface.lists) {
       const { lists } = await import('/src/vendor/extensions/lists')
 

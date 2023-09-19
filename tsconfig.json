@@ -31,5 +31,5 @@
     "useDefineForClassFields": true
   },
   "exclude": ["./tmp", "./vue"],
-  "include": ["./**/*.d.ts", "./**/*.ts"]
+  "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"]
 }

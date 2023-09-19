@@ -205,7 +205,7 @@ The `ink-mde/svelte` subpath exports a Svelte component.
 These are the default options, and any of them can be overridden when initializing (or reconfiguring) an instance of `ink-mde`.
 
 ```ts
-// ./src/store.ts#L12-L58
+// ./src/store.ts#L12-L65
 const options = {
   doc: '',
   files: {
@@ -230,6 +230,11 @@ const options = {
     toolbar: false,
   },
   katex: false,
+  keybindings: {
+    // Todo: Set these to false by default. https://codemirror.net/examples/tab
+    tab: true,
+    shiftTab: true,
+  },
   placeholder: '',
   plugins: [
     katex(),
@@ -251,6 +256,8 @@ const options = {
     taskList: true,
     upload: false,
   },
+  // This value overrides both `tab` and `shiftTab` keybindings.
+  trapTab: undefined,
   vim: false,
 }
 ```
