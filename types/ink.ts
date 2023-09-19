@@ -87,12 +87,17 @@ export interface Options {
   hooks?: Partial<Options.Hooks>,
   interface?: Partial<Options.Interface>,
   katex?: boolean,
+  keybindings?: {
+    shiftTab?: boolean,
+    tab?: boolean,
+  },
   placeholder?: string,
   plugins?: Options.RecursivePlugin[],
   readability?: boolean,
   search?: boolean,
   selections?: Editor.Selection[],
   toolbar?: Partial<Options.Toolbar>,
+  trapTab?: boolean,
   vim?: boolean,
 }
 
@@ -102,12 +107,17 @@ export interface OptionsResolved {
   hooks: Required<Options.Hooks>,
   interface: Required<Options.Interface>,
   katex: boolean,
+  keybindings: {
+    shiftTab: boolean,
+    tab: boolean,
+  },
   placeholder: string,
   plugins: Options.RecursivePlugin[],
   readability: boolean,
   search: boolean,
   selections: Editor.Selection[],
   toolbar: Required<Options.Toolbar>,
+  trapTab?: boolean,
   vim: boolean,
 }
 

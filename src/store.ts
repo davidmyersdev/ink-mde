@@ -33,6 +33,11 @@ export const blankState = (): InkInternal.StateResolved => {
       toolbar: false,
     },
     katex: false,
+    keybindings: {
+      // Todo: Set these to false by default. https://codemirror.net/examples/tab
+      tab: true,
+      shiftTab: true,
+    },
     placeholder: '',
     plugins: [
       katex(),
@@ -54,6 +59,8 @@ export const blankState = (): InkInternal.StateResolved => {
       taskList: true,
       upload: false,
     },
+    // This value overrides both `tab` and `shiftTab` keybindings.
+    trapTab: undefined,
     vim: false,
   }
 
