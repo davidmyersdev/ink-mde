@@ -10,12 +10,21 @@ export type MarkDecorationSpec = { attributes?: { [key: string]: string }, class
 export type ReplaceDecorationSpec = { block?: boolean, inclusive?: boolean, inclusiveEnd?: boolean, inclusiveStart?: boolean, widget?: WidgetType, [other: string]: any }
 export type WidgetDecorationSpec = { widget: WidgetType, block?: boolean, side?: number, [other: string]: any }
 
+export type Defined<T> = Required<{
+  [K in keyof T]: NonNullable<T[K]>
+}>
+
 // Custom types.
 export type CustomDecorationArgs = Parameters<typeof Decoration.mark>[0]
 export type CustomDecoration<T> = T & Decoration
 export type CustomDecorationTypes = 'line' | 'mark' | 'replace' | 'widget'
-export type CustomWidget<T> = T & WidgetSpec & { compare: (other: CustomWidget<T>) => boolean }
-export type CustomWidgetArgs = PartialWidgetSpec & Record<string, any>
+export type CustomWidget<T> = T & WidgetSpec
+export type CustomWidgetArgs<T extends PartialWidgetSpec> = {
+  [K in keyof T]?: K extends 'eq' ? (other: CustomWidget<Defined<T>>) => boolean : T[K]
+}
+export type CustomWidgetOptions<T extends PartialWidgetSpec> = {
+  [K in keyof T]: K extends 'compare' | 'eq' ? (other: CustomWidget<Defined<T>>) => boolean : T[K]
+}
 export type CustomWidgetDecoration<T> = T & WidgetDecoration<T> & Decoration
 export type CustomWidgetDecorationArgs = WidgetDecorationSpec & Record<string, any>
 export type NodeBlockDecoration<T> = CustomWidgetDecoration<T> & { widget: { node: SyntaxNodeRef } }
@@ -55,19 +64,37 @@ export const buildMarkDecoration = <T extends MarkDecorationSpec>(options: T) =>
   }) as CustomDecoration<T>
 }
 
-export const buildWidget = <T extends CustomWidgetArgs>(options: T): CustomWidget<T> => {
-  const eq = options.eq || ((other: CustomWidget<T>) => {
+export type WidgetOptions<T extends Record<string, any>> = {
+  [K in ((keyof T) | 'compare' | 'eq')]?: K extends 'compare' | 'eq' ? (other: WidgetReturn<T>) => boolean
+    : K extends keyof WidgetSpec ? WidgetSpec[K]
+    : T[K]
+}
+export type WidgetReturn<T extends Record<string, any>> = {
+  [K in keyof (T & WidgetSpec)]: K extends keyof T ? NonNullable<T[K]>
+    : K extends keyof WidgetSpec ? WidgetSpec[K]
+    : never
+}
+
+export const buildWidget = <T extends Record<string, any>>(options: WidgetOptions<T>): WidgetSpec => {
+  const eq = (other: WidgetReturn<T>) => {
+    if (options.eq) return options.eq(other)
     if (!options.id) return false
 
     return options.id === other.id
-  })
+  }
 
   return {
-    compare: eq,
+    compare: (other: WidgetReturn<T>) => {
+      return eq(other)
+    },
+    coordsAt: () => null,
     destroy: () => {},
-    eq,
+    eq: (other: WidgetReturn<T>) => {
+      return eq(other)
+    },
     estimatedHeight: -1,
     ignoreEvent: () => true,
+    lineBreaks: 0,
     toDOM: () => {
       return document.createElement('span')
     },

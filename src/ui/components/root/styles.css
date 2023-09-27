@@ -6,6 +6,11 @@
   flex-direction: var(--ink-internal-flex-direction, column);
 }
 
+.ink-mde .cm-cursor {
+  border-left-color: var(--ink-internal-color, inherit);
+  margin-left: 0;
+}
+
 .ink-mde .cm-tooltip {
   background-color: var(--ink-internal-block-background-color);
   border-radius: var(--ink-internal-border-radius);
@@ -32,10 +37,6 @@
 
 .ink-mde, .ink-mde * {
   box-sizing: border-box;
-}
-
-.ink-mde span {
-  display: inline-block;
 }
 
 .ink-mde,
@@ -164,20 +165,33 @@
   margin: 0;
   outline: none;
   padding: 0;
-  white-space: pre;
-  word-wrap: normal;
+  white-space: nowrap;
 }
 
 .ink-mde .cm-lineWrapping {
+  display: flex;
+  flex-direction: column;
   flex-shrink: 1;
-  overflow-wrap: anywhere;
-  white-space: break-spaces;
+  overflow-wrap: unset;
   word-break: break-word;
+  white-space: pre-wrap;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Things that should always break on any char */
+.ink-mde .cm-line .cm-code,
+.ink-mde .cm-line .cm-blockquote {
+  word-break: break-all;
 }
 
 .ink-mde .cm-line {
   font-family: var(--ink-internal-font-family);
   padding: 0;
+}
+
+.ink-mde .cm-line span {
+  display: inline;
 }
 
 .ink-mde .cm-line.cm-blockquote {

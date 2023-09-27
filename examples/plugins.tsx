@@ -5,6 +5,7 @@ import { katex } from '/plugins/katex'
 ink(document.querySelector('#app')!, {
   doc: '# Start with some text\n\nThis is some \$inline math\$\n\n\$\$\nc = \\pm\\sqrt{a^2 + b^2}\n\$\$\n\n```\nhi\n```\n\n```\nhello\n```',
   katex: true,
+  placeholder: 'This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text...',
   plugins: [
     plugin({
       value: async () => {
