@@ -2,61 +2,40 @@ import { syntaxTree } from '@codemirror/language'
 import { RangeSet, StateField } from '@codemirror/state'
 import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 import type { EditorState, Extension, Range } from '@codemirror/state'
-import type { DecorationSet, WidgetType } from '@codemirror/view'
+import type { DecorationSet } from '@codemirror/view'
+import { buildWidget } from '/lib/codemirror-kit'
 
-interface Widget extends WidgetType {
-  compare: (widget: Widget) => boolean,
-  isChecked?: boolean,
-}
+const dotWidget = () => buildWidget({
+  eq: () => {
+    return false
+  },
+  toDOM: () => {
+    const span = document.createElement('span')
 
-const dotWidget = (): Widget => {
-  return {
-    compare: (_other: Widget) => {
-      return false
-    },
-    destroy: () => {},
-    eq: (_other: Widget) => {
-      return false
-    },
-    estimatedHeight: -1,
-    ignoreEvent: () => true,
-    toDOM: () => {
-      const span = document.createElement('span')
+    span.innerHTML = '&#x2022;'
+    span.setAttribute('aria-hidden', 'true')
 
-      span.innerHTML = '&#x2022;'
-      span.setAttribute('aria-hidden', 'true')
+    return span
+  },
+})
 
-      return span
-    },
-    updateDOM: () => false,
-  }
-}
+const taskWidget = (isChecked: boolean) => buildWidget({
+  eq: (other) => {
+    return other.isChecked === isChecked
+  },
+  ignoreEvent: () => false,
+  isChecked,
+  toDOM: () => {
+    const input = document.createElement('input')
 
-const taskWidget = (isChecked: boolean): Widget => {
-  return {
-    compare: (other: Widget) => {
-      return other.isChecked === isChecked
-    },
-    destroy: () => {},
-    eq: (other: Widget) => {
-      return other.isChecked === isChecked
-    },
-    estimatedHeight: -1,
-    ignoreEvent: () => false,
-    isChecked,
-    toDOM: () => {
-      const input = document.createElement('input')
+    input.setAttribute('aria-hidden', 'true')
+    input.className = 'ink-mde-task-toggle'
+    input.type = 'checkbox'
+    input.checked = isChecked
 
-      input.setAttribute('aria-hidden', 'true')
-      input.className = 'ink-mde-task-toggle'
-      input.type = 'checkbox'
-      input.checked = isChecked
-
-      return input
-    },
-    updateDOM: () => false,
-  }
-}
+    return input
+  },
+})
 
 const hasOverlap = (x1: number, x2: number, y1: number, y2: number) => {
   return Math.max(x1, y1) <= Math.min(x2, y2)
