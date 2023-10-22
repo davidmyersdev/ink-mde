@@ -1,18 +1,27 @@
 import { ink, plugin } from 'ink-mde'
-import { buildBlockWidgetDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
+import {
+  buildBlockWidgetDecoration,
+  buildWidget,
+  nodeDecorator,
+} from '/lib/codemirror-kit'
 import { katex } from '/plugins/katex'
 
 ink(document.querySelector('#app')!, {
-  doc: '# Start with some text\n\nThis is some \$inline math\$\n\n\$\$\nc = \\pm\\sqrt{a^2 + b^2}\n\$\$\n\n```\nhi\n```\n\n```\nhello\n```',
+  doc: '# Start with some text\n\nThis is some $inline math$\n\n$$\nc = \\pm\\sqrt{a^2 + b^2}\n$$\n\n```\nhi\n```\n\n```\nhello\n```',
   katex: true,
-  placeholder: 'This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text...',
+  placeholder:
+    'This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text... This is a really long block of text...',
   plugins: [
     plugin({
       value: async () => {
         return nodeDecorator({
           nodes: ['FencedCode'],
           onMatch: (state, node) => {
-            const text = state.sliceDoc(node.from, node.to).split('\n').slice(1, -1).join('\n')
+            const text = state
+              .sliceDoc(node.from, node.to)
+              .split('\n')
+              .slice(1, -1)
+              .join('\n')
 
             if (text) {
               return buildBlockWidgetDecoration({
@@ -44,4 +53,20 @@ ink(document.querySelector('#app')!, {
     }),
     katex(),
   ],
+  vim: {
+    map: [
+      {
+        before: 'jj',
+        after: '<Esc>',
+        mode: 'insert',
+      },
+    ],
+    unmap: [
+      {
+        before: 'jj',
+        mode: 'insert',
+      },
+    ],
+    open: true,
+  },
 })
