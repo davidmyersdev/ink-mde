@@ -61,12 +61,6 @@ ink(document.querySelector('#app')!, {
         mode: 'insert',
       },
     ],
-    unmap: [
-      {
-        before: 'jj',
-        mode: 'insert',
-      },
-    ],
     open: true,
   },
 })
