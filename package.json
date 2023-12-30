@@ -121,7 +121,7 @@
     "vue:typecheck": "vue-tsc --project ./vue/tsconfig.json"
   },
   "peerDependencies": {
-    "svelte": "^3.0.0",
+    "svelte": "^3.0.0 || ^4.0.0",
     "vue": "^3.0.0"
   },
   "peerDependenciesMeta": {
