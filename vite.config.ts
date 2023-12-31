@@ -1,9 +1,9 @@
 /// <reference types="vitest" />
 
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
-import solidjs from 'vite-plugin-solid'
 import { externalizeDeps } from 'vite-plugin-externalize-deps'
+import solidjs from 'vite-plugin-solid'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ isSsrBuild }) => {

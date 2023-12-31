@@ -1,8 +1,8 @@
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { EditorView } from '@codemirror/view'
 import { plugin, pluginTypes } from 'ink-mde'
-import { useModule } from '/src/modules'
 import { buildBlockWidgetDecoration, buildLineDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
+import { useModule } from '/src/modules'
 import { grammar, mathInline, mathInlineMark, mathInlineMarkClose, mathInlineMarkOpen } from './grammar'
 
 const render = (text: string, element: HTMLElement) => {

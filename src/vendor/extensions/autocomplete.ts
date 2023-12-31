@@ -1,7 +1,7 @@
 import { autocompletion, closeBrackets } from '@codemirror/autocomplete'
 import { filterPlugins, partitionPlugins } from '/src/utils/options'
-import { pluginTypes } from '/types/values'
 import type * as Ink from '/types/ink'
+import { pluginTypes } from '/types/values'
 
 export const autocomplete = (options: Ink.OptionsResolved) => {
   // Todo: Handle lazy-loaded completions.

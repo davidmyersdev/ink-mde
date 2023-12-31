@@ -1,15 +1,10 @@
-<template>
-  <div ref="ink" v-html="html"></div>
-</template>
-
 <script lang="ts">
 import { ink, renderToString } from 'ink-mde'
-import { defineComponent, type PropType } from 'vue'
 import type * as Ink from 'ink-mde'
+import { type PropType, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'InkMde',
-  emits: ['update:modelValue'],
   props: {
     modelValue: {
       type: String,
@@ -18,6 +13,7 @@ export default defineComponent({
       type: Object as PropType<Ink.Options>,
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       html: '',
@@ -36,6 +32,17 @@ export default defineComponent({
         this.instance?.reconfigure(newValue)
       },
     },
+  },
+  created() {
+    if (import.meta.env.VITE_SSR) {
+      this.html = renderToString(this.options)
+    }
+  },
+  mounted() {
+    this.tryInit()
+  },
+  updated() {
+    this.tryInit()
   },
   methods: {
     tryInit() {
@@ -62,16 +69,9 @@ export default defineComponent({
       }
     },
   },
-  created() {
-    if (import.meta.env.VITE_SSR) {
-      this.html = renderToString(this.options)
-    }
-  },
-  mounted() {
-    this.tryInit()
-  },
-  updated() {
-    this.tryInit()
-  },
 })
 </script>
+
+<template>
+  <div ref="ink" v-html="html" />
+</template>

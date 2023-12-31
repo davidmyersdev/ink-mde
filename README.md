@@ -115,16 +115,16 @@ The `ink-mde/vue` subpath exports a Vue 3 component.
 #### Minimal setup
 
 ```vue
-<template>
-  <InkMde v-model="markdown" />
-</template>
-
 <script lang="ts" setup>
 import InkMde from 'ink-mde/vue'
 import { ref } from 'vue'
 
 const markdown = ref('# Hello, World!')
 </script>
+
+<template>
+  <InkMde v-model="markdown" />
+</template>
 ```
 
 #### Custom Options
@@ -132,12 +132,6 @@ const markdown = ref('# Hello, World!')
 The Vue component forwards all options that `ink-mde` supports, and it uses a deep watcher to ensure your `options` are reactive.
 
 ```vue
-<template>
-  <input v-model="options.interface.appearance" type="radio" value="dark"> dark
-  <input v-model="options.interface.appearance" type="radio" value="light"> light
-  <InkMde v-model="markdown" :options="options" />
-</template>
-
 <script lang="ts" setup>
 import InkMde from 'ink-mde/vue'
 import { reactive, ref } from 'vue'
@@ -149,6 +143,12 @@ const options = reactive({
   },
 })
 </script>
+
+<template>
+  <input v-model="options.interface.appearance" type="radio" value="dark"> dark
+  <input v-model="options.interface.appearance" type="radio" value="light"> light
+  <InkMde v-model="markdown" :options="options" />
+</template>
 ```
 
 ### Examples for `ink-mde/svelte`

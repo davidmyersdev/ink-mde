@@ -1,7 +1,7 @@
 import { type Component, createEffect, createSignal, onMount } from 'solid-js'
 import { buildVendorUpdates } from '/src/extensions'
-import { makeVars } from '../../utils'
 import { useStore } from '../../app'
+import { makeVars } from '../../utils'
 import styles from './styles.css?inline'
 
 export const Styles: Component = () => {
