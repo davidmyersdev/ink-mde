@@ -7,9 +7,9 @@ import type {
 } from '@codemirror/state'
 import type { EditorView as VendorView } from '@codemirror/view'
 import type { Accessor, Setter } from 'solid-js'
+import { type Queue } from '/src/utils/queue'
 import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
-import { type Queue } from '/src/utils/queue'
 
 export namespace InkInternal {
   export type Editor = InkInternal.Vendor.View

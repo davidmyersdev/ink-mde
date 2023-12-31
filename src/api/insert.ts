@@ -1,6 +1,6 @@
-import { selections } from './selections'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
+import { selections } from './selections'
 
 export const insert = ([state, setState]: InkInternal.Store, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
   const { editor } = state()
