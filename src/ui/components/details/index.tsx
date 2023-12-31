@@ -1,6 +1,6 @@
 import { type Component, Show } from 'solid-js'
-import type InkInternal from '/types/internal'
 import { toHuman } from '/src/utils/readability'
+import type InkInternal from '/types/internal'
 import { useStore } from '../../app'
 
 export const Details: Component<{ store: InkInternal.Store }> = () => {

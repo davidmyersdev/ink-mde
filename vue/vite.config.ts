@@ -7,13 +7,13 @@ import { externalizeDeps } from 'vite-plugin-externalize-deps'
 const root = dirname(fileURLToPath(import.meta.url))
 
 // https://vitejs.dev/config/
-export default defineConfig(({ ssrBuild }) => {
+export default defineConfig(({ isSsrBuild }) => {
   return {
     build: {
       emptyOutDir: false,
       lib: {
         entry: join(root, './src/index.ts'),
-        fileName: ssrBuild ? 'index' : 'client',
+        fileName: isSsrBuild ? 'index' : 'client',
       },
       rollupOptions: {
         external: [

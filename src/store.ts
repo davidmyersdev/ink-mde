@@ -1,12 +1,12 @@
 import { createSignal } from 'solid-js'
 import { katex } from '/plugins/katex'
-import { override } from '/src/utils/merge'
 import { createExtensions } from '/src/extensions'
-import { createElement } from './ui/utils'
+import { override } from '/src/utils/merge'
 import { makeQueue } from '/src/utils/queue'
-import * as InkValues from '/types/values'
 import type { Options } from '/types/ink'
 import type InkInternal from '/types/internal'
+import * as InkValues from '/types/values'
+import { createElement } from './ui/utils'
 
 export const blankState = (): InkInternal.StateResolved => {
   const options = {

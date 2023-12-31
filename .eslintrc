@@ -1,39 +1,26 @@
 {
-  "extends": ["@antfu/ts", "plugin:solid/typescript"],
+  "extends": ["artisan", "plugin:solid/typescript"],
   "plugins": ["solid"],
   "rules": {
-    "@typescript-eslint/brace-style": [2, "1tbs"],
-    "@typescript-eslint/consistent-type-definitions": [0, {}],
-    "@typescript-eslint/indent": [0, {}],
-    "@typescript-eslint/member-delimiter-style": [
-      2,
-      {
-        "multiline": {
-          "delimiter": "comma"
-        },
-        "singleline": {
-          "delimiter": "comma"
-        }
-      }
-    ],
-    "@typescript-eslint/no-use-before-define": [0, {}],
-    "antfu/if-newline": [0, {}],
-    "curly": [0, {}],
-    "indent": ["error", 2],
-    "multiline-ternary": [0, {}],
-    "solid/components-return-once": [0, {}]
+    "solid/components-return-once": ["off", {}]
   },
   "overrides": [
     {
-      "files": "./.github/**/*",
+      "files": ["./**/*.md/*.ts"],
       "rules": {
-        "yml/no-empty-mapping-value": [0, {}]
+        "@typescript-eslint/no-unused-vars": ["off"]
       }
     },
     {
-      "files": "./src/index.tsx",
+      "files": ["./src/index.tsx"],
       "rules": {
-        "eslint-comments/no-unlimited-disable": [0, {}]
+        "eslint-comments/no-unlimited-disable": ["off", {}]
+      }
+    },
+    {
+      "files": ["./types/**/*"],
+      "rules": {
+        "@typescript-eslint/no-namespace": ["off"]
       }
     }
   ]

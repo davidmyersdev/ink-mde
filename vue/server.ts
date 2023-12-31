@@ -1,7 +1,7 @@
 // https://vitejs.dev/guide/ssr.html
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import { externalizeDeps } from 'vite-plugin-externalize-deps'
