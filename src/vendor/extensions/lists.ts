@@ -1,7 +1,7 @@
 import { syntaxTree } from '@codemirror/language'
 import { RangeSet, StateField } from '@codemirror/state'
-import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 import type { EditorState, Extension, Range } from '@codemirror/state'
+import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 import type { DecorationSet } from '@codemirror/view'
 import { buildWidget } from '/lib/codemirror-kit'
 

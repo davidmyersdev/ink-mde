@@ -7,6 +7,7 @@ import { Root } from './components/root'
 const AppContext = createContext<InkInternal.Store>([() => blankState(), value => (typeof value === 'function' ? value(blankState()) : value)])
 const AppProvider: Component<{ children: JSX.Element, store: InkInternal.Store }> = (props) => {
   return (
+    // eslint-disable-next-line solid/reactivity
     <AppContext.Provider value={props.store}>
       {props.children}
     </AppContext.Provider>

@@ -1,7 +1,6 @@
-import * as InkValues from '/types/values'
-
 import type InkInternal from '/types/internal'
 import type InkUi from '/types/ui'
+import * as InkValues from '/types/values'
 
 export const createElement = (): InkUi.Element => {
   // Needed for tree-shaking purposes.

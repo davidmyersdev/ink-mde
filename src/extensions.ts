@@ -1,10 +1,10 @@
 import { Compartment } from '@codemirror/state'
+import { markdown } from '/src/markdown'
 import { isAutoDark } from '/src/ui/utils'
 import { filterPlugins, partitionPlugins } from '/src/utils/options'
 import { appearance } from '/src/vendor/extensions/appearance'
-import { appearanceTypes, pluginTypes } from '/types/values'
 import { type InkInternal } from '/types'
-import { markdown } from '/src/markdown'
+import { appearanceTypes, pluginTypes } from '/types/values'
 
 export const buildVendors = ([state, setState]: InkInternal.Store) => {
   const extensions = state().extensions.map(e => e.initialValue([state, setState]))
