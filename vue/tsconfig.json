@@ -5,6 +5,7 @@
     "declarationDir": "./tmp/types",
     "declarationMap": true,
     "emitDeclarationOnly": true,
+    "noEmit": false,
     "paths": {
       "ink-mde": [
         "../"
