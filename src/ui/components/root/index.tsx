@@ -10,7 +10,7 @@ import { Editor } from '../editor'
 import { Toolbar } from '../toolbar'
 import { Styles } from './styles'
 
-export const Root: Component<{ store: InkInternal.Store }> = () => {
+export const Root: Component<{ store: InkInternal.Store, target?: HTMLElement }> = (props) => {
   const [state, setState] = useStore()
   const setRoot = (root: HTMLElement) => {
     setState(override(state(), { root }))
@@ -26,7 +26,7 @@ export const Root: Component<{ store: InkInternal.Store }> = () => {
         <Toolbar />
       </Show>
       <div class='ink-mde-editor'>
-        <Editor />
+        <Editor target={props.target} />
       </div>
       <Show when={state().options.readability || state().options.interface.attribution}>
         <Details store={[state, setState]} />

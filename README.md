@@ -108,6 +108,28 @@ const editor = ink(document.getElementById('editor')!, options)
 editor.update(state.doc)
 ```
 
+#### Web Components
+
+```ts
+// ./examples/web-component.ts#L1-L16
+import { ink } from 'ink-mde'
+import { LitElement, html } from 'lit'
+
+class InkMde extends LitElement {
+  firstUpdated() {
+    ink(this.renderRoot.querySelector('#editor')!, {
+      doc: '# Hello, World!',
+    })
+  }
+
+  render() {
+    return html`<div id="editor"></div>`
+  }
+}
+
+customElements.define('ink-mde', InkMde)
+```
+
 ### Examples for `ink-mde/vue`
 
 The `ink-mde/vue` subpath exports a Vue 3 component.
