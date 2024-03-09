@@ -18,10 +18,10 @@ export const useStore = () => {
   return useContext(AppContext)
 }
 
-export const App: Component<{ store: InkInternal.Store }> = (props) => {
+export const App: Component<{ store: InkInternal.Store, target?: HTMLElement }> = (props) => {
   return (
     <AppProvider store={props.store}>
-      <Root store={props.store} />
+      <Root store={props.store} target={props.target} />
     </AppProvider>
   )
 }

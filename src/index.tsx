@@ -19,7 +19,7 @@ export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.Awa
 
   if (!import.meta.env.VITE_SSR) {
     solidPrepareForHydration()
-    solidHydrate(() => <App store={store} />, target)
+    solidHydrate(() => <App store={store} target={target} />, target)
   }
 
   return makeInstance(store)
@@ -59,7 +59,7 @@ export const render = (target: HTMLElement, options: Ink.Options = {}): Ink.Awai
   const store = makeStore(options)
 
   if (!import.meta.env.VITE_SSR) {
-    solidRender(() => <App store={store} />, target)
+    solidRender(() => <App store={store} target={target} />, target)
   }
 
   return makeInstance(store)
