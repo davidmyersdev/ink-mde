@@ -13,70 +13,16 @@
         box-sizing: border-box;
       }
 
-      :root {
-        --ink-code-font-family: 'Fira Code';
-      }
+      body, :host {
+        --ink-font-family: 'Inter', Helvetica, sans-serif;
+        --ink-code-font-family: 'Fira Code', monospace;
 
-      body {
-        font-family: 'Inter', Helvetica, sans-serif;
         margin: 0;
       }
-
-      .dark body {
-        background-color: rgb(24, 24, 27);
-        color: #fafafa;
-      }
-
-      .light body {
-        background-color: #fafafa;
-        color: rgb(24, 24, 27);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .auto body {
-          background-color: rgb(24, 24, 27);
-          color: #fafafa;
-        }
-      }
-
-      @media (prefers-color-scheme: light) {
-        .auto body {
-          background-color: #fafafa;
-          color: rgb(24, 24, 27);
-        }
-      }
-
-      .app-wrapper {
-        margin: auto;
-        max-width: 120ch;
-      }
-
-      .ink-mde .ink-mde-container {
-        max-width: 80ch;
-      }
-
-      #app .cm-editor.cm-focused {
-        outline: none;
-      }
-
-      html, body, .app-wrapper, #app, .ink-mde {
-        height: 100%;
-      }
-
-      .app-wrapper {
-        padding: 0.5rem;
-      }
-
-      /* .ink-mde-container {
-        max-width: 30rem;
-      } */
     </style>
   </head>
   <body>
-    <div class="app-wrapper">
-      <div id="app"></div>
-    </div>
-    <!-- <script type="module" src="/examples/demo.ts"></script> -->
-    <script type="module" src="/examples/plugins.tsx"></script>
+    <div id="app"></div>
+    <script type="module" src="/examples/web-component.ts"></script>
   </body>
 </html>

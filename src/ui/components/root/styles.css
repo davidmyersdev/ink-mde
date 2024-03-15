@@ -4,6 +4,7 @@
   color: var(--ink-internal-color, inherit);
   display: flex;
   flex-direction: var(--ink-internal-flex-direction, column);
+  font-family: var(--ink-internal-font-family);
 }
 
 .ink-mde .cm-cursor {

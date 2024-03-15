@@ -2,7 +2,10 @@ import { EditorView } from '@codemirror/view'
 import { makeState } from '/src/vendor/state'
 import type InkInternal from '/types/internal'
 
-export const makeEditor = ([state, setState]: InkInternal.Store): InkInternal.Editor => {
+export const makeEditor = ([state, setState]: InkInternal.Store, target?: HTMLElement): InkInternal.Editor => {
+  const rootNode = target?.getRootNode()
+  const root = rootNode?.nodeType === 11 ? rootNode as ShadowRoot : undefined
+
   const editor = new EditorView({
     dispatch: (transaction: InkInternal.Vendor.Transaction) => {
       const { options } = state()
@@ -17,6 +20,7 @@ export const makeEditor = ([state, setState]: InkInternal.Store): InkInternal.Ed
         options.hooks.afterUpdate(newDoc)
       }
     },
+    root,
     state: makeState([state, setState]),
   })
 
