@@ -1,8 +1,8 @@
 import { vi } from 'vitest'
 import { blankState } from '/src/store'
-import { makeEditor } from '/test/mocks/editor'
 import type { Options } from '/types/ink'
 import type InkInternal from '/types/internal'
+import { makeEditor } from './editor'
 
 export const makeState = (partialState: InkInternal.State): InkInternal.StateResolved => {
   return { ...blankState(), ...partialState } as InkInternal.StateResolved

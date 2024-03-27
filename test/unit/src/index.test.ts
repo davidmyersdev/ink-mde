@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ink, wrap } from '/src/index'
 import example from '/test/assets/example.md?raw'
-import { mockAll } from '/test/helpers/dom'
+import { mockAll } from '../../helpers/dom'
 
 describe('ink', () => {
   beforeEach(() => {

@@ -1,0 +1,8 @@
+name: Build Vue
+description: Build the Vue wrapper
+runs:
+  using: composite
+  steps:
+    - uses: ./.github/actions/build-core
+    - shell: bash
+      run: pnpm vue:build
