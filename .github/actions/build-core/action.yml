@@ -1,0 +1,7 @@
+name: Build core
+description: Build the core package
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: pnpm core:build

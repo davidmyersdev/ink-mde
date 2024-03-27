@@ -3,7 +3,7 @@ import {
   destroy,
   focus,
 } from '/src/api'
-import { makeStore } from '/test/mocks/store'
+import { makeStore } from '../../../mocks/store'
 
 describe('api', () => {
   describe('destroy', () => {

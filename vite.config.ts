@@ -61,6 +61,10 @@ export default defineConfig(({ isSsrBuild }) => {
         ],
       },
       environment: 'jsdom',
+      include: [
+        './examples/*.test.ts',
+        './test/unit/**/*.test.ts',
+      ],
     },
   }
 })
