@@ -1,0 +1,8 @@
+name: Build Svelte
+description: Build the Svelte wrapper
+runs:
+  using: composite
+  steps:
+    - uses: ./.github/actions/build-core
+    - shell: bash
+      run: pnpm svelte:build
