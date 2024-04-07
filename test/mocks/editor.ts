@@ -6,7 +6,7 @@ import type InkInternal from '/types/internal'
 vi.mock('@codemirror/state')
 vi.mock('@codemirror/view')
 
-export const makeEditor = (): InkInternal.Editor => {
+export const createView = (): InkInternal.Editor => {
   return new EditorView({
     state: EditorState.create(),
   })

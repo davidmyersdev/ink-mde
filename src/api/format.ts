@@ -1,9 +1,9 @@
 import { syntaxTree } from '@codemirror/language'
 import type { NodeType } from '@lezer/common'
-import { toInk } from '/src/vendor/adapters/selections'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 import * as InkValues from '/types/values'
+import { toInk } from '../editor/adapters/selections'
 
 // Todo:
 // - [ ] Handle special scenarios (e.g. headings in quote blocks).

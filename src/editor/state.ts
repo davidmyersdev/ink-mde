@@ -1,25 +1,29 @@
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
-import { type EditorSelection, EditorState } from '@codemirror/state'
+import type { EditorSelection } from '@codemirror/state'
+import { EditorState } from '@codemirror/state'
 import { keymap } from '@codemirror/view'
 import { buildVendors } from '/src/extensions'
-import { blockquote } from '/src/vendor/extensions/blockquote'
-import { code } from '/src/vendor/extensions/code'
-import { ink } from '/src/vendor/extensions/ink'
-import { lineWrapping } from '/src/vendor/extensions/line_wrapping'
-import { theme } from '/src/vendor/extensions/theme'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 import { toCodeMirror } from './adapters/selections'
+import { blockquote } from './extensions/blockquote'
+import { code } from './extensions/code'
+import { ink } from './extensions/ink'
+import { lineWrapping } from './extensions/line_wrapping'
+import { theme } from './extensions/theme'
 
 const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {
-  if (selections.length > 0)
+  if (selections.length > 0) {
     return toCodeMirror(selections)
+  }
 }
 
-export const makeState = ([state, setState]: InkInternal.Store): InkInternal.Vendor.State => {
+export const createState = ([state, setState]: InkInternal.Store): InkInternal.Vendor.State => {
+  const { selections } = state().options
+
   return EditorState.create({
     doc: state().options.doc,
-    selection: toVendorSelection(state().options.selections),
+    selection: toVendorSelection(selections),
     extensions: [
       keymap.of([
         ...defaultKeymap,
