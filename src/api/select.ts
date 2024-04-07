@@ -1,7 +1,7 @@
-import { toCodeMirror } from '/src/vendor/adapters/selections'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 import * as InkValues from '/types/values'
+import { toCodeMirror } from '../editor/adapters/selections'
 
 export const select = (store: InkInternal.Store, options: Ink.Instance.SelectOptions = {}) => {
   if (options.selections)
