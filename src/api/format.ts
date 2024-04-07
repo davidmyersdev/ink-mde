@@ -266,25 +266,59 @@ const getChanges = (changeDetails: ChangeDetails) => {
   return formatInline(changeDetails)
 }
 
-export const format = ([state]: InkInternal.Store, formatType: Ink.EnumString<Ink.Values.Markup>, { selection: maybeSelection }: Ink.Instance.FormatOptions = {}) => {
-  const { editor } = state()
-  const formatDefinition = formatting[formatType]
-  const selection = getSelection({ editor, formatDefinition, selection: maybeSelection })
-  const node = getNode(editor, formatDefinition, selection)
-  const changeDetails: ChangeDetails = {
-    editor,
-    formatDefinition,
-    node,
-    selection,
-  }
-  const changes = getChanges(changeDetails)
-  const offset = changes.reduce((total, change: { from: number, insert: string, to?: number }) => {
-    const offset = change.insert.length - ((change.to || change.from) - change.from)
+export const format = (
+	[state]: InkInternal.Store,
+	formatType: Ink.EnumString<Ink.Values.Markup>,
+	{ selection: maybeSelection }: Ink.Instance.FormatOptions = {}
+) => {
+	const { editor } = state();
+	const formatDefinition = formatting[formatType];
+	const selection = getSelection({
+		editor,
+		formatDefinition,
+		selection: maybeSelection,
+	});
 
-    return total + offset
-  }, 0)
+	// Check if the selection is empty
+	if (selection.start === selection.end) {
+		// Insert the prefix and suffix around the cursor
+		const changes = [
+			{ from: selection.start, insert: formatDefinition.prefix },
+			{ from: selection.start, insert: formatDefinition.suffix },
+		];
+		const cursorPosition = selection.start + formatDefinition.prefix.length;
+		const updates = state().editor.state.update({
+			changes,
+			selection: { head: cursorPosition, anchor: cursorPosition },
+		});
 
-  const updates = state().editor.state.update({ changes, selection: { head: selection.start, anchor: selection.end + offset } })
+		state().editor.dispatch(updates);
+    state().editor.focus();
+	} else {
+		const node = getNode(editor, formatDefinition, selection);
+		const changeDetails: ChangeDetails = {
+			editor,
+			formatDefinition,
+			node,
+			selection,
+		};
+		const changes = getChanges(changeDetails);
+		const offset = changes.reduce(
+			(total, change: { from: number; insert: string; to?: number }) => {
+				const offset =
+					change.insert.length - ((change.to || change.from) - change.from);
 
-  state().editor.dispatch(updates)
-}
+				return total + offset;
+			},
+			0
+		);
+
+		const updates = state().editor.state.update({
+			changes,
+			selection: { head: selection.start, anchor: selection.end + offset },
+		});
+
+		state().editor.dispatch(updates);
+    state().editor.focus();
+	}
+};
