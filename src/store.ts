@@ -1,4 +1,6 @@
 import { createSignal } from 'solid-js'
+import { autocomplete } from '/plugins/autocomplete'
+import { headings } from '/plugins/headings'
 import { katex } from '/plugins/katex'
 import { createExtensions } from '/src/extensions'
 import { override } from '/src/utils/merge'
@@ -40,6 +42,8 @@ export const blankState = (): InkInternal.StateResolved => {
     },
     placeholder: '',
     plugins: [
+      autocomplete(),
+      headings(),
       katex(),
     ],
     readability: false,

@@ -75,48 +75,6 @@ export const theme = (): Extension => {
         tag: tags.special(tags.variableName),
         color: 'var(--ink-internal-syntax-name-variable-special-color)',
       },
-      // headings
-      {
-        tag: tags.heading,
-        color: 'var(--ink-internal-syntax-heading-color)',
-        fontWeight: 'var(--ink-internal-syntax-heading-font-weight)',
-      },
-      {
-        tag: tags.heading1,
-        color: 'var(--ink-internal-syntax-heading1-color)',
-        fontSize: 'var(--ink-internal-syntax-heading1-font-size)',
-        fontWeight: 'var(--ink-internal-syntax-heading1-font-weight)',
-      },
-      {
-        tag: tags.heading2,
-        color: 'var(--ink-internal-syntax-heading2-color)',
-        fontSize: 'var(--ink-internal-syntax-heading2-font-size)',
-        fontWeight: 'var(--ink-internal-syntax-heading2-font-weight)',
-      },
-      {
-        tag: tags.heading3,
-        color: 'var(--ink-internal-syntax-heading3-color)',
-        fontSize: 'var(--ink-internal-syntax-heading3-font-size)',
-        fontWeight: 'var(--ink-internal-syntax-heading3-font-weight)',
-      },
-      {
-        tag: tags.heading4,
-        color: 'var(--ink-internal-syntax-heading4-color)',
-        fontSize: 'var(--ink-internal-syntax-heading4-font-size)',
-        fontWeight: 'var(--ink-internal-syntax-heading4-font-weight)',
-      },
-      {
-        tag: tags.heading5,
-        color: 'var(--ink-internal-syntax-heading5-color)',
-        fontSize: 'var(--ink-internal-syntax-heading5-font-size)',
-        fontWeight: 'var(--ink-internal-syntax-heading5-font-weight)',
-      },
-      {
-        tag: tags.heading6,
-        color: 'var(--ink-internal-syntax-heading6-color)',
-        fontSize: 'var(--ink-internal-syntax-heading6-font-size)',
-        fontWeight: 'var(--ink-internal-syntax-heading6-font-weight)',
-      },
       // contextual tag types
       {
         tag: tags.keyword,

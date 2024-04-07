@@ -1,7 +1,11 @@
-import { Compartment } from '@codemirror/state'
+import { type CompletionSource } from '@codemirror/autocomplete'
+import { markdownLanguage } from '@codemirror/lang-markdown'
+import { Compartment, type Extension } from '@codemirror/state'
+import { flatten } from '/src/helpers'
+import { type InkPlugin } from '/src/index'
 import { markdown } from '/src/markdown'
 import { isAutoDark } from '/src/ui/utils'
-import { filterPlugins, partitionPlugins } from '/src/utils/options'
+import { splitPlugins } from '/src/utils/plugins'
 import { appearance } from '/src/vendor/extensions/appearance'
 import { type InkInternal } from '/types'
 import { appearanceTypes, pluginTypes } from '/types/values'
@@ -11,6 +15,14 @@ export const buildVendors = ([state, setState]: InkInternal.Store) => {
 
   return extensions
 }
+
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/ExtensionManager.ts#L33
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/ExtensionManager.ts#L143
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/helpers/getExtensionField.ts#L13
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/ExtensionManager.ts#L150
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/ExtensionManager.ts#L34
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/ExtensionManager.ts#L48
+// https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/ExtensionManager.ts#L56
 
 export const buildVendorUpdates = async ([state, setState]: InkInternal.Store) => {
   const effects = await Promise.all(
@@ -60,7 +72,17 @@ export const createExtensions = () => {
 
 export const resolvers: InkInternal.ExtensionResolvers = [
   ([state]: InkInternal.Store) => {
-    const [_lazyExtensions, extensions] = partitionPlugins(filterPlugins(pluginTypes.default, state().options))
+    const { plugins } = state().options
+    const { extensions } = splitPlugins(flatten(plugins))
+
+    return extensions
+  },
+  ([state]: InkInternal.Store) => {
+    const { plugins } = state().options
+    const { completionSources } = splitPlugins(flatten(plugins))
+    const extensions = completionSources.map((completionSource) => markdownLanguage.data.of({
+      autocomplete: completionSource,
+    }))
 
     return extensions
   },
@@ -73,25 +95,17 @@ export const resolvers: InkInternal.ExtensionResolvers = [
   },
 ]
 
+// Todo: Look into RFC templates to maybe start opening up proposals for community feedback?
 export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
-  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
-    const [lazyExtensions] = partitionPlugins(filterPlugins(pluginTypes.default, state().options))
+  // async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
+  //   const [lazyExtensions] = partitionPlugins(filterPlugins(pluginTypes.default, state().options))
 
-    if (lazyExtensions.length > 0) {
-      return compartment.reconfigure(await Promise.all(lazyExtensions))
-    }
+  //   if (lazyExtensions.length > 0) {
+  //     return compartment.reconfigure(await Promise.all(lazyExtensions))
+  //   }
 
-    return compartment.reconfigure([])
-  },
-  async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
-    if (state().options.interface.autocomplete) {
-      const { autocomplete } = await import('/src/vendor/extensions/autocomplete')
-
-      return compartment.reconfigure(autocomplete(state().options))
-    }
-
-    return compartment.reconfigure([])
-  },
+  //   return compartment.reconfigure([])
+  // },
   async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
     if (state().options.interface.images) {
       const { images } = await import('/src/vendor/extensions/images')

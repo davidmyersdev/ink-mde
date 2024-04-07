@@ -1,5 +1,5 @@
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
-import { type EditorSelection, EditorState } from '@codemirror/state'
+import { type EditorSelection, EditorState, StateEffect, StateField, type Transaction } from '@codemirror/state'
 import { keymap } from '@codemirror/view'
 import { buildVendors } from '/src/extensions'
 import { blockquote } from '/src/vendor/extensions/blockquote'
@@ -16,8 +16,43 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
     return toCodeMirror(selections)
 }
 
+/**
+ * Create an updateable state field.
+ *
+ * @example
+ *
+ * const counter = initState(0)
+ * const editorState = EditorState.create({
+ *  extensions: [counter],
+ * })
+ *
+ * const effects = counter.update(editorState, 1)
+ * const transaction = editorState.update({ effects })
+ */
+export const initState = <T>(initial: T) => {
+  const effectType = StateEffect.define<T>()
+  const field = StateField.define<T>({
+    create: () => initial,
+    update: (value, transaction) => {
+      for (const effect of transaction.effects) {
+        if (effect.is(effectType)) {
+          return effect.value
+        }
+      }
+
+      return value
+    },
+  })
+
+  return Object.assign(field, {
+    update: (state: EditorState, value: T): Transaction => {
+      return state.update({ effects: effectType.of(value) })
+    },
+  })
+}
+
 export const makeState = ([state, setState]: InkInternal.Store): InkInternal.Vendor.State => {
-  return EditorState.create({
+  const editorState = EditorState.create({
     doc: state().options.doc,
     selection: toVendorSelection(state().options.selections),
     extensions: [
@@ -34,4 +69,6 @@ export const makeState = ([state, setState]: InkInternal.Store): InkInternal.Ven
       ...buildVendors([state, setState]),
     ],
   })
+
+  return editorState
 }

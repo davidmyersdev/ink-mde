@@ -1,27 +1,14 @@
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { EditorView } from '@codemirror/view'
-import { plugin, pluginTypes } from 'ink-mde'
+import { definePlugin } from 'ink-mde'
 import { buildBlockWidgetDecoration, buildLineDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
-import { useModule } from '/src/modules'
 import { grammar, mathInline, mathInlineMark, mathInlineMarkClose, mathInlineMarkOpen } from './grammar'
-
-const render = (text: string, element: HTMLElement) => {
-  useModule('katex', (katex) => {
-    katex.render(text, element, { output: 'html', throwOnError: false })
-  })
-}
 
 export const katex = () => {
   return [
-    plugin({
-      key: 'katex',
-      type: pluginTypes.grammar,
-      value: async () => grammar,
-    }),
-    plugin({
-      key: 'katex',
-      value: async () => {
-        return nodeDecorator({
+    definePlugin({
+      addExtensions: () => [
+        nodeDecorator({
           nodes: ['MathBlock', 'MathBlockMarkClose', 'MathBlockMarkOpen'],
           onMatch: (_state, node) => {
             const classes = ['ink-mde-line-math-block']
@@ -36,13 +23,8 @@ export const katex = () => {
             })
           },
           optimize: false,
-        })
-      },
-    }),
-    plugin({
-      key: 'katex',
-      value: async () => {
-        return nodeDecorator({
+        }),
+        nodeDecorator({
           nodes: ['MathBlock'],
           onMatch: (state, node) => {
             const text = state.sliceDoc(node.from, node.to).split('\n').slice(1, -1).join('\n')
@@ -51,23 +33,31 @@ export const katex = () => {
               return buildBlockWidgetDecoration({
                 widget: buildWidget({
                   id: text,
-                  toDOM: () => {
+                  toDOM: (view) => {
                     const container = document.createElement('div')
-                    const block = document.createElement('div')
+                    const katexTarget = document.createElement('div')
 
                     container.className = 'ink-mde-block-widget-container'
-                    block.className = 'ink-mde-block-widget ink-mde-katex-target'
-                    container.appendChild(block)
+                    katexTarget.className = 'ink-mde-block-widget ink-mde-katex-target'
+                    container.appendChild(katexTarget)
 
-                    render(text, block)
+                    import('katex').then(({ default: lib }) => {
+                      lib.render(text, katexTarget, { output: 'html', throwOnError: false })
+
+                      view.requestMeasure()
+                    })
 
                     return container
                   },
-                  updateDOM: (dom) => {
+                  updateDOM: (dom, view) => {
                     const katexTarget = dom.querySelector<HTMLElement>('.ink-mde-katex-target')
 
                     if (katexTarget) {
-                      render(text, katexTarget)
+                      import('katex').then(({ default: lib }) => {
+                        lib.render(text, katexTarget, { output: 'html', throwOnError: false })
+
+                        view.requestMeasure()
+                      })
 
                       return true
                     }
@@ -79,13 +69,8 @@ export const katex = () => {
             }
           },
           optimize: false,
-        })
-      },
-    }),
-    plugin({
-      key: 'katex',
-      value: async () => {
-        return syntaxHighlighting(
+        }),
+        syntaxHighlighting(
           HighlightStyle.define([
             {
               tag: [mathInline.tag, mathInlineMark.tag],
@@ -104,13 +89,8 @@ export const katex = () => {
               paddingLeft: 'var(--ink-internal-inline-padding)',
             },
           ]),
-        )
-      },
-    }),
-    plugin({
-      key: 'katex',
-      value: async () => {
-        return EditorView.theme({
+        ),
+        EditorView.theme({
           '.ink-mde-line-math-block': {
             backgroundColor: 'var(--ink-internal-block-background-color)',
             padding: '0 var(--ink-internal-block-padding) !important',
@@ -121,8 +101,11 @@ export const katex = () => {
           '.ink-mde-line-math-block-close': {
             borderRadius: '0 0 var(--ink-internal-border-radius) var(--ink-internal-border-radius)',
           },
-        })
-      },
+        }),
+      ],
+      addMarkdownExtensions: () => [
+        grammar,
+      ],
     }),
   ]
 }

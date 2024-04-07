@@ -3,6 +3,7 @@ import { type CompletionSource } from '@codemirror/autocomplete'
 import { type LanguageDescription } from '@codemirror/language'
 import { type Extension } from '@codemirror/state'
 import { type MarkdownConfig } from '@lezer/markdown'
+import { type InkPlugin } from '../src/index'
 import type * as InkValues from './values'
 
 export type VendorCompletion = CompletionSource
@@ -124,32 +125,34 @@ export interface OptionsResolved {
 export namespace Options {
   export type ExtensionNames = keyof Options.Extensions
 
-  export type Plugin = Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language
+  export type LegacyPlugin = Plugins.Completion | Plugins.Default | Plugins.Grammar | Plugins.Language
+  export type Plugin = InkPlugin | LegacyPlugin
+
   export type RecursivePlugin = Plugin | RecursivePlugin[]
 
   export namespace Plugins {
     export interface Completion {
       key?: string,
       type: EnumString<InkValues.PluginType.Completion>,
-      value: VendorCompletion | Promise<VendorCompletion>,
+      value: VendorCompletion,
     }
 
     export interface Default {
       key?: string,
       type: EnumString<InkValues.PluginType.Default>,
-      value: VendorExtension | Promise<VendorExtension>,
+      value: VendorExtension,
     }
 
     export interface Grammar {
       key?: string,
       type: EnumString<InkValues.PluginType.Grammar>,
-      value: VendorGrammar | Promise<VendorGrammar>,
+      value: VendorGrammar,
     }
 
     export interface Language {
       key?: string,
       type: EnumString<InkValues.PluginType.Language>,
-      value: VendorLanguage | Promise<VendorLanguage>,
+      value: VendorLanguage,
     }
   }
 

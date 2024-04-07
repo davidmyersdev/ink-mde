@@ -12,30 +12,6 @@
   margin-left: 0;
 }
 
-.ink-mde .cm-tooltip {
-  background-color: var(--ink-internal-block-background-color);
-  border-radius: var(--ink-internal-border-radius);
-  font-family: inherit;
-  padding: 0.25rem;
-}
-
-.ink-mde .cm-tooltip.cm-tooltip-autocomplete ul {
-  font-family: inherit;
-}
-
-.ink-mde .cm-tooltip.cm-tooltip-autocomplete ul li.ink-tooltip-option {
-  border-radius: var(--ink-internal-border-radius);
-  padding: 0.25rem;
-}
-
-.ink-mde .cm-tooltip.cm-tooltip-autocomplete ul li.ink-tooltip-option[aria-selected] {
-  background-color: rgba(150, 150, 150, 0.25);
-}
-
-.ink-mde .cm-completionLabel {
-  font-family: inherit;
-}
-
 .ink-mde, .ink-mde * {
   box-sizing: border-box;
 }

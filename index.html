@@ -23,6 +23,47 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/examples/web-component.ts"></script>
+    <!-- <script type="module" src="/examples/web-component.ts"></script> -->
+    <script type="module">
+      import { ink } from 'ink-mde'
+      import { autocomplete } from '/plugins/autocomplete'
+      import { headings } from '/plugins/headings'
+      import { katex } from '/plugins/katex'
+
+      ink(document.querySelector('#app'), {
+        doc: '# Hello, World!',
+        interface: {
+          appearance: 'light',
+          autocomplete: true,
+        },
+        katex: true,
+        plugins: [
+          katex(),
+          {
+            name: 'test-suggestions',
+            addCodeMirrorCompletionSources: () => [
+              (context) => {
+                const match = context.matchBefore(/\[(?:.(?!\[))*?/)
+
+                if (!match) {
+                  return null
+                }
+
+                return {
+                  from: match.from + 1,
+                  options: [
+                    {
+                      apply: 'http://example.test/hello',
+                      label: 'Hello',
+                      type: 'text',
+                    },
+                  ],
+                }
+              },
+            ],
+          },
+        ],
+      })
+    </script>
   </body>
 </html>

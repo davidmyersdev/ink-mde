@@ -31,25 +31,27 @@ test.describe('autocomplete', () => {
         interface: { autocomplete: true },
         plugins: [
           {
-            type: 'completion',
-            value: (context) => {
-              const match = context.matchBefore(/\[(?:.(?!\[))*?/)
+            name: 'test-suggestions',
+            addCodeMirrorCompletionSources: () => [
+              (context) => {
+                const match = context.matchBefore(/\[(?:.(?!\[))*?/)
 
-              if (!match) {
-                return null
-              }
+                if (!match) {
+                  return null
+                }
 
-              return {
-                from: match.from + 1,
-                options: [
-                  {
-                    apply: 'http://example.test/hello',
-                    label: 'Hello',
-                    type: 'text',
-                  },
-                ],
-              }
-            },
+                return {
+                  from: match.from + 1,
+                  options: [
+                    {
+                      apply: 'http://example.test/hello',
+                      label: 'Hello',
+                      type: 'text',
+                    },
+                  ],
+                }
+              },
+            ],
           },
         ],
       })
@@ -98,25 +100,27 @@ test.describe('autocomplete', () => {
           interface: { autocomplete: false },
           plugins: [
             {
-              type: 'completion',
-              value: (context) => {
-                const match = context.matchBefore(/\[(?:.(?!\[))*?/)
+              name: 'test-suggestions',
+              addCodeMirrorCompletionSources: () => [
+                (context) => {
+                  const match = context.matchBefore(/\[(?:.(?!\[))*?/)
 
-                if (!match) {
-                  return null
-                }
+                  if (!match) {
+                    return null
+                  }
 
-                return {
-                  from: match.from + 1,
-                  options: [
-                    {
-                      apply: 'http://example.test/hello',
-                      label: 'Hello',
-                      type: 'text',
-                    },
-                  ],
-                }
-              },
+                  return {
+                    from: match.from + 1,
+                    options: [
+                      {
+                        apply: 'http://example.test/hello',
+                        label: 'Hello',
+                        type: 'text',
+                      },
+                    ],
+                  }
+                },
+              ],
             },
           ],
         })

@@ -7,12 +7,12 @@ import { isPromise } from '/src/utils/inspect'
 import { type PluginValueForType } from '/src/utils/options'
 import type * as Ink from '/types/ink'
 
+export { type InkPlugin, definePlugin } from '/src/utils/plugins'
 export type * from '/types/ink'
 export { appearanceTypes, pluginTypes } from '/types/values'
 
 export const defineConfig = <T extends Ink.Options>(config: T) => config
 export const defineOptions = <T extends Ink.Options>(options: T) => options
-export const definePlugin = <T extends Ink.Options.RecursivePlugin>(plugin: T) => plugin
 
 export const hydrate = (target: HTMLElement, options: Ink.Options = {}): Ink.AwaitableInstance => {
   const store = makeStore(options)
