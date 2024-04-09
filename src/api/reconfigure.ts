@@ -1,3 +1,4 @@
+import { fullConfig } from '/src/editor/config'
 import { buildVendorUpdates } from '/src/extensions'
 import { override } from '/src/utils/merge'
 import type * as Ink from '/types/ink'
@@ -8,8 +9,9 @@ export const reconfigure = async ([state, setState]: InkInternal.Store, options:
 
   return workQueue.enqueue(async () => {
     setState(override(state(), { options }))
+    const transaction = fullConfig.update(state().editor.state, state().options)
     const effects = await buildVendorUpdates([state, setState])
 
-    state().editor.dispatch({ effects })
+    state().editor.dispatch({ effects }, transaction)
   })
 }

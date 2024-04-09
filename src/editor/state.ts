@@ -6,6 +6,7 @@ import { buildVendors } from '/src/extensions'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 import { toCodeMirror } from './adapters/selections'
+import { fullConfig } from './config'
 import { blockquote } from './extensions/blockquote'
 import { code } from './extensions/code'
 import { ink } from './extensions/ink'
@@ -19,12 +20,13 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
 }
 
 export const createState = ([state, setState]: InkInternal.Store): InkInternal.Vendor.State => {
-  const { selections } = state().options
+  const { options } = state()
 
   return EditorState.create({
     doc: state().options.doc,
-    selection: toVendorSelection(selections),
+    selection: toVendorSelection(options.selections),
     extensions: [
+      fullConfig.init(() => options),
       keymap.of([
         ...defaultKeymap,
         ...historyKeymap,
