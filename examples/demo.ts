@@ -30,6 +30,7 @@ window.ink = ink(document.getElementById('app')!, {
     injectMarkup: true,
   },
   interface: {
+    appearance: 'light',
     images: true,
     lists: true,
     readonly: false,
