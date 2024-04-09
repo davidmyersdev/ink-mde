@@ -54,37 +54,10 @@
   padding: 0.5rem;
 }
 
-.ink-mde .ink-mde-toolbar,
-.ink-mde .ink-mde-details {
+.ink-mde .ink-mde-toolbar {
   display: flex;
   flex-grow: 0;
   flex-shrink: 0;
-}
-
-.ink-mde .ink-mde-details {
-  background-color: var(--ink-internal-block-background-color);
-  display: flex;
-  padding: 0.5rem;
-}
-
-.ink-mde .ink-mde-details-content {
-  color: inherit;
-  display: flex;
-  filter: brightness(0.75);
-  flex-wrap: wrap;
-  font-size: 0.75em;
-  justify-content: flex-end;
-}
-
-.ink-mde .ink-mde-attribution {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.ink-mde .ink-mde-attribution-link {
-  color: currentColor;
-  font-weight: 600;
-  text-decoration: none;
 }
 
 .ink-mde .ink-mde-container {
@@ -136,8 +109,9 @@
 }
 
 .ink-mde .cm-panels {
-  background-color: unset;
+  background-color: inherit !important;
   border: unset;
+  color: inherit !important;
   z-index: 10;
 }
 

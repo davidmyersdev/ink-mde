@@ -4,7 +4,6 @@ import { getHydrationMarkerProps } from '/src/constants'
 import { override } from '/src/utils/merge'
 import type InkInternal from '/types/internal'
 import { useStore } from '../../app'
-import { Details } from '../details'
 import { DropZone } from '../drop_zone'
 import { Editor } from '../editor'
 import { Toolbar } from '../toolbar'
@@ -28,9 +27,6 @@ export const Root: Component<{ store: InkInternal.Store, target?: HTMLElement }>
       <div class='ink-mde-editor'>
         <Editor target={props.target} />
       </div>
-      <Show when={state().options.readability || state().options.interface.attribution}>
-        <Details store={[state, setState]} />
-      </Show>
     </div>
   )
 }

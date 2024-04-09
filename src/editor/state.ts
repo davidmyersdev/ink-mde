@@ -9,6 +9,7 @@ import { toCodeMirror } from './adapters/selections'
 import { fullConfig } from './config'
 import { blockquote } from './extensions/blockquote'
 import { code } from './extensions/code'
+import { details } from './extensions/details'
 import { ink } from './extensions/ink'
 import { lineWrapping } from './extensions/line_wrapping'
 import { theme } from './extensions/theme'
@@ -32,6 +33,7 @@ export const createState = ([state, setState]: InkInternal.Store): InkInternal.V
         ...historyKeymap,
       ]),
       blockquote(),
+      details(),
       code(),
       history(),
       ink(),
