@@ -1,6 +1,7 @@
-export type H<Tag extends HTag = HTag> = HTMLElementTagNameMap[Tag]
+export type H<Tag extends HTag = HTag> = HTagMap[Tag]
 export type HProps<_Tag extends HTag = HTag> = Record<string, boolean | number | string>
-export type HTag = keyof HTMLElementTagNameMap
+export type HTag = keyof HTagMap
+export type HTagMap = HTMLElementTagNameMap & SVGElementTagNameMap
 
 export type HFn = {
   <Tag extends HTag>(tag: Tag): HNode<Tag>,
@@ -29,7 +30,7 @@ const isVoidTag = (tag: string): boolean => {
   return voidTags.includes(tag)
 }
 
-const voidTags = Object.freeze([
+const voidHtmlTags = Object.freeze([
   'area',
   'base',
   'br',
@@ -46,16 +47,25 @@ const voidTags = Object.freeze([
   'wbr',
 ])
 
-export const createElement = <Tag extends HTag>(hNode: HNode<Tag>): H<Tag> => {
-  const { tag } = hNode
-  const element = document.createElement(tag)
+const voidSvgTags = Object.freeze([
+  'path',
+])
 
-  for (const [key, value] of Object.entries(hNode.options)) {
+const voidTags = Object.freeze([
+  ...voidHtmlTags,
+  ...voidSvgTags,
+])
+
+export const createElement = <Tag extends HTag>(hNode: HNode<Tag>): H<Tag> => {
+  const { children, options, tag } = hNode
+  const element = document.createElement(tag) as H<Tag>
+
+  for (const [key, value] of Object.entries(options)) {
     element.setAttribute(key, value?.toString())
   }
 
   if (!isVoidTag(tag)) {
-    for (const child of hNode.children) {
+    for (const child of children) {
       element.append(
         typeof child === 'string' ? document.createTextNode(child) : createElement(child),
       )
