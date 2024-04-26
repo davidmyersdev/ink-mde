@@ -13,6 +13,7 @@ import { details } from './extensions/details'
 import { ink } from './extensions/ink'
 import { lineWrapping } from './extensions/line_wrapping'
 import { theme } from './extensions/theme'
+import { toolbar } from './extensions/toolbar'
 
 const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection | undefined => {
   if (selections.length > 0) {
@@ -34,6 +35,7 @@ export const createState = ([state, setState]: InkInternal.Store): InkInternal.V
       ]),
       blockquote(),
       details(),
+      toolbar(),
       code(),
       history(),
       ink(),
