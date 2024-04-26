@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "jsxImportSource": "/lib/jsx",
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -30,6 +30,6 @@
     ],
     "useDefineForClassFields": true
   },
-  "exclude": ["./tmp", "./vue"],
+  "exclude": ["./node_modules", "./tmp", "./vue"],
   "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"]
 }

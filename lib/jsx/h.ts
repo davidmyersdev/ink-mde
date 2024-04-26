@@ -1,11 +1,14 @@
-export type H<Tag extends HTag = HTag> = HTagMap[Tag]
+export type * from './jsx'
+
+export type H<Tag extends HTagOrComponent = HTag> = Tag extends (() => infer Node extends HNode) ? Node['tag'] : Tag extends HTag ? HTagMap[Tag] : never
 export type HProps<_Tag extends HTag = HTag> = Record<string, boolean | number | string>
 export type HTag = keyof HTagMap
 export type HTagMap = HTMLElementTagNameMap & SVGElementTagNameMap
+export type HTagOrComponent = HTag | ((props: HProps) => HNode)
 
 export type HFn = {
   <Tag extends HTag>(tag: Tag): HNode<Tag>,
-  <Tag extends HTag>(tag: Tag, options: HProps): HNode<Tag>,
+  <Tag extends HTagOrComponent>(tag: Tag, options: HProps): HNode<Tag>,
   <Tag extends HTag>(tag: Tag, children: HNodeChildren): HNode<Tag>,
   <Tag extends HTag>(tag: Tag, options: HProps, children: HNodeChildren): HNode<Tag>,
 }
@@ -22,7 +25,18 @@ export type HNamedFn = {
   <Tag extends HTag>(options: HProps, children: HNodeChildren): HNode<Tag>,
 }
 
-export type HNode<Tag extends HTag = HTag> = {
+export type HNode<TagOrComponent extends HTagOrComponent = HTagOrComponent> = TagOrComponent extends (props: any) => any ? HComponentNode<TagOrComponent>
+  : TagOrComponent extends HTag ? HElementNode<TagOrComponent>
+  : never
+
+export type HComponentNode<Component extends (props: HProps) => HNode> = {
+  tag: Component,
+  options: Parameters<Component>[0],
+  children: HNodeChildren,
+  skipNode?: false,
+}
+
+export type HElementNode<Tag extends HTag = HTag> = {
   tag: Tag,
   options: HProps<Tag>,
   children: HNodeChildren,
@@ -66,12 +80,7 @@ const voidTags = Object.freeze([
   ...voidSvgTags,
 ])
 
-// Why doesn't SVG work?
-// https://stackoverflow.com/questions/56258167/why-does-svg-path-collapse-to-0x0-when-built-using-dom-interface-but-works-when
-// https://github.com/vuejs/core/blob/0dea7f9a260d93eb6c39aabac8c94c2c9b2042dd/packages/shared/src/domAttrConfig.ts
-// https://github.com/vuejs/core/blob/0dea7f9a260d93eb6c39aabac8c94c2c9b2042dd/packages/shared/src/domTagConfig.ts
-// https://vanjs.org/tutorial
-export const createElement = <Tag extends HTag>(hNode: HNode<Tag>): H<Tag> => {
+export const createElement = <Tag extends HTagOrComponent>(hNode: HNode<Tag>): H<Tag> => {
   const template = document.createElement('template')
 
   template.innerHTML = createString(hNode)
@@ -79,12 +88,20 @@ export const createElement = <Tag extends HTag>(hNode: HNode<Tag>): H<Tag> => {
   return template.content.cloneNode(true).childNodes[0] as H<Tag>
 }
 
-export const createString = <Tag extends HTag>(hNode: HNode<Tag>): string => {
-  const { tag } = hNode
+export const createString = <Node extends HNode>(hNode: Node): string => {
+  if (typeof hNode !== 'object') {
+    return hNode
+  }
+
+  const { children = [], options = {}, tag } = hNode
+
+  if (typeof tag === 'function') {
+    return createString(tag(options))
+  }
 
   let html = `<${tag}`
 
-  for (const [key, value] of Object.entries(hNode.options)) {
+  for (const [key, value] of Object.entries(options)) {
     html += ` ${key}="${value}"`
   }
 
@@ -96,7 +113,7 @@ export const createString = <Tag extends HTag>(hNode: HNode<Tag>): string => {
 
   html += '>'
 
-  for (const child of hNode.children) {
+  for (const child of children) {
     if (typeof child === 'string') {
       html += child
     } else if (!child.skipNode) {
@@ -109,7 +126,7 @@ export const createString = <Tag extends HTag>(hNode: HNode<Tag>): string => {
   return html
 }
 
-export const h: HFn = (tag, optionsOrChildren?: any, maybeChildren?: any) => {
+export const h: HFn = /* @__PURE__ */ (tag, optionsOrChildren?: any, maybeChildren?: any) => {
   const options: HProps = Array.isArray(optionsOrChildren) ? {} : optionsOrChildren
   const children: HNodeChildren = (Array.isArray(optionsOrChildren) ? optionsOrChildren : maybeChildren) ?? []
 

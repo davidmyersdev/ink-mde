@@ -39,9 +39,9 @@ window.ink = ink(document.getElementById('app')!, {
   },
   placeholder: 'Start typing...',
   readability: true,
-  toolbar: {
-    upload: true,
-  },
+  // toolbar: {
+  //   upload: true,
+  // },
 })
 
 window.ink.focus()
