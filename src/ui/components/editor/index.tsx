@@ -2,7 +2,7 @@ import type { Component } from 'solid-js'
 import { buildVendorUpdates } from '/src/extensions'
 import { useStore } from '/src/ui/app'
 import { override } from '/src/utils/merge'
-import { makeEditor } from '/src/vendor/editor'
+import { createView } from '../../../editor'
 
 export const Editor: Component<{ target?: HTMLElement }> = (props) => {
   // Needed for tree-shaking purposes.
@@ -22,7 +22,7 @@ export const Editor: Component<{ target?: HTMLElement }> = (props) => {
 
   const [state, setState] = useStore()
   // eslint-disable-next-line solid/reactivity
-  const editor = makeEditor([state, setState], props.target)
+  const editor = createView([state, setState], props.target)
 
   const { workQueue } = state()
   setState(override(state(), { editor }))
