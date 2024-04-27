@@ -1,8 +1,8 @@
 import { EditorView } from '@codemirror/view'
-import { makeState } from '/src/vendor/state'
 import type InkInternal from '/types/internal'
+import { createState } from './state'
 
-export const makeEditor = ([state, setState]: InkInternal.Store, target?: HTMLElement): InkInternal.Editor => {
+export const createView = ([state, setState]: InkInternal.Store, target?: HTMLElement): InkInternal.Editor => {
   const rootNode = target?.getRootNode()
   const root = rootNode?.nodeType === 11 ? rootNode as ShadowRoot : undefined
 
@@ -21,7 +21,7 @@ export const makeEditor = ([state, setState]: InkInternal.Store, target?: HTMLEl
       }
     },
     root,
-    state: makeState([state, setState]),
+    state: createState([state, setState]),
   })
 
   return editor

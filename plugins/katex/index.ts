@@ -2,14 +2,7 @@ import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { EditorView } from '@codemirror/view'
 import { plugin, pluginTypes } from 'ink-mde'
 import { buildBlockWidgetDecoration, buildLineDecoration, buildWidget, nodeDecorator } from '/lib/codemirror-kit'
-import { useModule } from '/src/modules'
 import { grammar, mathInline, mathInlineMark, mathInlineMarkClose, mathInlineMarkOpen } from './grammar'
-
-const render = (text: string, element: HTMLElement) => {
-  useModule('katex', (katex) => {
-    katex.render(text, element, { output: 'html', throwOnError: false })
-  })
-}
 
 export const katex = () => {
   return [
@@ -51,23 +44,31 @@ export const katex = () => {
               return buildBlockWidgetDecoration({
                 widget: buildWidget({
                   id: text,
-                  toDOM: () => {
+                  toDOM: (view) => {
                     const container = document.createElement('div')
-                    const block = document.createElement('div')
+                    const katexTarget = document.createElement('div')
 
                     container.className = 'ink-mde-block-widget-container'
-                    block.className = 'ink-mde-block-widget ink-mde-katex-target'
-                    container.appendChild(block)
+                    katexTarget.className = 'ink-mde-block-widget ink-mde-katex-target'
+                    container.appendChild(katexTarget)
 
-                    render(text, block)
+                    import('katex').then(({ default: lib }) => {
+                      lib.render(text, katexTarget, { output: 'html', throwOnError: false })
+
+                      view.requestMeasure()
+                    })
 
                     return container
                   },
-                  updateDOM: (dom) => {
+                  updateDOM: (dom, view) => {
                     const katexTarget = dom.querySelector<HTMLElement>('.ink-mde-katex-target')
 
                     if (katexTarget) {
-                      render(text, katexTarget)
+                      import('katex').then(({ default: lib }) => {
+                        lib.render(text, katexTarget, { output: 'html', throwOnError: false })
+
+                        view.requestMeasure()
+                      })
 
                       return true
                     }

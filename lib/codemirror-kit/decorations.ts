@@ -133,6 +133,8 @@ export const buildNodeDecorations = <T extends TypedDecoration>(state: EditorSta
 
             for (let line = state.doc.lineAt(node.from); line.from < node.to; line = state.doc.lineAt(line.to + 1)) {
               decorationRanges.push(wrapped.range(line.from))
+
+              if (line.to === state.doc.length) break
             }
           }
 
