@@ -62,7 +62,7 @@ test.describe('autocomplete', () => {
     await expect(target.locator('.cm-tooltip-autocomplete')).toBeVisible()
     await expect(target.locator('.cm-tooltip-autocomplete')).toContainText('Hello')
 
-    await page.keyboard.type('H\n', { delay: 100 })
+    await page.keyboard.type('H\n', { delay: 200 })
 
     await expect(target.locator('.ink-mde-editor-content')).toHaveText('[http://example.test/hello]')
   })
