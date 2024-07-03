@@ -12,8 +12,11 @@ declare global {
   }
 }
 
+const url = new URL(window.location.href)
+const doc = url.searchParams.get('doc') ?? example
+
 window.ink = ink(document.getElementById('app')!, {
-  doc: example,
+  doc,
   files: {
     clipboard: true,
     dragAndDrop: true,
@@ -28,6 +31,13 @@ window.ink = ink(document.getElementById('app')!, {
       }
     },
     injectMarkup: true,
+  },
+  hooks: {
+    afterUpdate: (text) => {
+      url.searchParams.set('doc', text)
+
+      window.history.replaceState(null, '', url)
+    },
   },
   interface: {
     images: true,
@@ -55,3 +65,5 @@ const toggleTheme = (theme: Values.Appearance) => {
 window.auto = toggleTheme.bind(undefined, 'auto')
 window.dark = toggleTheme.bind(undefined, 'dark')
 window.light = toggleTheme.bind(undefined, 'light')
+
+toggleTheme('light')
