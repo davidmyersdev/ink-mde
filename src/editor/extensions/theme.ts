@@ -137,10 +137,12 @@ export const theme = (): Extension => {
       {
         tag: tags.link,
         color: 'var(--ink-internal-syntax-link-color)',
+        wordBreak: 'break-all',
       },
       {
         tag: tags.url,
         color: 'var(--ink-internal-syntax-url-color)',
+        wordBreak: 'break-all',
       },
       // string group
       {
