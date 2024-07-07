@@ -1,23 +1,45 @@
 import { syntaxTree } from '@codemirror/language'
-import { RangeSet, StateField } from '@codemirror/state'
+import { StateField } from '@codemirror/state'
 import type { EditorState, Extension, Range } from '@codemirror/state'
 import { Decoration, EditorView, ViewPlugin } from '@codemirror/view'
 import type { DecorationSet } from '@codemirror/view'
+import type { SyntaxNodeRef } from '@lezer/common'
 import { buildWidget } from '/lib/codemirror-kit'
 
-const dotWidget = () => buildWidget({
-  eq: () => {
-    return false
-  },
-  toDOM: () => {
-    const span = document.createElement('span')
+const tabSize = 2
 
-    span.innerHTML = '&#x2022;'
-    span.setAttribute('aria-hidden', 'true')
+const spacerWidget = () => {
+  return buildWidget({
+    toDOM: () => {
+      const spacer = document.createElement('span')
 
-    return span
-  },
-})
+      spacer.className = 'ink-mde-indent'
+      spacer.style.width = `2rem`
+      spacer.style.textDecoration = 'none'
+      spacer.style.display = 'inline-flex'
+
+      const spacerLine = document.createElement('span')
+
+      spacerLine.className = 'ink-mde-indent-marker'
+      spacerLine.innerHTML = '&nbsp;'
+
+      spacer.appendChild(spacerLine)
+
+      return spacer
+    },
+  })
+}
+
+const createWrapper = () => {
+  const wrapper = document.createElement('label')
+
+  wrapper.setAttribute('aria-hidden', 'true')
+  wrapper.setAttribute('tabindex', '-1')
+  wrapper.className = 'ink-mde-list-marker'
+  wrapper.style.minWidth = '2rem'
+
+  return wrapper
+}
 
 const taskWidget = (isChecked: boolean) => buildWidget({
   eq: (other) => {
@@ -26,90 +48,145 @@ const taskWidget = (isChecked: boolean) => buildWidget({
   ignoreEvent: () => false,
   isChecked,
   toDOM: () => {
+    const wrapper = createWrapper()
     const input = document.createElement('input')
 
     input.setAttribute('aria-hidden', 'true')
-    input.className = 'ink-mde-task-toggle'
+    input.setAttribute('tabindex', '-1')
+    input.className = 'ink-mde-task-marker'
     input.type = 'checkbox'
     input.checked = isChecked
 
-    return input
+    wrapper.classList.add('ink-mde-task')
+
+    wrapper.appendChild(input)
+
+    return wrapper
   },
 })
 
-const hasOverlap = (x1: number, x2: number, y1: number, y2: number) => {
-  return Math.max(x1, y1) <= Math.min(x2, y2)
-}
+const dotWidget = () => {
+  return buildWidget({
+    toDOM: () => {
+      const wrapper = createWrapper()
 
-const isCursorInRange = (state: EditorState, from: number, to: number) => {
-  return state.selection.ranges.some((range) => {
-    return hasOverlap(from, to, range.from, range.to)
-  })
-}
+      wrapper.setAttribute('inert', 'true')
+      wrapper.innerHTML = '&bull;'
 
-const toggleTask = (view: EditorView, position: number) => {
-  const before = view.state.sliceDoc(position + 2, position + 5)
-
-  view.dispatch({
-    changes: {
-      from: position + 2,
-      to: position + 5,
-      insert: before === '[ ]' ? '[x]' : '[ ]',
+      return wrapper
     },
   })
-
-  return true
 }
 
-export const lists = (): Extension => {
-  const dotDecoration = () => Decoration.replace({
-    widget: dotWidget(),
-  })
+const numberWidget = (marker: string) => {
+  return buildWidget({
+    toDOM: () => {
+      const wrapper = createWrapper()
+      const content = document.createElement('span')
 
-  const taskDecoration = (isChecked: boolean) => Decoration.replace({
-    widget: taskWidget(isChecked),
-  })
+      wrapper.setAttribute('inert', 'true')
 
-  const decorate = (state: EditorState) => {
-    const widgets: Range<Decoration>[] = []
+      wrapper.appendChild(content)
+
+      content.setAttribute('aria-hidden', 'true')
+      content.setAttribute('tabindex', '-1')
+      content.className = 'ink-mde-number-marker'
+      content.innerHTML = `${marker}`
+
+      return wrapper
+    },
+  })
+}
+
+const getVals = (state: EditorState, { from, to, type }: SyntaxNodeRef) => {
+  // Todo: Determine whether to skip blockquote or not.
+  if (type.name === 'Blockquote') {
+    return false
+  }
+
+  if (type.name !== 'ListMark') {
+    return
+  }
+
+  const line = state.doc.lineAt(from)
+  const lineStart = line.from
+  const marker = state.sliceDoc(from, to)
+  const markerStart = from
+  const markerEnd = to
+  const markerHasTrailingSpace = state.sliceDoc(markerEnd, markerEnd + 1) === ' '
+  const indentation = markerStart - lineStart
+
+  if (!markerHasTrailingSpace) {
+    return
+  }
+
+  const indentLevel = Math.floor(indentation / tabSize)
+  const spacerDecorations = <Range<Decoration>[]>[]
+
+  for (const index of Array(indentLevel).keys()) {
+    const from = lineStart + (index * tabSize)
+    const to = from + tabSize
+
+    const spacerDec = Decoration.replace({ widget: spacerWidget() }).range(from, to)
+
+    spacerDecorations.push(spacerDec)
+  }
+
+  return {
+    indentLevel,
+    indentation,
+    lineStart,
+    marker,
+    markerEnd,
+    markerStart,
+    spacerDecorations,
+  }
+}
+
+const bulletLists = (): Extension => {
+  const decorate = (state: EditorState): [DecorationSet, DecorationSet] => {
+    const atomicRanges = <Range<Decoration>[]>[]
+    const decorationRanges = <Range<Decoration>[]>[]
 
     syntaxTree(state).iterate({
-      enter: ({ type, from, to }) => {
-        if (type.name === 'ListMark' && !isCursorInRange(state, from, to)) {
-          const task = state.sliceDoc(to + 1, to + 4)
+      enter: (node) => {
+        const result = getVals(state, node)
 
-          if (!['[ ]', '[x]'].includes(task)) {
-            const marker = state.sliceDoc(from, to)
-
-            if (['-', '*'].includes(marker)) {
-              widgets.push(dotDecoration().range(from, to))
-            }
-          }
+        if (!result) {
+          return result
         }
 
-        if (type.name === 'TaskMarker' && !isCursorInRange(state, from - 2, to)) {
-          const task = state.sliceDoc(from, to)
+        const { indentLevel, lineStart, marker, markerEnd, markerStart, spacerDecorations } = result
 
-          widgets.push(taskDecoration(task === '[x]').range(from - 2, to))
+        if (!['-', '*'].includes(marker)) {
+          return
         }
+
+        const lineDec = Decoration.line({
+          attributes: {
+            class: 'ink-mde-list ink-mde-bullet-list',
+            style: `--indent-level: ${indentLevel}`,
+          },
+        }).range(lineStart)
+
+        decorationRanges.push(lineDec)
+        decorationRanges.push(...spacerDecorations)
+        atomicRanges.push(...spacerDecorations)
+
+        const textStart = markerEnd + 1
+        const dotDec = Decoration.replace({
+          widget: dotWidget(),
+        }).range(markerStart, textStart)
+
+        decorationRanges.push(dotDec)
+        atomicRanges.push(dotDec)
       },
     })
 
-    return widgets.length > 0 ? RangeSet.of(widgets) : Decoration.none
+    return [Decoration.set(decorationRanges, true), Decoration.set(atomicRanges, true)]
   }
 
-  const viewPlugin = ViewPlugin.define(() => ({}), {
-    eventHandlers: {
-      mousedown: (event, view) => {
-        const target = event.target as HTMLElement
-
-        if (target?.nodeName === 'INPUT' && target.classList.contains('ink-mde-task-toggle')) {
-          return toggleTask(view, view.posAtDOM(target))
-        }
-      },
-    },
-  })
-  const stateField = StateField.define<DecorationSet>({
+  const stateField = StateField.define<[DecorationSet, DecorationSet]>({
     create(state) {
       return decorate(state)
     },
@@ -117,12 +194,272 @@ export const lists = (): Extension => {
       return decorate(state)
     },
     provide(field) {
-      return EditorView.decorations.from(field)
+      const result = [
+        EditorView.decorations.of((view) => {
+          const [decorationRanges, _atomicRanges] = view.state.field(field)
+
+          return decorationRanges
+        }),
+        EditorView.atomicRanges.of((view) => {
+          const [_decorationRanges, atomicRanges] = view.state.field(field)
+
+          return atomicRanges
+        }),
+      ]
+
+      return result
+    },
+  })
+
+  return [
+    stateField,
+  ]
+}
+
+const numberLists = (): Extension => {
+  const decorate = (state: EditorState): [DecorationSet, DecorationSet] => {
+    const atomicRanges = <Range<Decoration>[]>[]
+    const decorationRanges = <Range<Decoration>[]>[]
+
+    syntaxTree(state).iterate({
+      enter: (node) => {
+        const result = getVals(state, node)
+
+        if (!result) {
+          return result
+        }
+
+        const { indentLevel, lineStart, marker, markerEnd, markerStart, spacerDecorations } = result
+
+        if (['-', '*'].includes(marker)) {
+          return
+        }
+
+        const lineDec = Decoration.line({
+          attributes: {
+            class: 'ink-mde-list ink-mde-number-list',
+            style: `--indent-level: ${indentLevel}`,
+          },
+        }).range(lineStart)
+
+        decorationRanges.push(lineDec)
+        decorationRanges.push(...spacerDecorations)
+        atomicRanges.push(...spacerDecorations)
+
+        const textStart = markerEnd + 1
+        const dotDec = Decoration.replace({
+          widget: numberWidget(marker),
+        }).range(markerStart, textStart)
+
+        decorationRanges.push(dotDec)
+        atomicRanges.push(dotDec)
+      },
+    })
+
+    return [Decoration.set(decorationRanges, true), Decoration.set(atomicRanges, true)]
+  }
+
+  const stateField = StateField.define<[DecorationSet, DecorationSet]>({
+    create(state) {
+      return decorate(state)
+    },
+    update(_references, { state }) {
+      return decorate(state)
+    },
+    provide(field) {
+      const result = [
+        EditorView.decorations.of((view) => {
+          const [decorationRanges, _atomicRanges] = view.state.field(field)
+
+          return decorationRanges
+        }),
+        EditorView.atomicRanges.of((view) => {
+          const [_decorationRanges, atomicRanges] = view.state.field(field)
+
+          return atomicRanges
+        }),
+      ]
+
+      return result
+    },
+  })
+
+  return [
+    stateField,
+  ]
+}
+
+const taskLists = (): Extension => {
+  const decorate = (state: EditorState): [DecorationSet, DecorationSet] => {
+    const atomicRanges = <Range<Decoration>[]>[]
+    const decorationRanges = <Range<Decoration>[]>[]
+
+    syntaxTree(state).iterate({
+      enter: (node) => {
+        const result = getVals(state, node)
+
+        if (!result) {
+          return result
+        }
+
+        const { indentLevel, lineStart, marker, markerEnd, markerStart, spacerDecorations } = result
+
+        if (!['-', '*'].includes(marker)) {
+          return
+        }
+
+        const taskStart = markerEnd + 1
+        const taskEnd = taskStart + 3
+        const task = state.sliceDoc(taskStart, taskEnd)
+
+        if (!['[ ]', '[x]'].includes(task)) {
+          return
+        }
+
+        const textStart = taskEnd + 1
+        const taskHasTrailingSpace = state.sliceDoc(taskEnd, textStart) === ' '
+
+        if (!taskHasTrailingSpace) {
+          return
+        }
+
+        const isChecked = task === '[x]'
+
+        const lineDec = Decoration.line({
+          attributes: {
+            class: `ink-mde-list ink-mde-task-list ${isChecked ? 'ink-mde-task-checked' : 'ink-mde-task-unchecked'}`,
+            style: `--indent-level: ${indentLevel}`,
+          },
+        }).range(lineStart)
+
+        decorationRanges.push(lineDec)
+        decorationRanges.push(...spacerDecorations)
+        atomicRanges.push(...spacerDecorations)
+
+        const taskDec = Decoration.replace({
+          widget: taskWidget(isChecked),
+        }).range(markerStart, textStart)
+
+        decorationRanges.push(taskDec)
+        atomicRanges.push(taskDec)
+      },
+    })
+
+    return [Decoration.set(decorationRanges, true), Decoration.set(atomicRanges, true)]
+  }
+
+  const viewPlugin = ViewPlugin.define(() => ({}), {
+    eventHandlers: {
+      mousedown: (event, view) => {
+        const target = event.target as HTMLElement
+        const realTarget = target.closest('.ink-mde-list-marker')?.querySelector('.ink-mde-task-marker')
+
+        if (realTarget) {
+          const position = view.posAtDOM(realTarget)
+          const from = position - 4
+          const to = position - 1
+          const before = view.state.sliceDoc(from, to)
+
+          if (before === '[ ]') {
+            view.dispatch({
+              changes: {
+                from,
+                to,
+                insert: '[x]',
+              },
+            })
+          }
+
+          if (before === '[x]') {
+            view.dispatch({
+              changes: {
+                from,
+                to,
+                insert: '[ ]',
+              },
+            })
+          }
+
+          return true
+        }
+      },
+    },
+  })
+
+  const stateField = StateField.define<[DecorationSet, DecorationSet]>({
+    create(state) {
+      return decorate(state)
+    },
+    update(_references, { state }) {
+      return decorate(state)
+    },
+    provide(field) {
+      const result = [
+        EditorView.decorations.of((view) => {
+          const [decorationRanges, _atomicRanges] = view.state.field(field)
+
+          return decorationRanges
+        }),
+        EditorView.atomicRanges.of((view) => {
+          const [_decorationRanges, atomicRanges] = view.state.field(field)
+
+          return atomicRanges
+        }),
+      ]
+
+      return result
     },
   })
 
   return [
     viewPlugin,
     stateField,
+  ]
+}
+
+export const lists = (config: { task: boolean, bullet: boolean, number: boolean }): Extension => {
+  return [
+    config.task ? taskLists() : [],
+    config.bullet ? bulletLists() : [],
+    config.number ? numberLists() : [],
+    EditorView.theme({
+      ':where(.ink-mde-indent)': {
+        display: 'inline-flex',
+        justifyContent: 'center',
+      },
+      ':where(.ink-mde-indent-marker)': {
+        borderLeft: '1px solid var(--ink-internal-syntax-processing-instruction-color)',
+        bottom: '0',
+        overflow: 'hidden',
+        position: 'absolute',
+        top: '0',
+        width: '0',
+      },
+      ':where(.ink-mde-list)': {
+        paddingLeft: 'calc(var(--indent-level) * 2rem + 2rem) !important',
+        position: 'relative',
+        textIndent: 'calc((var(--indent-level) * 2rem + 2rem) * -1)',
+      },
+      ':where(.ink-mde-list *)': {
+        textIndent: '0',
+      },
+      ':where(.ink-mde-list-marker)': {
+        alignItems: 'center',
+        color: 'var(--ink-internal-syntax-processing-instruction-color)',
+        display: 'inline-flex',
+        justifyContent: 'center',
+        minWidth: '2rem',
+      },
+      ':where(.ink-mde-task-marker)': {
+        cursor: 'pointer',
+        margin: '0',
+        scale: '1.2',
+        transformOrigin: 'center center',
+      },
+      ':where(.ink-mde-task-list.ink-mde-task-checked)': {
+        textDecoration: 'line-through',
+        textDecorationColor: 'var(--ink-internal-syntax-processing-instruction-color)',
+      },
+    }),
   ]
 }

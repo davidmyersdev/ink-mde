@@ -41,11 +41,11 @@ window.ink = ink(document.getElementById('app')!, {
   },
   interface: {
     images: true,
-    lists: true,
     readonly: false,
     spellcheck: true,
     toolbar: true,
   },
+  lists: true,
   placeholder: 'Start typing...',
   readability: true,
   toolbar: {

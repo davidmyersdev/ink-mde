@@ -115,10 +115,22 @@ export const lazyResolvers: InkInternal.LazyExtensionResolvers = [
     return compartment.reconfigure([])
   },
   async ([state]: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => {
-    if (state().options.interface.lists) {
+    const { options } = state()
+
+    if (options.lists || options.interface.lists) {
       const { lists } = await import('./editor/extensions/lists')
 
-      return compartment.reconfigure(lists())
+      let bullet = true
+      let number = true
+      let task = true
+
+      if (typeof options.lists === 'object') {
+        bullet = typeof options.lists.bullet === 'undefined' ? false : options.lists.bullet
+        number = typeof options.lists.number === 'undefined' ? false : options.lists.number
+        task = typeof options.lists.task === 'undefined' ? false : options.lists.task
+      }
+
+      return compartment.reconfigure(lists({ bullet, number, task }))
     }
 
     return compartment.reconfigure([])

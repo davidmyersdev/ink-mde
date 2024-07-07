@@ -38,6 +38,7 @@ export const blankState = (): InkInternal.StateResolved => {
       tab: true,
       shiftTab: true,
     },
+    lists: false,
     placeholder: '',
     plugins: [
       katex(),
