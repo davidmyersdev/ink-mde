@@ -19,10 +19,18 @@
 
         margin: 0;
       }
+
+      @media (prefers-color-scheme: dark) {
+        .auto {
+          background-color: #222;
+          color: white;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/examples/web-component.ts"></script>
+    <script type="module" src="/examples/demo.ts"></script>
+    <!-- <script type="module" src="/examples/web-component.ts"></script> -->
   </body>
 </html>
