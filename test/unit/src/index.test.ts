@@ -52,6 +52,90 @@ describe('ink', () => {
     })
   })
 
+  describe('lists', () => {
+    const doc = `- A basic list\n- another item\n  - and another\n\n1. A numbered list\n  2. another item\n3. and another\n\n- [ ] A task list\n  - [x] another item\n- [ ] and another`
+
+    it('disables lists by default', async () => {
+      const target = document.createElement('div')
+
+      await ink(target, {
+        doc,
+      })
+
+      expect(target.querySelector('.ink-mde-indent')).toBeNull()
+      expect(target.querySelector('.ink-mde-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-bullet-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-number-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-task-list')).toBeNull()
+    })
+
+    it('enables only bullet lists when configured', async () => {
+      const target = document.createElement('div')
+
+      await ink(target, {
+        doc,
+        lists: {
+          bullet: true,
+        },
+      })
+
+      expect(target.querySelector('.ink-mde-indent')).toBeDefined()
+      expect(target.querySelector('.ink-mde-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-bullet-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-number-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-task-list')).toBeNull()
+    })
+
+    it('enables only number lists when configured', async () => {
+      const target = document.createElement('div')
+
+      await ink(target, {
+        doc,
+        lists: {
+          number: true,
+        },
+      })
+
+      expect(target.querySelector('.ink-mde-indent')).toBeDefined()
+      expect(target.querySelector('.ink-mde-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-bullet-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-number-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-task-list')).toBeNull()
+    })
+
+    it('enables only task lists when configured', async () => {
+      const target = document.createElement('div')
+
+      await ink(target, {
+        doc,
+        lists: {
+          task: true,
+        },
+      })
+
+      expect(target.querySelector('.ink-mde-indent')).toBeDefined()
+      expect(target.querySelector('.ink-mde-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-bullet-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-number-list')).toBeNull()
+      expect(target.querySelector('.ink-mde-task-list')).toBeDefined()
+    })
+
+    it('enables all lists when configured', async () => {
+      const target = document.createElement('div')
+
+      await ink(target, {
+        doc,
+        lists: true,
+      })
+
+      expect(target.querySelector('.ink-mde-indent')).toBeDefined()
+      expect(target.querySelector('.ink-mde-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-bullet-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-number-list')).toBeDefined()
+      expect(target.querySelector('.ink-mde-task-list')).toBeDefined()
+    })
+  })
+
   describe('wrap', () => {
     it('injects the editor after the textarea', () => {
       const form = document.createElement('form')
