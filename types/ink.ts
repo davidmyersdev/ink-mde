@@ -91,6 +91,11 @@ export interface Options {
     shiftTab?: boolean,
     tab?: boolean,
   },
+  lists?: boolean | {
+    bullet?: boolean,
+    number?: boolean,
+    task?: boolean,
+  },
   placeholder?: string,
   plugins?: Options.RecursivePlugin[],
   readability?: boolean,
@@ -110,6 +115,11 @@ export interface OptionsResolved {
   keybindings: {
     shiftTab: boolean,
     tab: boolean,
+  },
+  lists: boolean | {
+    bullet: boolean,
+    number: boolean,
+    task: boolean,
   },
   placeholder: string,
   plugins: Options.RecursivePlugin[],
