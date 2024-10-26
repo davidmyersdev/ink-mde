@@ -170,6 +170,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "tsx": "^4.7.0",
     "typescript": "~5.3.3",
+    "vanjs-core": "^1.5.2",
     "vite": "^5.0.10",
     "vite-plugin-externalize-deps": "^0.8.0",
     "vite-plugin-solid": "2.8.0",
