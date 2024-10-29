@@ -8,9 +8,9 @@
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "/lib/jsx-lite",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noImplicitAny": true,
@@ -30,6 +30,6 @@
     ],
     "useDefineForClassFields": true
   },
-  "exclude": ["./tmp", "./vue"],
+  "exclude": ["./node_modules", "./tmp", "./vue"],
   "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"]
 }

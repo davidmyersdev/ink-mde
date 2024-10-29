@@ -33,14 +33,41 @@ export default defineConfig(({ isSsrBuild }) => {
       target: 'esnext',
     },
     plugins: [
-      externalizeDeps(),
+      externalizeDeps({
+        except: [
+          /solid-js/,
+        ],
+      }),
       solidjs({
+        exclude: [
+          './src/ui/components/details/index.tsx',
+          './src/ui/components/editor/index.tsx',
+          './src/ui/components/Show.tsx',
+          './src/ui/components/test.tsx',
+        ],
         solid: {
           generate: isSsrBuild ? 'ssr' : 'dom',
           hydratable: true,
           omitNestedClosingTags: false,
         },
       }),
+      {
+        name: 'testing',
+        enforce: 'pre',
+        config() {
+          return {
+            esbuild: {
+              include: [
+                /\.ts$/,
+                './src/ui/components/details/index.tsx',
+                './src/ui/components/editor/index.tsx',
+                './src/ui/components/Show.tsx',
+                './src/ui/components/test.tsx',
+              ],
+            },
+          }
+        },
+      },
     ],
     resolve: {
       alias: {
@@ -52,6 +79,9 @@ export default defineConfig(({ isSsrBuild }) => {
         'node',
         'solid',
       ],
+    },
+    ssr: {
+      noExternal: true,
     },
     test: {
       clearMocks: true,

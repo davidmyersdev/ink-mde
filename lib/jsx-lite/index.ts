@@ -12,6 +12,12 @@ const adaptProps = (rawProps: Record<string, any>): Record<string, any> => {
   return adapted
 }
 
+export const Fragment = ({ children }: { children?: Element[] | undefined }) => {
+  console.log('Fragment', { children })
+
+  return children || []
+}
+
 export const createElement = (tag: string | Function, { children, ...rawProps }: {
   children?: Element | undefined,
 }): Element => {

@@ -62,6 +62,8 @@ export const render = (target: HTMLElement, options: Ink.Options = {}): Ink.Awai
     solidRender(() => <App store={store} target={target} />, target)
   }
 
+  import('./ui/components/test').then((res) => console.log(res))
+
   return makeInstance(store)
 }
 

@@ -1,5 +1,6 @@
-import { Show } from 'solid-js'
+import { Show, createEffect } from 'solid-js'
 import type { Component } from 'solid-js'
+import van from 'vanjs-core'
 import { getHydrationMarkerProps } from '/src/constants'
 import { override } from '/src/utils/merge'
 import type InkInternal from '/types/internal'
@@ -16,6 +17,14 @@ export const Root: Component<{ store: InkInternal.Store, target?: HTMLElement }>
     setState(override(state(), { root }))
   }
 
+  const vanState = van.state(state())
+
+  createEffect(() => {
+    vanState.val = state()
+
+    console.log('vanState', vanState.val)
+  })
+
   return (
     <div class='ink ink-mde' ref={setRoot} {...getHydrationMarkerProps()}>
       <Styles />
@@ -29,7 +38,7 @@ export const Root: Component<{ store: InkInternal.Store, target?: HTMLElement }>
         <Editor target={props.target} />
       </div>
       <Show when={state().options.readability || state().options.interface.attribution}>
-        <Details store={[state, setState]} />
+        <Details state={vanState} />
       </Show>
     </div>
   )
