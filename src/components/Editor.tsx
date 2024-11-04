@@ -1,9 +1,9 @@
+import { createView } from '/src/editor'
 import { buildVendorUpdates } from '/src/extensions'
-import { useStore } from '/src/ui/app'
-import { override } from '/src/utils/merge'
-import { createView } from '../../../editor'
+import { updateStore } from '/src/store'
+import type { InkInternal } from '/types'
 
-export const Editor = (props: { target?: HTMLElement }) => {
+export const Editor = ({ state, target }: { state: InkInternal.StoreState, target?: HTMLElement }) => {
   // Needed for tree-shaking purposes.
   if (import.meta.env.VITE_SSR) {
     return (
@@ -19,15 +19,13 @@ export const Editor = (props: { target?: HTMLElement }) => {
     )
   }
 
-  const [state, setState] = useStore()
-  // eslint-disable-next-line solid/reactivity
-  const editor = createView([state, setState], props.target)
+  const editor = createView(state, target)
+  const { val: workQueue } = state.workQueue
 
-  const { workQueue } = state()
-  setState(override(state(), { editor }))
+  updateStore(state, { editor })
 
   workQueue.enqueue(async () => {
-    const effects = await buildVendorUpdates([state, setState])
+    const effects = await buildVendorUpdates(state)
 
     editor.dispatch({ effects })
   })

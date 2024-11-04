@@ -1,6 +1,6 @@
 export namespace InkUi {
-  export type Element = HTMLDivElement
-  export type Root = HTMLDivElement
+  export type Element = HTMLElement
+  export type Root = HTMLElement
 }
 
 export default InkUi

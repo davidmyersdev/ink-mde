@@ -6,7 +6,7 @@ import type {
   Transaction as VendorTransaction,
 } from '@codemirror/state'
 import type { EditorView as VendorView } from '@codemirror/view'
-import type { Accessor, Setter } from 'solid-js'
+import type { State as VanState } from '/lib/vanjs'
 import { type Queue } from '/src/utils/queue'
 import type * as Ink from '/types/ink'
 import type InkUi from '/types/ui'
@@ -16,19 +16,19 @@ export namespace InkInternal {
 
   export interface Extension {
     compartment: InkInternal.Vendor.Compartment,
-    initialValue: (store: InkInternal.Store) => InkInternal.Vendor.Extension,
-    reconfigure: (store: InkInternal.Store) => Promise<InkInternal.Vendor.StateEffect<unknown>> | InkInternal.Vendor.StateEffect<unknown>,
+    initialValue: (state: StoreState) => InkInternal.Vendor.Extension,
+    reconfigure: (state: StoreState) => Promise<InkInternal.Vendor.StateEffect<unknown>> | InkInternal.Vendor.StateEffect<unknown>,
   }
 
   export interface LazyExtension {
     compartment: InkInternal.Vendor.Compartment,
-    initialValue: (store: InkInternal.Store) => InkInternal.Vendor.Extension,
-    reconfigure: (store: InkInternal.Store) => Promise<InkInternal.Vendor.StateEffect<unknown>>,
+    initialValue: (state: StoreState) => InkInternal.Vendor.Extension,
+    reconfigure: (state: StoreState) => Promise<InkInternal.Vendor.StateEffect<unknown>>,
   }
 
-  export type ExtensionResolver = (store: InkInternal.Store) => InkInternal.Vendor.Extension
+  export type ExtensionResolver = (state: StoreState) => InkInternal.Vendor.Extension
   export type ExtensionResolvers = ExtensionResolver[]
-  export type LazyExtensionResolver = (store: InkInternal.Store, compartment: InkInternal.Vendor.Compartment) => Promise<InkInternal.Vendor.StateEffect<unknown>>
+  export type LazyExtensionResolver = (state: StoreState, compartment: InkInternal.Vendor.Compartment) => Promise<InkInternal.Vendor.StateEffect<unknown>>
   export type LazyExtensionResolvers = LazyExtensionResolver[]
 
   export type Extensions = {
@@ -61,9 +61,7 @@ export namespace InkInternal {
     workQueue: Queue,
   }
 
-  export type Store = [get: StoreStateGetter, set: StoreStateSetter]
-  export type StoreStateGetter = Accessor<InkInternal.StateResolved>
-  export type StoreStateSetter = Setter<InkInternal.StateResolved>
+  export type StoreState = { [Key in keyof StateResolved]: VanState<StateResolved[Key]> }
 
   export namespace Vendor {
     // All vendor types (and adapters) should be encapsulated here.

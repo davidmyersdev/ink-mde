@@ -9,11 +9,9 @@ declare global {
     interface ElementChildrenAttribute {
         children: object,
     }
-    interface Element extends VanElement {
-    }
-    interface IntrinsicAttributes {
-        key?: Key,
-    }
+    interface Element extends VanElement {}
+    interface IntrinsicAttributes {}
+
     type IntrinsicElements = {
         [K in keyof InnerElement]: TagOption<K>;
     }

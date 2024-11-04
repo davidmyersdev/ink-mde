@@ -3,48 +3,47 @@ import {
   destroy,
   focus,
 } from '/src/api'
-import { makeStore } from '../../../mocks/store'
+import { makeMockStore } from '/test/mocks/store'
 
 describe('api', () => {
   describe('destroy', () => {
     it('destroys the editor', () => {
-      const store = makeStore()
-      const [state] = store
-      const { editor } = state()
+      const state = makeMockStore()
+      const { editor } = state
 
-      vi.spyOn(editor, 'destroy')
+      const spy = vi.spyOn(editor.val, 'destroy')
 
-      destroy(store)
+      destroy(state)
 
-      expect(editor.destroy).toHaveBeenCalledOnce()
+      expect(spy).toHaveBeenCalledOnce()
     })
   })
 
   describe('focus', () => {
     it('focuses the editor', () => {
-      const store = makeStore()
-      const [state] = store
-      const { editor } = state()
+      const state = makeMockStore()
+      const { editor } = state
 
-      vi.spyOn(editor, 'hasFocus', 'get').mockReturnValue(false)
-      vi.spyOn(editor, 'focus')
+      vi.spyOn(editor.val, 'hasFocus', 'get').mockReturnValue(false)
 
-      focus(store)
+      const spy = vi.spyOn(editor.val, 'focus')
 
-      expect(editor.focus).toHaveBeenCalledOnce()
+      focus(state)
+
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('does not focus the editor when it already has focus', () => {
-      const store = makeStore()
-      const [state] = store
-      const { editor } = state()
+      const state = makeMockStore()
+      const { editor } = state
 
-      vi.spyOn(editor, 'hasFocus', 'get').mockReturnValue(true)
-      vi.spyOn(editor, 'focus')
+      vi.spyOn(editor.val, 'hasFocus', 'get').mockReturnValue(true)
 
-      focus(store)
+      const spy = vi.spyOn(editor.val, 'focus')
 
-      expect(editor.focus).not.toHaveBeenCalledOnce()
+      focus(state)
+
+      expect(spy).not.toHaveBeenCalledOnce()
     })
   })
 })

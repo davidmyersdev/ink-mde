@@ -16,28 +16,26 @@ import { awaitable } from '/src/utils/awaitable'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const makeInstance = (store: InkInternal.Store): Ink.AwaitableInstance => {
+export const makeInstance = (state: InkInternal.StoreState): Ink.AwaitableInstance => {
   const instance = {
-    destroy: destroy.bind(undefined, store),
-    focus: focus.bind(undefined, store),
-    format: format.bind(undefined, store),
-    getDoc: getDoc.bind(undefined, store),
-    insert: insert.bind(undefined, store),
-    load: load.bind(undefined, store),
-    options: options.bind(undefined, store),
-    reconfigure: reconfigure.bind(undefined, store),
-    select: select.bind(undefined, store),
-    selections: selections.bind(undefined, store),
-    update: update.bind(undefined, store),
-    wrap: wrap.bind(undefined, store),
+    destroy: destroy.bind(undefined, state),
+    focus: focus.bind(undefined, state),
+    format: format.bind(undefined, state),
+    getDoc: getDoc.bind(undefined, state),
+    insert: insert.bind(undefined, state),
+    load: load.bind(undefined, state),
+    options: options.bind(undefined, state),
+    reconfigure: reconfigure.bind(undefined, state),
+    select: select.bind(undefined, state),
+    selections: selections.bind(undefined, state),
+    update: update.bind(undefined, state),
+    wrap: wrap.bind(undefined, state),
   }
 
   return awaitable(instance, (resolve, reject) => {
     try {
-      const [state] = store
-
       // Ensure all other queued tasks are finished before resolving.
-      state().workQueue.enqueue(() => resolve(instance))
+      state.workQueue.val.enqueue(() => resolve(instance))
     } catch (error: any) {
       reject(error)
     }

@@ -20,11 +20,10 @@ window.ink = ink(document.getElementById('app')!, {
   files: {
     clipboard: true,
     dragAndDrop: true,
-    handler: (files) => {
-      // eslint-disable-next-line no-console
-      console.log({ files })
-
+    handler: async (files) => {
       const lastFile = Array.from(files).pop()
+
+      await new Promise((resolve) => setTimeout(resolve, 10000))
 
       if (lastFile) {
         return URL.createObjectURL(lastFile)
@@ -40,6 +39,7 @@ window.ink = ink(document.getElementById('app')!, {
     },
   },
   interface: {
+    attribution: false,
     images: true,
     readonly: false,
     spellcheck: true,
@@ -47,7 +47,7 @@ window.ink = ink(document.getElementById('app')!, {
   },
   lists: true,
   placeholder: 'Start typing...',
-  readability: true,
+  readability: false,
   toolbar: {
     upload: true,
   },

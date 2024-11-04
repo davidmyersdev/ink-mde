@@ -266,8 +266,8 @@ const getChanges = (changeDetails: ChangeDetails) => {
   return formatInline(changeDetails)
 }
 
-export const format = ([state]: InkInternal.Store, formatType: Ink.EnumString<Ink.Values.Markup>, { selection: maybeSelection }: Ink.Instance.FormatOptions = {}) => {
-  const { editor } = state()
+export const format = (state: InkInternal.StoreState, formatType: Ink.EnumString<Ink.Values.Markup>, { selection: maybeSelection }: Ink.Instance.FormatOptions = {}) => {
+  const { val: editor } = state.editor
   const formatDefinition = formatting[formatType]
   const selection = getSelection({ editor, formatDefinition, selection: maybeSelection })
   const node = getNode(editor, formatDefinition, selection)
@@ -284,7 +284,7 @@ export const format = ([state]: InkInternal.Store, formatType: Ink.EnumString<In
     return total + offset
   }, 0)
 
-  const updates = state().editor.state.update({ changes, selection: { head: selection.start, anchor: selection.end + offset } })
+  const updates = editor.state.update({ changes, selection: { head: selection.start, anchor: selection.end + offset } })
 
-  state().editor.dispatch(updates)
+  editor.dispatch(updates)
 }

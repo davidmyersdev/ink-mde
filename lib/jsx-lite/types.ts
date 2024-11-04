@@ -1,5 +1,5 @@
 import type CSS from 'csstype'
-import type { State } from 'vanjs-core'
+import type { State } from '/lib/vanjs'
 
 export type VanElement = HTMLElement
 export type JSXElementType<P> = (props: P) => VanNode | VanElement
@@ -387,7 +387,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes, Reacti
     placeholder?: string | undefined,
     slot?: string | undefined,
     spellCheck?: Booleanish | undefined,
-    style?: CSS.Properties | undefined,
+    style?: CSS.Properties | string | undefined,
     tabIndex?: number | undefined,
     title?: string | undefined,
     translate?: 'yes' | 'no' | undefined,
@@ -439,7 +439,7 @@ export interface SVGAttributes<T> extends AriaAttributes, DOMAttributes, Reactiv
     method?: string | undefined,
     min?: number | string | undefined,
     name?: string | undefined,
-    style?: CSS.Properties | undefined,
+    style?: CSS.Properties | string | undefined,
     target?: string | undefined,
     type?: string | undefined,
     width?: number | string | undefined,

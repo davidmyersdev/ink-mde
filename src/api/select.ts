@@ -3,30 +3,28 @@ import type InkInternal from '/types/internal'
 import * as InkValues from '/types/values'
 import { toCodeMirror } from '../editor/adapters/selections'
 
-export const select = (store: InkInternal.Store, options: Ink.Instance.SelectOptions = {}) => {
+export const select = (state: InkInternal.StoreState, options: Ink.Instance.SelectOptions = {}) => {
   if (options.selections)
-    return selectMultiple(store, options.selections)
+    return selectMultiple(state, options.selections)
   if (options.selection)
-    return selectOne(store, options.selection)
+    return selectOne(state, options.selection)
   if (options.at)
-    return selectAt(store, options.at)
+    return selectAt(state, options.at)
 }
 
-export const selectAt = (store: InkInternal.Store, at: Ink.Values.Selection) => {
-  const [state] = store
-
+export const selectAt = (state: InkInternal.StoreState, at: Ink.Values.Selection) => {
   if (at === InkValues.Selection.Start)
-    return selectOne(store, { start: 0, end: 0 })
+    return selectOne(state, { start: 0, end: 0 })
 
   if (at === InkValues.Selection.End) {
-    const position = state().editor.state.doc.length
+    const position = state.editor.val.state.doc.length
 
-    return selectOne(store, { start: position, end: position })
+    return selectOne(state, { start: position, end: position })
   }
 }
 
-export const selectMultiple = ([state]: InkInternal.Store, selections: Ink.Editor.Selection[]) => {
-  const { editor } = state()
+export const selectMultiple = (state: InkInternal.StoreState, selections: Ink.Editor.Selection[]) => {
+  const { val: editor } = state.editor
 
   editor.dispatch(
     editor.state.update({
@@ -35,6 +33,6 @@ export const selectMultiple = ([state]: InkInternal.Store, selections: Ink.Edito
   )
 }
 
-export const selectOne = (store: InkInternal.Store, selection: Ink.Editor.Selection) => {
-  return selectMultiple(store, [selection])
+export const selectOne = (state: InkInternal.StoreState, selection: Ink.Editor.Selection) => {
+  return selectMultiple(state, [selection])
 }

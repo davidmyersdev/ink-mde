@@ -1,15 +1,14 @@
 import { buildVendorUpdates } from '/src/extensions'
-import { override } from '/src/utils/merge'
+import { updateStore } from '/src/store'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 
-export const reconfigure = async ([state, setState]: InkInternal.Store, options: Ink.Options) => {
-  const { workQueue } = state()
+export const reconfigure = async (state: InkInternal.StoreState, options: Ink.Options) => {
+  return state.workQueue.val.enqueue(async () => {
+    updateStore(state, { options })
 
-  return workQueue.enqueue(async () => {
-    setState(override(state(), { options }))
-    const effects = await buildVendorUpdates([state, setState])
+    const effects = await buildVendorUpdates(state)
 
-    state().editor.dispatch({ effects })
+    state.editor.val.dispatch({ effects })
   })
 }

@@ -6,16 +6,16 @@ import { buildVendorUpdates } from '/src/extensions'
 import { filterPlugins, partitionPlugins } from '/src/utils/options'
 import { type InkInternal, type OptionsResolved, pluginTypes } from '/types'
 
-const makeExtension = ([state, setState]: InkInternal.Store) => {
+const makeExtension = (state: InkInternal.StoreState) => {
   const baseExtensions = [] as MarkdownExtension[]
-  const [lazyExtensions, extensions] = filterExtensions(state().options)
-  const [lazyLanguages, languages] = filterLanguages(state().options)
+  const [lazyExtensions, extensions] = filterExtensions(state.options.val)
+  const [lazyLanguages, languages] = filterLanguages(state.options.val)
 
   if (Math.max(lazyExtensions.length, lazyLanguages.length) > 0) {
-    state().workQueue.enqueue(async () => {
-      const effects = await buildVendorUpdates([state, setState])
+    state.workQueue.val.enqueue(async () => {
+      const effects = await buildVendorUpdates(state)
 
-      state().editor.dispatch({ effects })
+      state.editor.val.dispatch({ effects })
     })
   }
 
@@ -34,10 +34,10 @@ const filterLanguages = (options: OptionsResolved) => {
   return partitionPlugins(filterPlugins(pluginTypes.language, options))
 }
 
-const updateExtension = async ([state]: InkInternal.Store) => {
+const updateExtension = async (state: InkInternal.StoreState) => {
   const baseExtensions = [] as MarkdownExtension[]
-  const extensions = await Promise.all(filterPlugins(pluginTypes.grammar, state().options))
-  const languages = await Promise.all(filterPlugins(pluginTypes.language, state().options))
+  const extensions = await Promise.all(filterPlugins(pluginTypes.grammar, state.options.val))
+  const languages = await Promise.all(filterPlugins(pluginTypes.language, state.options.val))
 
   return markdownExtension({
     base: markdownLanguage,
@@ -51,11 +51,11 @@ export const markdown = (): InkInternal.Extension => {
 
   return {
     compartment,
-    initialValue: (store: InkInternal.Store) => {
-      return compartment.of(makeExtension(store))
+    initialValue: (state: InkInternal.StoreState) => {
+      return compartment.of(makeExtension(state))
     },
-    reconfigure: async (store: InkInternal.Store) => {
-      return compartment.reconfigure(await updateExtension(store))
+    reconfigure: async (state: InkInternal.StoreState) => {
+      return compartment.reconfigure(await updateExtension(state))
     },
   }
 }

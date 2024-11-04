@@ -18,11 +18,11 @@ const toVendorSelection = (selections: Ink.Editor.Selection[]): EditorSelection 
   }
 }
 
-export const createState = ([state, setState]: InkInternal.Store): InkInternal.Vendor.State => {
-  const { selections } = state().options
+export const createState = (state: InkInternal.StoreState): InkInternal.Vendor.State => {
+  const { selections } = state.options.val
 
   return EditorState.create({
-    doc: state().options.doc,
+    doc: state.options.val.doc,
     selection: toVendorSelection(selections),
     extensions: [
       keymap.of([
@@ -35,7 +35,7 @@ export const createState = ([state, setState]: InkInternal.Store): InkInternal.V
       ink(),
       lineWrapping(),
       theme(),
-      ...buildVendors([state, setState]),
+      ...buildVendors(state),
     ],
   })
 }

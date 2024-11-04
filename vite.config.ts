@@ -3,7 +3,6 @@
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import { externalizeDeps } from 'vite-plugin-externalize-deps'
-import solidjs from 'vite-plugin-solid'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ isSsrBuild }) => {
@@ -12,7 +11,7 @@ export default defineConfig(({ isSsrBuild }) => {
       emptyOutDir: false,
       lib: {
         entry: './src/index.tsx',
-        fileName: 'client',
+        fileName: isSsrBuild ? 'server' : 'client',
       },
       rollupOptions: {
         output: [
@@ -33,63 +32,24 @@ export default defineConfig(({ isSsrBuild }) => {
       target: 'esnext',
     },
     plugins: [
-      externalizeDeps({
-        except: [
-          /solid-js/,
-        ],
-      }),
-      solidjs({
-        exclude: [
-          './src/ui/components/details/index.tsx',
-          './src/ui/components/editor/index.tsx',
-          './src/ui/components/Show.tsx',
-          './src/ui/components/test.tsx',
-        ],
-        solid: {
-          generate: isSsrBuild ? 'ssr' : 'dom',
-          hydratable: true,
-          omitNestedClosingTags: false,
-        },
-      }),
-      {
-        name: 'testing',
-        enforce: 'pre',
-        config() {
-          return {
-            esbuild: {
-              include: [
-                /\.ts$/,
-                './src/ui/components/details/index.tsx',
-                './src/ui/components/editor/index.tsx',
-                './src/ui/components/Show.tsx',
-                './src/ui/components/test.tsx',
-              ],
-            },
-          }
-        },
-      },
+      externalizeDeps(),
     ],
     resolve: {
       alias: {
         '/': resolve(__dirname, './'),
         'ink-mde': resolve(__dirname, './src/index'),
+        'vanjs-core': isSsrBuild ? 'mini-van-plate/van-plate' : 'vanjs-core',
       },
       conditions: [
         'browser',
         'node',
-        'solid',
       ],
     },
     ssr: {
-      noExternal: true,
+      // noExternal: true,
     },
     test: {
       clearMocks: true,
-      deps: {
-        inline: [
-          'solid-js',
-        ],
-      },
       environment: 'jsdom',
       include: [
         './examples/*.test.ts',

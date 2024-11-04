@@ -2,14 +2,14 @@ import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
 import { selections } from './selections'
 
-export const insert = ([state, setState]: InkInternal.Store, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
-  const { editor } = state()
+export const insert = (state: InkInternal.StoreState, text: string, selection?: Ink.Editor.Selection, updateSelection = false) => {
+  const { val: editor } = state.editor
 
   let start = selection?.start
   let end = selection?.end || selection?.start
 
   if (typeof start === 'undefined') {
-    const current = selections([state, setState]).pop() as Ink.Editor.Selection
+    const current = selections(state).pop() as Ink.Editor.Selection
 
     start = current.start
     end = current.end

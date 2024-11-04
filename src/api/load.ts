@@ -1,9 +1,9 @@
 import { createState } from '/src/editor'
-import { override } from '/src/utils/merge'
+import { updateStore } from '/src/store'
 import type InkInternal from '/types/internal'
 
-export const load = ([state, setState]: InkInternal.Store, doc: string) => {
-  setState(override(state(), { options: { doc } }))
+export const load = (state: InkInternal.StoreState, doc: string) => {
+  updateStore(state, { options: { doc } })
 
-  state().editor.setState(createState([state, setState]))
+  state.editor.val.setState(createState(state))
 }

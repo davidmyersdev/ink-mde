@@ -1,5 +1,5 @@
 {
-  "extends": ["artisan", "plugin:solid/typescript"],
+  "extends": ["artisan"],
   "plugins": ["solid"],
   "rules": {
     "solid/components-return-once": ["off", {}]

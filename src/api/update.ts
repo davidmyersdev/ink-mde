@@ -1,7 +1,7 @@
 import type InkInternal from '/types/internal'
 
-export const update = ([state]: InkInternal.Store, doc: string) => {
-  const { editor } = state()
+export const update = (state: InkInternal.StoreState, doc: string) => {
+  const { val: editor } = state.editor
 
   editor.dispatch(
     editor.state.update({

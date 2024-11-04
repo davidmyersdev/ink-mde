@@ -20,10 +20,27 @@
         margin: 0;
       }
 
+      .dark {
+        background-color: #222;
+        color: white;
+      }
+
       @media (prefers-color-scheme: dark) {
         .auto {
           background-color: #222;
           color: white;
+        }
+      }
+
+      .light {
+        background-color: white;
+        color: #222;
+      }
+
+      @media (prefers-color-scheme: light) {
+        .auto {
+          background-color: white;
+          color: #222;
         }
       }
     </style>

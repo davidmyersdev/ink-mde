@@ -60,6 +60,9 @@ export default defineComponent({
               }
             },
           },
+          interface: {
+            toolbar: true,
+          },
         })
 
         // @ts-expect-error Todo: Fix type recognition on $refs.

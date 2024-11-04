@@ -1,4 +1,4 @@
-import type InkInternal from '/types/internal'
+import type { OptionsResolved } from '/types/ink'
 import type InkUi from '/types/ui'
 import * as InkValues from '/types/values'
 
@@ -30,7 +30,7 @@ export const isDark = (appearance: string) => {
   return isAutoDark()
 }
 
-export const makeVars = (state: InkInternal.StateResolved) => {
+export const makeVars = (options: OptionsResolved) => {
   // Todo: The syntax nodes should be merged with the tag nodes to ensure values are always set correctly. This might
   // require extracting this out into a separate "constants" file or something similar.
   const styles = [
@@ -112,7 +112,7 @@ export const makeVars = (state: InkInternal.StateResolved) => {
     { suffix: 'toolbar-item-spacing', default: '0' },
   ]
 
-  const isLight = !isDark(state.options.interface.appearance)
+  const isLight = !isDark(options.interface.appearance)
 
   return styles.map((style) => {
     const value = (isLight && style.light) ? style.light : style.default

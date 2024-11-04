@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js'
+import * as van from '/lib/vanjs'
 import { katex } from '/plugins/katex'
 import { createExtensions } from '/src/extensions'
 import { override } from '/src/utils/merge'
@@ -80,8 +80,46 @@ export const makeState = (partialState: InkInternal.State): InkInternal.StateRes
   return override(blankState(), partialState)
 }
 
-export const makeStore = (options: Options, overrides: InkInternal.State = {}): InkInternal.Store => {
-  const [state, setState] = createSignal(makeState({ ...overrides, doc: options.doc || '', options }))
+export const makeStore = (userOptions: Options, overrides: InkInternal.State = {}): InkInternal.StoreState => {
+  const {
+    doc,
+    editor,
+    extensions,
+    options,
+    root,
+    target,
+    workQueue,
+  } = makeState({ ...overrides, doc: userOptions.doc || '', options: userOptions })
 
-  return [state, setState]
+  return {
+    doc: van.state(doc),
+    editor: van.state(editor),
+    extensions: van.state(extensions),
+    options: van.state(options),
+    root: van.state(root),
+    // root: { val: root, rawVal: root, oldVal: root },
+    target: van.state(target),
+    // target: { val: target, rawVal: target, oldVal: target },
+    workQueue: van.state(workQueue),
+  }
+}
+
+export const updateStore = (state: InkInternal.StoreState, overrides: InkInternal.State = {}) => {
+  const {
+    doc,
+    editor,
+    extensions,
+    options,
+    root,
+    target,
+    workQueue,
+  } = overrides
+
+  if (doc) state.doc.val = override(state.doc.val, doc)
+  if (editor) state.editor.val = override(state.editor.val, editor)
+  if (extensions) state.extensions.val = override(state.extensions.val, extensions)
+  if (options) state.options.val = override(state.options.val, options)
+  if (root) state.root.val = override(state.root.val, root)
+  if (target) state.target.val = override(state.target.val, target)
+  if (workQueue) state.workQueue.val = override(state.workQueue.val, workQueue)
 }
