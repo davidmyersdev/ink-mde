@@ -30,6 +30,6 @@
   "main": "./dist/index.js",
   "type": "module",
   "dependencies": {
-    "ink-mde": "workspace:*"
+    "ink-mde": "^0.34.0"
   }
 }

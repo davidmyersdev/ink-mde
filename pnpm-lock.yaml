@@ -139,7 +139,7 @@ importers:
   examples/template-ts:
     dependencies:
       ink-mde:
-        specifier: workspace:*
+        specifier: ^0.34.0
         version: link:../..
     devDependencies:
       typescript:
@@ -152,7 +152,7 @@ importers:
   svelte:
     dependencies:
       ink-mde:
-        specifier: workspace:*
+        specifier: ^0.34.0
         version: link:..
     devDependencies:
       '@sveltejs/adapter-auto':
