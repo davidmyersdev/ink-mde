@@ -18,7 +18,7 @@ A beautiful, modern, customizable Markdown editor powered by CodeMirror 6 and Ty
 - [x] Inline Markdown image previews
 - [x] Configurable and stylable
 - [x] An optional formatting toolbar (great for mobile)
-- [x] Optionally enable Vim Mode
+- [x] Optionally enable and configure Vim Mode
 - [x] Framework agnostic
 - [x] Vue wrapper (`ink-mde/vue` subpath export)
 - [x] Svelte wrapper (`ink-mde/svelte` subpath export)
@@ -283,6 +283,33 @@ const options = {
   trapTab: undefined,
   vim: false,
 }
+```
+
+### Configuring Vim
+
+Ink uses the lovely [@replit/codemirror-vim](https://github.com/replit/codemirror-vim) package to provide Vim bindings.
+Once you have `vim` set to `true` in your Ink instance, you can use the `getCM()` method and the
+[codemirror-vim extension api](https://github.com/replit/codemirror-vim?tab=readme-ov-file#usage-of-cm5-vim-extension-api)
+to configure your own key bindings.
+
+```javascript
+import { Vim } from '@replit/codemirror-vim'
+
+// Use `await` otherwise your editor instance may not be initialized
+const instance = await ink(document.createElement('div'), { vim: true })
+const cm = instance.getCM()
+
+// Mandatory key mapping
+Vim.exitInsertMode(cm)
+Vim.handleKey(cm, '<Esc>')
+
+// Now you can define your own key mappings
+Vim.map('jj', '<Esc>', 'insert'); // in insert mode
+Vim.map('Y', 'y$', 'normal'); // in normal mode
+
+Vim.defineEx('write', 'w', function() {
+  // Do something when the user does :w
+});
 ```
 
 ### Plugins

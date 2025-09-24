@@ -15,6 +15,7 @@ import {
 import { awaitable } from '/src/utils/awaitable'
 import type * as Ink from '/types/ink'
 import type InkInternal from '/types/internal'
+import { getCM } from './api/get_cm'
 
 export const makeInstance = (store: InkInternal.Store): Ink.AwaitableInstance => {
   const instance = {
@@ -22,6 +23,7 @@ export const makeInstance = (store: InkInternal.Store): Ink.AwaitableInstance =>
     focus: focus.bind(undefined, store),
     format: format.bind(undefined, store),
     getDoc: getDoc.bind(undefined, store),
+    getCM: getCM.bind(undefined, store),
     insert: insert.bind(undefined, store),
     load: load.bind(undefined, store),
     options: options.bind(undefined, store),

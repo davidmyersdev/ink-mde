@@ -24,6 +24,12 @@ describe('ink', () => {
       expect(instance.getDoc()).toEqual('# Hello')
     })
 
+    it('returns the codemirror instance', async () => {
+      const instance = await wrap(document.createElement('textarea'), { vim: true })
+
+      expect(instance.getCM()).toBeDefined()
+    })
+
     it('can be reconfigured', () => {
       const instance = ink(document.createElement('div'), {
         interface: {

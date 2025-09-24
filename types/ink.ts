@@ -3,6 +3,7 @@ import { type CompletionSource } from '@codemirror/autocomplete'
 import { type LanguageDescription } from '@codemirror/language'
 import { type Extension } from '@codemirror/state'
 import { type MarkdownConfig } from '@lezer/markdown'
+import { type CodeMirror } from '@replit/codemirror-vim'
 import type * as InkValues from './values'
 
 export type VendorCompletion = CompletionSource
@@ -27,6 +28,7 @@ export interface Instance {
   focus: () => void,
   format: (type: EnumString<InkValues.Markup>, options: Instance.FormatOptions) => void,
   getDoc: () => string,
+  getCM: () => undefined | CodeMirror,
   insert: (text: string, selection?: Editor.Selection) => void,
   load: (doc: string) => void,
   options: () => OptionsResolved,
