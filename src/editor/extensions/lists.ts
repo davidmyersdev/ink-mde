@@ -355,9 +355,9 @@ const taskLists = (): Extension => {
         const realTarget = target.closest('.ink-mde-list-marker')?.querySelector('.ink-mde-task-marker')
 
         if (realTarget) {
-          const position = view.posAtDOM(realTarget)
-          const from = position - 4
-          const to = position - 1
+          const markerStart = view.posAtDOM(realTarget)
+          const from = markerStart + 2
+          const to = markerStart + 5
           const before = view.state.sliceDoc(from, to)
 
           if (before === '[ ]') {

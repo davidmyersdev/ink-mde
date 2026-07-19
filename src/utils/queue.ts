@@ -7,7 +7,7 @@ export const makeQueue = () => {
   }
 
   const process = async () => {
-    const task = state.queue.pop()
+    const task = state.queue.shift()
 
     if (!task) return
 
