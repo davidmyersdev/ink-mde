@@ -41,7 +41,7 @@ export const Toolbar: Component = () => {
         <Show when={state().options.toolbar.heading || state().options.toolbar.bold || state().options.toolbar.italic}>
           <div class='ink-mde-toolbar-group'>
             <Show when={state().options.toolbar.heading}>
-              <Button onclick={() => formatAs(InkValues.Markup.Heading)}>
+              <Button ariaLabel='Heading' onclick={() => formatAs(InkValues.Markup.Heading)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M6 4V10M6 16V10M6 10H14M14 10V4M14 10V16'/>
                 </svg>
@@ -55,7 +55,7 @@ export const Toolbar: Component = () => {
               </Button>
             </Show>
             <Show when={state().options.toolbar.italic}>
-              <Button onclick={() => formatAs(InkValues.Markup.Italic)}>
+              <Button ariaLabel='Italic' onclick={() => formatAs(InkValues.Markup.Italic)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M11 4L9 16M13 4H9M7 16H11'/>
                 </svg>
