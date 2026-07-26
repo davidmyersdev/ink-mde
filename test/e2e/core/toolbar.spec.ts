@@ -73,4 +73,37 @@ test.describe('toolbar', () => {
     await toolbarItalic.click()
     await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('*text*')
   })
+
+  test('formats selected text as a quote', async ({ page }) => {
+    const { host, toolbarQuote } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarQuote.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('> text')
+  })
+
+  test('formats selected text as a code block', async ({ page }) => {
+    const { host, toolbarCodeBlock } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarCodeBlock.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('```\ntext\n```')
+  })
+
+  test('formats selected text as inline code', async ({ page }) => {
+    const { host, toolbarCode } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarCode.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('`text`')
+  })
 })
