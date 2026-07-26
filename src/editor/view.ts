@@ -11,7 +11,10 @@ export const createView = ([state, setState]: InkInternal.Store, target?: HTMLEl
       const { options } = state()
       const newDoc = transaction.newDoc.toString()
 
-      options.hooks.beforeUpdate(newDoc)
+      if (transaction.docChanged) {
+        options.hooks.beforeUpdate(newDoc)
+      }
+
       editor.update([transaction])
 
       if (transaction.docChanged) {
