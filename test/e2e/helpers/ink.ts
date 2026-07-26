@@ -17,6 +17,7 @@ export const getLocators = (page: Page) => {
   const listIndent = host.locator('.ink-mde-indent')
   const listNumber = host.locator('.ink-mde-number-list')
   const listTask = host.locator('.ink-mde-task-list')
+  const placeholder = host.locator('.cm-placeholder')
   const root = host.locator('.ink-mde')
   const textarea = host.locator('textarea')
 
@@ -36,6 +37,7 @@ export const getLocators = (page: Page) => {
     listIndent,
     listNumber,
     listTask,
+    placeholder,
     root,
     textarea,
   }
