@@ -7,6 +7,7 @@ export const getLocators = (page: Page) => {
   const host = page.locator('#editor')
   const imagePreview = host.locator('.cm-image-img')
   const root = host.locator('.ink-mde')
+  const textarea = host.locator('textarea')
 
   return {
     autocomplete,
@@ -14,6 +15,7 @@ export const getLocators = (page: Page) => {
     host,
     imagePreview,
     root,
+    textarea,
   }
 }
 
