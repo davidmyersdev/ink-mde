@@ -110,7 +110,7 @@
     "svelte:clean": "rimraf ./svelte/dist",
     "svelte:dev": "pnpm --filter svelte exec vite dev --host 127.0.0.1 --port 5176",
     "test": "run-s test:watch",
-    "test:e2e": "run-s core:build:server vue:build:server && playwright test",
+    "test:e2e": "run-s build && playwright test",
     "test:e2e:clean": "rimraf ./playwright-report ./test-results",
     "test:unit": "vitest run",
     "test:watch": "vitest",
