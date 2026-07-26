@@ -3,6 +3,11 @@ import { type ink, type wrap } from '/src/index'
 
 export const getLocators = (page: Page) => {
   const autocomplete = page.locator('.cm-tooltip-autocomplete')
+  const blockquote = page.locator('.cm-blockquote')
+  const code = page.locator('.cm-code:not(.cm-code-open):not(.cm-code-close)')
+  const codeBlock = page.locator('.cm-codeblock')
+  const codeBlockClose = page.locator('.cm-codeblock-close')
+  const codeBlockOpen = page.locator('.cm-codeblock-open')
   const content = page.locator('#editor .ink-mde-editor-content')
   const host = page.locator('#editor')
   const imagePreview = host.locator('.cm-image-img')
@@ -11,6 +16,11 @@ export const getLocators = (page: Page) => {
 
   return {
     autocomplete,
+    blockquote,
+    code,
+    codeBlock,
+    codeBlockClose,
+    codeBlockOpen,
     content,
     host,
     imagePreview,
