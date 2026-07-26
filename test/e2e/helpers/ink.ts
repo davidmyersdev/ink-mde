@@ -21,6 +21,7 @@ export const getLocators = (page: Page) => {
   const listIndent = host.locator('.ink-mde-indent')
   const listNumber = host.locator('.ink-mde-number-list')
   const listTask = host.locator('.ink-mde-task-list')
+  const katexTarget = host.locator('.ink-mde-katex-target')
   const placeholder = host.locator('.cm-placeholder')
   const root = host.locator('.ink-mde')
   const searchInput = host.locator('.ink-mde-search-input')
@@ -59,6 +60,7 @@ export const getLocators = (page: Page) => {
     dropZonePreview,
     host,
     imagePreview,
+    katexTarget,
     listBullet,
     listIndent,
     listNumber,
