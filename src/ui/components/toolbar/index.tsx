@@ -93,7 +93,7 @@ export const Toolbar: Component = () => {
         <Show when={state().options.toolbar.list || state().options.toolbar.orderedList || state().options.toolbar.taskList}>
           <div class='ink-mde-toolbar-group'>
             <Show when={state().options.toolbar.list}>
-              <Button onclick={() => formatAs(InkValues.Markup.List)}>
+              <Button ariaLabel='Bullet list' onclick={() => formatAs(InkValues.Markup.List)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M7 16H17.8294'/>
                   <path d='M2 16H4'/>
@@ -105,7 +105,7 @@ export const Toolbar: Component = () => {
               </Button>
             </Show>
             <Show when={state().options.toolbar.orderedList}>
-              <Button onclick={() => formatAs(InkValues.Markup.OrderedList)}>
+              <Button ariaLabel='Ordered list' onclick={() => formatAs(InkValues.Markup.OrderedList)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M7 16H18'/>
                   <path d='M2 17.0242C2.48314 17.7569 3.94052 17.6154 3.99486 16.7919C4.05315 15.9169 3.1975 16.0044 2.99496 16.0044M2.0023 14.9758C2.48544 14.2431 3.94282 14.3846 3.99716 15.2081C4.05545 16.0831 3.1998 16.0002 2.99726 16.0002'/>
@@ -117,7 +117,7 @@ export const Toolbar: Component = () => {
               </Button>
             </Show>
             <Show when={state().options.toolbar.taskList}>
-              <Button onclick={() => formatAs(InkValues.Markup.TaskList)}>
+              <Button ariaLabel='Task list' onclick={() => formatAs(InkValues.Markup.TaskList)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M7 16H17.8294'/>
                   <path d='M5 15L3 17L2 16'/>

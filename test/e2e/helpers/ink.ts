@@ -36,6 +36,9 @@ export const getLocators = (page: Page) => {
   const toolbarQuote = toolbar.getByRole('button', { name: 'Quote' })
   const toolbarCodeBlock = toolbar.getByRole('button', { name: 'Code block' })
   const toolbarCode = toolbar.getByRole('button', { name: 'Inline code' })
+  const toolbarList = toolbar.getByRole('button', { name: 'Bullet list' })
+  const toolbarOrderedList = toolbar.getByRole('button', { name: 'Ordered list' })
+  const toolbarTaskList = toolbar.getByRole('button', { name: 'Task list' })
 
   return {
     autocomplete,
@@ -72,6 +75,9 @@ export const getLocators = (page: Page) => {
     toolbarQuote,
     toolbarCodeBlock,
     toolbarCode,
+    toolbarList,
+    toolbarOrderedList,
+    toolbarTaskList,
   }
 }
 
