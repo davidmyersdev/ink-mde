@@ -108,7 +108,7 @@
     "svelte:build": "run-s svelte:clean && pnpm --filter svelte build",
     "svelte:clean": "rimraf ./svelte/dist",
     "test": "run-s test:watch",
-    "test:e2e": "playwright test",
+    "test:e2e": "pnpm core:build:server && playwright test",
     "test:unit": "vitest run",
     "test:watch": "vitest",
     "typecheck": "run-p core:typecheck vue:typecheck",
