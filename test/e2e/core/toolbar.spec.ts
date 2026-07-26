@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer'
 import { expect, test } from '@playwright/test'
 import { getLocators, withInk } from '../helpers/ink'
 
@@ -160,5 +161,42 @@ test.describe('toolbar', () => {
     })
     await toolbarImage.click()
     await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('![](text)')
+  })
+
+  test('opens the hidden file input from the upload button', async ({ page }) => {
+    const { toolbarUpload } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      await mount(target, { interface: { toolbar: true }, toolbar: { upload: true } })
+    })
+    const chooser = page.waitForEvent('filechooser')
+    await toolbarUpload.click()
+    await chooser
+  })
+
+  test('sends toolbar-selected files to the configured handler', async ({ page }) => {
+    const { host, toolbarUpload } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      await mount(target, {
+        interface: { toolbar: true },
+        toolbar: { upload: true },
+        files: { handler: files => { target.dataset.upload = files[0]?.name } },
+      })
+    })
+    await toolbarUpload.locator('input[type=file]').setInputFiles({ mimeType: 'image/png', name: 'upload.png', buffer: Buffer.from('image') })
+    await expect.poll(async () => await host.evaluate(target => target.dataset.upload)).toBe('upload.png')
+  })
+
+  test('inserts image markup when the toolbar file handler returns a URL', async ({ page }) => {
+    const { host, toolbarUpload } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, {
+        interface: { toolbar: true },
+        toolbar: { upload: true },
+        files: { handler: () => 'https://example.test/upload.png' },
+      })
+      Object.assign(target, { instance })
+    })
+    await toolbarUpload.locator('input[type=file]').setInputFiles({ mimeType: 'image/png', name: 'upload.png', buffer: Buffer.from('image') })
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('![](https://example.test/upload.png)')
   })
 })

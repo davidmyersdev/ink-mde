@@ -150,7 +150,7 @@ export const Toolbar: Component = () => {
               </Button>
             </Show>
             <Show when={state().options.toolbar.upload}>
-              <Button onclick={uploadClickHandler}>
+              <Button ariaLabel='Upload' onclick={uploadClickHandler}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M10 13V4M10 4L13 7M10 4L7 7'/>
                   <path d='M2 13V15C2 15.5523 2.44772 16 3 16H17C17.5523 16 18 15.5523 18 15V13'/>
