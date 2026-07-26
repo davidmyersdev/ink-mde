@@ -8,10 +8,13 @@ export const getLocators = (page: Page) => {
   const codeBlock = page.locator('.cm-codeblock')
   const codeBlockClose = page.locator('.cm-codeblock-close')
   const codeBlockOpen = page.locator('.cm-codeblock-open')
+  const host = page.locator('#editor')
   const content = page.locator('#editor .ink-mde-editor-content')
+  const details = host.locator('.ink-mde-details')
+  const readability = details.locator('.ink-mde-readability')
+  const attribution = details.locator('.ink-mde-attribution')
   const dropZone = page.locator('#editor .ink-drop-zone')
   const dropZonePreview = dropZone.locator('.ink-drop-zone-file-preview-image')
-  const host = page.locator('#editor')
   const imagePreview = host.locator('.cm-image-img')
   const listBullet = host.locator('.ink-mde-bullet-list')
   const listIndent = host.locator('.ink-mde-indent')
@@ -29,6 +32,9 @@ export const getLocators = (page: Page) => {
     codeBlockClose,
     codeBlockOpen,
     content,
+    details,
+    readability,
+    attribution,
     dropZone,
     dropZonePreview,
     host,
