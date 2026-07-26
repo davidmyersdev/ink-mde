@@ -139,4 +139,26 @@ test.describe('toolbar', () => {
     await toolbarTaskList.click()
     await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('- [ ] text')
   })
+
+  test('formats selected text as a link', async ({ page }) => {
+    const { host, toolbarLink } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarLink.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('[](text)')
+  })
+
+  test('formats selected text as an image', async ({ page }) => {
+    const { host, toolbarImage } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarImage.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('![](text)')
+  })
 })
