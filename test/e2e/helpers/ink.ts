@@ -33,6 +33,7 @@ export const withInk = async <Result, Arg>(
   page: Page,
   callback: (
     helpers: {
+      arg?: Arg,
       mount: typeof ink,
       target: HTMLElement,
       wrap: typeof wrap,
@@ -57,7 +58,7 @@ export const withInk = async <Result, Arg>(
   }, arg)
 
   try {
-    return await page.evaluate(callback, helpers)
+    return await page.evaluate(callback as never, helpers)
   } finally {
     await helpers.dispose()
   }
