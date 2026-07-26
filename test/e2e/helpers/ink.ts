@@ -29,6 +29,8 @@ export const getLocators = (page: Page) => {
   const searchPanel = host.locator('.ink-mde-search-panel')
   const syntaxObserver = host.locator('.cm-editor[data-e2e-syntax]')
   const textarea = host.locator('textarea')
+  const toolbar = host.locator('.ink-mde-toolbar')
+  const toolbarBold = toolbar.getByRole('button', { name: 'Bold' })
 
   return {
     autocomplete,
@@ -58,6 +60,8 @@ export const getLocators = (page: Page) => {
     searchPanel,
     syntaxObserver,
     textarea,
+    toolbar,
+    toolbarBold,
   }
 }
 
