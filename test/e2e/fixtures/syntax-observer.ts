@@ -14,7 +14,7 @@ export const syntaxObserver = (position: (doc: string) => number) => {
 
     write(view: EditorView) {
       const offset = position(view.state.doc.toString())
-      view.dom.dataset.e2eSyntax = syntaxTree(view.state).resolve(offset, 1).name
+      view.dom.dataset.e2eSyntax = syntaxTree(view.state).resolveInner(offset, 1).name
     }
   })
 }
