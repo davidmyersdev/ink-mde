@@ -22,6 +22,10 @@ export const getLocators = (page: Page) => {
   const listTask = host.locator('.ink-mde-task-list')
   const placeholder = host.locator('.cm-placeholder')
   const root = host.locator('.ink-mde')
+  const searchInput = host.locator('.ink-mde-search-input')
+  const searchMatch = host.locator('.cm-searchMatch')
+  const searchMatchSelected = host.locator('.cm-searchMatch-selected')
+  const searchPanel = host.locator('.ink-mde-search-panel')
   const textarea = host.locator('textarea')
 
   return {
@@ -45,6 +49,10 @@ export const getLocators = (page: Page) => {
     listTask,
     placeholder,
     root,
+    searchInput,
+    searchMatch,
+    searchMatchSelected,
+    searchPanel,
     textarea,
   }
 }
