@@ -48,7 +48,7 @@ export const Toolbar: Component = () => {
               </Button>
             </Show>
             <Show when={state().options.toolbar.bold}>
-              <Button onclick={() => formatAs(InkValues.Markup.Bold)}>
+              <Button ariaLabel='Bold' onclick={() => formatAs(InkValues.Markup.Bold)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-width='1.5' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M6.5 10H10.5C12.1569 10 13.5 11.3431 13.5 13C13.5 14.6569 12.1569 16 10.5 16H6.5V4H9.5C11.1569 4 12.5 5.34315 12.5 7C12.5 8.65686 11.1569 10 9.5 10'/>
                 </svg>
