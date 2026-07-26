@@ -66,14 +66,14 @@ export const Toolbar: Component = () => {
         <Show when={state().options.toolbar.quote || state().options.toolbar.codeBlock || state().options.toolbar.code}>
           <div class='ink-mde-toolbar-group'>
             <Show when={state().options.toolbar.quote}>
-              <Button onclick={() => formatAs(InkValues.Markup.Quote)}>
+              <Button ariaLabel='Quote' onclick={() => formatAs(InkValues.Markup.Quote)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M2.00257 16H17.9955M2.00055 4H18M7 10H18.0659M2 8.5V11.4999C2.4 11.5 2.5 11.5 2.5 11.5V11V10.5M4 8.5V11.4999H4.5V11V10.5'/>
                 </svg>
               </Button>
             </Show>
             <Show when={state().options.toolbar.codeBlock}>
-              <Button onclick={() => formatAs(InkValues.Markup.CodeBlock)}>
+              <Button ariaLabel='Code block' onclick={() => formatAs(InkValues.Markup.CodeBlock)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M13 4L7 16'/>
                   <path d='M5 7L2 10L5 13'/>
@@ -82,7 +82,7 @@ export const Toolbar: Component = () => {
               </Button>
             </Show>
             <Show when={state().options.toolbar.code}>
-              <Button onclick={() => formatAs(InkValues.Markup.Code)}>
+              <Button ariaLabel='Inline code' onclick={() => formatAs(InkValues.Markup.Code)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M7 4L8 6'/>
                 </svg>
