@@ -11,6 +11,10 @@ export const getLocators = (page: Page) => {
   const content = page.locator('#editor .ink-mde-editor-content')
   const host = page.locator('#editor')
   const imagePreview = host.locator('.cm-image-img')
+  const listBullet = host.locator('.ink-mde-bullet-list')
+  const listIndent = host.locator('.ink-mde-indent')
+  const listNumber = host.locator('.ink-mde-number-list')
+  const listTask = host.locator('.ink-mde-task-list')
   const root = host.locator('.ink-mde')
   const textarea = host.locator('textarea')
 
@@ -24,6 +28,10 @@ export const getLocators = (page: Page) => {
     content,
     host,
     imagePreview,
+    listBullet,
+    listIndent,
+    listNumber,
+    listTask,
     root,
     textarea,
   }
