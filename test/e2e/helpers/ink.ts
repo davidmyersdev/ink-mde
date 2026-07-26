@@ -31,6 +31,8 @@ export const getLocators = (page: Page) => {
   const textarea = host.locator('textarea')
   const toolbar = host.locator('.ink-mde-toolbar')
   const toolbarBold = toolbar.getByRole('button', { name: 'Bold' })
+  const toolbarHeading = toolbar.getByRole('button', { name: 'Heading' })
+  const toolbarItalic = toolbar.getByRole('button', { name: 'Italic' })
 
   return {
     autocomplete,
@@ -62,6 +64,8 @@ export const getLocators = (page: Page) => {
     textarea,
     toolbar,
     toolbarBold,
+    toolbarHeading,
+    toolbarItalic,
   }
 }
 

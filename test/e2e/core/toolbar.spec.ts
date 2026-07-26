@@ -51,4 +51,26 @@ test.describe('toolbar', () => {
       return await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())
     }).toBe('**text**')
   })
+
+  test('formats selected text as a heading', async ({ page }) => {
+    const { host, toolbarHeading } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarHeading.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('# text')
+  })
+
+  test('formats selected text as italic', async ({ page }) => {
+    const { host, toolbarItalic } = getLocators(page)
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'text', interface: { toolbar: true } })
+      instance.select({ selection: { end: 4, start: 0 } })
+      Object.assign(target, { instance })
+    })
+    await toolbarItalic.click()
+    await expect.poll(async () => await host.evaluate((target: HTMLElement & { instance: { getDoc: () => string } }) => target.instance.getDoc())).toBe('*text*')
+  })
 })
