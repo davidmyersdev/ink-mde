@@ -27,6 +27,7 @@ export const getLocators = (page: Page) => {
   const searchMatch = host.locator('.cm-searchMatch')
   const searchMatchSelected = host.locator('.cm-searchMatch-selected')
   const searchPanel = host.locator('.ink-mde-search-panel')
+  const syntaxObserver = host.locator('.cm-editor[data-e2e-syntax]')
   const textarea = host.locator('textarea')
 
   return {
@@ -55,6 +56,7 @@ export const getLocators = (page: Page) => {
     searchMatch,
     searchMatchSelected,
     searchPanel,
+    syntaxObserver,
     textarea,
   }
 }
