@@ -8,6 +8,7 @@ export const getLocators = (page: Page) => {
   const codeBlock = page.locator('.cm-codeblock')
   const codeBlockClose = page.locator('.cm-codeblock-close')
   const codeBlockOpen = page.locator('.cm-codeblock-open')
+  const defaultPluginWidget = page.locator('.e2e-default-plugin-widget')
   const host = page.locator('#editor')
   const content = page.locator('#editor .ink-mde-editor-content')
   const details = host.locator('.ink-mde-details')
@@ -35,6 +36,7 @@ export const getLocators = (page: Page) => {
     codeBlock,
     codeBlockClose,
     codeBlockOpen,
+    defaultPluginWidget,
     content,
     details,
     readability,
