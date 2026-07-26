@@ -1,33 +1,26 @@
 import { expect, test } from '@playwright/test'
+import { getLocators, withInk } from '../helpers/ink'
 
 test.describe('autocomplete', () => {
   test('auto-closes square brackets', async ({ page }) => {
-    await page.goto('/test/e2e/')
+    const { content } = getLocators(page)
 
-    const target = page.locator('#editor')
-
-    await target.evaluate(async (el: HTMLElement) => {
-      const { ink } = await import('/src/index')
-
-      const instance = await ink(el, { interface: { autocomplete: true } })
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { interface: { autocomplete: true } })
 
       instance.focus()
     })
 
     await page.keyboard.type('[')
 
-    await expect(target.locator('.ink-mde-editor-content')).toHaveText('[]')
+    await expect(content).toHaveText('[]')
   })
 
   test('auto-suggests and accepts relevant text', async ({ page }) => {
-    await page.goto('/test/e2e/')
+    const { autocomplete, content } = getLocators(page)
 
-    const target = page.locator('#editor')
-
-    await target.evaluate(async (el: HTMLElement) => {
-      const { ink } = await import('/src/index')
-
-      const instance = await ink(el, {
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, {
         interface: { autocomplete: true },
         plugins: [
           {
@@ -59,42 +52,34 @@ test.describe('autocomplete', () => {
 
     await page.keyboard.type('[')
 
-    await expect(target.locator('.cm-tooltip-autocomplete')).toBeVisible()
-    await expect(target.locator('.cm-tooltip-autocomplete')).toContainText('Hello')
+    await expect(autocomplete).toBeVisible()
+    await expect(autocomplete).toContainText('Hello')
 
     await page.keyboard.type('H\n', { delay: 200 })
 
-    await expect(target.locator('.ink-mde-editor-content')).toHaveText('[http://example.test/hello]')
+    await expect(content).toHaveText('[http://example.test/hello]')
   })
 
   test.describe('when disabled', () => {
     test('does not auto-close square brackets', async ({ page }) => {
-      await page.goto('/test/e2e/')
+      const { content } = getLocators(page)
 
-      const target = page.locator('#editor')
-
-      await target.evaluate(async (el: HTMLElement) => {
-        const { ink } = await import('/src/index')
-
-        const instance = await ink(el, { interface: { autocomplete: false } })
+      await withInk(page, async ({ mount, target }) => {
+        const instance = await mount(target, { interface: { autocomplete: false } })
 
         instance.focus()
       })
 
       await page.keyboard.type('[')
 
-      await expect(target.locator('.ink-mde-editor-content')).toHaveText('[')
+      await expect(content).toHaveText('[')
     })
 
     test('does not auto-suggest relevant text', async ({ page }) => {
-      await page.goto('/test/e2e/')
+      const { autocomplete } = getLocators(page)
 
-      const target = page.locator('#editor')
-
-      await target.evaluate(async (el: HTMLElement) => {
-        const { ink } = await import('/src/index')
-
-        const instance = await ink(el, {
+      await withInk(page, async ({ mount, target }) => {
+        const instance = await mount(target, {
           interface: { autocomplete: false },
           plugins: [
             {
@@ -126,7 +111,7 @@ test.describe('autocomplete', () => {
 
       await page.keyboard.type('[')
 
-      await expect(target.locator('.cm-tooltip-autocomplete')).not.toBeVisible()
+      await expect(autocomplete).not.toBeVisible()
     })
   })
 })
