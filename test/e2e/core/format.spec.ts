@@ -40,6 +40,22 @@ test.describe('formatting API', () => {
     await expect(formatAndUnformat(page, 'code_block')).resolves.toEqual({ formatted: '```\nword\n```', unformatted: 'word' })
   })
 
+  test('cycles headings through the supported prefix states', async ({ page }) => {
+    const docs = await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'word' })
+      const docs: string[] = []
+
+      for (let index = 0; index < 7; index++) {
+        instance.format('heading', { selection: { end: instance.getDoc().length, start: 0 } })
+        docs.push(instance.getDoc())
+      }
+
+      return docs
+    })
+
+    expect(docs).toEqual(['# word', '## word', '### word', '#### word', '##### word', '###### word', 'word'])
+  })
+
   test('formats and unformats blockquotes', async ({ page }) => {
     await expect(formatAndUnformat(page, 'quote')).resolves.toEqual({ formatted: '> word', unformatted: 'word' })
   })
@@ -54,5 +70,32 @@ test.describe('formatting API', () => {
 
   test('formats and unformats task lists', async ({ page }) => {
     await expect(formatAndUnformat(page, 'task_list')).resolves.toEqual({ formatted: '- [ ] word', unformatted: 'word' })
+  })
+
+  test('formats multiline selections for line-oriented markup', async ({ page }) => {
+    const result = await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'one\ntwo' })
+
+      instance.format('quote', { selection: { end: 7, start: 0 } })
+      const formatted = instance.getDoc()
+
+      instance.format('quote', { selection: { end: formatted.length, start: 0 } })
+
+      return { formatted, unformatted: instance.getDoc() }
+    })
+
+    expect(result).toEqual({ formatted: '> one\n> two', unformatted: 'one\ntwo' })
+  })
+
+  test('leaves the selection around formatted text', async ({ page }) => {
+    const selections = await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: 'word' })
+
+      instance.format('bold', { selection: { end: 4, start: 0 } })
+
+      return instance.selections()
+    })
+
+    expect(selections).toEqual([{ end: 8, start: 0 }])
   })
 })
