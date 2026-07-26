@@ -3,15 +3,15 @@ description: Install with cached dependencies
 runs:
   using: composite
   steps:
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v7
       with:
-        node-version: 18
-    - uses: pnpm/action-setup@v4
+        node-version: 24
+    - uses: pnpm/action-setup@v6
       with:
         run_install: false
     - shell: bash
       run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v6
       with:
         key: v1-${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
         path: ${{ env.STORE_PATH }}
