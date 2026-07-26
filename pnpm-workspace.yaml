@@ -1,3 +1,13 @@
+allowBuilds:
+  '@sveltejs/kit': true
+  esbuild: true
+  svelte-preprocess: true
+
+configDependencies:
+  '@pnpm/plugin-types-fixer': 0.1.0
+
+includeWorkspaceRoot: true
+
 packages:
   - .
   - ./examples/*
