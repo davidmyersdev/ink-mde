@@ -5,12 +5,14 @@ export const getLocators = (page: Page) => {
   const autocomplete = page.locator('.cm-tooltip-autocomplete')
   const content = page.locator('#editor .ink-mde-editor-content')
   const host = page.locator('#editor')
+  const imagePreview = host.locator('.cm-image-img')
   const root = host.locator('.ink-mde')
 
   return {
     autocomplete,
     content,
     host,
+    imagePreview,
     root,
   }
 }
