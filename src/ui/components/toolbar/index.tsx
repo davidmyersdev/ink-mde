@@ -133,14 +133,14 @@ export const Toolbar: Component = () => {
         <Show when={state().options.toolbar.link || state().options.toolbar.image || state().options.toolbar.upload}>
           <div class='ink-mde-toolbar-group'>
             <Show when={state().options.toolbar.link}>
-              <Button onclick={() => formatAs(InkValues.Markup.Link)}>
+              <Button ariaLabel='Link' onclick={() => formatAs(InkValues.Markup.Link)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <path d='M9.12127 10.881C10.02 11.78 11.5237 11.7349 12.4771 10.7813L15.2546 8.00302C16.2079 7.04937 16.253 5.54521 15.3542 4.6462C14.4555 3.74719 12.9512 3.79174 11.9979 4.74539L10.3437 6.40007M10.8787 9.11903C9.97997 8.22002 8.47626 8.26509 7.52288 9.21874L4.74545 11.997C3.79208 12.9506 3.74701 14.4548 4.64577 15.3538C5.54452 16.2528 7.04876 16.2083 8.00213 15.2546L9.65633 13.5999'/>
                 </svg>
               </Button>
             </Show>
             <Show when={state().options.toolbar.image}>
-              <Button onclick={() => formatAs(InkValues.Markup.Image)}>
+              <Button ariaLabel='Image' onclick={() => formatAs(InkValues.Markup.Image)}>
                 <svg viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-miterlimit='5' stroke-linecap='round' stroke-linejoin='round'>
                   <rect x='2' y='4' width='16' height='12' rx='1'/>
                   <path d='M7.42659 7.67597L13.7751 13.8831M2.00208 12.9778L7.42844 7.67175'/>

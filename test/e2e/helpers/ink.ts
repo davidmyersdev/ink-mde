@@ -39,6 +39,8 @@ export const getLocators = (page: Page) => {
   const toolbarList = toolbar.getByRole('button', { name: 'Bullet list' })
   const toolbarOrderedList = toolbar.getByRole('button', { name: 'Ordered list' })
   const toolbarTaskList = toolbar.getByRole('button', { name: 'Task list' })
+  const toolbarLink = toolbar.getByRole('button', { name: 'Link' })
+  const toolbarImage = toolbar.getByRole('button', { name: 'Image' })
 
   return {
     autocomplete,
@@ -78,6 +80,8 @@ export const getLocators = (page: Page) => {
     toolbarList,
     toolbarOrderedList,
     toolbarTaskList,
+    toolbarLink,
+    toolbarImage,
   }
 }
 
