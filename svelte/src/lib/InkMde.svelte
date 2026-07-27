@@ -15,22 +15,27 @@
   export let editor: Ink.Instance | undefined = undefined
   export let options: OptionsWithoutDoc | undefined = undefined
 
+  const withWrapperHooks = (options: OptionsWithoutDoc | undefined): OptionsWithoutDoc => ({
+    ...options,
+    hooks: {
+      ...options?.hooks,
+      afterUpdate: (doc) => {
+        value = doc
+        options?.hooks?.afterUpdate?.(doc)
+        dispatch('afterUpdate', doc)
+      },
+      beforeUpdate: (doc) => {
+        options?.hooks?.beforeUpdate?.(doc)
+        dispatch('beforeUpdate', doc)
+      },
+    },
+  })
+
   let divRef: HTMLDivElement
   onMount(() => {
     editor = ink(divRef, {
       doc: value,
-      ...options,
-      hooks: {
-        afterUpdate: (doc) => {
-          value = doc
-          options?.hooks?.afterUpdate?.(doc)
-          dispatch('afterUpdate', doc)
-        },
-        beforeUpdate: (doc) => {
-          options?.hooks?.beforeUpdate?.(doc)
-          dispatch('beforeUpdate', doc)
-        },
-      },
+      ...withWrapperHooks(options),
     })
   })
 
@@ -38,7 +43,7 @@
   // if a parent component changes the `option` prop, the editor will be reconfigured
   $: {
     if (editor && options) {
-      editor.reconfigure(options)
+      editor.reconfigure(withWrapperHooks(options))
     }
   }
 

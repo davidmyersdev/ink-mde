@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 
 import { resolve } from 'node:path'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import { externalizeDeps } from 'vite-plugin-externalize-deps'
 import solidjs from 'vite-plugin-solid'
@@ -34,6 +35,7 @@ export default defineConfig(({ isSsrBuild }) => {
     },
     plugins: [
       externalizeDeps(),
+      vue(),
       solidjs({
         solid: {
           generate: isSsrBuild ? 'ssr' : 'dom',
@@ -46,6 +48,7 @@ export default defineConfig(({ isSsrBuild }) => {
       alias: {
         '/': resolve(__dirname, './'),
         'ink-mde': resolve(__dirname, './src/index'),
+        'vue': resolve(__dirname, './node_modules/vue/dist/vue.esm-browser.js'),
       },
       conditions: [
         'browser',

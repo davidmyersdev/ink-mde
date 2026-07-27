@@ -8,52 +8,63 @@ jobs:
   build-core:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - uses: ./.github/actions/build-core
   build-svelte:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - uses: ./.github/actions/build-core
       - uses: ./.github/actions/build-svelte
   build-vue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - uses: ./.github/actions/build-core
       - uses: ./.github/actions/build-vue
   check-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - run: pnpm -r docs:check
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - run: pnpm -r lint
   test-e2e:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex:
+          - 1
+          - 2
+          - 3
+          - 4
+        shardTotal:
+          - 4
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - run: pnpm playwright install --with-deps
-      - run: pnpm -r test:e2e
+      - run: pnpm -r test:e2e --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
   test-unit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - run: pnpm -r test:unit
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/install-dependencies
       - uses: ./.github/actions/build-core
       - run: pnpm typecheck
