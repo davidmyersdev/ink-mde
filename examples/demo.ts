@@ -6,9 +6,9 @@ declare global {
   interface Window {
     ink: Instance,
     // theme helpers
-    auto: () => void,
-    dark: () => void,
-    light: () => void,
+    auto: () => Promise<void>,
+    dark: () => Promise<void>,
+    light: () => Promise<void>,
   }
 }
 
@@ -59,7 +59,7 @@ const toggleTheme = (theme: Values.Appearance) => {
   document.documentElement.classList.remove('auto', 'dark', 'light')
   document.documentElement.classList.add(theme)
 
-  window.ink.reconfigure({ interface: { appearance: theme } })
+  return window.ink.reconfigure({ interface: { appearance: theme } })
 }
 
 window.auto = toggleTheme.bind(undefined, 'auto')

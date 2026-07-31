@@ -110,6 +110,23 @@ test.describe('lists', () => {
     await expect.poll(() => host.evaluate((target) => (target as HTMLElement & { __inkMdeInstance: { getDoc: () => string } }).__inkMdeInstance.getDoc())).toBe('- [ ] task')
   })
 
+  test('checks a task marker after preceding content changes', async ({ page }) => {
+    const { host, listTask } = getLocators(page)
+
+    await withInk(page, async ({ mount, target }) => {
+      const instance = await mount(target, { doc: '- [ ] task', lists: true })
+
+      Object.assign(target, { __inkMdeInstance: instance })
+    })
+
+    await host.evaluate((target) => {
+      (target as HTMLElement & { __inkMdeInstance: { update: (doc: string) => void } }).__inkMdeInstance.update('before\n- [ ] task')
+    })
+    await listTask.locator('.ink-mde-task-marker').click()
+
+    await expect.poll(() => host.evaluate((target) => (target as HTMLElement & { __inkMdeInstance: { getDoc: () => string } }).__inkMdeInstance.getDoc())).toBe('before\n- [x] task')
+  })
+
   test('updates existing list decorations when reconfigured', async ({ page }) => {
     const counts = await withInk(page, async ({ mount, target }) => {
       const instance = await mount(target, { doc: '- bullet' })

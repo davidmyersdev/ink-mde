@@ -44,16 +44,8 @@ test.describe('examples and demo', () => {
 
     const appearance = await page.evaluate(async () => {
       await window.ink
-      const reconfigure = window.ink.reconfigure.bind(window.ink)
-      let reconfiguration: Promise<void> | undefined
-      window.ink.reconfigure = (options) => {
-        const nextReconfiguration = reconfigure(options)
-        reconfiguration = nextReconfiguration
-        return nextReconfiguration
-      }
 
-      window.dark()
-      await reconfiguration
+      await window.dark()
 
       return window.ink.options().interface.appearance
     })
